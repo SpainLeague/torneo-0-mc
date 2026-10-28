@@ -3,7 +3,7 @@
 <style>
 :root{color-scheme:dark;--bg:#0b1020;--panel:#121a2d;--panel2:#19243b;--text:#eef3ff;--muted:#a6b4cc;--line:#2b3852;--accent:#8be9fd;--accent2:#c4b5fd}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#172647 0,#0b1020 55%);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}header{padding:30px 20px 24px;max-width:1250px;margin:auto}h1{font-size:clamp(26px,4vw,40px);line-height:1.1;margin:0 0 8px;letter-spacing:-.04em}.sub{color:var(--muted);max-width:750px}.pill{display:inline-block;border:1px solid #3b4d6b;border-radius:99px;padding:4px 10px;color:var(--accent);font-size:12px;margin-bottom:12px}.wrap{max-width:1250px;margin:auto;padding:0 20px 50px}.filters{background:rgba(18,26,45,.94);border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;position:sticky;top:8px;z-index:3;backdrop-filter:blur(12px)}label{display:block;font-size:12px;color:var(--muted);margin:0 0 5px}input,select{width:100%;background:#0b1222;color:var(--text);border:1px solid #34425d;border-radius:10px;padding:11px 12px;font:inherit;min-width:0}input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px}.filter-bottom{grid-column:1/-1;display:flex;gap:10px;align-items:center;justify-content:space-between;color:var(--muted);font-size:13px}.btn{border:1px solid #425575;border-radius:10px;padding:9px 12px;background:#202e49;color:var(--text);cursor:pointer;font:inherit}.btn:hover{border-color:var(--accent)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}.card{background:linear-gradient(155deg,#16213a,#11192a);border:1px solid var(--line);border-radius:16px;overflow:hidden;min-width:0}.cardtop{display:flex;align-items:center;gap:13px;padding:14px 15px 10px}.sprite{width:74px;height:74px;object-fit:contain;background:#0b1222;border-radius:14px;flex-shrink:0}.name{font-weight:750;font-size:18px;line-height:1.2}.subname{font-size:12px;color:var(--muted);margin-top:4px}.types{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.type{font-size:11px;padding:3px 8px;border-radius:6px;background:#283650;color:#eaf1ff}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:4px 14px 13px}.stat{background:#0c1425;border-radius:9px;padding:7px 8px}.stat span{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.04em}.stat b{font-size:16px;font-variant-numeric:tabular-nums}.abilities{border-top:1px solid var(--line);padding:12px 15px;color:#d8e3f7;font-size:13px}.effect-text{margin-top:7px;color:#b9c8e3;font-size:12px;line-height:1.45}.abilities b{color:var(--accent2)}.cardfoot{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 14px}.cardfoot a{color:var(--accent);font-size:12px;text-decoration:none;border:1px solid #354764;border-radius:8px;padding:6px 9px}.cardfoot a:hover{background:#22314e}.notice{margin-top:20px;border:1px solid #6b5a35;background:#292313;color:#f9e6b4;border-radius:12px;padding:13px 15px;font-size:13px}.empty{grid-column:1/-1;text-align:center;padding:50px 10px;color:var(--muted)}footer{max-width:1250px;margin:auto;padding:0 20px 35px;color:var(--muted);font-size:12px}.speednote{font-size:12px;color:var(--muted)}@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.filters{grid-template-columns:repeat(2,minmax(0,1fr));position:static}}@media(max-width:560px){header{padding-top:22px}.wrap{padding:0 12px 35px}.filters{padding:12px;gap:9px}.grid{grid-template-columns:1fr;gap:10px}.filter-bottom{align-items:flex-start;flex-direction:column}.cardtop{padding:12px}.sprite{width:68px;height:68px}}
 
-.tabs{display:flex;gap:8px;margin:0 0 18px;padding:5px;background:#10192b;border:1px solid var(--line);border-radius:14px;width:fit-content;max-width:100%}.tab{border:0;border-radius:10px;padding:11px 16px;background:transparent;color:var(--muted);font:inherit;font-weight:700;cursor:pointer}.tab.active{background:#2b3d5d;color:var(--text);box-shadow:inset 0 0 0 1px #52698d}.builder-intro{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin:8px 0 16px}.builder-intro h2{font-size:clamp(22px,3vw,30px);margin:0 0 5px}.builder-intro p{color:var(--muted);margin:0;max-width:720px}.builder-actions{display:flex;gap:8px;flex-wrap:wrap}.save-row{display:grid;grid-template-columns:minmax(150px,1fr) auto minmax(150px,1fr) auto auto;gap:8px;margin:0 0 16px}.save-row input,.save-row select{padding:9px 10px;font-size:13px}.team-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}.team-slot{min-width:0;background:linear-gradient(155deg,#16213a,#11192a);border:1px solid var(--line);border-radius:15px;padding:12px;display:flex;gap:12px;align-items:center}.team-slot img,.slot-placeholder{width:74px;height:74px;flex-shrink:0;object-fit:contain;background:#0b1222;border-radius:12px}.slot-placeholder{display:grid;place-items:center;color:#62738f;font-size:25px}.slot-controls{min-width:0;flex:1}.slot-title{font-size:12px;color:var(--muted);margin-bottom:5px}.slot-controls select{padding:9px 8px;font-size:13px}.slot-type{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.slot-type .type{font-size:10px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;background:#10192b}.coverage{border-collapse:separate;border-spacing:0;width:100%;min-width:700px;font-size:13px}.coverage th,.coverage td{padding:9px 10px;text-align:center;border-bottom:1px solid #26344d;border-right:1px solid #26344d;white-space:nowrap}.coverage th{background:#192640;color:#dce7fb;position:sticky;top:0;z-index:1}.coverage th:first-child,.coverage td:first-child{text-align:left;position:sticky;left:0;background:#172239;z-index:2}.coverage th:first-child{z-index:3}.coverage tr:last-child td{border-bottom:0}.coverage th:last-child,.coverage td:last-child{border-right:0}.coverage .weak{background:#612f3b;color:#ffe4e8;font-weight:800}.coverage .resist{background:#1d5148;color:#d5fff3;font-weight:800}.coverage .immune{background:#34405a;color:#f1f5ff;font-weight:800}.coverage .neutral{color:#52627c}.coverage .type-chip{display:inline-block;border-radius:6px;padding:3px 7px;background:#2a3a57;color:#e6eeff}.coverage .total{font-weight:800}.builder-note,.share-status{font-size:12px;color:var(--muted);margin:12px 2px}.share-status{color:var(--accent)}@media(max-width:900px){.team-slots{grid-template-columns:repeat(2,minmax(0,1fr))}.builder-intro{flex-direction:column}}@media(max-width:560px){.tabs{width:100%}.tab{flex:1;padding:10px 8px;font-size:13px}.team-slots{grid-template-columns:1fr}.team-slot img,.slot-placeholder{width:62px;height:62px}.builder-actions{width:100%}.builder-actions .btn{flex:1}.save-row{grid-template-columns:1fr 1fr}.save-row input,.save-row select{grid-column:span 2}.save-row .btn{grid-column:span 1}}
+.tabs{display:flex;gap:8px;margin:0 0 18px;padding:5px;background:#10192b;border:1px solid var(--line);border-radius:14px;width:fit-content;max-width:100%}.tab{border:0;border-radius:10px;padding:11px 16px;background:transparent;color:var(--muted);font:inherit;font-weight:700;cursor:pointer}.tab.active{background:#2b3d5d;color:var(--text);box-shadow:inset 0 0 0 1px #52698d}.builder-intro{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin:8px 0 16px}.builder-intro h2{font-size:clamp(22px,3vw,30px);margin:0 0 5px}.builder-intro p{color:var(--muted);margin:0;max-width:720px}.builder-actions{display:flex;gap:8px;flex-wrap:wrap}.save-row{display:grid;grid-template-columns:minmax(150px,1fr) auto minmax(150px,1fr) auto auto;gap:8px;margin:0 0 16px}.save-row input,.save-row select{padding:9px 10px;font-size:13px}.team-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}.team-slot{min-width:0;background:linear-gradient(155deg,#16213a,#11192a);border:1px solid var(--line);border-radius:15px;padding:12px;display:flex;gap:12px;align-items:center}.team-slot img,.slot-placeholder{width:74px;height:74px;flex-shrink:0;object-fit:contain;background:#0b1222;border-radius:12px}.slot-placeholder{display:grid;place-items:center;color:#62738f;font-size:25px}.slot-controls{min-width:0;flex:1}.ability-controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:8px}.ability-toggle{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}.ability-toggle input{accent-color:var(--accent)}.ability-select{max-width:100%;min-width:0;padding:6px 7px;font-size:11px}.ability-note{display:block;color:var(--muted);font-size:10px;margin-top:3px}.slot-title{font-size:12px;color:var(--muted);margin-bottom:5px}.slot-controls select{padding:9px 8px;font-size:13px}.slot-type{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.slot-type .type{font-size:10px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;background:#10192b}.coverage{border-collapse:separate;border-spacing:0;width:100%;min-width:700px;font-size:13px}.coverage th,.coverage td{padding:9px 10px;text-align:center;border-bottom:1px solid #26344d;border-right:1px solid #26344d;white-space:nowrap}.coverage th{background:#192640;color:#dce7fb;position:sticky;top:0;z-index:1}.coverage th:first-child,.coverage td:first-child{text-align:left;position:sticky;left:0;background:#172239;z-index:2}.coverage th:first-child{z-index:3}.coverage tr:last-child td{border-bottom:0}.coverage th:last-child,.coverage td:last-child{border-right:0}.coverage .weak{background:#612f3b;color:#ffe4e8;font-weight:800}.coverage .resist{background:#1d5148;color:#d5fff3;font-weight:800}.coverage .immune{background:#34405a;color:#f1f5ff;font-weight:800}.coverage .neutral{color:#52627c}.coverage .type-chip{display:inline-block;border-radius:6px;padding:3px 7px;background:#2a3a57;color:#e6eeff}.coverage .total{font-weight:800}.builder-note,.share-status{font-size:12px;color:var(--muted);margin:12px 2px}.share-status{color:var(--accent)}@media(max-width:900px){.team-slots{grid-template-columns:repeat(2,minmax(0,1fr))}.builder-intro{flex-direction:column}}@media(max-width:560px){.tabs{width:100%}.tab{flex:1;padding:10px 8px;font-size:13px}.team-slots{grid-template-columns:1fr}.team-slot img,.slot-placeholder{width:62px;height:62px}.builder-actions{width:100%}.builder-actions .btn{flex:1}.save-row{grid-template-columns:1fr 1fr}.save-row input,.save-row select{grid-column:span 2}.save-row .btn{grid-column:span 1}}
 
 .coverage{min-width:0;table-layout:fixed;font-size:12px}
 .coverage th,.coverage td{padding:7px 5px}
@@ -95,6 +95,32 @@ const TYPE_DATA={
 };
 const TEAM_KEY='torneo0mc-team-v1';
 let teamNames=Array(6).fill('');
+let applyAbility=Array(6).fill(false);
+let selectedAbilities=Array(6).fill('');
+const DEFENSIVE_ABILITIES=[
+ {name:'Absorbe Fuego',aliases:['Absorbe Fuego','Flash Fire'],rules:{'Fuego':0}},
+ {name:'Absorbe Agua',aliases:['Absorbe Agua','Water Absorb'],rules:{'Agua':0}},
+ {name:'Pararrayos',aliases:['Pararrayos','Lightning Rod'],rules:{'Eléctrico':0}},
+ {name:'Electromotor',aliases:['Electromotor','Motor Drive'],rules:{'Eléctrico':0}},
+ {name:'Herbívoro',aliases:['Herbívoro','Sap Sipper'],rules:{'Planta':0}},
+ {name:'Levitación',aliases:['Levitación','Levitate'],rules:{'Tierra':0}},
+ {name:'Absorbe Tierra',aliases:['Absorbe Tierra','Earth Eater'],rules:{'Tierra':0}},
+ {name:'Colector',aliases:['Colector','Storm Drain'],rules:{'Agua':0}},
+ {name:'Sebo',aliases:['Sebo','Thick Fat'],rules:{'Fuego':0.5,'Hielo':0.5}},
+ {name:'Ignífugo',aliases:['Ignífugo','Heatproof'],rules:{'Fuego':0.5}},
+ {name:'Sal Purificadora',aliases:['Sal Purificadora','Purifying Salt'],rules:{'Fantasma':0.5}},
+ {name:'Cuerpo Horneado',aliases:['Cuerpo Horneado','Well-Baked Body'],rules:{'Fuego':0}}
+];
+function normalizeAbilityText(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('es');}
+function getDefensiveAbilities(p){
+ const text=normalizeAbilityText((p.abilities||'')+' '+(p.effect||''));
+ return DEFENSIVE_ABILITIES.filter(a=>a.aliases.some(alias=>text.includes(normalizeAbilityText(alias))));
+}
+function abilityMultiplier(p,attack,slotIndex){
+ if(!applyAbility[slotIndex])return 1;
+ const ability=getDefensiveAbilities(p).find(a=>a.name===selectedAbilities[slotIndex]);
+ return ability&&ability.rules[attack]!==undefined?ability.rules[attack]:1;
+}
 const typeMultiplier=(attack,defend)=>{
  const d=TYPE_DATA[defend]||{};
  if((d.immune||[]).includes(attack)) return 0;
@@ -102,9 +128,10 @@ const typeMultiplier=(attack,defend)=>{
  if((d.resist||[]).includes(attack)) return .5;
  return 1;
 };
-function pokemonMultiplier(p,attack){
+function pokemonMultiplier(p,attack,slotIndex){
  let mult=typeMultiplier(attack,p.type1);
  if(p.type2) mult*=typeMultiplier(attack,p.type2);
+ mult*=abilityMultiplier(p,attack,slotIndex);
  return mult;
 }
 function multLabel(n){return n===0?'×0':n===.25?'×¼':n===.5?'×½':n===1?'—':n===2?'×2':n===4?'×4':String(n)}
@@ -122,11 +149,14 @@ function renderTeamSlots(){
  const sorted=DATA.slice().sort((a,b)=>a.name.localeCompare(b.name,'es'));
  for(let i=0;i<6;i++){
   const p=DATA.find(x=>x.name===teamNames[i]);
+  const abilities=p?getDefensiveAbilities(p):[];
+  if(p&&(!selectedAbilities[i]||!abilities.some(a=>a.name===selectedAbilities[i])))selectedAbilities[i]=abilities[0]?.name||'';
   const slot=document.createElement('div');slot.className='team-slot';
-  const art=p&&p.sprite?'<img src="'+esc(p.sprite)+'" alt="'+esc(p.name)+'" loading="lazy" onerror="this.style.visibility=\'hidden\'">':'<div class="slot-placeholder">＋</div>';
+  const art=p&&p.sprite?'<img src="'+esc(p.sprite)+'" alt="'+esc(p.name)+'" loading="lazy">':'<div class="slot-placeholder">＋</div>';
   const current=p?'<div class="selected-pokemon"><b>'+esc(p.name)+'</b></div>':'<div class="selected-pokemon muted">Ningún Pokémon seleccionado</div>';
-  slot.innerHTML=art+'<div class="slot-controls"><div class="slot-title">Pokémon '+(i+1)+'</div>'+current+'<input class="slot-search" type="search" autocomplete="off" placeholder="Buscar por nombre…" aria-label="Buscar Pokémon '+(i+1)+'"><select aria-label="Resultados para Pokémon '+(i+1)+'"><option value="">Escribe para buscar…</option></select>'+(p?'<div class="slot-type">'+[p.type1,p.type2].filter(Boolean).map(t=>'<span class="type">'+esc(t)+'</span>').join('')+'</div>':'')+'</div>';
-  const search=slot.querySelector('.slot-search'),select=slot.querySelector('select');
+  const abilityUI='<div class="ability-controls"><label class="ability-toggle"><input type="checkbox" class="apply-ability" '+(applyAbility[i]&&abilities.length?'checked':'')+(!abilities.length?' disabled':'')+'> Aplicar habilidad defensiva</label><select class="ability-select" aria-label="Habilidad defensiva de '+esc(p?p.name:'slot vacío')+'" '+(!abilities.length||!applyAbility[i]?'disabled':'')+'>'+abilities.map(a=>'<option value="'+esc(a.name)+'" '+(selectedAbilities[i]===a.name?'selected':'')+'>'+esc(a.name)+'</option>').join('')+'</select>'+(p&&!abilities.length?'<small class="ability-note">Sin habilidad defensiva de tipos reconocida</small>':'')+'</div>';
+  slot.innerHTML=art+'<div class="slot-controls"><div class="slot-title">Pokémon '+(i+1)+'</div>'+current+'<input class="slot-search" type="search" autocomplete="off" placeholder="Buscar por nombre…" aria-label="Buscar Pokémon '+(i+1)+'"><select class="pokemon-select" aria-label="Resultados para Pokémon '+(i+1)+'"><option value="">Escribe para buscar…</option></select>'+(p?'<div class="slot-type">'+[p.type1,p.type2].filter(Boolean).map(t=>'<span class="type">'+esc(t)+'</span>').join('')+'</div>':'')+abilityUI+'</div>';
+  const search=slot.querySelector('.slot-search'),select=slot.querySelector('.pokemon-select');
   function updateOptions(){
    const q=search.value.trim().toLocaleLowerCase('es');
    const matches=q?sorted.filter(x=>{const name=x.name.toLocaleLowerCase('es');const baseName=name.startsWith('mega ')?name.slice(5):name;return name.startsWith(q)||baseName.startsWith(q);}):sorted;
@@ -136,7 +166,10 @@ function renderTeamSlots(){
    select.disabled=matches.length===0;
   }
   search.addEventListener('input',updateOptions);
-  select.addEventListener('change',e=>{if(e.target.value){teamNames[i]=e.target.value;renderTeam();}});
+  select.addEventListener('change',e=>{if(e.target.value){teamNames[i]=e.target.value;applyAbility[i]=false;selectedAbilities[i]='';renderTeam();}});
+  const toggle=slot.querySelector('.apply-ability'),abilitySelect=slot.querySelector('.ability-select');
+  toggle.addEventListener('change',e=>{applyAbility[i]=e.target.checked;abilitySelect.disabled=!e.target.checked;renderCoverage();});
+  abilitySelect.addEventListener('change',e=>{selectedAbilities[i]=e.target.value;renderCoverage();});
   root.append(slot);
  }
 }
@@ -146,7 +179,7 @@ function renderCoverage(){
  const table=$('coverageTable');
  let html='<thead><tr><th>Tipo atacante</th>'+slots.map((p,i)=>'<th class="pokemon-col"><div class="coverage-pokemon">'+(p?(p.sprite?'<img src="'+esc(p.sprite)+'" alt="" loading="lazy">':'')+'<span>'+esc(p.name)+'</span>':'<span class="empty-slot">Slot '+(i+1)+'</span>')+'</div></th>').join('')+'<th class="summary-col">Debilidad del equipo</th><th class="summary-col">Resistencia del equipo</th></tr></thead><tbody>';
  for(const attack of POKE_TYPES){
-  const vals=slots.map(p=>p?{p,n:pokemonMultiplier(p,attack)}:null);
+  const vals=slots.map((p,i)=>p?{p,n:pokemonMultiplier(p,attack,i)}:null);
   const filled=vals.filter(Boolean);
   const weak=filled.filter(v=>v.n>1).length,resist=filled.filter(v=>v.n<1).length;
   html+='<tr><td><span class="type-chip"><span class="type-full">'+attack+'</span><span class="type-short">'+({'Eléctrico':'Eléc.','Psíquico':'Psíq.','Fantasma':'Fant.','Siniestro':'Sini.','Volador':'Vola.','Veneno':'Vene.','Lucha':'Luch.','Planta':'Plan.','Tierra':'Tier.','Hielo':'Hiel.','Fuego':'Fueg.','Agua':'Agua','Normal':'Norm.','Bicho':'Bich.','Roca':'Roca','Dragón':'Drag.','Acero':'Acer.','Hada':'Hada'}[attack]||attack)+'</span></span></td>'+vals.map(v=>v?'<td class="'+multClass(v.n)+'" title="'+esc(v.p.name)+': '+multLabel(v.n)+'">'+multLabel(v.n)+'</td>':'<td class="empty-cell" aria-label="Slot vacío">—</td>').join('')+'<td class="summary-col total '+(weak?'weak':'neutral')+'">'+weak+'</td><td class="summary-col total '+(resist?'resist':'neutral')+'">'+resist+'</td></tr>';
@@ -158,14 +191,19 @@ $('clearTeam').addEventListener('click',()=>{teamNames=Array(6).fill('');renderT
 $('shareTeam').addEventListener('click',async()=>{
  const names=teamNames.filter(Boolean);
  if(!names.length){$('shareStatus').textContent='Selecciona al menos un Pokémon antes de compartir.';return}
- const encoded=encodeURIComponent(JSON.stringify(teamNames));
+ const encoded=encodeURIComponent(JSON.stringify({team:teamNames,applyAbility,selectedAbilities}));
  const url=location.href.split('#')[0]+'#team='+encoded;
  try{await navigator.clipboard.writeText(url);$('shareStatus').textContent='Enlace copiado. Cualquiera que lo abra podrá cargar este equipo.'}
  catch(e){$('shareStatus').textContent='Copia este enlace desde la barra del navegador: '+url;history.replaceState(null,'',url)}
 });
 function loadTeamFromHash(){
  const m=location.hash.match(/(?:^#|&)team=([^&]+)/);
- if(m){try{const a=JSON.parse(decodeURIComponent(m[1]));if(Array.isArray(a))teamNames=Array.from({length:6},(_,i)=>DATA.some(p=>p.name===a[i])?a[i]:'');}catch(e){}}
+ if(m){try{
+  const saved=JSON.parse(decodeURIComponent(m[1]));
+  const a=Array.isArray(saved)?saved:saved.team;
+  if(Array.isArray(a))teamNames=Array.from({length:6},(_,i)=>DATA.some(p=>p.name===a[i])?a[i]:'');
+  if(!Array.isArray(saved)){applyAbility=Array.from({length:6},(_,i)=>!!saved.applyAbility?.[i]);selectedAbilities=Array.from({length:6},(_,i)=>String(saved.selectedAbilities?.[i]||''));}
+ }catch(e){}}
 }
 loadTeamFromHash();
 
@@ -178,13 +216,13 @@ function refreshSavedTeams(selected=''){
 $('saveTeam').addEventListener('click',()=>{
  const team=teamNames.slice();if(!team.some(Boolean)){$('shareStatus').textContent='Añade al menos un Pokémon antes de guardar.';return}
  const name=$('teamName').value.trim()||'Equipo '+new Date().toLocaleDateString('es-ES');
- const items=getSavedTeams();const id=String(Date.now());items.push({id,name,team});
+ const items=getSavedTeams();const id=String(Date.now());items.push({id,name,team,applyAbility:applyAbility.slice(),selectedAbilities:selectedAbilities.slice()});
  try{localStorage.setItem(SAVED_KEY,JSON.stringify(items));refreshSavedTeams(id);$('shareStatus').textContent='Equipo guardado en este navegador.'}
  catch(e){$('shareStatus').textContent='No se pudo guardar. Comprueba que el navegador permita almacenamiento local.'}
 });
 $('loadTeam').addEventListener('click',()=>{
  const item=getSavedTeams().find(x=>x.id===$('savedTeams').value);if(!item){$('shareStatus').textContent='Selecciona un equipo guardado.';return}
- teamNames=Array.from({length:6},(_,i)=>DATA.some(p=>p.name===item.team[i])?item.team[i]:'');$('teamName').value=item.name;renderTeam();$('shareStatus').textContent='Equipo cargado.'
+ teamNames=Array.from({length:6},(_,i)=>DATA.some(p=>p.name===item.team[i])?item.team[i]:'');applyAbility=Array.from({length:6},(_,i)=>!!item.applyAbility?.[i]);selectedAbilities=Array.from({length:6},(_,i)=>String(item.selectedAbilities?.[i]||''));$('teamName').value=item.name;renderTeam();$('shareStatus').textContent='Equipo cargado.'
 });
 $('deleteTeam').addEventListener('click',()=>{
  const id=$('savedTeams').value;if(!id){$('shareStatus').textContent='Selecciona un equipo guardado.';return}
