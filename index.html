@@ -168,8 +168,10 @@ function renderTeamSlots(){
   search.addEventListener('input',updateOptions);
   select.addEventListener('change',e=>{if(e.target.value){teamNames[i]=e.target.value;applyAbility[i]=false;selectedAbilities[i]='';renderTeam();}});
   const toggle=slot.querySelector('.apply-ability'),abilitySelect=slot.querySelector('.ability-select');
-  toggle.addEventListener('change',e=>{applyAbility[i]=e.target.checked;abilitySelect.disabled=!e.target.checked;renderCoverage();});
-  abilitySelect.addEventListener('change',e=>{selectedAbilities[i]=e.target.value;renderCoverage();});
+  if(toggle&&abilitySelect){
+   toggle.addEventListener('change',e=>{applyAbility[i]=e.target.checked;abilitySelect.disabled=!e.target.checked;renderCoverage();});
+   abilitySelect.addEventListener('change',e=>{selectedAbilities[i]=e.target.value;renderCoverage();});
+  }
   root.append(slot);
  }
 }
