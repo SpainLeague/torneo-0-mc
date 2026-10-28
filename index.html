@@ -4,7 +4,31 @@
 :root{color-scheme:dark;--bg:#0b1020;--panel:#121a2d;--panel2:#19243b;--text:#eef3ff;--muted:#a6b4cc;--line:#2b3852;--accent:#8be9fd;--accent2:#c4b5fd}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#172647 0,#0b1020 55%);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}header{padding:30px 20px 24px;max-width:1250px;margin:auto}h1{font-size:clamp(26px,4vw,40px);line-height:1.1;margin:0 0 8px;letter-spacing:-.04em}.sub{color:var(--muted);max-width:750px}.pill{display:inline-block;border:1px solid #3b4d6b;border-radius:99px;padding:4px 10px;color:var(--accent);font-size:12px;margin-bottom:12px}.wrap{max-width:1250px;margin:auto;padding:0 20px 50px}.filters{background:rgba(18,26,45,.94);border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;position:sticky;top:8px;z-index:3;backdrop-filter:blur(12px)}label{display:block;font-size:12px;color:var(--muted);margin:0 0 5px}input,select{width:100%;background:#0b1222;color:var(--text);border:1px solid #34425d;border-radius:10px;padding:11px 12px;font:inherit;min-width:0}input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px}.filter-bottom{grid-column:1/-1;display:flex;gap:10px;align-items:center;justify-content:space-between;color:var(--muted);font-size:13px}.btn{border:1px solid #425575;border-radius:10px;padding:9px 12px;background:#202e49;color:var(--text);cursor:pointer;font:inherit}.btn:hover{border-color:var(--accent)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}.card{background:linear-gradient(155deg,#16213a,#11192a);border:1px solid var(--line);border-radius:16px;overflow:hidden;min-width:0}.cardtop{display:flex;align-items:center;gap:13px;padding:14px 15px 10px}.sprite{width:74px;height:74px;object-fit:contain;background:#0b1222;border-radius:14px;flex-shrink:0}.name{font-weight:750;font-size:18px;line-height:1.2}.subname{font-size:12px;color:var(--muted);margin-top:4px}.types{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.type{font-size:11px;padding:3px 8px;border-radius:6px;background:#283650;color:#eaf1ff}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:4px 14px 13px}.stat{background:#0c1425;border-radius:9px;padding:7px 8px}.stat span{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.04em}.stat b{font-size:16px;font-variant-numeric:tabular-nums}.abilities{border-top:1px solid var(--line);padding:12px 15px;color:#d8e3f7;font-size:13px}.effect-text{margin-top:7px;color:#b9c8e3;font-size:12px;line-height:1.45}.abilities b{color:var(--accent2)}.cardfoot{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 14px}.cardfoot a{color:var(--accent);font-size:12px;text-decoration:none;border:1px solid #354764;border-radius:8px;padding:6px 9px}.cardfoot a:hover{background:#22314e}.notice{margin-top:20px;border:1px solid #6b5a35;background:#292313;color:#f9e6b4;border-radius:12px;padding:13px 15px;font-size:13px}.empty{grid-column:1/-1;text-align:center;padding:50px 10px;color:var(--muted)}footer{max-width:1250px;margin:auto;padding:0 20px 35px;color:var(--muted);font-size:12px}.speednote{font-size:12px;color:var(--muted)}@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.filters{grid-template-columns:repeat(2,minmax(0,1fr));position:static}}@media(max-width:560px){header{padding-top:22px}.wrap{padding:0 12px 35px}.filters{padding:12px;gap:9px}.grid{grid-template-columns:1fr;gap:10px}.filter-bottom{align-items:flex-start;flex-direction:column}.cardtop{padding:12px}.sprite{width:68px;height:68px}}
 
 .tabs{display:flex;gap:8px;margin:0 0 18px;padding:5px;background:#10192b;border:1px solid var(--line);border-radius:14px;width:fit-content;max-width:100%}.tab{border:0;border-radius:10px;padding:11px 16px;background:transparent;color:var(--muted);font:inherit;font-weight:700;cursor:pointer}.tab.active{background:#2b3d5d;color:var(--text);box-shadow:inset 0 0 0 1px #52698d}.builder-intro{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin:8px 0 16px}.builder-intro h2{font-size:clamp(22px,3vw,30px);margin:0 0 5px}.builder-intro p{color:var(--muted);margin:0;max-width:720px}.builder-actions{display:flex;gap:8px;flex-wrap:wrap}.save-row{display:grid;grid-template-columns:minmax(150px,1fr) auto minmax(150px,1fr) auto auto;gap:8px;margin:0 0 16px}.save-row input,.save-row select{padding:9px 10px;font-size:13px}.team-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}.team-slot{min-width:0;background:linear-gradient(155deg,#16213a,#11192a);border:1px solid var(--line);border-radius:15px;padding:12px;display:flex;gap:12px;align-items:center}.team-slot img,.slot-placeholder{width:74px;height:74px;flex-shrink:0;object-fit:contain;background:#0b1222;border-radius:12px}.slot-placeholder{display:grid;place-items:center;color:#62738f;font-size:25px}.slot-controls{min-width:0;flex:1}.slot-title{font-size:12px;color:var(--muted);margin-bottom:5px}.slot-controls select{padding:9px 8px;font-size:13px}.slot-type{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.slot-type .type{font-size:10px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;background:#10192b}.coverage{border-collapse:separate;border-spacing:0;width:100%;min-width:700px;font-size:13px}.coverage th,.coverage td{padding:9px 10px;text-align:center;border-bottom:1px solid #26344d;border-right:1px solid #26344d;white-space:nowrap}.coverage th{background:#192640;color:#dce7fb;position:sticky;top:0;z-index:1}.coverage th:first-child,.coverage td:first-child{text-align:left;position:sticky;left:0;background:#172239;z-index:2}.coverage th:first-child{z-index:3}.coverage tr:last-child td{border-bottom:0}.coverage th:last-child,.coverage td:last-child{border-right:0}.coverage .weak{background:#612f3b;color:#ffe4e8;font-weight:800}.coverage .resist{background:#1d5148;color:#d5fff3;font-weight:800}.coverage .immune{background:#34405a;color:#f1f5ff;font-weight:800}.coverage .neutral{color:#52627c}.coverage .type-chip{display:inline-block;border-radius:6px;padding:3px 7px;background:#2a3a57;color:#e6eeff}.coverage .total{font-weight:800}.builder-note,.share-status{font-size:12px;color:var(--muted);margin:12px 2px}.share-status{color:var(--accent)}@media(max-width:900px){.team-slots{grid-template-columns:repeat(2,minmax(0,1fr))}.builder-intro{flex-direction:column}}@media(max-width:560px){.tabs{width:100%}.tab{flex:1;padding:10px 8px;font-size:13px}.team-slots{grid-template-columns:1fr}.team-slot img,.slot-placeholder{width:62px;height:62px}.builder-actions{width:100%}.builder-actions .btn{flex:1}.save-row{grid-template-columns:1fr 1fr}.save-row input,.save-row select{grid-column:span 2}.save-row .btn{grid-column:span 1}}
-</style></head><body><header><span class="pill">CATÁLOGO DEL TORNEO · POKÉMON CHAMPIONS</span><h1>La pool del torneo</h1><div class="sub">Consulta los Pokémon y formas permitidos, compara estadísticas y filtra por tipo, habilidad o velocidad. Las formas base y Mega aparecen como entradas independientes.</div></header>
+
+.coverage{min-width:0;table-layout:fixed;font-size:12px}
+.coverage th,.coverage td{padding:7px 5px}
+.coverage th:first-child,.coverage td:first-child{width:86px}
+.coverage-pokemon{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;max-width:120px;margin:auto}
+.coverage-pokemon img{width:48px;height:42px;object-fit:contain}
+.coverage-pokemon span{white-space:normal;overflow-wrap:anywhere;font-size:11px;line-height:1.15}
+.type-short{display:none}
+@media(max-width:560px){
+ .table-wrap{overflow:visible;border-radius:10px}
+ .coverage{font-size:10px}
+ .coverage th,.coverage td{padding:5px 2px;white-space:normal;overflow-wrap:anywhere}
+ .coverage th:first-child,.coverage td:first-child{width:48px;left:0}
+ .coverage-pokemon{gap:2px}
+ .coverage-pokemon img{width:32px;height:30px}
+ .coverage-pokemon span{font-size:8px;line-height:1.05;word-break:break-word}
+ .coverage .type-chip{padding:3px 1px;font-size:9px}
+ .type-full{display:none}.type-short{display:inline}
+ .coverage .summary-col{display:none}
+ .coverage td:not(:first-child){font-size:10px}
+ .team-slot{padding:9px;gap:9px}
+ .slot-controls{min-width:0}
+ .slot-search,.slot-controls select{font-size:12px;padding:8px 7px;margin-top:5px}
+ .selected-pokemon{font-size:12px;line-height:1.2;margin:3px 0}
+}</style></head><body><header><span class="pill">CATÁLOGO DEL TORNEO · POKÉMON CHAMPIONS</span><h1>La pool del torneo</h1><div class="sub">Consulta los Pokémon y formas permitidos, compara estadísticas y filtra por tipo, habilidad o velocidad. Las formas base y Mega aparecen como entradas independientes.</div></header>
 <main class="wrap">
 <nav class="tabs" aria-label="Secciones"><button class="tab active" id="tabPool" type="button">📚 Pool Pokémon</button><button class="tab" id="tabBuilder" type="button">🧩 Crear equipo</button></nav>
 <div id="poolView"><section class="filters" aria-label="Filtros de la pool">
@@ -91,24 +115,35 @@ $('tabPool').addEventListener('click',()=>setTab('pool'));
 $('tabBuilder').addEventListener('click',()=>setTab('builder'));
 function renderTeamSlots(){
  const root=$('teamSlots');root.replaceChildren();
+ const sorted=DATA.slice().sort((a,b)=>a.name.localeCompare(b.name,'es'));
  for(let i=0;i<6;i++){
   const p=DATA.find(x=>x.name===teamNames[i]);
   const slot=document.createElement('div');slot.className='team-slot';
   const art=p&&p.sprite?'<img src="'+esc(p.sprite)+'" alt="'+esc(p.name)+'" loading="lazy" onerror="this.style.visibility=\'hidden\'">':'<div class="slot-placeholder">＋</div>';
-  const opts=['<option value="">— Selecciona un Pokémon —</option>',...DATA.slice().sort((a,b)=>a.name.localeCompare(b.name,'es')).map(x=>'<option value="'+esc(x.name)+'" '+(x.name===teamNames[i]?'selected':'')+'>'+esc(x.name)+'</option>')].join('');
-  slot.innerHTML=art+'<div class="slot-controls"><div class="slot-title">Pokémon '+(i+1)+'</div><select aria-label="Pokémon '+(i+1)+'">'+opts+'</select>'+(p?'<div class="slot-type">'+[p.type1,p.type2].filter(Boolean).map(t=>'<span class="type">'+esc(t)+'</span>').join('')+'</div>':'')+'</div>';
-  slot.querySelector('select').addEventListener('change',e=>{teamNames[i]=e.target.value;renderTeam();});
+  const current=p?'<div class="selected-pokemon"><b>'+esc(p.name)+'</b></div>':'<div class="selected-pokemon muted">Ningún Pokémon seleccionado</div>';
+  slot.innerHTML=art+'<div class="slot-controls"><div class="slot-title">Pokémon '+(i+1)+'</div>'+current+'<input class="slot-search" type="search" autocomplete="off" placeholder="Buscar por nombre…" aria-label="Buscar Pokémon '+(i+1)+'"><select aria-label="Resultados para Pokémon '+(i+1)+'"><option value="">Escribe para buscar…</option></select>'+(p?'<div class="slot-type">'+[p.type1,p.type2].filter(Boolean).map(t=>'<span class="type">'+esc(t)+'</span>').join('')+'</div>':'')+'</div>';
+  const search=slot.querySelector('.slot-search'),select=slot.querySelector('select');
+  function updateOptions(){
+   const q=search.value.trim().toLocaleLowerCase('es');
+   const matches=q?sorted.filter(x=>x.name.toLocaleLowerCase('es').startsWith(q)):sorted;
+   select.replaceChildren();
+   select.append(new Option(q?(matches.length?'Coincidencias ('+matches.length+')':'No hay coincidencias'):'Escribe para buscar por nombre',''));
+   for(const x of matches)select.add(new Option(x.name,x.name));
+   select.disabled=matches.length===0;
+  }
+  search.addEventListener('input',updateOptions);
+  select.addEventListener('change',e=>{if(e.target.value){teamNames[i]=e.target.value;renderTeam();}});
   root.append(slot);
  }
 }
 function renderCoverage(){
  const chosen=teamNames.map(n=>DATA.find(p=>p.name===n)).filter(Boolean);
  const table=$('coverageTable');
- let html='<thead><tr><th>Tipo atacante</th>'+chosen.map(p=>'<th>'+esc(p.name)+'</th>').join('')+'<th>Débiles</th><th>Resistencias</th><th>Inmunes</th></tr></thead><tbody>';
+ let html='<thead><tr><th>Tipo atacante</th>'+chosen.map(p=>'<th class="pokemon-col"><div class="coverage-pokemon">'+(p.sprite?'<img src="'+esc(p.sprite)+'" alt="" loading="lazy" onerror="this.style.visibility=\\'hidden\\'">':'')+'<span>'+esc(p.name)+'</span></div></th>').join('')+'<th class="summary-col">Débiles</th><th class="summary-col">Resistencias</th><th class="summary-col">Inmunes</th></tr></thead><tbody>';
  for(const attack of POKE_TYPES){
   const vals=chosen.map(p=>({p,n:pokemonMultiplier(p,attack)}));
   const weak=vals.filter(v=>v.n>1).length,resist=vals.filter(v=>v.n>0&&v.n<1).length,immune=vals.filter(v=>v.n===0).length;
-  html+='<tr><td><span class="type-chip">'+attack+'</span></td>'+vals.map(v=>'<td class="'+multClass(v.n)+'" title="'+esc(v.p.name)+': '+multLabel(v.n)+'">'+multLabel(v.n)+'</td>').join('')+'<td class="total '+(weak?'weak':'neutral')+'">'+weak+'</td><td class="total '+(resist?'resist':'neutral')+'">'+resist+'</td><td class="total '+(immune?'immune':'neutral')+'">'+immune+'</td></tr>';
+  html+='<tr><td><span class="type-chip"><span class="type-full">'+attack+'</span><span class="type-short">'+({'Eléctrico':'Eléc.','Psíquico':'Psíq.','Fantasma':'Fant.','Siniestro':'Sini.','Volador':'Vola.','Veneno':'Vene.','Lucha':'Luch.','Planta':'Plan.','Tierra':'Tier.','Hielo':'Hiel.','Fuego':'Fueg.','Agua':'Agua','Normal':'Norm.','Bicho':'Bich.','Roca':'Roca','Dragón':'Drag.','Acero':'Acer.','Hada':'Hada'}[attack]||attack)+'</span></span></td>'+vals.map(v=>'<td class="'+multClass(v.n)+'" title="'+esc(v.p.name)+': '+multLabel(v.n)+'">'+multLabel(v.n)+'</td>').join('')+'<td class="summary-col total '+(weak?'weak':'neutral')+'">'+weak+'</td><td class="summary-col total '+(resist?'resist':'neutral')+'">'+resist+'</td><td class="summary-col total '+(immune?'immune':'neutral')+'">'+immune+'</td></tr>';
  }
  if(!chosen.length) html+='<tr><td colspan="4">Añade Pokémon para ver el análisis de tipos.</td></tr>';
  html+='</tbody>';table.innerHTML=html;
