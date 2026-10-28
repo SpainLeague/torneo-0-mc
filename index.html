@@ -161,9 +161,10 @@ const ABILITY_PAIRS=[
 function normalizeAbility(s){return String(s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLocaleLowerCase('es').replace(/[^a-z0-9]/g,'')}
 const abilityCanonical=new Map();for(const [en,es] of ABILITY_PAIRS){const canonical=normalizeAbility(en);abilityCanonical.set(normalizeAbility(en),canonical);abilityCanonical.set(normalizeAbility(es),canonical)}
 function canonicalAbility(s){const n=normalizeAbility(s);return abilityCanonical.get(n)||n}
-const abilities=[...new Map(rawAbilities.map(a=>[canonicalAbility(a),a])).values()].sort((a,b)=>a.localeCompare(b,'es'));
+function abilityLabel(a){const pair=ABILITY_PAIRS.find(([en,es])=>canonicalAbility(a)===normalizeAbility(en));return pair?`${pair[1]} (${pair[0]})`:a}
+const abilities=[...new Map(rawAbilities.map(a=>[canonicalAbility(a),a])).values()].sort((a,b)=>abilityLabel(a).localeCompare(abilityLabel(b),'es'));
 for(const t of types){const o=document.createElement('option');o.value=t;o.textContent=t;$('type').append(o)}
-for(const a of abilities){const o=document.createElement('option');o.value=canonicalAbility(a);o.textContent=ABILITY_PAIRS.find(([en,es])=>canonicalAbility(a)===normalizeAbility(en))?ABILITY_PAIRS.find(([en,es])=>canonicalAbility(a)===normalizeAbility(en)).join(' / '):a;$('ability').append(o)}
+for(const a of abilities){const o=document.createElement('option');o.value=canonicalAbility(a);o.textContent=abilityLabel(a);$('ability').append(o)}
 const statLabels={hp50:'PS',atk50:'Ataque',def50:'Defensa','spa50':'At. Esp.','spd50':'Def. Esp.'};
 function speed(p){return $('speedMode').value==='favorable'?p.speedAppliedFavorable:p.speedAppliedNeutral}
 function statVal(p,k){return k==='speed'?speed(p):p[k]}
