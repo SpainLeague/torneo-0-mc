@@ -125,7 +125,7 @@ function renderTeamSlots(){
   const search=slot.querySelector('.slot-search'),select=slot.querySelector('select');
   function updateOptions(){
    const q=search.value.trim().toLocaleLowerCase('es');
-   const matches=q?sorted.filter(x=>x.name.toLocaleLowerCase('es').startsWith(q)):sorted;
+   const matches=q?sorted.filter(x=>{const name=x.name.toLocaleLowerCase('es');const baseName=name.startsWith('mega ')?name.slice(5):name;return name.startsWith(q)||baseName.startsWith(q);}):sorted;
    select.replaceChildren();
    select.append(new Option(q?(matches.length?'Coincidencias ('+matches.length+')':'No hay coincidencias'):'Escribe para buscar por nombre',''));
    for(const x of matches)select.add(new Option(x.name,x.name));
