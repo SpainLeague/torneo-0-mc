@@ -142,12 +142,12 @@ function renderCoverage(){
  const slots=teamNames.map(n=>n?DATA.find(p=>p.name===n)||null:null);
  const chosen=slots.filter(Boolean);
  const table=$('coverageTable');
- let html='<thead><tr><th>Tipo atacante</th>'+slots.map((p,i)=>'<th class="pokemon-col"><div class="coverage-pokemon">'+(p?(p.sprite?'<img src="'+esc(p.sprite)+'" alt="" loading="lazy">':'')+'<span>'+esc(p.name)+'</span>':'<span class="empty-slot">Slot '+(i+1)+'</span>')+'</div></th>').join('')+'<th class="summary-col">Débiles</th><th class="summary-col">Resistencias</th><th class="summary-col">Inmunes</th></tr></thead><tbody>';
+ let html='<thead><tr><th>Tipo atacante</th>'+slots.map((p,i)=>'<th class="pokemon-col"><div class="coverage-pokemon">'+(p?(p.sprite?'<img src="'+esc(p.sprite)+'" alt="" loading="lazy">':'')+'<span>'+esc(p.name)+'</span>':'<span class="empty-slot">Slot '+(i+1)+'</span>')+'</div></th>').join('')+'<th class="summary-col">Debilidad del equipo</th><th class="summary-col">Resistencia del equipo</th></tr></thead><tbody>';
  for(const attack of POKE_TYPES){
   const vals=slots.map(p=>p?{p,n:pokemonMultiplier(p,attack)}:null);
   const filled=vals.filter(Boolean);
-  const weak=filled.filter(v=>v.n>1).length,resist=filled.filter(v=>v.n>0&&v.n<1).length,immune=filled.filter(v=>v.n===0).length;
-  html+='<tr><td><span class="type-chip"><span class="type-full">'+attack+'</span><span class="type-short">'+({'Eléctrico':'Eléc.','Psíquico':'Psíq.','Fantasma':'Fant.','Siniestro':'Sini.','Volador':'Vola.','Veneno':'Vene.','Lucha':'Luch.','Planta':'Plan.','Tierra':'Tier.','Hielo':'Hiel.','Fuego':'Fueg.','Agua':'Agua','Normal':'Norm.','Bicho':'Bich.','Roca':'Roca','Dragón':'Drag.','Acero':'Acer.','Hada':'Hada'}[attack]||attack)+'</span></span></td>'+vals.map(v=>v?'<td class="'+multClass(v.n)+'" title="'+esc(v.p.name)+': '+multLabel(v.n)+'">'+multLabel(v.n)+'</td>':'<td class="empty-cell" aria-label="Slot vacío">—</td>').join('')+'<td class="summary-col total '+(weak?'weak':'neutral')+'">'+weak+'</td><td class="summary-col total '+(resist?'resist':'neutral')+'">'+resist+'</td><td class="summary-col total '+(immune?'immune':'neutral')+'">'+immune+'</td></tr>';
+  const weak=filled.filter(v=>v.n>1).length,resist=filled.filter(v=>v.n<1).length;
+  html+='<tr><td><span class="type-chip"><span class="type-full">'+attack+'</span><span class="type-short">'+({'Eléctrico':'Eléc.','Psíquico':'Psíq.','Fantasma':'Fant.','Siniestro':'Sini.','Volador':'Vola.','Veneno':'Vene.','Lucha':'Luch.','Planta':'Plan.','Tierra':'Tier.','Hielo':'Hiel.','Fuego':'Fueg.','Agua':'Agua','Normal':'Norm.','Bicho':'Bich.','Roca':'Roca','Dragón':'Drag.','Acero':'Acer.','Hada':'Hada'}[attack]||attack)+'</span></span></td>'+vals.map(v=>v?'<td class="'+multClass(v.n)+'" title="'+esc(v.p.name)+': '+multLabel(v.n)+'">'+multLabel(v.n)+'</td>':'<td class="empty-cell" aria-label="Slot vacío">—</td>').join('')+'<td class="summary-col total '+(weak?'weak':'neutral')+'">'+weak+'</td><td class="summary-col total '+(resist?'resist':'neutral')+'">'+resist+'</td></tr>';
  }
  html+='</tbody>';table.innerHTML=html;
 }
