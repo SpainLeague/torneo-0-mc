@@ -420,8 +420,9 @@ function renderRecommendations(){
   const p=item.p,card=document.createElement('article');card.className='recommend-card';
   const img=p.sprite?'<img src="'+esc(p.sprite)+'" alt="'+esc(p.name)+'" loading="lazy">':'<div class="slot-placeholder">?</div>';
   const types=[p.type1,p.type2].filter(Boolean).map(t=>'<span class="type type-'+(TYPE_CLASS[t]||'normal')+'">'+esc(t)+'</span>').join('');
+  const supportTags=item.support.length?'<p class="recommend-moves">Funciones de apoyo: '+item.support.map(s=>esc(s.label)).join(', ')+'</p>':'';
   const moves=item.highlighted.length?'<p class="recommend-moves">Herramientas que aprende: '+item.highlighted.map(m=>esc((MOVE_ES[m]?MOVE_ES[m]+' ('+m+')':m))).join(', ')+'</p>':'';
-  card.innerHTML=img+'<div class="recommend-card-content"><h4>'+esc(p.name)+'</h4><div class="types">'+types+'</div><p>'+item.reasons.map(esc).join(' ')+'</p>'+moves+'<p class="recommend-score">Sinergia defensiva: '+item.score.toFixed(1)+'</p><button class="btn" type="button">Añadir al equipo</button></div>';
+  card.innerHTML=img+'<div class="recommend-card-content"><h4>'+esc(p.name)+'</h4><div class="types">'+types+'</div><p>'+item.reasons.map(esc).join(' ')+'</p>'+supportTags+moves+'<p class="recommend-score">Sinergia defensiva: '+item.score.toFixed(1)+'</p><button class="btn" type="button">Añadir al equipo</button></div>';
   card.querySelector('button').addEventListener('click',()=>{const index=teamNames.findIndex(n=>!n);if(index<0)return;if(!legalRecommendationCandidate(p,teamNames.map(n=>DATA.find(x=>x.name===n)).filter(Boolean))){status.textContent='No se puede añadir: superaría el límite de una Mega o dos Pokémon por tipo.';return;}teamNames[index]=p.name;applyAbility[index]=false;selectedAbilities[index]='';renderTeam();});
   root.append(card);
  }
