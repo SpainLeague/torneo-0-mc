@@ -184,16 +184,35 @@ function resolveMove(value){
  return '';
 }
 function populateMoveOptions(){
- const list=$('moveOptions');list.replaceChildren();
- for(const move of MOVE_DATA.moves){list.append(new Option(move,move));if(MOVE_ES[move])list.append(new Option(MOVE_ES[move]+' ('+move+')',MOVE_ES[move]+' ('+move+')'))}
- $('moveStatus').textContent=MOVE_DATA.moves.length+' movimientos disponibles · nombres en inglés y traducciones comunes al español';
+ updateMoveOptions();
+ $('moveStatus').textContent=MOVE_DATA.moves.length+' movimientos disponibles · separa los movimientos con comas; las sugerencias corresponden al texto después de la última coma';
+}
+function updateMoveOptions(){
+ const input=$('move'),list=$('moveOptions'),value=input.value;
+ const comma=value.lastIndexOf(',');
+ const prefix=comma>=0?value.slice(0,comma+1)+' ': '';
+ const query=comma>=0?value.slice(comma+1).trim():value.trim();
+ const nq=normalizeMove(query);
+ list.replaceChildren();
+ const candidates=[];
+ for(const move of MOVE_DATA.moves){
+  const labels=[move];
+  if(MOVE_ES[move])labels.push(MOVE_ES[move]+' ('+move+')');
+  for(const label of labels){
+   if(!nq||normalizeMove(label).startsWith(nq)||normalizeMove(move).startsWith(nq)||normalizeMove(MOVE_ES[move]||'').startsWith(nq)){
+    const full=prefix+label;
+    if(!candidates.includes(full))candidates.push(full);
+   }
+  }
+ }
+ for(const value of candidates)list.append(new Option(value,value));
 }
 const TYPE_CLASS={'Normal':'normal','Fuego':'fuego','Agua':'agua','Eléctrico':'electrico','Planta':'planta','Hielo':'hielo','Lucha':'lucha','Veneno':'veneno','Tierra':'tierra','Volador':'volador','Psíquico':'psiquico','Bicho':'bicho','Roca':'roca','Fantasma':'fantasma','Dragón':'dragon','Siniestro':'siniestro','Acero':'acero','Hada':'hada'};
-function render(){let list=DATA.filter(p=>{const q=$('search').value.trim().toLocaleLowerCase('es');if(q&&!p.name.toLocaleLowerCase('es').includes(q))return false;const t=$('type').value;if(t&&p.type1!==t&&p.type2!==t)return false;const a=$('ability').value;if(a&&!p.abilities.split('/').map(x=>canonicalAbility(x.trim())).includes(a))return false;const moveTexts=$('move').value.split(/[;,]/).map(x=>x.trim()).filter(Boolean),moves=moveTexts.map(resolveMove);if(moveTexts.length&&moves.every(Boolean)&&!moves.every(move=>(MOVE_DATA.pokemon[p.name]||[]).some(m=>normalizeMove(m)===normalizeMove(move))))return false;const ms=$('minSpeed').value;if(ms!==''&&speed(p)<Number(ms))return false;const k=$('minStat').value,v=$('minValue').value;if(k&&v!==''&&statVal(p,k)<Number(v))return false;return true});
+function render(){let list=DATA.filter(p=>{const q=$('search').value.trim().toLocaleLowerCase('es');if(q&&!p.name.toLocaleLowerCase('es').includes(q))return false;const t=$('type').value;if(t&&p.type1!==t&&p.type2!==t)return false;const a=$('ability').value;if(a&&!p.abilities.split('/').map(x=>canonicalAbility(x.trim())).includes(a))return false;const moveTexts=$('move').value.split(',').map(x=>x.trim()),moves=moveTexts.map(resolveMove);const requiredMoves=moves.filter(Boolean);if(requiredMoves.some(move=>!(MOVE_DATA.pokemon[p.name]||[]).some(m=>normalizeMove(m)===normalizeMove(move))))return false;const ms=$('minSpeed').value;if(ms!==''&&speed(p)<Number(ms))return false;const k=$('minStat').value,v=$('minValue').value;if(k&&v!==''&&statVal(p,k)<Number(v))return false;return true});
 const sort=$('sort').value;list.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'es'):sort==='speed'?speed(b)-speed(a):b[sort]-a[sort]);$('count').textContent=`${list.length} de ${DATA.length} entradas de la pool`;const root=$('cards');root.replaceChildren();if(!list.length){root.innerHTML='<div class="empty">No hay Pokémon que coincidan con esos filtros.</div>';return}
 for(const p of list){const card=document.createElement('article');card.className='card';const sprite=p.sprite?`<img class="sprite" src="${p.sprite}" alt="Ilustración de ${esc(p.name)}" loading="lazy" onerror="this.style.visibility=\'hidden\'">`:'<div class="sprite"></div>';const typeTags=[p.type1,p.type2].filter(Boolean).map(t=>`<span class="type type-${TYPE_CLASS[t]||'normal'}">${esc(t)}</span>`).join('');const source=p.source?`<a href="${p.source}" target="_blank" rel="noopener">Ficha y referencia ↗</a>`:'';card.innerHTML=`<div class="cardtop">${sprite}<div><div class="name">${esc(p.name)}</div><div class="subname">Estadísticas base · velocidad comparada a nivel 50 (${$('speedMode').value==='favorable'?'favorable':'neutra'})</div><div class="types">${typeTags}</div></div></div><div class="stats">${[['PS',p.hpBase],['Ataque',p.atkBase],['Defensa',p.defBase],['At. Esp.',p.spaBase],['Def. Esp.',p.spdBase],['Vel. base',p.speBase]].map(([n,v])=>`<div class="stat"><span>${n}</span><b>${v??'—'}</b></div>`).join('')}</div><div class="abilities"><b>Habilidad(es):</b> ${esc(p.abilities)}<div class="effect-text">${esc(p.effect||"Consulta la ficha de referencia para los efectos de las habilidades.")}</div><div class="speednote">Velocidad base: ${p.speBase??'—'} · Nv. 50 neutra: ${p.speedNeutral??'—'} · Nv. 50 favorable: ${p.speedFavorable??'—'}</div></div><div class="cardfoot">${source}<a href="https://champions.pokemon.com/" target="_blank" rel="noopener">Pokémon Champions ↗</a></div>`;root.append(card)}}
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-['search','type','ability','move','sort','speedMode','minSpeed','minStat','minValue'].forEach(id=>$(id).addEventListener(id==='search'||id==='move'||id==='minSpeed'||id==='minValue'?'input':'change',render));$('reset').addEventListener('click',()=>{['search','move','minSpeed','minValue'].forEach(id=>$(id).value='');['type','ability','minStat'].forEach(id=>$(id).value='');$('sort').value='name';$('speedMode').value='neutral';render()});render();fetch('./move-data.json').then(r=>{if(!r.ok)throw new Error('No se pudo cargar move-data.json');return r.json()}).then(data=>{MOVE_DATA=data;populateMoveOptions();render()}).catch(()=>{$('moveStatus').textContent='No se pudieron cargar los movimientos. Recarga la página.'});
+['search','type','ability','move','sort','speedMode','minSpeed','minStat','minValue'].forEach(id=>$(id).addEventListener(id==='search'||id==='move'||id==='minSpeed'||id==='minValue'?'input':'change',()=>{if(id==='move')updateMoveOptions();render()}));$('reset').addEventListener('click',()=>{['search','move','minSpeed','minValue'].forEach(id=>$(id).value='');['type','ability','minStat'].forEach(id=>$(id).value='');$('sort').value='name';$('speedMode').value='neutral';render()});render();fetch('./move-data.json').then(r=>{if(!r.ok)throw new Error('No se pudo cargar move-data.json');return r.json()}).then(data=>{MOVE_DATA=data;populateMoveOptions();render()}).catch(()=>{$('moveStatus').textContent='No se pudieron cargar los movimientos. Recarga la página.'});
 
 /* Constructor de equipos basado en la pool local */
 const POKE_TYPES=['Normal','Fuego','Agua','Eléctrico','Planta','Hielo','Lucha','Veneno','Tierra','Volador','Psíquico','Bicho','Roca','Fantasma','Dragón','Siniestro','Acero','Hada'];
