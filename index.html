@@ -254,6 +254,7 @@ const DEFENSIVE_ABILITIES=[
  {name:'Sebo',aliases:['Sebo','Thick Fat'],rules:{'Fuego':0.5,'Hielo':0.5}},
  {name:'Ignífugo',aliases:['Ignífugo','Heatproof'],rules:{'Fuego':0.5}},
  {name:'Pompa',aliases:['Pompa','Water Bubble'],rules:{'Fuego':0.5}},
+ {name:'Filtro',aliases:['Filtro','Filter'],rules:{},reduceSuperEffective:true},
  {name:'Sal Purificadora',aliases:['Sal Purificadora','Purifying Salt'],rules:{'Fantasma':0.5}},
  {name:'Cuerpo Horneado',aliases:['Cuerpo Horneado','Well-Baked Body'],rules:{'Fuego':0}}
 ];
@@ -278,6 +279,7 @@ function pokemonMultiplier(p,attack,slotIndex){
  let mult=typeMultiplier(attack,p.type1);
  if(p.type2) mult*=typeMultiplier(attack,p.type2);
  mult*=abilityMultiplier(p,attack,slotIndex);
+ if(applyAbility[slotIndex]&&selectedAbilities[slotIndex]==='Filtro'&&mult>1)mult*=0.75;
  return mult;
 }
 function multLabel(n){return n===0?'×0':n===.25?'×¼':n===.5?'×½':n===1?'—':n===2?'×2':n===4?'×4':String(n)}
