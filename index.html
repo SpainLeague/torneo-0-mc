@@ -367,8 +367,8 @@ function teamTypeCounts(team){
 }
 function legalRecommendationCandidate(candidate,team){
  if(team.some(p=>p.name===candidate.name))return false;
- const megaCount=team.filter(p=>/^Mega\\s/i.test(p.name)).length;
- if(/^Mega\\s/i.test(candidate.name)&&megaCount>=1)return false;
+ const megaCount=team.filter(p=>/^Mega\s/i.test(p.name)).length;
+ if(/^Mega\s/i.test(candidate.name)&&megaCount>=1)return false;
  const counts=teamTypeCounts(team);
  return [...new Set([candidate.type1,candidate.type2].filter(Boolean))].every(t=>(counts[t]||0)<2);
 }
