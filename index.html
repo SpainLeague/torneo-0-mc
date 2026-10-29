@@ -298,7 +298,11 @@ function renderTeamSlots(){
  for(let i=0;i<6;i++){
   const p=DATA.find(x=>x.name===teamNames[i]);
   const abilities=p?getDefensiveAbilities(p):[];
-  if(p&&(!selectedAbilities[i]||!abilities.some(a=>a.name===selectedAbilities[i])))selectedAbilities[i]=abilities[0]?.name||'';
+  const pokemonAbilities=p?(p.abilities||'').split('/').map(a=>a.trim()).filter(Boolean):[];
+  const uniquePokemonAbilities=new Set(pokemonAbilities.map(normalizeAbilityText));
+  const hasOnlyOneDefensiveAbility=uniquePokemonAbilities.size===1&&abilities.length===1;
+  if(hasOnlyOneDefensiveAbility){applyAbility[i]=true;selectedAbilities[i]=abilities[0].name;}
+  else if(p&&(!selectedAbilities[i]||!abilities.some(a=>a.name===selectedAbilities[i])))selectedAbilities[i]=abilities[0]?.name||'';
   const slot=document.createElement('div');slot.className='team-slot';
   const art=p&&p.sprite?'<img src="'+esc(p.sprite)+'" alt="'+esc(p.name)+'" loading="lazy">':'<div class="slot-placeholder">＋</div>';
   const current=p?'<div class="selected-pokemon"><b>'+esc(p.name)+'</b><button type="button" class="remove-pokemon" aria-label="Eliminar '+esc(p.name)+' del slot '+(i+1)+'" title="Eliminar Pokémon">×</button></div>':'<div class="selected-pokemon muted">Ningún Pokémon seleccionado</div>';
