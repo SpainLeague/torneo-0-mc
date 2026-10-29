@@ -70,7 +70,7 @@
   <button class="btn" id="recommendStart" type="button">Analizar acompañantes</button>
   <button class="btn" id="recommendClear" type="button">Reiniciar equipo</button>
  </div>
- <p class="recommend-note">Solo se recomiendan Pokémon de esta pool. El equipo admite como máximo una Mega y no más de dos Pokémon que compartan cada tipo. Los seis slots y la tabla defensiva están sincronizados con el Constructor de equipos.</p>
+ <p class="recommend-note">Solo se recomiendan Pokémon de esta pool. El equipo puede incluir hasta dos Pokémon Mega (aunque solo podrás megaevolucionar uno por combate) y no más de dos Pokémon que compartan cada tipo. Los seis slots y la tabla defensiva están sincronizados con el Constructor de equipos.</p>
  <div class="team-slots" id="recommendationSlots"></div>
  <div class="table-wrap"><table class="coverage" id="recommendationCoverage"></table></div>
  <div class="recommend-results"><h3>Acompañantes sugeridos</h3><p id="recommendStatus" class="recommend-note">Selecciona un Pokémon y pulsa «Analizar acompañantes».</p><div class="recommend-grid" id="recommendations"></div></div>
@@ -368,7 +368,7 @@ function teamTypeCounts(team){
 function legalRecommendationCandidate(candidate,team){
  if(team.some(p=>p.name===candidate.name))return false;
  const megaCount=team.filter(p=>/^Mega\s/i.test(p.name)).length;
- if(/^Mega\s/i.test(candidate.name)&&megaCount>=1)return false;
+ if(/^Mega\s/i.test(candidate.name)&&megaCount>=2)return false;
  const counts=teamTypeCounts(team);
  return [...new Set([candidate.type1,candidate.type2].filter(Boolean))].every(t=>(counts[t]||0)<2);
 }
@@ -412,7 +412,7 @@ function renderRecommendations(){
  if(!team.length){status.textContent='Selecciona un Pokémon y pulsa «Analizar acompañantes».';return;}
  if(team.length>=6){status.textContent='El equipo ya tiene seis Pokémon. Elimina uno de los slots para ver más acompañantes.';return;}
  const megaCount=team.filter(p=>/^Mega\\s/i.test(p.name)).length;const excessiveTypes=Object.entries(teamTypeCounts(team)).filter(([,count])=>count>2).map(([type])=>type);
- if(megaCount>1||excessiveTypes.length){status.textContent='El equipo actual incumple las reglas: máximo una Mega y no más de dos Pokémon por tipo. Ajusta los slots para recibir sugerencias.';root.innerHTML='<div class="empty">Revisa las reglas de composición del equipo.</div>';return;}
+ if(megaCount>2||excessiveTypes.length){status.textContent='El equipo actual incumple las reglas: máximo dos Megas y no más de dos Pokémon por tipo. Ajusta los slots para recibir sugerencias.';root.innerHTML='<div class="empty">Revisa las reglas de composición del equipo.</div>';return;}
  const ranked=DATA.filter(p=>legalRecommendationCandidate(p,team)).map(p=>({p,...recommendationDetails(p,team)})).sort((a,b)=>b.score-a.score||a.p.name.localeCompare(b.p.name,'es')).slice(0,10);
  status.textContent='Sugerencias calculadas según las debilidades y resistencias por tipo, la diversidad de tipos y algunas herramientas de apoyo que el Pokémon aprende. Los movimientos listados son opciones disponibles, no un moveset recomendado.';
  if(!ranked.length){root.innerHTML='<div class="empty">No hay candidatos que cumplan las reglas de composición actuales.</div>';return;}
@@ -423,7 +423,7 @@ function renderRecommendations(){
   const supportTags=item.support.length?'<p class="recommend-moves">Funciones de apoyo: '+item.support.map(s=>esc(s.label)).join(', ')+'</p>':'';
   const moves=item.highlighted.length?'<p class="recommend-moves">Herramientas que aprende: '+item.highlighted.map(m=>esc((MOVE_ES[m]?MOVE_ES[m]+' ('+m+')':m))).join(', ')+'</p>':'';
   card.innerHTML=img+'<div class="recommend-card-content"><h4>'+esc(p.name)+'</h4><div class="types">'+types+'</div><p>'+item.reasons.map(esc).join(' ')+'</p>'+supportTags+moves+'<p class="recommend-score">Sinergia defensiva: '+item.score.toFixed(1)+'</p><button class="btn" type="button">Añadir al equipo</button></div>';
-  card.querySelector('button').addEventListener('click',()=>{const index=teamNames.findIndex(n=>!n);if(index<0)return;if(!legalRecommendationCandidate(p,teamNames.map(n=>DATA.find(x=>x.name===n)).filter(Boolean))){status.textContent='No se puede añadir: superaría el límite de una Mega o dos Pokémon por tipo.';return;}teamNames[index]=p.name;applyAbility[index]=false;selectedAbilities[index]='';renderTeam();});
+  card.querySelector('button').addEventListener('click',()=>{const index=teamNames.findIndex(n=>!n);if(index<0)return;if(!legalRecommendationCandidate(p,teamNames.map(n=>DATA.find(x=>x.name===n)).filter(Boolean))){status.textContent='No se puede añadir: superaría el límite de dos Megas o dos Pokémon por tipo.';return;}teamNames[index]=p.name;applyAbility[index]=false;selectedAbilities[index]='';renderTeam();});
   root.append(card);
  }
 }
