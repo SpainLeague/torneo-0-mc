@@ -57,7 +57,7 @@
 
 <section class="grid" id="cards" aria-live="polite"></section></div>
 <section id="builderView" hidden>
-  <div class="builder-intro"><div><h2>Constructor de equipos</h2><p>Selecciona hasta seis Pokémon de la pool y consulta al instante sus debilidades, resistencias e inmunidades por tipo.</p></div><div class="builder-actions"><button class="btn" id="clearTeam" type="button">Vaciar equipo</button><button class="btn" id="shareTeam" type="button">Copiar enlace del equipo</button></div><div class="save-row"><input id="teamName" placeholder="Nombre del equipo (opcional)" aria-label="Nombre del equipo"><button class="btn" id="saveTeam" type="button">Guardar</button><select id="savedTeams" aria-label="Equipos guardados"><option value="">Equipos guardados…</option></select><button class="btn" id="loadTeam" type="button">Cargar</button><button class="btn" id="deleteTeam" type="button">Borrar</button></div></div>
+  <div class="builder-intro"><div><h2>Constructor de equipos</h2><p>Selecciona hasta seis Pokémon de la pool y consulta al instante sus debilidades, resistencias e inmunidades por tipo.</p></div><div class="builder-actions"><button class="btn" id="clearTeam" type="button">Vaciar equipo</button><button class="btn" id="shareTeam" type="button">Copiar enlace del equipo</button><button class="btn" id="exportShowdown" type="button">Exportar a Showdown</button></div><div class="save-row"><input id="teamName" placeholder="Nombre del equipo (opcional)" aria-label="Nombre del equipo"><button class="btn" id="saveTeam" type="button">Guardar</button><select id="savedTeams" aria-label="Equipos guardados"><option value="">Equipos guardados…</option></select><button class="btn" id="loadTeam" type="button">Cargar</button><button class="btn" id="deleteTeam" type="button">Borrar</button></div></div>
   <div class="team-slots" id="teamSlots"></div>
   <div class="share-status" id="shareStatus" aria-live="polite"></div>
   <div class="table-wrap"><table class="coverage" id="coverageTable"></table></div>
@@ -475,6 +475,61 @@ $('recommendStart').addEventListener('click',()=>{
 $('recommendClear').addEventListener('click',()=>{teamNames=Array(6).fill('');applyAbility=Array(6).fill(false);selectedAbilities=Array(6).fill('');renderTeam();renderRecommendations();});
 
 $('clearTeam').addEventListener('click',()=>{teamNames=Array(6).fill('');renderTeam();});
+
+const SHOWDOWN_MEGA_STONES={
+ 'Mega Skarmory':'Skarmorite','Mega Starmie':'Starmite','Mega Sharpedo':'Sharpedonite','Mega Gyarados':'Gyaradosite',
+ 'Mega Beedrill':'Beedrillite','Mega Heracross':'Heracronite','Mega Manectric':'Manectite','Mega Ampharos':'Ampharosite',
+ 'Mega Chandelure':'Chandelurite','Mega Banette':'Banettite','Mega Pyroar':'Pyroarite','Mega Emboar':'Emboarite',
+ 'Mega Clefable':'Clefablite','Mega Hawlucha':'Hawluchanite','Mega Crabominable':'Crabominite','Mega Lopunny':'Lopunnite',
+ 'Mega Pidgeot':'Pidgeotite','Mega Audino':'Audinite','Mega Drampa':'Drampanite','Mega Sceptile':'Sceptilite',
+ 'Mega Meganium':'Meganiumite','Mega Alakazam':'Alakazite','Mega Scrafty':'Scraftite','Mega Barbaracle':'Barbaracite',
+ 'Mega Greninja':'Greninjite','Mega Scizor':'Scizorite','Mega Meowstic (F)':'Meowsticite','Mega Golurk':'Golurkite',
+ 'Mega Aggron':'Aggronite','Mega Abomasnow':'Abomasite','Mega Houndoom':'Houndoominite','Mega Eelektross':'Eelektrossite',
+ 'Mega Altaria':'Altarianite','Mega Feraligatr':'Feraligatrite','Mega Chimecho':'Chimechite','Mega Slowbro':'Slowbronite',
+ 'Mega Malamar':'Malamarite','Mega Steelix':'Steelixite','Mega Dragalge':'Dragalgite','Mega Chesnaught':'Chesnaughtite',
+ 'Mega Scolipede':'Scolipite','Mega Falinks':'Falinksite','Mega Absol':'Absolite','Mega Victreebel':'Victreebelite',
+ 'Mega Medicham':'Medichamite'
+};
+function showdownSpeciesName(name){
+ const isMega=/^Mega\\s/i.test(name);
+ let species=name.replace(/^Mega\\s+/i,'').replace(/\\s+\\(F\\)$/i,'-F').replace(/\\s+\\(M\\)$/i,'-M');
+ return isMega?species+'-Mega':species;
+}
+function showdownAbilityName(name){
+ const normalized=normalizeAbility(name);
+ const pair=ABILITY_PAIRS.find(([en,es])=>normalizeAbility(en)===normalized||normalizeAbility(es)===normalized);
+ return pair?pair[0]:String(name||'').trim();
+}
+function buildShowdownExport(){
+ return teamNames.map((name,index)=>{
+  const p=DATA.find(entry=>entry.name===name);
+  if(!p)return '';
+  const lines=[showdownSpeciesName(p.name)];
+  const available=(p.abilities||'').split('/').map(value=>value.trim()).filter(Boolean);
+  const selected=applyAbility[index]&&selectedAbilities[index]?selectedAbilities[index]:available[0];
+  if(selected)lines.push('Ability: '+showdownAbilityName(selected));
+  const stone=SHOWDOWN_MEGA_STONES[p.name];
+  if(stone)lines[0]+=' @ '+stone;
+  lines.push('Level: 50');
+  return lines.join('\\n');
+ }).filter(Boolean).join('\\n\\n');
+}
+$('exportShowdown').addEventListener('click',async()=>{
+ const exportText=buildShowdownExport();
+ if(!exportText){$('shareStatus').textContent='Selecciona al menos un Pokémon antes de exportar.';return;}
+ try{
+  await navigator.clipboard.writeText(exportText);
+  $('shareStatus').textContent='Equipo copiado en formato Pokémon Showdown.';
+ }catch(error){
+  const field=document.createElement('textarea');
+  field.value=exportText;field.setAttribute('readonly','');field.style.position='fixed';field.style.opacity='0';
+  document.body.append(field);field.select();
+  let copied=false;try{copied=document.execCommand('copy');}catch(e){}
+  field.remove();
+  $('shareStatus').textContent=copied?'Equipo copiado en formato Pokémon Showdown.':'No se pudo copiar automáticamente. Revisa los permisos del navegador e inténtalo de nuevo.';
+ }
+});
+
 $('shareTeam').addEventListener('click',async()=>{
  const names=teamNames.filter(Boolean);
  if(!names.length){$('shareStatus').textContent='Selecciona al menos un Pokémon antes de compartir.';return}
