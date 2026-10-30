@@ -491,8 +491,8 @@ const SHOWDOWN_MEGA_STONES={
  'Mega Medicham':'Medichamite'
 };
 function showdownSpeciesName(name){
- const isMega=/^Mega\\s/i.test(name);
- let species=name.replace(/^Mega\\s+/i,'').replace(/\\s+\\(F\\)$/i,'-F').replace(/\\s+\\(M\\)$/i,'-M');
+ const isMega=/^Mega\s/i.test(name);
+ let species=name.replace(/^Mega\s+/i,'').replace(/\s+\\(F\\)$/i,'-F').replace(/\s+\\(M\\)$/i,'-M');
  return isMega?species+'-Mega':species;
 }
 function showdownAbilityName(name){
@@ -511,8 +511,8 @@ function buildShowdownExport(){
   const stone=SHOWDOWN_MEGA_STONES[p.name];
   if(stone)lines[0]+=' @ '+stone;
   lines.push('Level: 50');
-  return lines.join('\\n');
- }).filter(Boolean).join('\\n\\n');
+  return lines.join('\n');
+ }).filter(Boolean).join('\n\n');
 }
 $('exportShowdown').addEventListener('click',async()=>{
  const exportText=buildShowdownExport();
