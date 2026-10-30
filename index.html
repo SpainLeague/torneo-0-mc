@@ -145,7 +145,7 @@ const ABILITY_PAIRS=[
 ['Water Bubble','Burbuja'],
 ['Water Absorb','Absorbe Agua'],
 ['Volt Absorb','Absorbe Electricidad'],
-['Zero to Hero','Cambio Heroico'],
+['Zero to Hero','Cambio Heroico'],['Water Bubble','Pompa'],['Filter','Filtro'],
 ['Adaptability','Adaptable'],
 ['Aroma Veil','Velo Aroma'],
 ['Bulletproof','Antibalas'],
@@ -175,7 +175,7 @@ const ABILITY_PAIRS=[
 ['Wind Power','Dinamo'],
 ['Zero to Hero','Cambio Heroico']
 ];
-function normalizeAbility(s){return String(s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLocaleLowerCase('es').replace(/[^a-z0-9]/g,'')}
+function normalizeAbility(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('es').replace(/[^a-z0-9]/g,'')}
 const abilityCanonical=new Map();for(const [en,es] of ABILITY_PAIRS){const canonical=normalizeAbility(en);abilityCanonical.set(normalizeAbility(en),canonical);abilityCanonical.set(normalizeAbility(es),canonical)}
 function canonicalAbility(s){const n=normalizeAbility(s);return abilityCanonical.get(n)||n}
 function abilityLabel(a){const pair=ABILITY_PAIRS.find(([en,es])=>canonicalAbility(a)===normalizeAbility(en));return pair?`${pair[1]} (${pair[0]})`:a}
