@@ -21,3 +21,9 @@ test('rejects an ability that is not legal for the pool entry',()=>{
 test('rejects a reference ability absent from the Champions calculator dex',()=>{
  assert.throws(()=>resolveAbility(poolEntry,{abilities:{0:'First Ability'}},reference,'Second Ability'),/no está disponible/);
 });
+
+
+test('maps a selected localized pool ability to its English Champions dex ability by position',()=>{
+ const localizedPool={name:'Testmon',abilities:'Primera Habilidad / Segunda Habilidad'};
+ assert.equal(resolveAbility(localizedPool,species,reference,'Segunda Habilidad'),'Second Ability');
+});
