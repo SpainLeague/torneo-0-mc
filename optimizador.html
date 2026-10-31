@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101828"><title>Optimizador PC · Torneo 0% MC</title>
 <style>
-:root{color-scheme:dark;--bg:#0b1020;--panel:#121a2d;--panel2:#19243b;--text:#eef3ff;--muted:#a6b4cc;--line:#2b3852;--accent:#8be9fd;--green:#86efac;--warn:#fbbf24}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#172647 0,#0b1020 55%);color:var(--text);font:14px/1.5 system-ui,sans-serif}header,.wrap{max-width:1180px;margin:auto;padding:22px 18px}h1{font-size:clamp(25px,4vw,36px);margin:5px 0}.muted,.hint{color:var(--muted)}.top a{color:var(--accent);text-decoration:none}.panel{background:linear-gradient(155deg,#16213a,#11192a);border:1px solid var(--line);border-radius:15px;padding:16px;margin:14px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.field{min-width:0}label{display:block;font-size:12px;color:var(--muted);margin:0 0 5px}input,select{width:100%;min-width:0;background:#0b1222;color:var(--text);border:1px solid #34425d;border-radius:9px;padding:9px;font:inherit}button,.btn{border:1px solid #425575;border-radius:9px;padding:9px 12px;background:#202e49;color:var(--text);cursor:pointer;font:inherit}button.primary{background:#164e63;border-color:#0e7490}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.stat{background:#0b1425;padding:9px;border-radius:9px}.stat b{display:block;font-size:18px}.stat small{color:var(--muted)}.pc-row{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}.pc-row input{text-align:center}.pc-total{display:flex;justify-content:space-between;margin-top:10px;font-weight:700}.ok{color:var(--green)}.bad{color:#fca5a5}.target{border:1px solid var(--line);border-radius:11px;padding:12px;margin:10px 0}.target-head{display:flex;justify-content:space-between;gap:8px;align-items:center}.target-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}.check{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}.check input{width:auto}.notice{border:1px solid #725a25;background:#292313;color:#f9e6b4;border-radius:10px;padding:12px;font-size:12px}.actions{display:flex;gap:8px;flex-wrap:wrap}.status{padding:10px;background:#0b1425;border-radius:9px;color:var(--muted);margin-top:10px}.hidden{display:none}@media(max-width:720px){.grid{grid-template-columns:1fr}.three{grid-template-columns:repeat(2,minmax(0,1fr))}.target-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:440px){header,.wrap{padding:14px 11px}.panel{padding:12px}.pc-row{grid-template-columns:repeat(3,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+:root{color-scheme:dark;--bg:#0b1020;--panel:#121a2d;--panel2:#19243b;--text:#eef3ff;--muted:#a6b4cc;--line:#2b3852;--accent:#8be9fd;--green:#86efac;--warn:#fbbf24}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#172647 0,#0b1020 55%);color:var(--text);font:14px/1.5 system-ui,sans-serif}header,.wrap{max-width:1180px;margin:auto;padding:22px 18px}h1{font-size:clamp(25px,4vw,36px);margin:5px 0}.muted,.hint{color:var(--muted)}.top a{color:var(--accent);text-decoration:none}.panel{background:linear-gradient(155deg,#16213a,#11192a);border:1px solid var(--line);border-radius:15px;padding:16px;margin:14px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.field{min-width:0}label{display:block;font-size:12px;color:var(--muted);margin:0 0 5px}input,select{width:100%;min-width:0;background:#0b1222;color:var(--text);border:1px solid #34425d;border-radius:9px;padding:9px;font:inherit}button,.btn{border:1px solid #425575;border-radius:9px;padding:9px 12px;background:#202e49;color:var(--text);cursor:pointer;font:inherit}button.primary{background:#164e63;border-color:#0e7490}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.stat{background:#0b1425;padding:9px;border-radius:9px}.stat b{display:block;font-size:18px}.stat small{color:var(--muted)}.pc-row{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}.pc-row input{text-align:center}.pc-total{display:flex;justify-content:space-between;margin-top:10px;font-weight:700}.ok{color:var(--green)}.bad{color:#fca5a5}.target{border:1px solid var(--line);border-radius:11px;padding:12px;margin:10px 0}.target-head{display:flex;justify-content:space-between;gap:8px;align-items:center}.target-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}.check{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}.check input{width:auto}.notice{border:1px solid #725a25;background:#292313;color:#f9e6b4;border-radius:10px;padding:12px;font-size:12px}.actions{display:flex;gap:8px;flex-wrap:wrap}.status{padding:10px;background:#0b1425;border-radius:9px;color:var(--muted);margin-top:10px;white-space:pre-line}.search-results{display:grid;gap:10px;margin-top:12px}.result-card{border:1px solid #2b3852;border-radius:11px;background:#10192b;padding:13px}.result-card h3{margin:0 0 6px;font-size:16px}.result-card p{margin:4px 0;color:#a6b4cc}.result-card .score{color:#86efac;font-weight:700}.hidden{display:none}@media(max-width:720px){.grid{grid-template-columns:1fr}.three{grid-template-columns:repeat(2,minmax(0,1fr))}.target-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:440px){header,.wrap{padding:14px 11px}.panel{padding:12px}.pc-row{grid-template-columns:repeat(3,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style></head><body><header><div class="top"><a href="./">← Volver a Torneo 0% MC</a></div><p class="muted">HERRAMIENTA DE PREPARACIÓN · POKÉMON CHAMPIONS</p><h1>Optimizador de PC</h1><p class="muted">Configura el Pokémon que quieres optimizar, sus rivales y los umbrales competitivos.</p></header>
 <main class="wrap">
-<div class="notice"><b>Estado del desarrollo:</b> el motor oficial de Smogon en modo Champions ya está conectado para probar escenarios manuales y probabilidades de KO. El buscador automático de repartos y los modificadores de combate siguen en desarrollo; todavía no se ofrecen recomendaciones automáticas.</div>
+<div class="notice"><b>Estado del desarrollo:</b> el motor oficial de Smogon en modo Champions permite calcular escenarios manuales. Ya está disponible una búsqueda heurística inicial de repartos; los modificadores de combate y la búsqueda exhaustiva siguen en desarrollo.</div>
 <section class="grid">
 <article class="panel"><h2>Pokémon a optimizar</h2><div class="field"><label for="own">Pokémon / forma</label><select id="own"></select></div><div class="three" style="margin-top:10px"><div class="field"><label for="nature">Naturaleza</label><select id="nature"></select></div><div class="field"><label for="ability">Habilidad</label><select id="ability"></select></div><div class="field"><label for="item">Objeto</label><select id="item"><option value="">Sin objeto</option></select></div></div><div class="stats" id="ownStats"></div></article>
 <article class="panel"><h2>Pokémon rival</h2><div class="field"><label for="foe">Pokémon / forma</label><select id="foe"></select></div><div class="three" style="margin-top:10px"><div class="field"><label for="foeNature">Naturaleza</label><select id="foeNature"></select></div><div class="field"><label for="foeAbility">Habilidad</label><select id="foeAbility"></select></div><div class="field"><label for="foeItem">Objeto</label><select id="foeItem"><option value="">Sin objeto</option></select></div></div><div class="stats" id="foeStats"></div></article>
@@ -13,7 +13,10 @@
 <article class="panel"><h2>PC del Pokémon a optimizar</h2><p class="hint">Elige uno de los repartos competitivos publicados o introduce uno manualmente.</p><div class="field"><label for="ownPreset">Repartos más usados · Champions M-C BO3</label><select id="ownPreset"><option value="">Sin datos disponibles</option></select></div><div class="pc-row" id="ownPC"></div><div class="pc-total"><span id="ownTotal">Total: 0 / 66</span><span id="ownValidity"></span></div></article>
 <article class="panel"><h2>PC del rival</h2><p class="hint">Puedes aplicar un reparto competitivo como referencia para el rival.</p><div class="field"><label for="foePreset">Repartos más usados · Champions M-C BO3</label><select id="foePreset"><option value="">Sin datos disponibles</option></select></div><div class="pc-row" id="foePC"></div><div class="pc-total"><span id="foeTotal">Total: 0 / 66</span><span id="foeValidity"></span></div></article>
 </section>
-<section class="panel"><div class="target-head"><div><h2>Objetivos competitivos</h2><p class="hint">Todos tienen la misma importancia. Puedes combinar objetivos ofensivos y defensivos.</p></div><button id="addTarget" type="button">+ Añadir objetivo</button></div><div id="targets"></div><div class="actions"><button class="primary" id="prepare" type="button">Validar y calcular escenarios</button><button id="reset" type="button">Restablecer</button></div><div id="status" class="status" aria-live="polite">Selecciona los Pokémon y configura los objetivos.</div></section>
+<section class="panel"><div class="target-head"><div><h2>Objetivos competitivos</h2><p class="hint">Todos tienen la misma importancia. Puedes combinar objetivos ofensivos y defensivos.</p></div><button id="addTarget" type="button">+ Añadir objetivo</button></div><div id="targets"></div><div class="actions"><button class="primary" id="prepare" type="button">Validar y calcular escenarios</button><button id="reset" type="button">Restablecer</button></div><div id="status" class="status" aria-live="polite">Selecciona los Pokémon y configura los objetivos.</div>
+<div class="actions" style="margin-top:10px"><button class="primary" id="searchBest" type="button">Buscar mejores repartos de PC</button><button id="cancelSearch" type="button" class="hidden">Detener búsqueda</button></div>
+<p class="hint">La búsqueda heurística parte de repartos competitivos publicados y distribuciones iniciales. Mantiene fija la naturaleza, habilidad, objeto y configuración del rival. No examina todas las combinaciones legales.</p>
+<div id="searchResults" class="search-results" aria-live="polite"></div></section>
 <section class="panel"><h2>Condiciones y modificadores</h2><div class="three"><label class="check"><input type="checkbox"> Clima</label><label class="check"><input type="checkbox"> Terreno</label><label class="check"><input type="checkbox"> Pantallas</label><label class="check"><input type="checkbox"> Viento Afín</label><label class="check"><input type="checkbox"> Golpe crítico</label><label class="check"><input type="checkbox"> Daño residual</label><label class="check"><input type="checkbox"> Recuperación</label><label class="check"><input type="checkbox"> Dobles / daño en área</label></div><p class="hint">Los controles visuales se incorporarán al motor de cálculo al completar la integración de mecánicas.</p></section>
 </main>
 <script src="https://unpkg.com/@smogon/calc@0.12.0/dist/data/production.min.js"></script>
@@ -22,13 +25,14 @@
 import {loadOptimizerData, getLegalMoveNames, auditPoolCoverage, calculateChampionStats, getLegalItemsForPool, getRequiredMegaStone, validatePoolItem, getSpreadPresets} from './optimizador-data.js';
 import {getSmogonRuntime, auditSmogonCoverage, calculateSmogonDamage} from './optimizador-smogon.js';
 import {koThresholds} from './optimizador-ko.js';
+import {findBestLocalSpreads} from './optimizador-heuristic.js';
 const STATS=['PS','Ataque','Defensa','At. Esp.','Def. Esp.','Velocidad'],KEYS=['hp','atk','def','spa','spd','spe'];
 const NATURES=['Activa','Afable','Agitada','Alegre','Alocada','Amable','Audaz','Cauta','Dócil','Firme','Floja','Fuerte','Grosera','Huraña','Ingenua','Mansa','Miedosa','Modesta','Osada','Pícara','Plácida','Rara','Serena','Seria','Tímida'];
 const NATURE_IDS={'Activa':'hasty','Afable':'mild','Agitada':'impish','Alegre':'jolly','Alocada':'rash','Amable':'gentle','Audaz':'brave','Cauta':'careful','Dócil':'docile','Firme':'adamant','Floja':'lax','Fuerte':'hardy','Grosera':'sassy','Huraña':'lonely','Ingenua':'naive','Mansa':'quiet','Miedosa':'timid','Modesta':'modest','Osada':'bold','Pícara':'naughty','Plácida':'relaxed','Rara':'quirky','Serena':'calm','Seria':'serious','Tímida':'bashful'};
 const NATURE_EFFECTS={
 'Activa':['spe','def'],'Afable':['spa','def'],'Agitada':['def','spa'],'Alegre':['spe','spa'],'Alocada':['spa','spd'],'Amable':['spd','def'],'Audaz':['atk','spe'],'Cauta':['spd','spa'],'Dócil':[],'Firme':['atk','spa'],'Floja':['def','spd'],'Fuerte':[],'Grosera':['spd','spe'],'Huraña':['atk','def'],'Ingenua':['spe','spd'],'Mansa':['spa','spe'],'Miedosa':['spe','atk'],'Modesta':['spa','atk'],'Osada':['def','atk'],'Pícara':['atk','spd'],'Plácida':['def','spe'],'Rara':[],'Serena':['spd','atk'],'Seria':[],'Tímida':[]
 };
-let pool=[],moves={},targetId=0,optimizerData=null;
+let pool=[],moves={},targetId=0,optimizerData=null,searchCancelled=false;
 const $=id=>document.getElementById(id);
 function opts(sel,items){sel.replaceChildren(...items.map(x=>new Option(x,x)))}
 function chosen(id){return pool.find(p=>p.name===$(id).value)}
@@ -89,5 +93,86 @@ function calculateConfiguredTargets(){
 $('addTarget').addEventListener('click',addTarget);
 $('reset').addEventListener('click',reset);
 $('prepare').addEventListener('click',calculateConfiguredTargets);
+
+function searchSeedsForSelectedPokemon(){
+ const presets=getSpreadPresets(optimizerData,$('own').value).slice(0,5).map(x=>x.points);
+ const seeds=presets.concat([
+  [32,0,0,0,2,32],[0,32,0,0,2,32],[0,0,32,0,2,32],
+  [32,0,32,0,2,0],[0,0,0,32,2,32],[11,11,11,11,11,11]
+ ]);
+ const current=getPC('ownPC');
+ if(current.every(Number.isInteger)&&current.every(x=>x>=0&&x<=32)&&current.reduce((a,b)=>a+b,0)===66)seeds.unshift(current);
+ return seeds;
+}
+function renderSearchResults(result){
+ const root=$('searchResults');root.replaceChildren();
+ if(!result.results.length){root.textContent='No se han encontrado repartos evaluables.';return}
+ const summary=document.createElement('p');summary.className='hint';
+ summary.textContent='Evaluados '+result.evaluated.toLocaleString('es-ES')+' repartos candidatos. Búsqueda local heurística; no garantiza el óptimo global.';
+ root.append(summary);
+ result.results.forEach((candidate,index)=>{
+  const card=document.createElement('article');card.className='result-card';
+  const title=document.createElement('h3');title.textContent='#'+(index+1)+' · '+candidate.points.join(' / ');
+  const score=document.createElement('p');score.className='score';score.textContent='Cumplimiento medio de umbrales: '+(candidate.score*100).toFixed(1)+'%';
+  const detail=document.createElement('p');detail.textContent=candidate.details.map(x=>'Objetivo '+x.index+': '+(x.success*100).toFixed(1)+'% (mínimo '+(x.minimum*100).toFixed(0)+'%) · '+(x.passed?'cumplido':'no cumplido')+' · '+x.range[0]+'–'+x.range[1]+' PS').join(' | ');
+  card.append(title,score,detail);
+  const apply=document.createElement('button');apply.type='button';apply.textContent='Aplicar este reparto';
+  apply.addEventListener('click',()=>{const rootPC=$('ownPC');rootPC.querySelectorAll('input').forEach((input,i)=>input.value=candidate.points[i]);$('ownPreset').value='';validatePC('ownPC');renderStats('own');$('status').textContent='Reparto aplicado. La naturaleza, habilidad y objeto no se han modificado.'});
+  card.append(apply);root.append(card);
+ });
+}
+async function searchBestPcSpreads(){
+ const targets=[...$('targets').querySelectorAll('.target')];
+ const valid=validatePC('ownPC')&&validatePC('foePC');
+ const itemValid=validatePoolItem(optimizerData,$('own').value,$('item').value)&&validatePoolItem(optimizerData,$('foe').value,$('foeItem').value);
+ const modifiers=[...document.querySelectorAll('.check input')].some(input=>input.checked);
+ if(!valid){$('status').textContent='PC inválidos: cada estadística debe ser un entero entre 0 y 32 y el total no puede superar 66.';return}
+ if(!itemValid){$('status').textContent='Objeto inválido: las formas Mega requieren su megapiedra correspondiente.';return}
+ if(!targets.length||targets.some(t=>!t.querySelector('.move').value||t.querySelector('.move').disabled)){ $('status').textContent='Añade objetivos con movimientos legales seleccionados antes de optimizar.';return}
+ if(modifiers){$('status').textContent='Desmarca los modificadores: todavía no están conectados al motor de cálculo.';return}
+ if(!getSmogonRuntimeAvailable()){return}
+ const ownName=$('own').value,foeName=$('foe').value,foePoints=getPC('foePC');
+ const ownNature=NATURE_IDS[$('nature').value],foeNature=NATURE_IDS[$('foeNature').value];
+ const ownAbility=$('ability').value,foeAbility=$('foeAbility').value,ownItem=$('item').value,foeItem=$('foeItem').value;
+ const targetSpecs=targets.map(target=>({
+  offensive:target.querySelector('.kind').value==='off',
+  moveName:target.querySelector('.move').value,
+  attacks:Number(target.querySelector('.hits').value),
+  minimum:Number(target.querySelector('.chance').value)/100
+ }));
+ searchCancelled=false;$('searchBest').disabled=true;$('cancelSearch').classList.remove('hidden');$('searchResults').replaceChildren();
+ $('status').textContent='Iniciando búsqueda de repartos...';
+ try{
+  const result=await findBestLocalSpreads({
+   starts:searchSeedsForSelectedPokemon(),top:3,maxIterations:3,
+   shouldCancel:()=>searchCancelled,
+   onProgress:progress=>{$('status').textContent='Búsqueda en curso: '+progress.completedSeeds+'/'+progress.totalSeeds+' puntos de partida · '+progress.evaluated+' candidatos evaluados.'},
+   evaluate:points=>{
+    const details=targetSpecs.map((target,index)=>{
+     const attacker=target.offensive?ownName:foeName,defender=target.offensive?foeName:ownName;
+     const damage=calculateSmogonDamage(optimizerData,{
+      attacker,defender,moveName:target.moveName,
+      attackerPoints:target.offensive?points:foePoints,defenderPoints:target.offensive?foePoints:points,
+      attackerNatureId:target.offensive?ownNature:foeNature,defenderNatureId:target.offensive?foeNature:ownNature,
+      attackerAbility:target.offensive?ownAbility:foeAbility,defenderAbility:target.offensive?foeAbility:ownAbility,
+      attackerItemId:target.offensive?ownItem:foeItem,defenderItemId:target.offensive?foeItem:ownItem
+     });
+     const ko=koThresholds(damage.rolls,damage.defenderStats.hp).probabilities[target.attacks-1].probability;
+     const success=target.offensive?ko:1-ko;
+     return {index:index+1,success,minimum:target.minimum,passed:success>=target.minimum,range:damage.range};
+    });
+    const score=details.reduce((sum,item)=>sum+Math.min(1,item.success/item.minimum),0)/details.length;
+    return {score,details};
+   }
+  });
+  renderSearchResults(result);
+  $('status').textContent=result.cancelled?'Búsqueda detenida por el usuario.':'Búsqueda completada. Se muestran hasta tres repartos encontrados en los vecindarios explorados.';
+ }catch(error){$('searchResults').replaceChildren();$('status').textContent='No se pudo completar la búsqueda: '+error.message}
+ finally{$('searchBest').disabled=false;$('cancelSearch').classList.add('hidden');searchCancelled=false}
+}
+function getSmogonRuntimeAvailable(){try{getSmogonRuntime();return true}catch(error){$('status').textContent='Motor Champions no disponible: '+error.message;return false}}
+$('searchBest').addEventListener('click',searchBestPcSpreads);
+$('cancelSearch').addEventListener('click',()=>{searchCancelled=true;$('status').textContent='Se detendrá al terminar el punto de partida actual...'});
+
 init();
 </script></body></html>
