@@ -58,10 +58,10 @@ export function repeatedKoProbability(rolls, currentHP, attackCount, residualBet
   return states.get(currentHP) ?? 0;
 }
 
-export function koThresholds(rolls, currentHP, residualBetweenAttacks = 0) {
+export function koThresholds(rolls, currentHP, residualBetweenAttacks = 0, accuracy = 1) {
   const probabilities = [1,2,3].map(attacks => ({
     attacks,
-    probability: repeatedKoProbability(rolls, currentHP, attacks, residualBetweenAttacks)
+    probability: repeatedKoProbability(rolls, currentHP, attacks, residualBetweenAttacks, accuracy)
   }));
   return {
     ohko: probabilities[0].probability,
