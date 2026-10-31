@@ -30,10 +30,15 @@ jobs:
         run: python -m unittest discover -s tests -p "test_import_champions_spreads.py" -v
       - name: Test PC heuristic optimizer
         run: node --test tests/test_optimizador_heuristic.mjs
+      - name: Test damage probability calculations
+        run: node --test tests/test_optimizador_ko.mjs
       - name: Check optimizer JavaScript syntax
         run: |
           node --check optimizador-heuristic.js
           node --check optimizador-smogon.js
+          node --check optimizador-ko.js
+          node --check optimizador-search.js
+          node --check optimizador-data.js
           python - <<'PY'
           from pathlib import Path
           import re
