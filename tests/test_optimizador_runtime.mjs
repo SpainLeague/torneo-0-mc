@@ -55,6 +55,8 @@ test('audits all pool forms and validates stats plus every declared ability on r
       else failures.push(row.poolName + ': ' + error.message);
     }
   }
+  assert.deepEqual(unsupportedMoves, [], 'Every legal pool move must exist in the Champions damage dex');
+  assert.deepEqual(unsupportedAbilities, ['Greninja: Battle Bond'], 'Only Battle Bond is currently unsupported by the pinned calculator');
   assert.deepEqual(failures, [], 'Resolved Champions forms must match the engine stats and supported ability slots');
   assert.deepEqual(unsupported, ['Greninja: Battle Bond'], 'Only the known unsupported Battle Bond ability may remain unavailable');
   assert.equal(resolved.length, data.pool.length, 'Every pool form must resolve in the Champions engine');
