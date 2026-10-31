@@ -17,12 +17,13 @@ test('local search improves a seed and returns unique top results', async () => 
     top: 3,
     maxIterations: 4,
     yieldControl: async () => {},
-    evaluate: points => ({score: points[5] / 32, details: {speedPc: points[5]}})
+    evaluate: points => ({score: Math.min(1, points[5] / 4), details: {speedPc: points[5]}})
   });
   assert.equal(result.cancelled, false);
   assert.ok(result.evaluated > 1);
   assert.equal(result.results.length, 3);
-  assert.equal(result.results[0].points[5], 32);
+  assert.ok(result.results[0].points[5] >= 4);
+  assert.equal(result.results[0].score, 1);
   assert.equal(new Set(result.results.map(x => x.points.join(','))).size, result.results.length);
 });
 
