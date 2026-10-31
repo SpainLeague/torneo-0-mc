@@ -50,31 +50,41 @@ export function resolveSmogonSpecies(data, poolName, gen) {
   return {name: species.name, species, reference: reference?.species ?? null};
 }
 
-export function resolveAbility(poolEntry, species, referenceSpecies, selectedAbility) {
-  const championsAbilities = Object.values(species.abilities ?? {});
-  if (!championsAbilities.length) {
-    if (selectedAbility) {
-      throw new Error('Smogon no declara una habilidad Champions verificable para «' + poolEntry.name + '». No se aplicará una habilidad de otro formato.');
-    }
-    return undefined;
-  }
+const ABILITY_ALIASES = {
+  'Torrente':'Torrent',
+  'Cortante':'Sharpness',
+  'Cola Surf':'Surge Surfer',
+  'Levitación':'Levitate',
+  'Mandíbula Fuerte':'Strong Jaw',
+  'Robustez':'Sturdy',
+  'Gélido':'Ice Body',
+  'Intimidación':'Intimidate',
+  'Irascible':'Anger Point',
+  'Rumia':'Cud Chew',
+  'Ilusión':'Illusion',
+  'Vista Lince':'Keen Eye',
+  'Allanamiento':'Infiltrator',
+  'Tenacidad':'Competitive',
+  'Bromista':'Prankster'
+};
 
+export function resolveAbility(poolEntry, species, referenceSpecies, selectedAbility, gen) {
   const poolAbilities = String(poolEntry.abilities ?? '').split('/').map(x => x.trim()).filter(Boolean);
   const selectedIndex = selectedAbility ? poolAbilities.indexOf(selectedAbility) : 0;
   if (selectedAbility && selectedIndex < 0) {
     throw new Error('No se ha podido identificar la habilidad seleccionada de «' + poolEntry.name + '».');
   }
-
+  const poolAbility = poolAbilities[selectedIndex];
   const referenceAbilities = referenceSpecies?.abilities;
-  const requested = Array.isArray(referenceAbilities) ? referenceAbilities[selectedIndex] : championsAbilities[selectedIndex] ?? poolAbilities[selectedIndex];
-  if (!requested) {
-    throw new Error('No se puede verificar la habilidad seleccionada de «' + poolEntry.name + '» con los datos Champions disponibles.');
-  }
-  const supported = championsAbilities.find(name => normalizeId(name) === normalizeId(requested));
+  const requested = (Array.isArray(referenceAbilities) ? referenceAbilities[selectedIndex] : null)
+    ?? ABILITY_ALIASES[poolAbility]
+    ?? poolAbility;
+  if (!requested) return undefined;
+  const supported = gen?.abilities?.get(normalizeId(requested));
   if (!supported) {
     throw new Error('La habilidad «' + requested + '» no está disponible en el dex Champions del motor.');
   }
-  return supported;
+  return supported.name ?? requested;
 }
 
 function resolveItem(data, gen, itemId) {
@@ -102,7 +112,7 @@ export function createSmogonPokemon(data, poolName, {
   if (!nature || !gen.natures.get(normalizeId(nature))) {
     throw new Error('Naturaleza no disponible en el motor Champions: ' + natureId);
   }
-  const abilityName = resolveAbility(entry, resolved.species, resolved.reference, ability);
+  const abilityName = resolveAbility(entry, resolved.species, resolved.reference, ability, gen);
   if (!gen.abilities.get(normalizeId(abilityName))) {
     throw new Error('Habilidad no disponible en el motor Champions: ' + abilityName);
   }
