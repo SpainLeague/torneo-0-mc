@@ -41,3 +41,14 @@ test('rejects invalid HP, attack counts and rolls', () => {
   assert.throws(()=>repeatedKoProbability([10],100,4),/1, 2 o 3/);
   assert.throws(()=>damageDistribution([]),/distribución/);
 });
+
+
+test('repeated attacks include the probability of missing each attack', () => {
+  const rolls=Array(16).fill(60);
+  assert.equal(repeatedKoProbability(rolls,60,1,0,0.5),0.5);
+  assert.equal(repeatedKoProbability(rolls,100,2,0,0.5),0.25);
+});
+
+test('accuracy outside the valid range is rejected', () => {
+  assert.throws(()=>repeatedKoProbability(Array(16).fill(10),100,1,0,1.1),/precisión/);
+});
