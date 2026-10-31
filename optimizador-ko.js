@@ -30,38 +30,61 @@ export function damageDistribution(rolls) {
   return distribution;
 }
 
-export function repeatedKoProbability(rolls, currentHP, attackCount, residualBetweenAttacks = 0, accuracy = 1) {
+export function repeatedKoProbability(
+  rolls,
+  currentHP,
+  attackCount,
+  residualBetweenAttacks = 0,
+  accuracy = 1,
+  recoveryBetweenAttacks = 0,
+  maxHP = currentHP
+) {
   if (!Number.isFinite(currentHP) || currentHP <= 0) throw new Error('Los PS actuales deben ser positivos.');
   if (!Number.isInteger(attackCount) || attackCount < 1 || attackCount > 3) throw new Error('El número de ataques debe ser 1, 2 o 3.');
   if (!Number.isFinite(residualBetweenAttacks) || residualBetweenAttacks < 0) throw new Error('El daño residual debe ser un número no negativo.');
   if (!Number.isFinite(accuracy) || accuracy < 0 || accuracy > 1) throw new Error('La precisión debe estar entre 0 y 1.');
+  if (!Number.isFinite(recoveryBetweenAttacks) || recoveryBetweenAttacks < 0) throw new Error('La recuperación debe ser un número no negativo.');
+  if (!Number.isFinite(maxHP) || maxHP < currentHP) throw new Error('Los PS máximos deben ser iguales o superiores a los PS actuales.');
+
   const damageOutcomes = damageDistribution(rolls);
   const distribution = [
     ...damageOutcomes.map(outcome => ({damage: outcome.damage, probability: outcome.probability * accuracy})),
     ...(accuracy < 1 ? [{damage: 0, probability: 1 - accuracy}] : [])
   ];
-  // DP maps accumulated damage to its exact probability. A capped residual is
-  // applied between attacks; this models the requested repeated-hit threshold,
-  // not choices, switching, or a turn-by-turn battle.
-  let states = new Map([[0, 1]]);
+  // Track remaining HP, not accumulated damage, so recovery is capped at maxHP.
+  // Between separate attacks, residual damage is applied before recovery.
+  let states = new Map([[currentHP, 1]]);
+  let koProbability = 0;
   for (let attack = 0; attack < attackCount; attack++) {
     const next = new Map();
-    for (const [total, chance] of states) {
+    for (const [hp, chance] of states) {
       for (const outcome of distribution) {
-        const updated = total + outcome.damage + (attack > 0 ? residualBetweenAttacks : 0);
-        const key = Math.min(currentHP, updated);
-        next.set(key, (next.get(key) ?? 0) + chance * outcome.probability);
+        let remaining = hp - outcome.damage;
+        const outcomeChance = chance * outcome.probability;
+        if (remaining <= 0) {
+          koProbability += outcomeChance;
+          continue;
+        }
+        if (attack < attackCount - 1) {
+          remaining -= residualBetweenAttacks;
+          if (remaining <= 0) {
+            koProbability += outcomeChance;
+            continue;
+          }
+          remaining = Math.min(maxHP, remaining + recoveryBetweenAttacks);
+        }
+        next.set(remaining, (next.get(remaining) ?? 0) + outcomeChance);
       }
     }
     states = next;
   }
-  return states.get(currentHP) ?? 0;
+  return Math.max(0, Math.min(1, koProbability));
 }
 
-export function koThresholds(rolls, currentHP, residualBetweenAttacks = 0, accuracy = 1) {
+export function koThresholds(rolls, currentHP, residualBetweenAttacks = 0, accuracy = 1, recoveryBetweenAttacks = 0, maxHP = currentHP) {
   const probabilities = [1,2,3].map(attacks => ({
     attacks,
-    probability: repeatedKoProbability(rolls, currentHP, attacks, residualBetweenAttacks, accuracy)
+    probability: repeatedKoProbability(rolls, currentHP, attacks, residualBetweenAttacks, accuracy, recoveryBetweenAttacks, maxHP)
   }));
   return {
     ohko: probabilities[0].probability,
