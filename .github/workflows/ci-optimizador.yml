@@ -31,6 +31,8 @@ jobs:
         run: node --test tests/test_optimizador_heuristic.mjs
       - name: Test damage and KO probability calculations
         run: node --test tests/test_optimizador_ko.mjs
+      - name: Test Champions speed benchmarks
+        run: node --test tests/test_optimizador_speed.mjs
       - name: Test selected ability mapping
         run: node --test tests/test_optimizador_ability.mjs
       - name: Install pinned Champions damage engine
@@ -42,6 +44,8 @@ jobs:
           node --check optimizador-heuristic.js
           node --check optimizador-smogon.js
           node --check optimizador-search.js
+          node --check optimizador-speed.js
+          node --check tests/test_optimizador_speed.mjs
           node --check optimizador-data.js
           node --check tests/test_optimizador_runtime.mjs
           python - <<'PY'
