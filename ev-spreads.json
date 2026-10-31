@@ -11,9 +11,12 @@
     "format": "gen9championsvgc2026regmcbo3",
     "formatLabel": "Pokémon Champions VGC Regulation M-C BO3",
     "primaryRatingCutoff": 1760,
-    "fallbackRatingCutoffs": 1630,
+    "fallbackRatingCutoffs": [
+      1630,
+      0
+    ],
     "month": "2026-09",
-    "generatedAt": "2026-10-31T15:55:50.700365+00:00",
+    "generatedAt": "2026-10-31T15:56:23.371763+00:00",
     "statOrder": [
       "hp",
       "atk",
