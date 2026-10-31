@@ -28,7 +28,7 @@ def parse_moveset_file(raw,top_n=10):
  for i,line in enumerate(lines):
   if i>0 and i+1<len(lines) and lines[i-1].startswith("+") and line.startswith("|") and lines[i+1].startswith("+"):
    title=line.strip().strip("|").strip()
-   if title and not title.lower().startswith(("raw count:","avg. weight:","viability")):
+   if title and title not in {"Abilities","Items","Spreads","Moves","Teammates"} and not title.lower().startswith(("raw count:","avg. weight:","viability")):
     current={"sourceName":title,"rawCount":None,"spreads":[]}; records[norm(title)]=current; in_spreads=False; continue
   if current is None or not line.startswith("|"): continue
   content=line.strip().strip("|").strip()
@@ -60,7 +60,7 @@ def main():
  p=argparse.ArgumentParser(); p.add_argument("--month",default=""); p.add_argument("--pool",default="pool-data.json"); p.add_argument("--output",default="ev-spreads.json"); p.add_argument("--source-file",default=""); p.add_argument("--top",type=int,default=10); a=p.parse_args()
  month=a.month or default_month()
  if not re.fullmatch(r"\d{4}-\d{2}",month): p.error("--month debe tener formato YYYY-MM")
- if not 1<=a.top<=10: p.error("--top debe be between 1 and 10")
+ if not 1<=a.top<=10: p.error("--top debe estar entre 1 y 10")
  pool=json.loads(Path(a.pool).read_text(encoding="utf-8")); raw,url=fetch_source(month,a.source_file); parsed=parse_moveset_file(raw,a.top); result=build_output(pool,parsed,month,url,a.top)
  Path(a.output).write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
  meta=result["meta"]; print(f"Importados {meta['storedSpreadCount']} repartos para {meta['matchedPoolEntries']}/{meta['poolEntries']} entradas.")
