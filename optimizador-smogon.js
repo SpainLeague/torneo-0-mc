@@ -157,8 +157,11 @@ export function calculateSmogonDamage(data, {
   if (moveData.category === 'Status') {
     throw new Error('«' + moveName + '» es un movimiento de estado y no tiene cálculo de daño.');
   }
-  if (Array.isArray(moveData.multihit) && !Number.isInteger(hits)) {
-    throw new Error('«' + moveName + '» tiene un número variable de golpes. Indica hits para calcular cada escenario por separado.');
+  if (Array.isArray(moveData.multihit)) {
+    const [minimumHits, maximumHits] = moveData.multihit;
+    if (!Number.isInteger(hits) || hits < minimumHits || hits > maximumHits) {
+      throw new Error('«' + moveName + '» requiere seleccionar un número de golpes entre ' + minimumHits + ' y ' + maximumHits + '.');
+    }
   }
 
   const attackingPokemon = createSmogonPokemon(data, attacker, {
