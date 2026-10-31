@@ -97,3 +97,30 @@ export function auditPoolCoverage(data) {
     referenceId: getReferenceSpeciesRecord(data, entry.name)?.id ?? null
   }));
 }
+
+export function getRequiredMegaStone(data, poolName) {
+  const record = getReferenceSpeciesRecord(data, poolName);
+  if (record?.species?.megaStone) return record.species.megaStone;
+  if (poolName === 'Mega Meowstic (F)') return 'meowsticite';
+  return null;
+}
+
+export function getLegalItemsForPool(data, poolName) {
+  const required = getRequiredMegaStone(data, poolName);
+  if (required) {
+    const item = data.reference.items?.[required];
+    return item?.legal ? [{id: required, name: item.name}] : [];
+  }
+  return Object.entries(data.reference.items ?? {})
+    .filter(([, item]) => item.legal)
+    .map(([id, item]) => ({id, name: item.name}))
+    .sort((a,b) => a.name.localeCompare(b.name, 'es'));
+}
+
+export function validatePoolItem(data, poolName, itemId) {
+  const required = getRequiredMegaStone(data, poolName);
+  const normalized = normalizeId(itemId);
+  if (required) return normalized === normalizeId(required);
+  if (!normalized) return true;
+  return !!data.reference.items?.[normalized]?.legal;
+}
