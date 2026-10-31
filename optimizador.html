@@ -16,7 +16,8 @@
 <section class="panel"><div class="target-head"><div><h2>Objetivos competitivos</h2><p class="hint">Todos tienen la misma importancia. Puedes combinar objetivos ofensivos y defensivos.</p></div><button id="addTarget" type="button">+ Añadir objetivo</button></div><div id="targets"></div><div class="actions"><button class="primary" id="prepare" type="button">Validar configuración</button><button id="reset" type="button">Restablecer</button></div><div id="status" class="status" aria-live="polite">Selecciona los Pokémon y configura los objetivos.</div></section>
 <section class="panel"><h2>Condiciones y modificadores</h2><div class="three"><label class="check"><input type="checkbox"> Clima</label><label class="check"><input type="checkbox"> Terreno</label><label class="check"><input type="checkbox"> Pantallas</label><label class="check"><input type="checkbox"> Viento Afín</label><label class="check"><input type="checkbox"> Golpe crítico</label><label class="check"><input type="checkbox"> Daño residual</label><label class="check"><input type="checkbox"> Recuperación</label><label class="check"><input type="checkbox"> Dobles / daño en área</label></div><p class="hint">Los controles visuales se incorporarán al motor de cálculo al completar la integración de mecánicas.</p></section>
 </main>
-<script>
+<script type="module">
+import {loadOptimizerData, getLegalMoveNames, auditPoolCoverage} from './optimizador-data.js';
 const STATS=['PS','Ataque','Defensa','At. Esp.','Def. Esp.','Velocidad'],KEYS=['hp','atk','def','spa','spd','spe'];
 const NATURES=['Activa','Afable','Agitada','Alegre','Alocada','Amable','Audaz','Cauta','Dócil','Firme','Floja','Fuerte','Grosera','Huraña','Ingenua','Mansa','Miedosa','Modesta','Osada','Pícara','Plácida','Rara','Serena','Seria','Tímida'];
 const NATURE_EFFECTS={
