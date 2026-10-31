@@ -15,6 +15,6 @@ test('Mega Starmie has corrected Attack values in both pool sources', () => {
     assert.equal(entry.atkBase, 100);
     assert.equal(entry.atk50, 120);
   }
-  assert.equal(pool.find(entry => entry.name === 'Starmie')?.atkBase, 45,
+  assert.equal(pool.find(entry => entry.name === 'Starmie')?.atkBase, 75,
     'The base Starmie entry must not be modified by the Mega correction');
 });
