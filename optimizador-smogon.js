@@ -22,6 +22,7 @@ const SMOGON_SPECIES = {
   'Tauros de Paldea (Raza Acuática)':'Tauros-Paldea-Aqua',
   'Zoroark Hisui':'Zoroark-Hisui',
   'Meowstic-F':'Meowstic-F',
+  'Mega Meowstic (F)':'Meowstic-F-Mega',
   'Meowstic-M':'Meowstic',
   'Goodra Hisui':'Goodra-Hisui',
   'Persian Alola':'Persian-Alola',
