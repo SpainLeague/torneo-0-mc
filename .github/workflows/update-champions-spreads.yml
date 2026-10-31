@@ -32,6 +32,8 @@ jobs:
         run: node --test tests/test_optimizador_heuristic.mjs
       - name: Test damage probability calculations
         run: node --test tests/test_optimizador_ko.mjs
+      - name: Test selected ability mapping
+        run: node --test tests/test_optimizador_ability.mjs
       - name: Check optimizer JavaScript syntax
         run: |
           node --check optimizador-heuristic.js
