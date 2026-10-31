@@ -2,12 +2,19 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 
-test('Mega Starmie pool entry uses the corrected Champions base and level-50 Attack', () => {
+test('Mega Starmie has corrected Attack values in both pool sources', () => {
   const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
-  const entries = [...html.matchAll(/\{[^{}]*"name":"Mega Starmie"[^{}]*\}/g)];
-  assert.equal(entries.length, 1, 'There must be exactly one Mega Starmie pool entry');
-  const entry = entries[0][0];
-  assert.match(entry, /"atkBase":100/);
-  assert.match(entry, /"atk50":120/);
-  assert.doesNotMatch(entry, /"atkBase":140|"atk50":160/);
+  const htmlEntries = [...html.matchAll(/\\{[^{}]*"name":"Mega Starmie"[^{}]*\\}/g)];
+  assert.equal(htmlEntries.length, 1, 'There must be exactly one Mega Starmie entry in index.html');
+
+  const pool = JSON.parse(readFileSync(new URL('../pool-data.json', import.meta.url), 'utf8'));
+  const poolEntries = pool.filter(entry => entry.name === 'Mega Starmie');
+  assert.equal(poolEntries.length, 1, 'There must be exactly one Mega Starmie entry in pool-data.json');
+
+  for (const entry of [JSON.parse(htmlEntries[0][0]), poolEntries[0]]) {
+    assert.equal(entry.atkBase, 100);
+    assert.equal(entry.atk50, 120);
+  }
+  assert.equal(pool.find(entry => entry.name === 'Starmie')?.atkBase, 45,
+    'The base Starmie entry must not be modified by the Mega correction');
 });
