@@ -144,6 +144,7 @@ export function calculateSmogonDamage(data, {
   attackerItemId = '',
   defenderItemId = '',
   field = {},
+  isCrit = false,
   hits
 }) {
   const {api, gen} = getSmogonRuntime();
@@ -169,7 +170,8 @@ export function calculateSmogonDamage(data, {
   const move = new api.Move(gen, moveName, {
     ability: attackingPokemon.ability,
     item: attackingPokemon.item,
-    ...(Number.isInteger(hits) ? {hits} : {})
+    ...(Number.isInteger(hits) ? {hits} : {}),
+    isCrit: !!isCrit
   });
   const battleField = new api.Field({gameType: 'Doubles', ...field});
   const result = api.calculate(gen, attackingPokemon, defendingPokemon, move, battleField);
@@ -187,6 +189,7 @@ export function calculateSmogonDamage(data, {
   return {
     rolls,
     range: result.range(),
+    accuracy: moveData.accuracy === true || moveData.accuracy == null ? 1 : moveData.accuracy / 100,
     description: result.fullDesc(),
     attackerStats: {...attackingPokemon.rawStats},
     defenderStats: {...defendingPokemon.rawStats}
