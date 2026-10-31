@@ -168,6 +168,7 @@ async function searchBestPcSpreads(){
  if(!valid){$('status').textContent='PC inválidos: cada estadística debe ser un entero entre 0 y 32 y el total no puede superar 66.';return}
  if(!itemValid){$('status').textContent='Objeto inválido: las formas Mega requieren su megapiedra correspondiente.';return}
  if(!targets.length||targets.some(t=>!t.querySelector('.move').value||t.querySelector('.move').disabled)){ $('status').textContent='Añade objetivos con movimientos legales seleccionados antes de optimizar.';return}
+ const invalidTurnState=targets.map(readTargetTurnState).find(x=>x.error);if(invalidTurnState){$('status').textContent=invalidTurnState.error;return}
  if(!getSmogonRuntimeAvailable()){return}
  const ownName=$('own').value,foeName=$('foe').value,foePoints=getPC('foePC');
  const ownNature=NATURE_IDS[$('nature').value],foeNature=NATURE_IDS[$('foeNature').value];
