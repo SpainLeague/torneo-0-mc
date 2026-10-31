@@ -139,10 +139,12 @@ export function validatePoolItem(data, poolName, itemId) {
 
 
 export function getSpreadPresets(data, poolName) {
-  const spreads = data.evSpreads?.pokemon?.[poolName]?.spreads;
+  const record = data.evSpreads?.pokemon?.[poolName];
+  const spreads = record?.spreads;
   if (!Array.isArray(spreads)) return [];
   return spreads.filter(spread => Array.isArray(spread.points) && spread.points.length === 6 &&
     spread.points.every(value => Number.isInteger(value) && value >= 0 && value <= 32) &&
     spread.points.reduce((sum, value) => sum + value, 0) === 66 &&
-    typeof spread.natureId === 'string' && Number.isFinite(spread.usagePercent));
+    typeof spread.natureId === 'string' && Number.isFinite(spread.usagePercent))
+    .map(spread => ({...spread, ratingCutoff: record.ratingCutoff ?? data.evSpreads?.meta?.primaryRatingCutoff ?? 1760}));
 }
