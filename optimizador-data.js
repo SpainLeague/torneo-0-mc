@@ -78,7 +78,7 @@ export function calculateChampionStats(data, poolName, points = [0,0,0,0,0,0], n
   const bases = [entry.hpBase, entry.atkBase, entry.defBase, entry.spaBase, entry.spdBase, entry.speBase];
   return bases.map((base, index) => {
     const sp = points[index] ?? 0;
-    if (index === 0) return Number(base) + 75 + sp;
+    if (index === 0) return Number(base) === 1 ? 1 : Number(base) + 75 + sp;
     const stat = ['atk','def','spa','spd','spe'][index - 1];
     const multiplier = nature?.plus === stat ? 1.1 : nature?.minus === stat ? 0.9 : 1;
     return Math.floor((Number(base) + 20 + sp) * multiplier);
