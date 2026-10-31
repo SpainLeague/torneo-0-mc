@@ -1,3 +1,4 @@
+import {koThresholds} from './optimizador-ko.js';
 import {calculate as calculateReferenceDamage} from './vendor/pokecalc/damage.js';
 import {getPoolEntry, getLegalMoveNames, getReferenceSpeciesRecord, validateStatPoints, normalizeId, getPoolTypes} from './optimizador-data.js';
 
@@ -79,4 +80,11 @@ export function getPoolCombatReadiness(data) {
       engineReady: !!record && getLegalMoveNames(data, entry.name).some(move => !!data.reference.moves?.[normalizeId(move)])
     };
   });
+}
+
+/** Damage and exact repeated-attack KO odds from the same 16 engine rolls. */
+export function calculatePoolDamageWithKo(data, attackerConfig, defenderConfig, moveName, field = {}, residualBetweenAttacks = 0) {
+  const result = calculatePoolDamage(data, attackerConfig, defenderConfig, moveName, field);
+  const ko = koThresholds(result.damage, result.defender.currentHP, residualBetweenAttacks);
+  return {...result, repeatedKo: ko};
 }
