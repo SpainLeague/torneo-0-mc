@@ -159,3 +159,18 @@ test('spread moves receive the doubles area modifier', () => {
   });
   assert.ok(doubles.range[1] < singles.range[1], 'Spread damage should be reduced in doubles');
 });
+
+
+test('allows an explicit effective accuracy override for ability and item effects', () => {
+  const normal = calculateSmogonDamage(data,{
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump'
+  });
+  const adjusted = calculateSmogonDamage(data,{
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',accuracyOverride:1
+  });
+  assert.ok(normal.accuracy < 1);
+  assert.equal(adjusted.accuracy,1);
+  assert.throws(()=>calculateSmogonDamage(data,{
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',accuracyOverride:1.1
+  }),/precisión efectiva/);
+});
