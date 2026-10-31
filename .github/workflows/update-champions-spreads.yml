@@ -41,7 +41,6 @@ jobs:
           node --check optimizador-smogon.js
           node --check optimizador-ko.js
           node --check tests/test_optimizador_runtime.mjs
-          node --check optimizador-ko.js
           node --check optimizador-search.js
           node --check optimizador-data.js
           python - <<'PY'
