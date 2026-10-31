@@ -51,14 +51,25 @@ export function resolveSmogonSpecies(data, poolName, gen) {
 }
 
 function resolveAbility(poolEntry, species, referenceSpecies, selectedAbility) {
+  const championsAbilities = Object.values(species.abilities ?? {});
+  if (!championsAbilities.length) {
+    if (selectedAbility) {
+      throw new Error('Smogon no declara una habilidad Champions verificable para «' + poolEntry.name + '». No se aplicará una habilidad de otro formato.');
+    }
+    return undefined;
+  }
   const poolAbilities = String(poolEntry.abilities ?? '').split('/').map(x => x.trim()).filter(Boolean);
-  const selectedIndex = Math.max(0, poolAbilities.indexOf(selectedAbility));
+  const selectedIndex = selectedAbility ? poolAbilities.indexOf(selectedAbility) : 0;
+  if (selectedAbility && selectedIndex < 0) {
+    throw new Error('No se ha podido identificar la habilidad seleccionada de «' + poolEntry.name + '».');
+  }
   const referenceAbilities = referenceSpecies?.abilities;
-  const fromReference = Array.isArray(referenceAbilities) ? referenceAbilities[selectedIndex] : null;
-  const fromSmogon = Object.values(species.abilities ?? {})[selectedIndex] ?? Object.values(species.abilities ?? {})[0];
-  const ability = fromReference ?? fromSmogon;
-  if (!ability) throw new Error('No se ha podido resolver una habilidad Champions para «' + poolEntry.name + '».');
-  return ability;
+  const requested = Array.isArray(referenceAbilities) ? referenceAbilities[selectedIndex] : null;
+  const supported = championsAbilities[0];
+  if (requested && normalizeId(requested) !== normalizeId(supported)) {
+    throw new Error('La habilidad seleccionada («' + requested + '») no coincide con la habilidad documentada por Smogon para Champions («' + supported + '»).');
+  }
+  return supported;
 }
 
 function resolveItem(data, gen, itemId) {
@@ -186,6 +197,7 @@ export function auditSmogonCoverage(data) {
       poolName: entry.name,
       speciesName,
       speciesError,
+      abilityCount: speciesName ? Object.values(gen.species.get(normalizeId(speciesName))?.abilities ?? {}).length : 0,
       legalMoveCount: legalMoves.length,
       missingMoves
     };
