@@ -7,14 +7,16 @@ function toSPObject(points) {
   return Object.fromEntries(STAT_KEYS.map((stat, index) => [stat, Number(points[index] ?? 0)]));
 }
 
-function engineDataForPool(data, poolEntry, referenceRecord) {
-  const species = {...referenceRecord.species};
-  species.name = poolEntry.name;
-  species.display = poolEntry.name;
-  species.stats = [poolEntry.hpBase,poolEntry.atkBase,poolEntry.defBase,poolEntry.spaBase,poolEntry.spdBase,poolEntry.speBase].map(Number);
-  species.types = getPoolTypes(poolEntry);
-  // Keep reference abilities/weight/flags only when the reference form matched.
-  const speciesTable = {...data.reference.species, [referenceRecord.id]: species};
+function engineDataForPool(data, entries) {
+  const speciesTable = {...data.reference.species};
+  for (const {entry, record} of entries) {
+    const species = {...record.species};
+    species.name = entry.name;
+    species.display = entry.name;
+    species.stats = [entry.hpBase,entry.atkBase,entry.defBase,entry.spaBase,entry.spdBase,entry.speBase].map(Number);
+    species.types = getPoolTypes(entry);
+    speciesTable[record.id] = species;
+  }
   return {...data.reference, species: speciesTable};
 }
 
@@ -62,7 +64,7 @@ export function calculatePoolDamage(data, attackerConfig, defenderConfig, moveNa
   if (!data.reference.moves?.[moveId]) throw new Error('El motor no contiene datos de daño para el movimiento: ' + legalName);
   const attacker = makeSet(data, attackerConfig.poolName, attackerConfig);
   const defender = makeSet(data, defenderConfig.poolName, defenderConfig);
-  const engineData = engineDataForPool(data, attackerEntry, getReferenceSpeciesRecord(data, attackerConfig.poolName));
+  const engineData = engineDataForPool(data, [\n    {entry: attackerEntry, record: getReferenceSpeciesRecord(data, attackerConfig.poolName)},\n    {entry: getPoolEntry(data, defenderConfig.poolName), record: getReferenceSpeciesRecord(data, defenderConfig.poolName)}\n  ]);
   return calculateReferenceDamage(attacker, defender, {id: moveId, name: legalName}, field, engineData);
 }
 
