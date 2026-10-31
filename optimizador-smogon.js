@@ -123,7 +123,8 @@ export function calculateSmogonDamage(data, {
   defenderAbility,
   attackerItemId = '',
   defenderItemId = '',
-  field = {}
+  field = {},
+  hits
 }) {
   const {api, gen} = getSmogonRuntime();
   const legalMoves = getLegalMoveNames(data, attacker);
@@ -135,6 +136,9 @@ export function calculateSmogonDamage(data, {
   if (moveData.category === 'Status') {
     throw new Error('«' + moveName + '» es un movimiento de estado y no tiene cálculo de daño.');
   }
+  if (Array.isArray(moveData.multihit) && !Number.isInteger(hits)) {
+    throw new Error('«' + moveName + '» tiene un número variable de golpes. Indica hits para calcular cada escenario por separado.');
+  }
 
   const attackingPokemon = createSmogonPokemon(data, attacker, {
     points: attackerPoints, natureId: attackerNatureId, ability: attackerAbility, itemId: attackerItemId
@@ -144,15 +148,21 @@ export function calculateSmogonDamage(data, {
   });
   const move = new api.Move(gen, moveName, {
     ability: attackingPokemon.ability,
-    item: attackingPokemon.item
+    item: attackingPokemon.item,
+    ...(Number.isInteger(hits) ? {hits} : {})
   });
   const battleField = new api.Field({gameType: 'Doubles', ...field});
   const result = api.calculate(gen, attackingPokemon, defendingPokemon, move, battleField);
-  const rolls = Array.isArray(result.damage) && result.damage.every(Number.isFinite)
-    ? result.damage.slice()
-    : null;
-  if (!rolls || rolls.length !== 16) {
-    throw new Error('El motor devolvió un formato de daño no compatible con el evaluador actual (por ejemplo, daño fijo o multigolpe).');
+  const rolls = typeof result.damage === 'number'
+    ? Array(16).fill(result.damage)
+    : Array.isArray(result.damage) && result.damage.every(Number.isFinite)
+      ? result.damage.slice()
+      : Array.isArray(result.damage) && result.damage.length > 0 &&
+        result.damage.every(hitRolls => Array.isArray(hitRolls) && hitRolls.length === 16 && hitRolls.every(Number.isFinite))
+        ? result.damage.map(hitRolls => hitRolls.slice())
+        : null;
+  if (!rolls) {
+    throw new Error('El motor devolvió un formato de daño no compatible con el evaluador.');
   }
   return {
     rolls,
