@@ -33,7 +33,7 @@
 <script src="https://unpkg.com/@smogon/calc@0.12.0/dist/data/production.min.js"></script>
 <script src="https://unpkg.com/@smogon/calc@0.12.0/dist/production.min.js"></script>
 <script type="module">
-import {loadOptimizerData, getLegalMoveNames, auditPoolCoverage, calculateChampionStats, getLegalItemsForPool, getRequiredMegaStone, validatePoolItem, getSpreadPresets} from './optimizador-data.js';
+import {loadOptimizerData, getLegalMoveNames, auditPoolCoverage, calculateChampionStats, getLegalItemsForPool, getRequiredMegaStone, validatePoolItem, getSpreadPresets, normalizeId} from './optimizador-data.js';
 import {getSmogonRuntime, auditSmogonCoverage, calculateSmogonDamage} from './optimizador-smogon.js';
 import {koThresholds} from './optimizador-ko.js';
 import {findBestLocalSpreads} from './optimizador-heuristic.js';
@@ -59,7 +59,7 @@ function updateItems(which){const p=chosen(which),sel=$(which==='own'?'item':'fo
 function updateTargetHitControl(el){
  const move=el.querySelector('.move').value,control=el.querySelector('.hitCount');
  let variable=false;
- try{const {gen}=getSmogonRuntime();variable=Array.isArray(gen.moves.get(move.toLowerCase().replace(/[^a-z0-9]/g,''))?.multihit)}catch{}
+ try{const {gen}=getSmogonRuntime();variable=Array.isArray(gen.moves.get(normalizeId(move))?.multihit)}catch{}
  control.disabled=!variable;
  if(!variable)control.value='';
  el.querySelector('.moveHint').textContent=variable?'Movimiento de golpes variables: selecciona el número de impactos para fijar el escenario.':'Movimientos legales Champions; la precisión se incorpora a la probabilidad de KO.';
