@@ -30,6 +30,20 @@ jobs:
         run: python -m unittest discover -s tests -p "test_import_champions_spreads.py" -v
       - name: Test PC heuristic optimizer
         run: node --experimental-default-type=module --test tests/test_optimizador_heuristic.mjs
+      - name: Check optimizer JavaScript syntax
+        run: |
+          node --experimental-default-type=module --check optimizador-heuristic.js
+          node --experimental-default-type=module --check optimizador-smogon.js
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          source = Path('optimizador.html').read_text(encoding='utf-8')
+          match = re.search(r'<script type="module">(.*?)</script>', source, re.S)
+          if not match:
+              raise SystemExit('No se encontró el módulo JavaScript del optimizador')
+          Path('/tmp/optimizador-inline.mjs').write_text(match.group(1), encoding='utf-8')
+          PY
+          node --check /tmp/optimizador-inline.mjs
       - name: Import previous month's Champions BO3 spreads
         run: |
           if [ -n "${{ inputs.stats_month }}" ]; then
