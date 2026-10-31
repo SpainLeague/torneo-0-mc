@@ -12,7 +12,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: champions-pc-spreads-\${{ github.ref }}
+  group: champions-pc-spreads-${{ github.ref }}
   cancel-in-progress: false
 jobs:
   import-spreads:
@@ -21,7 +21,7 @@ jobs:
       - name: Checkout development branch
         uses: actions/checkout@v4
         with:
-          ref: \${{ github.ref }}
+          ref: ${{ github.ref }}
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -30,8 +30,8 @@ jobs:
         run: python -m unittest discover -s tests -p "test_import_champions_spreads.py" -v
       - name: Import previous month's Champions BO3 spreads
         run: |
-          if [ -n "\${{ inputs.stats_month }}" ]; then
-            python scripts/import_champions_spreads.py --month "\${{ inputs.stats_month }}"
+          if [ -n "${{ inputs.stats_month }}" ]; then
+            python scripts/import_champions_spreads.py --month "${{ inputs.stats_month }}"
           else
             python scripts/import_champions_spreads.py
           fi
