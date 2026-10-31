@@ -105,6 +105,7 @@ function calculateConfiguredTargets(){
    const defender=offensive?$('foe').value:$('own').value;
    const attackerPoints=getPC(offensive?'ownPC':'foePC');
    const defenderPoints=getPC(offensive?'foePC':'ownPC');
+   const turnState=readTargetTurnState(target);
    const damage=calculateSmogonDamage(optimizerData,{
     attacker,defender,moveName:target.querySelector('.move').value,
     attackerPoints,defenderPoints,
@@ -118,7 +119,6 @@ function calculateConfiguredTargets(){
     hits:target.querySelector('.hitCount').value?Number(target.querySelector('.hitCount').value):undefined
    });
    const attacks=Number(target.querySelector('.hits').value);
-   const turnState=readTargetTurnState(target);
    const currentHP=Math.max(1,Math.ceil(damage.defenderStats.hp*turnState.hpPercent/100));
    const probabilities=koThresholds(damage.rolls,currentHP,turnState.residual,damage.accuracy,turnState.recovery,damage.defenderStats.hp);
    const ko=probabilities.probabilities[attacks-1].probability;
