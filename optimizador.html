@@ -17,9 +17,10 @@
 <section class="panel"><h2>Condiciones y modificadores</h2><div class="three"><label class="check"><input type="checkbox"> Clima</label><label class="check"><input type="checkbox"> Terreno</label><label class="check"><input type="checkbox"> Pantallas</label><label class="check"><input type="checkbox"> Viento Afín</label><label class="check"><input type="checkbox"> Golpe crítico</label><label class="check"><input type="checkbox"> Daño residual</label><label class="check"><input type="checkbox"> Recuperación</label><label class="check"><input type="checkbox"> Dobles / daño en área</label></div><p class="hint">Los controles visuales se incorporarán al motor de cálculo al completar la integración de mecánicas.</p></section>
 </main>
 <script type="module">
-import {loadOptimizerData, getLegalMoveNames, auditPoolCoverage} from './optimizador-data.js';
+import {loadOptimizerData, getLegalMoveNames, auditPoolCoverage, calculateChampionStats} from './optimizador-data.js';
 const STATS=['PS','Ataque','Defensa','At. Esp.','Def. Esp.','Velocidad'],KEYS=['hp','atk','def','spa','spd','spe'];
 const NATURES=['Activa','Afable','Agitada','Alegre','Alocada','Amable','Audaz','Cauta','Dócil','Firme','Floja','Fuerte','Grosera','Huraña','Ingenua','Mansa','Miedosa','Modesta','Osada','Pícara','Plácida','Rara','Serena','Seria','Tímida'];
+const NATURE_IDS={'Activa':'hasty','Afable':'mild','Agitada':'impish','Alegre':'jolly','Alocada':'rash','Amable':'gentle','Audaz':'brave','Cauta':'careful','Dócil':'docile','Firme':'adamant','Floja':'lax','Fuerte':'hardy','Grosera':'sassy','Huraña':'lonely','Ingenua':'naive','Mansa':'quiet','Miedosa':'timid','Modesta':'modest','Osada':'bold','Pícara':'naughty','Plácida':'relaxed','Rara':'quirky','Serena':'calm','Seria':'serious','Tímida':'bashful'};
 const NATURE_EFFECTS={
 'Activa':['spe','def'],'Afable':['spa','def'],'Agitada':['def','spa'],'Alegre':['spe','spa'],'Alocada':['spa','spd'],'Amable':['spd','def'],'Audaz':['atk','spe'],'Cauta':['spd','spa'],'Dócil':[],'Firme':['atk','spa'],'Floja':['def','spd'],'Fuerte':[],'Grosera':['spd','spe'],'Huraña':['atk','def'],'Ingenua':['spe','spd'],'Mansa':['spa','spe'],'Miedosa':['spe','atk'],'Modesta':['spa','atk'],'Osada':['def','atk'],'Pícara':['atk','spd'],'Plácida':['def','spe'],'Rara':[],'Serena':['spd','atk'],'Seria':[],'Tímida':[]
 };
@@ -27,7 +28,7 @@ let pool=[],moves={},targetId=0,optimizerData=null;
 const $=id=>document.getElementById(id);
 function opts(sel,items){sel.replaceChildren(...items.map(x=>new Option(x,x)))}
 function chosen(id){return pool.find(p=>p.name===$(id).value)}
-function statValues(p,pcs,nature){if(!p)return [];return KEYS.map((k,i)=>{const base=Number(p[['hpBase','atkBase','defBase','spaBase','spdBase','speBase'][i]])||0;if(k==='hp')return base+75+(pcs[i]||0);const effect=NATURE_EFFECTS[nature]||[];const mult=effect[0]===k?1.1:effect[1]===k?.9:1;return Math.floor((base+20+(pcs[i]||0))*mult)})}
+function statValues(p,pcs,nature){if(!p||!optimizerData)return [];const safe=pcs.map(v=>Number.isFinite(v)&&v>=0&&v<=32?Math.floor(v):0);return calculateChampionStats(optimizerData,p.name,safe,NATURE_IDS[nature]||'hardy')}
 function pcInputs(rootId,initial){const root=$(rootId);root.replaceChildren();KEYS.forEach((k,i)=>{const box=document.createElement('div');box.innerHTML='<label>'+STATS[i]+'</label><input type="number" min="0" max="32" step="1" value="'+(initial?.[i]||0)+'" inputmode="numeric" aria-label="PC '+STATS[i]+'">';box.querySelector('input').addEventListener('input',()=>{validatePC(rootId);renderStats(rootId==='ownPC'?'own':'foe')});root.append(box)});validatePC(rootId)}
 function getPC(id){return [...$(id).querySelectorAll('input')].map(x=>x.value.trim()===''?NaN:Number(x.value))}
 function validatePC(id){const vals=getPC(id),sum=vals.reduce((a,b)=>a+(Number.isFinite(b)?b:0),0),valid=vals.every(x=>Number.isInteger(x)&&x>=0&&x<=32)&&sum<=66;$(id==='ownPC'?'ownTotal':'foeTotal').textContent='Total: '+sum+' / 66';const badge=$(id==='ownPC'?'ownValidity':'foeValidity');badge.textContent=valid?'Válido':'No válido';badge.className=valid?'ok':'bad';return valid}
