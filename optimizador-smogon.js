@@ -204,7 +204,9 @@ export function calculateSmogonDamage(data, {
     rolls,
     range: result.range(),
     accuracy: accuracyOverride == null
-      ? (moveData.accuracy === true || moveData.accuracy == null ? 1 : moveData.accuracy / 100)
+      ? (Number.isFinite(data.reference.moves?.[normalizeId(moveName)]?.acc)
+        ? data.reference.moves[normalizeId(moveName)].acc / 100
+        : (moveData.accuracy === true || moveData.accuracy == null ? 1 : moveData.accuracy / 100))
       : accuracyOverride,
     description: result.fullDesc(),
     attackerStats: {...attackingPokemon.rawStats},
