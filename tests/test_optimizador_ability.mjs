@@ -2,28 +2,30 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {resolveAbility} from '../optimizador-smogon.js';
 
+const abilityNames = new Set(['firstability','secondability','torrent','sharpness','surgesurfer']);
+const gen = {abilities:{get:id=>abilityNames.has(id)?{name:id==='secondability'?'Second Ability':id==='firstability'?'First Ability':id==='torrent'?'Torrent':id==='sharpness'?'Sharpness':'Surge Surfer'}:undefined}};
 const poolEntry={name:'Testmon',abilities:'First Ability / Second Ability'};
-const species={abilities:{0:'First Ability',1:'Second Ability'}};
+const species={abilities:{0:'First Ability'}};
 const reference={abilities:['First Ability','Second Ability']};
 
-test('selects the requested secondary ability instead of always using the first',()=>{
- assert.equal(resolveAbility(poolEntry,species,reference,'Second Ability'),'Second Ability');
+test('selects the requested secondary ability even if Gen 0 species data lists only one default ability',()=>{
+ assert.equal(resolveAbility(poolEntry,species,reference,'Second Ability',gen),'Second Ability');
 });
 
 test('defaults to the first Champions ability',()=>{
- assert.equal(resolveAbility(poolEntry,species,reference,undefined),'First Ability');
+ assert.equal(resolveAbility(poolEntry,species,reference,undefined,gen),'First Ability');
 });
 
 test('rejects an ability that is not legal for the pool entry',()=>{
- assert.throws(()=>resolveAbility(poolEntry,species,reference,'Hidden Ability'),/identificar la habilidad/);
+ assert.throws(()=>resolveAbility(poolEntry,species,reference,'Hidden Ability',gen),/identificar la habilidad/);
 });
 
-test('rejects a reference ability absent from the Champions calculator dex',()=>{
- assert.throws(()=>resolveAbility(poolEntry,{abilities:{0:'First Ability'}},reference,'Second Ability'),/no está disponible/);
+test('rejects an ability absent from the calculator ability dex',()=>{
+ const noSecond = {abilities:{get:id=>id==='firstability'?{name:'First Ability'}:undefined}};
+ assert.throws(()=>resolveAbility(poolEntry,species,reference,'Second Ability',noSecond),/no está disponible/);
 });
 
-
-test('maps a selected localized pool ability to its English Champions dex ability by position',()=>{
- const localizedPool={name:'Testmon',abilities:'Primera Habilidad / Segunda Habilidad'};
- assert.equal(resolveAbility(localizedPool,species,reference,'Segunda Habilidad'),'Second Ability');
+test('maps localized abilities for forms without a reference record',()=>{
+ const localized={name:'Samurott Hisui',abilities:'Torrente / Cortante'};
+ assert.equal(resolveAbility(localized,{},null,'Cortante',gen),'Sharpness');
 });
