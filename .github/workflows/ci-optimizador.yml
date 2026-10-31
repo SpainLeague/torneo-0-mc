@@ -30,6 +30,8 @@ jobs:
         run: python -m unittest discover -s tests -p "test_import_champions_spreads.py" -v
       - name: Test PC heuristic optimizer
         run: node --test tests/test_optimizador_heuristic.mjs
+      - name: Test Mega Starmie pool regression
+        run: node --test tests/test_mega_starmie_pool.mjs
       - name: Test damage and KO probability calculations
         run: node --test tests/test_optimizador_ko.mjs
       - name: Test Champions speed benchmarks
@@ -51,6 +53,7 @@ jobs:
           node --check optimizador-search.js
           node --check optimizador-speed.js
           node --check tests/test_optimizador_speed.mjs
+          node --check tests/test_mega_starmie_pool.mjs
           node --check optimizador-data.js
           node --check tests/test_optimizador_runtime.mjs
           node --check tests/test_optimizador_browser.mjs
