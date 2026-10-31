@@ -1,12 +1,33 @@
 // Exact probability utilities for repeated damage rolls.
 // This does not simulate battle turns: it convolves independent roll outcomes.
 export function damageDistribution(rolls) {
-  if (!Array.isArray(rolls) || rolls.length !== 16 || rolls.some(x => !Number.isFinite(x) || x < 0)) {
-    throw new Error('Se necesitan exactamente 16 rolls de daño válidos.');
+  if (!Array.isArray(rolls) || rolls.length === 0) {
+    throw new Error('Se necesita una distribución de daño válida.');
   }
-  const counts = new Map();
-  for (const roll of rolls) counts.set(roll, (counts.get(roll) ?? 0) + 1);
-  return [...counts.entries()].map(([damage, count]) => ({damage, probability: count / 16}));
+  // Smogon returns 16 rolls for a single hit and one 16-roll array per hit
+  // for fixed-count multihit moves. Convolve the latter to obtain exact sums.
+  const hitRolls = Array.isArray(rolls[0]) ? rolls : [rolls];
+  if (hitRolls.some(hit => !Array.isArray(hit) || hit.length !== 16 ||
+    hit.some(value => !Number.isFinite(value) || value < 0))) {
+    throw new Error('Cada golpe debe contener exactamente 16 rolls de daño válidos.');
+  }
+  let distribution = [{damage: 0, probability: 1}];
+  for (const hit of hitRolls) {
+    const counts = new Map();
+    for (const damage of hit) counts.set(damage, (counts.get(damage) ?? 0) + 1);
+    const outcomes = [...counts.entries()].map(([damage, count]) => ({
+      damage, probability: count / 16
+    }));
+    const combined = new Map();
+    for (const current of distribution) {
+      for (const outcome of outcomes) {
+        const total = current.damage + outcome.damage;
+        combined.set(total, (combined.get(total) ?? 0) + current.probability * outcome.probability);
+      }
+    }
+    distribution = [...combined.entries()].map(([damage, probability]) => ({damage, probability}));
+  }
+  return distribution;
 }
 
 export function repeatedKoProbability(rolls, currentHP, attackCount, residualBetweenAttacks = 0) {
