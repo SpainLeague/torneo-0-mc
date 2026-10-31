@@ -30,11 +30,16 @@ export function damageDistribution(rolls) {
   return distribution;
 }
 
-export function repeatedKoProbability(rolls, currentHP, attackCount, residualBetweenAttacks = 0) {
+export function repeatedKoProbability(rolls, currentHP, attackCount, residualBetweenAttacks = 0, accuracy = 1) {
   if (!Number.isFinite(currentHP) || currentHP <= 0) throw new Error('Los PS actuales deben ser positivos.');
   if (!Number.isInteger(attackCount) || attackCount < 1 || attackCount > 3) throw new Error('El número de ataques debe ser 1, 2 o 3.');
   if (!Number.isFinite(residualBetweenAttacks) || residualBetweenAttacks < 0) throw new Error('El daño residual debe ser un número no negativo.');
-  const distribution = damageDistribution(rolls);
+  if (!Number.isFinite(accuracy) || accuracy < 0 || accuracy > 1) throw new Error('La precisión debe estar entre 0 y 1.');
+  const damageOutcomes = damageDistribution(rolls);
+  const distribution = [
+    ...damageOutcomes.map(outcome => ({damage: outcome.damage, probability: outcome.probability * accuracy})),
+    ...(accuracy < 1 ? [{damage: 0, probability: 1 - accuracy}] : [])
+  ];
   // DP maps accumulated damage to its exact probability. A capped residual is
   // applied between attacks; this models the requested repeated-hit threshold,
   // not choices, switching, or a turn-by-turn battle.
