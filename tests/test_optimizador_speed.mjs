@@ -27,3 +27,16 @@ test('rejects invalid speeds, margins and relations',()=>{
  assert.throws(()=>evaluateSpeedBenchmark(100,100,{margin:-1}),/margen/);
  assert.throws(()=>evaluateSpeedBenchmark(100,100,{relation:'same'}),/relación/);
 });
+
+
+test('applies speed stages before other modifiers and paralysis after them',()=>{
+ assert.equal(calculateEffectiveSpeed(100,{speedStage:2}),200);
+ assert.equal(calculateEffectiveSpeed(100,{speedStage:-2}),50);
+ assert.equal(calculateEffectiveSpeed(100,{speedStage:1,itemId:'choicescarf'}),225);
+ assert.equal(calculateEffectiveSpeed(100,{tailwind:true,paralyzed:true}),100);
+ assert.equal(calculateEffectiveSpeed(100,{tailwind:true,ability:'Quick Feet',paralyzed:true}),300);
+});
+
+test('rejects speed stages outside the Champions range',()=>{
+ assert.throws(()=>calculateEffectiveSpeed(100,{speedStage:7}),/etapa/);
+});
