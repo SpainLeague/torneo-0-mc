@@ -126,7 +126,7 @@ function calculateConfiguredTargets(){
    const maxPercent=damage.range[1]/damage.defenderStats.hp*100;
    return 'Objetivo '+(index+1)+' ('+(offensive?'hacer KO':'sobrevivir')+', '+attacks+'HKO): '+attacker+' → '+defender+' con '+target.querySelector('.move').value+': '+damage.range[0]+'–'+damage.range[1]+' PS ('+minPercent.toFixed(1)+'–'+maxPercent.toFixed(1)+'%). PS iniciales '+currentHP+'/'+damage.defenderStats.hp+'; residual '+turnState.residual+'; recuperación '+turnState.recovery+'. Probabilidad de cumplirlo: '+(success*100).toFixed(1)+'% / mínimo '+(minimum*100)+'% — '+(success>=minimum?'CUMPLIDO':'NO CUMPLIDO');
   });
-  $('status').textContent=results.join('\n')+'\n\nCálculo Smogon Champions, dobles, rivales a PS completos y escenario base. Escenario base sin modificadores. La búsqueda heurística está disponible en el botón «Buscar mejores repartos de PC».';
+  $('status').textContent=results.join('\n')+'\n\nCálculo Smogon Champions, '+($('gameType').value==='Doubles'?'dobles':'individual')+', con las condiciones, precisión, PS iniciales y efectos entre ataques seleccionados. No simula turnos completos. La búsqueda heurística está disponible en el botón «Buscar mejores repartos de PC».';
  }catch(error){$('status').textContent='No se ha podido calcular el escenario: '+error.message}
 }
 $('addTarget').addEventListener('click',addTarget);
