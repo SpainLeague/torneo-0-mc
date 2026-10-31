@@ -89,13 +89,21 @@ export function getPoolTypes(entry) {
 }
 
 export function auditPoolCoverage(data) {
-  return data.pool.map(entry => ({
-    poolName: entry.name,
-    legalMoveCount: getLegalMoveNames(data, entry.name).length,
-    referenceResolved: !!getReferenceSpeciesRecord(data, entry.name),
-    referenceName: getReferenceSpeciesRecord(data, entry.name)?.species.display ?? null,
-    referenceId: getReferenceSpeciesRecord(data, entry.name)?.id ?? null
-  }));
+  return data.pool.map(entry => {
+    const legalMoves = getLegalMoveNames(data, entry.name);
+    const record = getReferenceSpeciesRecord(data, entry.name);
+    const movesWithoutDamageData = legalMoves.filter(move =>
+      !data.reference.moves?.[normalizeId(move)]
+    );
+    return {
+      poolName: entry.name,
+      legalMoveCount: legalMoves.length,
+      referenceResolved: !!record,
+      referenceName: record?.species.display ?? null,
+      referenceId: record?.id ?? null,
+      movesWithoutDamageData
+    };
+  });
 }
 
 export function getRequiredMegaStone(data, poolName) {
