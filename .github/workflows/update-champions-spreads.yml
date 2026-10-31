@@ -1,0 +1,48 @@
+name: Update Champions M-C PC spreads
+on:
+  push:
+    branches:
+      - feature/optimizador-pc
+  workflow_dispatch:
+    inputs:
+      stats_month:
+        description: "Smogon stats month (YYYY-MM); blank means previous month"
+        required: false
+        type: string
+permissions:
+  contents: write
+concurrency:
+  group: champions-pc-spreads-\${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  import-spreads:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout development branch
+        uses: actions/checkout@v4
+        with:
+          ref: \${{ github.ref }}
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test importer
+        run: python -m unittest discover -s tests -p "test_import_champions_spreads.py" -v
+      - name: Import previous month's Champions BO3 spreads
+        run: |
+          if [ -n "\${{ inputs.stats_month }}" ]; then
+            python scripts/import_champions_spreads.py --month "\${{ inputs.stats_month }}"
+          else
+            python scripts/import_champions_spreads.py
+          fi
+      - name: Commit to the development branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ev-spreads.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Champions M-C PC usage spreads"
+            git push
+          else
+            echo "No spread data changes."
+          fi
