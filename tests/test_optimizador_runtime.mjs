@@ -29,8 +29,12 @@ test('audits all pool forms and validates stats plus every declared ability on r
   const audit = auditSmogonCoverage(data);
   const unresolved = audit.filter(row => !row.speciesName);
   const resolved = audit.filter(row => row.speciesName);
+  const unsupportedMoves = audit.flatMap(row => row.missingMoves.map(move => row.poolName + ': ' + move));
+  const unsupportedAbilities = audit.flatMap(row => row.unsupportedAbilities.map(ability => row.poolName + ': ' + ability.name));
   console.log('Champions runtime coverage:', resolved.length + '/' + audit.length,
     'forms resolved; unresolved:', unresolved.map(row => row.poolName).join(', ') || 'none');
+  console.log('Unsupported move data:', unsupportedMoves.length, unsupportedMoves.join(', ') || 'none');
+  console.log('Unsupported abilities:', unsupportedAbilities.length, unsupportedAbilities.join(', ') || 'none');
   const failures = [];
   const unsupported = [];
   for (const row of resolved) {
@@ -53,7 +57,7 @@ test('audits all pool forms and validates stats plus every declared ability on r
   }
   assert.deepEqual(failures, [], 'Resolved Champions forms must match the engine stats and supported ability slots');
   assert.deepEqual(unsupported, ['Greninja: Battle Bond'], 'Only the known unsupported Battle Bond ability may remain unavailable');
-  assert.ok(resolved.length >= 200, 'At least 200 of the 223 pool forms should resolve in the Champions engine');
+  assert.equal(resolved.length, data.pool.length, 'Every pool form must resolve in the Champions engine');
 });
 
 test('calculates real Champions damage with weather, terrain, screens and critical hits', () => {
