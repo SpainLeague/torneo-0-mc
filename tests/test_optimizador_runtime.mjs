@@ -105,11 +105,11 @@ test('requires a legal explicit hit count for variable multihit moves', () => {
 
 test('weather boosts Water damage in Rain', () => {
   const clear = calculateSmogonDamage(data,{
-    attacker:'Inteleon',defender:'Skarmory',moveName:'Water Gun',
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
     field:{gameType:'Doubles'}
   });
   const rain = calculateSmogonDamage(data,{
-    attacker:'Inteleon',defender:'Skarmory',moveName:'Water Gun',
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
     field:{gameType:'Doubles',weather:'Rain'}
   });
   assert.ok(rain.range[0] > clear.range[0], 'Rain should increase Water-type damage');
