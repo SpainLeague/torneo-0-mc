@@ -30,6 +30,10 @@
 <div class="grid" style="margin-top:12px">
 <div><b>Viento Afín propio</b><label class="check"><input id="ownTailwind" type="checkbox"> Activo</label></div>
 <div><b>Viento Afín rival</b><label class="check"><input id="foeTailwind" type="checkbox"> Activo</label></div>
+<div><label for="ownSpeedStage">Etapa de Velocidad propia (-6 a +6)</label><input id="ownSpeedStage" type="number" min="-6" max="6" step="1" value="0"></div>
+<div><label for="foeSpeedStage">Etapa de Velocidad rival (-6 a +6)</label><input id="foeSpeedStage" type="number" min="-6" max="6" step="1" value="0"></div>
+<div><label class="check"><input id="ownParalyzed" type="checkbox"> Pokémon propio paralizado</label></div>
+<div><label class="check"><input id="foeParalyzed" type="checkbox"> Pokémon rival paralizado</label></div>
 </div>
 <div style="margin-top:12px"><label class="check"><input id="critical" type="checkbox"> Calcular como golpe crítico</label></div>
 <p class="hint">Clima, terreno, pantallas, golpe crítico y daño de movimientos en área se envían al motor de Pokémon Champions. La precisión base del movimiento se tiene en cuenta en las probabilidades de KO y puede ajustarse manualmente para efectos de habilidades u objetos. Viento Afín se aplica a los benchmarks de Velocidad. Estos consideran también Choice Scarf y las habilidades Nado Rápido, Clorofila, Ímpetu Arena, Quitanieves y Cola Surf; no incluyen parálisis, etapas de Velocidad ni activación de Impulso. El daño residual y la recuperación se introducen manualmente entre ataques consecutivos.</p></section>
@@ -87,8 +91,10 @@ function readSpeedTargetState(target){
 function calculateSpeedComparison(ownPoints,relation,margin){
  const ownStats=calculateChampionStats(optimizerData,$('own').value,ownPoints,NATURE_IDS[$('nature').value]);
  const foeStats=calculateChampionStats(optimizerData,$('foe').value,getPC('foePC'),NATURE_IDS[$('foeNature').value]);
- const ownSpeed=calculateEffectiveSpeed(ownStats[5],{ability:$('ability').value,itemId:$('item').value,weather:$('weather').value,terrain:$('terrain').value,tailwind:$('ownTailwind').checked});
- const foeSpeed=calculateEffectiveSpeed(foeStats[5],{ability:$('foeAbility').value,itemId:$('foeItem').value,weather:$('weather').value,terrain:$('terrain').value,tailwind:$('foeTailwind').checked});
+ const ownSpeedStage=Number($('ownSpeedStage').value),foeSpeedStage=Number($('foeSpeedStage').value);
+ if(!Number.isInteger(ownSpeedStage)||ownSpeedStage < -6||ownSpeedStage>6||!Number.isInteger(foeSpeedStage)||foeSpeedStage < -6||foeSpeedStage>6)throw new Error('Las etapas de Velocidad deben estar entre -6 y +6.');
+ const ownSpeed=calculateEffectiveSpeed(ownStats[5],{ability:$('ability').value,itemId:$('item').value,weather:$('weather').value,terrain:$('terrain').value,tailwind:$('ownTailwind').checked,speedStage:ownSpeedStage,paralyzed:$('ownParalyzed').checked});
+ const foeSpeed=calculateEffectiveSpeed(foeStats[5],{ability:$('foeAbility').value,itemId:$('foeItem').value,weather:$('weather').value,terrain:$('terrain').value,tailwind:$('foeTailwind').checked,speedStage:foeSpeedStage,paralyzed:$('foeParalyzed').checked});
  return evaluateSpeedBenchmark(ownSpeed,foeSpeed,{relation,margin});
 }
 function addTarget(){
@@ -170,7 +176,7 @@ function calculateConfiguredTargets(){
    const maxPercent=damage.range[1]/damage.defenderStats.hp*100;
    return 'Objetivo '+(index+1)+' ('+(offensive?'hacer KO':'sobrevivir')+', '+attacks+'HKO): '+attacker+' → '+defender+' con '+target.querySelector('.move').value+': '+damage.range[0]+'–'+damage.range[1]+' PS ('+minPercent.toFixed(1)+'–'+maxPercent.toFixed(1)+'%). precisión '+turnState.accuracy+'%; PS iniciales '+currentHP+'/'+damage.defenderStats.hp+'; residual '+turnState.residual+'; recuperación '+turnState.recovery+'. Probabilidad de cumplirlo: '+(success*100).toFixed(1)+'% / mínimo '+(minimum*100)+'% — '+(success>=minimum?'CUMPLIDO':'NO CUMPLIDO');
   });
-  $('status').textContent=results.join('\n')+'\n\nCálculo Smogon Champions, '+($('gameType').value==='Doubles'?'dobles':'individual')+', con condiciones, precisión, PS iniciales y efectos entre ataques. Los objetivos de Velocidad incluyen Viento Afín, Choice Scarf y habilidades de clima/terreno. No simula turnos completos ni etapas de Velocidad.';
+  $('status').textContent=results.join('\n')+'\n\nCálculo Smogon Champions, '+($('gameType').value==='Doubles'?'dobles':'individual')+', con condiciones, precisión, PS iniciales y efectos entre ataques. Los objetivos de Velocidad incluyen etapas, parálisis, Viento Afín, Choice Scarf y habilidades de clima/terreno compatibles. No simula turnos completos ni etapas de Velocidad.';
  }catch(error){$('status').textContent='No se ha podido calcular el escenario: '+error.message}
 }
 $('addTarget').addEventListener('click',addTarget);
