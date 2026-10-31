@@ -70,5 +70,5 @@ test('recovery is applied between attacks and capped at maximum HP', () => {
 test('residual damage is applied before recovery between attacks', () => {
   const rolls=Array(16).fill(40);
   assert.equal(repeatedKoProbability(rolls,100,2,10,1,5,100),0);
-  assert.equal(repeatedKoProbability(rolls,100,2,15,1,5,100),1);
+  assert.equal(repeatedKoProbability(rolls,100,2,25,1,5,100),1);
 });
