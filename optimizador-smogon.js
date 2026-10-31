@@ -65,6 +65,9 @@ function resolveAbility(poolEntry, species, referenceSpecies, selectedAbility) {
   }
   const referenceAbilities = referenceSpecies?.abilities;
   const requested = Array.isArray(referenceAbilities) ? referenceAbilities[selectedIndex] : null;
+  if (selectedAbility && selectedIndex > 0 && !Array.isArray(referenceAbilities)) {
+    throw new Error('No se puede verificar la habilidad seleccionada de «' + poolEntry.name + '» con los datos Champions disponibles.');
+  }
   const supported = championsAbilities[0];
   if (requested && normalizeId(requested) !== normalizeId(supported)) {
     throw new Error('La habilidad seleccionada («' + requested + '») no coincide con la habilidad documentada por Smogon para Champions («' + supported + '»).');
