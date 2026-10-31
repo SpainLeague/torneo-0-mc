@@ -146,5 +146,5 @@ export function getSpreadPresets(data, poolName) {
     spread.points.every(value => Number.isInteger(value) && value >= 0 && value <= 32) &&
     spread.points.reduce((sum, value) => sum + value, 0) === 66 &&
     typeof spread.natureId === 'string' && Number.isFinite(spread.usagePercent))
-    .map(spread => ({...spread, ratingCutoff: record.ratingCutoff ?? data.evSpreads?.meta?.primaryRatingCutoff ?? 1760}));
+    .map(spread => ({...spread, ratingCutoff: record.ratingCutoff ?? data.evSpreads?.meta?.primaryRatingCutoff ?? 1760, sampleCount: record.rawCount ?? null}));
 }
