@@ -1,0 +1,100 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import * as smogonCalc from '@smogon/calc';
+import {
+  auditSmogonCoverage,
+  calculateSmogonDamage,
+  createSmogonPokemon,
+  getSmogonRuntime
+} from '../optimizador-smogon.js';
+import {getLegalMoveNames, normalizeId} from '../optimizador-data.js';
+
+globalThis.calc = smogonCalc;
+const read = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
+const data = {
+  pool: read('../pool-data.json'),
+  moveData: read('../move-data.json'),
+  reference: read('../vendor/champions-reference/champions-data.json'),
+  evSpreads: read('../ev-spreads.json')
+};
+
+test('loads the actual Smogon Champions generation 0 runtime', () => {
+  const {gen} = getSmogonRuntime();
+  assert.equal(gen.num, 0);
+});
+
+test('audits all pool forms and validates stats plus every declared ability on resolved forms', () => {
+  const {gen} = getSmogonRuntime();
+  const audit = auditSmogonCoverage(data);
+  const unresolved = audit.filter(row => !row.speciesName);
+  const resolved = audit.filter(row => row.speciesName);
+  console.log('Champions runtime coverage:', resolved.length + '/' + audit.length,
+    'forms resolved; unresolved:', unresolved.map(row => row.poolName).join(', ') || 'none');
+  const failures = [];
+  for (const row of resolved) {
+    const entry = data.pool.find(item => item.name === row.poolName);
+    const abilities = String(entry.abilities || '').split('/').map(value => value.trim()).filter(Boolean);
+    try {
+      if (!abilities.length) {
+        createSmogonPokemon(data, row.poolName, {points:[0,0,0,0,0,0], natureId:'hardy'});
+      } else {
+        for (const ability of abilities) {
+          createSmogonPokemon(data, row.poolName, {
+            points:[0,0,0,0,0,0], natureId:'hardy', ability
+          });
+        }
+      }
+    } catch (error) {
+      failures.push(row.poolName + ': ' + error.message);
+    }
+  }
+  assert.deepEqual(failures, [], 'Resolved Champions forms must match the engine stats and ability slots');
+  assert.ok(resolved.length >= 200, 'At least 200 of the 223 pool forms should resolve in the Champions engine');
+});
+
+test('calculates real Champions damage with weather, terrain, screens and critical hits', () => {
+  const {gen} = getSmogonRuntime();
+  const resolved = auditSmogonCoverage(data).filter(row => row.speciesName);
+  let chosen;
+  for (const row of resolved) {
+    const moveName = getLegalMoveNames(data, row.poolName).find(name => {
+      const move = gen.moves.get(normalizeId(name));
+      return move && move.category !== 'Status' && !Array.isArray(move.multihit);
+    });
+    if (moveName) { chosen = {attacker:row.poolName, moveName}; break; }
+  }
+  assert.ok(chosen, 'A legal damaging move should be available in the pool');
+  const defender = resolved.find(row => row.poolName !== chosen.attacker)?.poolName;
+  assert.ok(defender, 'A second resolved form should be available as defender');
+  const result = calculateSmogonDamage(data, {
+    ...chosen, defender,
+    field:{
+      gameType:'Doubles', weather:'Rain', terrain:'Electric',
+      attackerSide:{isHelpingHand:true},
+      defenderSide:{isReflect:true,isLightScreen:true,isAuroraVeil:true}
+    },
+    isCrit:true
+  });
+  assert.ok(Array.isArray(result.rolls) && result.rolls.length === 16);
+  assert.ok(Number.isFinite(result.accuracy) && result.accuracy >= 0 && result.accuracy <= 1);
+  assert.ok(Array.isArray(result.range) && result.range.length === 2);
+});
+
+test('requires a legal explicit hit count for variable multihit moves', () => {
+  const {gen} = getSmogonRuntime();
+  let scenario;
+  for (const row of auditSmogonCoverage(data).filter(row => row.speciesName)) {
+    const moveName = getLegalMoveNames(data, row.poolName).find(name =>
+      Array.isArray(gen.moves.get(normalizeId(name))?.multihit)
+    );
+    if (moveName) { scenario = {attacker:row.poolName, moveName}; break; }
+  }
+  if (!scenario) return;
+  const defender = auditSmogonCoverage(data).find(row => row.speciesName && row.poolName !== scenario.attacker).poolName;
+  assert.throws(() => calculateSmogonDamage(data,{...scenario,defender}), /requiere seleccionar un número de golpes/);
+  const move = gen.moves.get(normalizeId(scenario.moveName));
+  const hits = move.multihit[0];
+  const result = calculateSmogonDamage(data,{...scenario,defender,hits});
+  assert.ok(Array.isArray(result.rolls) && Array.isArray(result.rolls[0]));
+});
