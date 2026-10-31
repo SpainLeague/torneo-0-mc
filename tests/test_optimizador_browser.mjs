@@ -48,7 +48,7 @@ test('optimizer works in desktop and mobile browsers',async t=>{
   assert.equal(await page.locator('#targets .target .move').isVisible(),false);
   await page.locator('#ownTailwind').check();
   await page.locator('#prepare').click();
-  await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Velocidad propio'),null);
+  await page.waitForFunction(()=>/CUMPLIDO|NO CUMPLIDO/.test(document.querySelector('#status').textContent),null,{timeout:10000});
   assert.match(await page.locator('#status').textContent,/CUMPLIDO|NO CUMPLIDO/);
 
   await page.locator('#searchBest').click();
