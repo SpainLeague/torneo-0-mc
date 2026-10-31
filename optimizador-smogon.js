@@ -50,7 +50,7 @@ export function resolveSmogonSpecies(data, poolName, gen) {
   return {name: species.name, species, reference: reference?.species ?? null};
 }
 
-function resolveAbility(poolEntry, species, referenceSpecies, selectedAbility) {
+export function resolveAbility(poolEntry, species, referenceSpecies, selectedAbility) {
   const championsAbilities = Object.values(species.abilities ?? {});
   if (!championsAbilities.length) {
     if (selectedAbility) {
@@ -58,19 +58,25 @@ function resolveAbility(poolEntry, species, referenceSpecies, selectedAbility) {
     }
     return undefined;
   }
+
   const poolAbilities = String(poolEntry.abilities ?? '').split('/').map(x => x.trim()).filter(Boolean);
   const selectedIndex = selectedAbility ? poolAbilities.indexOf(selectedAbility) : 0;
   if (selectedAbility && selectedIndex < 0) {
     throw new Error('No se ha podido identificar la habilidad seleccionada de «' + poolEntry.name + '».');
   }
+
   const referenceAbilities = referenceSpecies?.abilities;
-  const requested = Array.isArray(referenceAbilities) ? referenceAbilities[selectedIndex] : null;
-  if (selectedAbility && selectedIndex > 0 && !Array.isArray(referenceAbilities)) {
+  const requested = Array.isArray(referenceAbilities) ? referenceAbilities[selectedIndex] : poolAbilities[selectedIndex];
+  if (!requested) {
     throw new Error('No se puede verificar la habilidad seleccionada de «' + poolEntry.name + '» con los datos Champions disponibles.');
   }
-  const supported = championsAbilities[0];
-  if (requested && normalizeId(requested) !== normalizeId(supported)) {
-    throw new Error('La habilidad seleccionada («' + requested + '») no coincide con la habilidad documentada por Smogon para Champions («' + supported + '»).');
+  if (selectedAbility && normalizeId(selectedAbility) !== normalizeId(requested)) {
+    throw new Error('La habilidad seleccionada («' + selectedAbility + '») no coincide con la referencia Champions («' + requested + '»).');
+  }
+
+  const supported = championsAbilities.find(name => normalizeId(name) === normalizeId(requested));
+  if (!supported) {
+    throw new Error('La habilidad «' + requested + '» no está disponible en el dex Champions del motor.');
   }
   return supported;
 }
