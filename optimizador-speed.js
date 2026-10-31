@@ -11,7 +11,14 @@ export function calculateEffectiveSpeed(baseSpeed, {
     throw new Error('La Velocidad base debe ser un entero positivo.');
   }
   let speed = baseSpeed;
-  const abilityId = normalizeId(ability);
+  const abilityKey = normalizeId(ability);
+  const abilityId = ({
+    nadorapido:'swiftswim',
+    clorofila:'chlorophyll',
+    impetusarena:'sandrush',
+    quitanieves:'slushrush',
+    colasurf:'surgesurfer'
+  })[abilityKey] ?? abilityKey;
   const weatherId = normalizeId(weather);
   const terrainId = normalizeId(terrain);
 
