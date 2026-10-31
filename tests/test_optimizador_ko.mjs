@@ -52,3 +52,23 @@ test('repeated attacks include the probability of missing each attack', () => {
 test('accuracy outside the valid range is rejected', () => {
   assert.throws(()=>repeatedKoProbability(Array(16).fill(10),100,1,0,1.1),/precisión/);
 });
+
+
+test('current HP percentage changes the KO threshold', () => {
+  const rolls=Array(16).fill(40);
+  assert.equal(repeatedKoProbability(rolls,80,2),1);
+  assert.equal(repeatedKoProbability(rolls,100,2),0);
+});
+
+test('recovery is applied between attacks and capped at maximum HP', () => {
+  const rolls=Array(16).fill(50);
+  assert.equal(repeatedKoProbability(rolls,100,2,0,1,0,100),1);
+  assert.equal(repeatedKoProbability(rolls,100,2,0,1,1,100),0);
+  assert.equal(repeatedKoProbability(rolls,80,2,0,1,30,100),0);
+});
+
+test('residual damage is applied before recovery between attacks', () => {
+  const rolls=Array(16).fill(40);
+  assert.equal(repeatedKoProbability(rolls,100,2,10,1,5,100),0);
+  assert.equal(repeatedKoProbability(rolls,100,2,15,1,5,100),1);
+});
