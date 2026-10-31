@@ -45,3 +45,29 @@ test('supports cooperative cancellation', async () => {
   assert.equal(result.cancelled, true);
   assert.equal(result.evaluated, 0);
 });
+
+
+test('beam search crosses a neutral-score plateau to reach a two-step optimum', async () => {
+  const result = await findBestLocalSpreads({
+    starts: [[11, 11, 11, 11, 11, 11]],
+    top: 3,
+    maxIterations: 2,
+    beamWidth: 32,
+    yieldControl: async () => {},
+    evaluate: points => ({
+      score: points.join(',') === '10,12,10,11,11,12' ? 1 : 0
+    })
+  });
+  assert.equal(result.cancelled, false);
+  assert.ok(result.results.some(candidate => candidate.points.join(',') === '10,12,10,11,11,12'));
+  assert.equal(result.beamWidth, 32);
+});
+
+test('rejects an excessive beam width', async () => {
+  await assert.rejects(() => findBestLocalSpreads({
+    starts: [[32, 0, 32, 0, 2, 0]],
+    beamWidth: 33,
+    yieldControl: async () => {},
+    evaluate: () => ({score: 0.5})
+  }), /beamWidth/);
+});
