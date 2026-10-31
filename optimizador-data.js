@@ -24,21 +24,22 @@ export function normalizeId(value) {
 }
 
 export async function loadOptimizerData(basePath = './') {
-  const [poolResponse, movesResponse, referenceResponse] = await Promise.all([
+  const [poolResponse, movesResponse, referenceResponse, spreadsResponse] = await Promise.all([
     fetch(basePath + 'pool-data.json'),
     fetch(basePath + 'move-data.json'),
-    fetch(basePath + 'vendor/champions-reference/champions-data.json')
+    fetch(basePath + 'vendor/champions-reference/champions-data.json'),
+    fetch(basePath + 'ev-spreads.json')
   ]);
-  if (!poolResponse.ok || !movesResponse.ok || !referenceResponse.ok) {
+  if (!poolResponse.ok || !movesResponse.ok || !referenceResponse.ok || !spreadsResponse.ok) {
     throw new Error('No se han podido cargar todos los archivos de datos del optimizador.');
   }
-  const [pool, moveData, reference] = await Promise.all([
-    poolResponse.json(), movesResponse.json(), referenceResponse.json()
+  const [pool, moveData, reference, evSpreads] = await Promise.all([
+    poolResponse.json(), movesResponse.json(), referenceResponse.json(), spreadsResponse.json()
   ]);
   if (!Array.isArray(pool) || pool.length !== 223) {
     throw new Error('La pool no contiene las 223 entradas esperadas.');
   }
-  return {pool, moveData, reference};
+  return {pool, moveData, reference, evSpreads};
 }
 
 export function getPoolEntry(data, name) {
@@ -134,4 +135,14 @@ export function validatePoolItem(data, poolName, itemId) {
   if (required) return normalized === normalizeId(required);
   if (!normalized) return true;
   return !!data.reference.items?.[normalized]?.legal;
+}
+
+
+export function getSpreadPresets(data, poolName) {
+  const spreads = data.evSpreads?.pokemon?.[poolName]?.spreads;
+  if (!Array.isArray(spreads)) return [];
+  return spreads.filter(spread => Array.isArray(spread.points) && spread.points.length === 6 &&
+    spread.points.every(value => Number.isInteger(value) && value >= 0 && value <= 32) &&
+    spread.points.reduce((sum, value) => sum + value, 0) === 66 &&
+    typeof spread.natureId === 'string' && Number.isFinite(spread.usagePercent));
 }
