@@ -101,3 +101,57 @@ test('requires a legal explicit hit count for variable multihit moves', () => {
   const result = calculateSmogonDamage(data,{...scenario,defender,hits});
   assert.ok(Array.isArray(result.rolls) && Array.isArray(result.rolls[0]));
 });
+
+
+test('weather boosts Water damage in Rain', () => {
+  const clear = calculateSmogonDamage(data,{
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Water Gun',
+    field:{gameType:'Doubles'}
+  });
+  const rain = calculateSmogonDamage(data,{
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Water Gun',
+    field:{gameType:'Doubles',weather:'Rain'}
+  });
+  assert.ok(rain.range[0] > clear.range[0], 'Rain should increase Water-type damage');
+});
+
+test('Electric Terrain boosts a grounded Electric attacker', () => {
+  const clear = calculateSmogonDamage(data,{
+    attacker:'Bellibolt',defender:'Vaporeon',moveName:'Thunderbolt',
+    field:{gameType:'Doubles'}
+  });
+  const terrain = calculateSmogonDamage(data,{
+    attacker:'Bellibolt',defender:'Vaporeon',moveName:'Thunderbolt',
+    field:{gameType:'Doubles',terrain:'Electric'}
+  });
+  assert.ok(terrain.range[0] > clear.range[0], 'Electric Terrain should boost the grounded Electric attacker');
+});
+
+test('Reflect reduces physical damage and critical hits change the damage rolls', () => {
+  const base = calculateSmogonDamage(data,{
+    attacker:'Skarmory',defender:'Vaporeon',moveName:'Brave Bird',
+    field:{gameType:'Doubles'}
+  });
+  const reflect = calculateSmogonDamage(data,{
+    attacker:'Skarmory',defender:'Vaporeon',moveName:'Brave Bird',
+    field:{gameType:'Doubles',defenderSide:{isReflect:true}}
+  });
+  const critical = calculateSmogonDamage(data,{
+    attacker:'Skarmory',defender:'Vaporeon',moveName:'Brave Bird',
+    field:{gameType:'Doubles'},isCrit:true
+  });
+  assert.ok(reflect.range[1] < base.range[1], 'Reflect should reduce physical damage');
+  assert.ok(critical.range[0] > base.range[0], 'A critical hit should increase damage');
+});
+
+test('spread moves receive the doubles area modifier', () => {
+  const singles = calculateSmogonDamage(data,{
+    attacker:'Skarmory',defender:'Vaporeon',moveName:'Rock Slide',
+    field:{gameType:'Singles'}
+  });
+  const doubles = calculateSmogonDamage(data,{
+    attacker:'Skarmory',defender:'Vaporeon',moveName:'Rock Slide',
+    field:{gameType:'Doubles'}
+  });
+  assert.ok(doubles.range[1] < singles.range[1], 'Spread damage should be reduced in doubles');
+});
