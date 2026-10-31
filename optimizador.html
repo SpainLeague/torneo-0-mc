@@ -271,7 +271,7 @@ async function searchBestPcSpreads(){
 }
 function getSmogonRuntimeAvailable(){try{getSmogonRuntime();return true}catch(error){$('status').textContent='Motor Champions no disponible: '+error.message;return false}}
 $('searchBest').addEventListener('click',searchBestPcSpreads);
-$('cancelSearch').addEventListener('click',()=>{searchCancelled=true;$('status').textContent='Se detendrá al terminar el punto de partida actual...'});
+$('cancelSearch').addEventListener('click',()=>{searchCancelled=true;$('status').textContent='Se detendrá al terminar la iteración actual...'});
 
 init();
 </script></body></html>
