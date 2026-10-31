@@ -5,19 +5,25 @@ export function calculateEffectiveSpeed(baseSpeed, {
   itemId = '',
   weather = '',
   terrain = '',
-  tailwind = false
+  tailwind = false,
+  speedStage = 0,
+  paralyzed = false
 } = {}) {
   if (!Number.isInteger(baseSpeed) || baseSpeed < 1) {
     throw new Error('La Velocidad base debe ser un entero positivo.');
   }
-  let speed = baseSpeed;
+  if (!Number.isInteger(speedStage) || speedStage < -6 || speedStage > 6) throw new Error('La etapa de Velocidad debe estar entre -6 y +6.');
+  let speed = speedStage >= 0
+    ? Math.floor(baseSpeed * (2 + speedStage) / 2)
+    : Math.floor(baseSpeed * 2 / (2 - speedStage));
   const abilityKey = normalizeId(ability);
   const abilityId = ({
     nadorapido:'swiftswim',
     clorofila:'chlorophyll',
     impetusarena:'sandrush',
     quitanieves:'slushrush',
-    colasurf:'surgesurfer'
+    colasurf:'surgesurfer',
+    piesrapidos:'quickfeet'
   })[abilityKey] ?? abilityKey;
   const weatherId = normalizeId(weather);
   const terrainId = normalizeId(terrain);
@@ -32,7 +38,8 @@ export function calculateEffectiveSpeed(baseSpeed, {
     speed *= 2;
   }
   if (tailwind) speed *= 2;
-  return speed;
+  if (paralyzed) speed = abilityId === 'quickfeet' ? Math.floor(speed * 1.5) : Math.floor(speed / 2);
+  return Math.max(1,speed);
 }
 
 export function evaluateSpeedBenchmark(ownSpeed, foeSpeed, {
