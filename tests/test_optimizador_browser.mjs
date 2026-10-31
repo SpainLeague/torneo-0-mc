@@ -49,11 +49,11 @@ test('optimizer works in desktop and mobile browsers',async t=>{
   await page.locator('#ownTailwind').check();
   await page.locator('#prepare').click();
   await page.waitForFunction(()=>/CUMPLIDO|NO CUMPLIDO/.test(document.querySelector('#status').textContent),null,{timeout:10000});
-  assert.match(await page.locator('#status').textContent,/CUMPLIDO|NO CUMPLIDO/);
+  assert.match(await page.locator('#status').textContent(),/CUMPLIDO|NO CUMPLIDO/);
 
   await page.locator('#searchBest').click();
   await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Búsqueda completada')||document.querySelector('#status').textContent.includes('No se pudo completar'),null,{timeout:15000});
-  assert.match(await page.locator('#status').textContent,/Búsqueda completada/);
+  assert.match(await page.locator('#status').textContent(),/Búsqueda completada/);
   assert.ok(await page.locator('#searchResults .result-card').count()>0,'Speed-only heuristic search should return candidate spreads');
 
   await kind.selectOption('off');
@@ -63,7 +63,7 @@ test('optimizer works in desktop and mobile browsers',async t=>{
   await page.locator('#weather').selectOption('Rain');
   await page.locator('#prepare').click();
   await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Probabilidad de cumplirlo')||document.querySelector('#status').textContent.includes('No se ha podido calcular'),null);
-  assert.match(await page.locator('#status').textContent,/Probabilidad de cumplirlo/,'A real Champions damage scenario should calculate in the browser');
+  assert.match(await page.locator('#status').textContent(),/Probabilidad de cumplirlo/,'A real Champions damage scenario should calculate in the browser');
   assert.deepEqual(pageErrors,[],'Speed search and damage calculation should not create browser exceptions');
 
   await page.setViewportSize({width:390,height:844});
