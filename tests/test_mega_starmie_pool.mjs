@@ -2,25 +2,34 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 
-test('Mega Starmie has corrected Attack values in both pool sources', () => {
-  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
-  const nameToken = '"name":"Mega Starmie"';
-  const nameIndex = html.indexOf(nameToken);
-  assert.notEqual(nameIndex, -1, 'Mega Starmie must exist in index.html');
-  assert.equal(html.indexOf(nameToken, nameIndex + nameToken.length), -1,
-    'There must be exactly one Mega Starmie entry in index.html');
+function readEmbeddedPoolEntry(html, name) {
+  const token = '"name":"' + name + '"';
+  const nameIndex = html.indexOf(token);
+  assert.notEqual(nameIndex, -1, name + ' must exist in index.html');
+  assert.equal(html.indexOf(token, nameIndex + token.length), -1,
+    'There must be exactly one ' + name + ' entry in index.html');
   const entryStart = html.lastIndexOf('{', nameIndex);
   const entryEnd = html.indexOf('}', nameIndex);
-  const htmlEntry = JSON.parse(html.slice(entryStart, entryEnd + 1));
+  return JSON.parse(html.slice(entryStart, entryEnd + 1));
+}
+
+test('Mega Starmie has corrected Attack values without changing base Starmie', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const megaHtml = readEmbeddedPoolEntry(html, 'Mega Starmie');
+  const baseHtml = readEmbeddedPoolEntry(html, 'Starmie');
 
   const pool = JSON.parse(readFileSync(new URL('../pool-data.json', import.meta.url), 'utf8'));
-  const poolEntries = pool.filter(entry => entry.name === 'Mega Starmie');
-  assert.equal(poolEntries.length, 1, 'There must be exactly one Mega Starmie entry in pool-data.json');
+  const megaPool = pool.filter(entry => entry.name === 'Mega Starmie');
+  const basePool = pool.filter(entry => entry.name === 'Starmie');
+  assert.equal(megaPool.length, 1);
+  assert.equal(basePool.length, 1);
 
-  for (const entry of [htmlEntry, poolEntries[0]]) {
+  for (const entry of [megaHtml, megaPool[0]]) {
     assert.equal(entry.atkBase, 100);
     assert.equal(entry.atk50, 120);
   }
-  assert.equal(pool.find(entry => entry.name === 'Starmie')?.atkBase, 75,
-    'The base Starmie entry must not be modified by the Mega correction');
+  for (const entry of [baseHtml, basePool[0]]) {
+    assert.equal(entry.atkBase, 75);
+    assert.equal(entry.atk50, 95);
+  }
 });
