@@ -1,5 +1,5 @@
 // Exhaustive Champions Stat Point search primitives.
-// A valid spread has six integer allocations, 0..32 each, with a total <= 66.
+// A legal spread has six integer allocations, 0..32 each, using exactly 66 PC by default.
 // The evaluator must return {score, details?, failures?}; higher score is better.
 // This module deliberately does not invent damage estimates: connect a verified
 // damage evaluator before using findBestSpreads for competitive recommendations.
@@ -39,9 +39,9 @@ export function validateSpread(spread) {
 }
 
 /**
- * Exhaustively evaluates every legal distribution up to maxTotal.
- * Each objective is expected to contribute equally; evaluator owns the
- * probability/threshold calculation and returns a normalized score in [0, 1].
+ * Exhaustively evaluates distributions using exactly maxTotal PC by default.
+ * Set exactTotal:false to include lower totals. Each objective is expected to
+ * contribute equally; evaluator returns a normalized score in [0, 1].
  */
 export function findBestSpreads({
   evaluate,
