@@ -35,10 +35,14 @@ jobs:
         run: node --test tests/test_optimizador_speed.mjs
       - name: Test selected ability mapping
         run: node --test tests/test_optimizador_ability.mjs
-      - name: Install pinned Champions damage engine
-        run: npm install --no-save --ignore-scripts @smogon/calc@0.12.0
+      - name: Install pinned calculator and browser test runtime
+        run: npm install --no-save --ignore-scripts @smogon/calc@0.12.0 playwright@1.56.1
+      - name: Install headless Chromium
+        run: npx playwright install --with-deps chromium
       - name: Test real Smogon Champions runtime integration
         run: node --test tests/test_optimizador_runtime.mjs
+      - name: Test optimizer in desktop and mobile browsers
+        run: node --test tests/test_optimizador_browser.mjs
       - name: Check optimizer JavaScript syntax
         run: |
           node --check optimizador-heuristic.js
@@ -48,6 +52,7 @@ jobs:
           node --check tests/test_optimizador_speed.mjs
           node --check optimizador-data.js
           node --check tests/test_optimizador_runtime.mjs
+          node --check tests/test_optimizador_browser.mjs
           python - <<'PY'
           from pathlib import Path
           import re
