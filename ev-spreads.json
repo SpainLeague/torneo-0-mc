@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "meta": {
+    "status": "pending",
+    "source": "Smogon University usage stats",
+    "format": "gen9championsvgc2026regmcbo3",
+    "formatLabel": "Pokémon Champions VGC Regulation M-C BO3",
+    "ratingCutoff": 1760,
+    "month": null,
+    "statOrder": [
+      "hp",
+      "atk",
+      "def",
+      "spa",
+      "spd",
+      "spe"
+    ],
+    "statPointCap": 32,
+    "statPointTotal": 66,
+    "requestedTopN": 10,
+    "sourceExplicitSpreadLimit": 6,
+    "matchedPoolEntries": 0,
+    "poolEntries": 223,
+    "missingPoolEntries": [],
+    "storedSpreadCount": 0,
+    "note": "Pendiente de importar el archivo mensual de Smogon. No se generan repartos estimados."
+  },
+  "pokemon": {}
+}
