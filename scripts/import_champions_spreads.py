@@ -4,7 +4,7 @@ from __future__ import annotations
 import argparse, json, re, urllib.request
 from datetime import datetime, timezone, date, timedelta
 from pathlib import Path
-FORMAT="gen9championsvgc2026regmcbo3"; RATING=1760
+FORMAT="gen9championsvgc2026regmcbo3"; RATING_CUTOFFS=[1760,1630,0]
 BASE="https://www.smogon.com/stats"
 SPREAD=re.compile(r"^\|\s*([A-Za-z]+):(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)\s+([0-9.]+)%\s*\|$")
 ALIASES={
@@ -17,9 +17,9 @@ def source_name(name):
  return name
 def default_month():
  return (date.today().replace(day=1)-timedelta(days=1)).strftime("%Y-%m")
-def fetch_source(month,local):
+def fetch_source(month,cutoff,local=None):
  if local: return Path(local).read_text(encoding="utf-8"),str(local)
- url=f"{BASE}/{month}/moveset/{FORMAT}-{RATING}.txt"
+ url=f"{BASE}/{month}/moveset/{FORMAT}-{cutoff}.txt"
  req=urllib.request.Request(url,headers={"User-Agent":"Torneo0MC-PCSpreadImporter/1.0"})
  with urllib.request.urlopen(req,timeout=90) as response: raw=response.read().decode("utf-8")
  return raw,url
@@ -47,21 +47,31 @@ def parse_moveset_file(raw,top_n=10):
   rec["spreads"].sort(key=lambda x:x["usagePercent"],reverse=True); rec["spreads"]=rec["spreads"][:top_n]
   for rank,item in enumerate(rec["spreads"],1): item["rank"]=rank
  return records
-def build_output(pool,source_records,month,source_url,top_n):
+def build_output(pool,source_sets,month,top_n):
  pokemon={}; missing=[]; used={}
  for entry in pool:
-  name=entry["name"]; key=norm(source_name(name)); rec=source_records.get(key)
-  if not rec or not rec["spreads"]: missing.append(name); continue
+  name=entry["name"]; key=norm(source_name(name)); selected=None
+  for cutoff,url,records in source_sets:
+   rec=records.get(key)
+   if rec and rec["spreads"]:
+    selected=(cutoff,url,rec); break
+  if selected is None: missing.append(name); continue
+  cutoff,url,rec=selected
   if key in used: raise ValueError(f"Colisión: {used[key]!r} y {name!r} apuntan a {rec['sourceName']!r}")
-  used[key]=name; pokemon[name]={"sourceName":rec["sourceName"],"rawCount":rec["rawCount"],"spreads":rec["spreads"]}
+  used[key]=name; pokemon[name]={"sourceName":rec["sourceName"],"rawCount":rec["rawCount"],"ratingCutoff":cutoff,"sourceUrl":url,"spreads":rec["spreads"]}
  count=sum(len(x["spreads"]) for x in pokemon.values())
- return {"schemaVersion":1,"meta":{"status":"ready" if pokemon else "empty","source":"Smogon University usage stats","sourceUrl":source_url,"format":FORMAT,"formatLabel":"Pokémon Champions VGC Regulation M-C BO3","ratingCutoff":RATING,"month":month,"generatedAt":datetime.now(timezone.utc).isoformat(),"statOrder":["hp","atk","def","spa","spd","spe"],"statPointCap":32,"statPointTotal":66,"requestedTopN":top_n,"sourceExplicitSpreadLimit":6,"matchedPoolEntries":len(pokemon),"poolEntries":len(pool),"missingPoolEntries":missing,"storedSpreadCount":count,"note":"Smogon publica hasta seis repartos explícitos por especie; el resto se agrupa como Other. No se inventan repartos para completar diez."},"pokemon":pokemon}
+ return {"schemaVersion":1,"meta":{"status":"ready" if pokemon else "empty","source":"Smogon University usage stats","sourceUrls":[url for _,url,_ in source_sets],"format":FORMAT,"formatLabel":"Pokémon Champions VGC Regulation M-C BO3","primaryRatingCutoff":RATING_CUTOFFS[0],"fallbackRatingCutoffs":RATING_CUTOFFS[1],"month":month,"generatedAt":datetime.now(timezone.utc).isoformat(),"statOrder":["hp","atk","def","spa","spd","spe"],"statPointCap":32,"statPointTotal":66,"requestedTopN":top_n,"sourceExplicitSpreadLimit":6,"matchedPoolEntries":len(pokemon),"poolEntries":len(pool),"missingPoolEntries":missing,"storedSpreadCount":count,"note":"Smogon publica hasta seis repartos explícitos por especie; el resto se agrupa como Other. No se inventan repartos para completar diez."},"pokemon":pokemon}
 def main():
  p=argparse.ArgumentParser(); p.add_argument("--month",default=""); p.add_argument("--pool",default="pool-data.json"); p.add_argument("--output",default="ev-spreads.json"); p.add_argument("--source-file",default=""); p.add_argument("--top",type=int,default=10); a=p.parse_args()
  month=a.month or default_month()
  if not re.fullmatch(r"\d{4}-\d{2}",month): p.error("--month debe tener formato YYYY-MM")
  if not 1<=a.top<=10: p.error("--top debe estar entre 1 y 10")
- pool=json.loads(Path(a.pool).read_text(encoding="utf-8")); raw,url=fetch_source(month,a.source_file); parsed=parse_moveset_file(raw,a.top); result=build_output(pool,parsed,month,url,a.top)
+ pool=json.loads(Path(a.pool).read_text(encoding="utf-8")); source_sets=[]
+ for cutoff in RATING_CUTOFFS:
+  raw,url=fetch_source(month,cutoff,a.source_file if cutoff==RATING_CUTOFFS[0] else "")
+  parsed=parse_moveset_file(raw,a.top)
+  source_sets.append((cutoff,url,parsed))
+ result=build_output(pool,source_sets,month,a.top)
  Path(a.output).write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
  meta=result["meta"]; print(f"Importados {meta['storedSpreadCount']} repartos para {meta['matchedPoolEntries']}/{meta['poolEntries']} entradas.")
  if meta["missingPoolEntries"]: print("Sin datos:",", ".join(meta["missingPoolEntries"]))
