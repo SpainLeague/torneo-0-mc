@@ -1,12 +1,14 @@
 {
   "schemaVersion": 1,
   "meta": {
-    "status": "pending",
+    "status": "ready",
     "source": "Smogon University usage stats",
+    "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
     "format": "gen9championsvgc2026regmcbo3",
     "formatLabel": "Pokémon Champions VGC Regulation M-C BO3",
     "ratingCutoff": 1760,
-    "month": null,
+    "month": "2026-09",
+    "generatedAt": "2026-10-31T15:54:27.697036+00:00",
     "statOrder": [
       "hp",
       "atk",
@@ -19,11 +21,7254 @@
     "statPointTotal": 66,
     "requestedTopN": 10,
     "sourceExplicitSpreadLimit": 6,
-    "matchedPoolEntries": 0,
+    "matchedPoolEntries": 101,
     "poolEntries": 223,
-    "missingPoolEntries": [],
-    "storedSpreadCount": 0,
-    "note": "Pendiente de importar el archivo mensual de Smogon. No se generan repartos estimados."
+    "missingPoolEntries": [
+      "Skarmory",
+      "Starmie",
+      "Mega Sharpedo",
+      "Sharpedo",
+      "Qwilfish",
+      "Vaporeon",
+      "Slowking",
+      "Scolipede",
+      "Goodra",
+      "Raichu Alola",
+      "Manectric",
+      "Dedenne",
+      "Rotom Frost",
+      "Rotom Fan",
+      "Ampharos",
+      "Bellibolt",
+      "Gourgeist",
+      "Banette",
+      "Infernape",
+      "Mega Emboar",
+      "Emboar",
+      "Florges",
+      "Mega Clefable",
+      "Aromatisse",
+      "Froslass",
+      "Glaceon",
+      "Avalugg Hisui",
+      "Mega Hawlucha",
+      "Hawlucha",
+      "Medicham",
+      "Falinks",
+      "Machamp",
+      "Crabominable",
+      "Mega Pidgeot",
+      "Tauros",
+      "Tauros de Paldea (Raza Combate)",
+      "Lopunny",
+      "Furfrou",
+      "Watchog",
+      "Mega Audino",
+      "Audino",
+      "Mega Drampa",
+      "Sceptile",
+      "Flapple",
+      "Alakazam",
+      "Meowstic-F",
+      "Zoroark",
+      "Absol",
+      "Malamar",
+      "Sandaconda",
+      "Garbodor",
+      "Barbaracle",
+      "Spiritomb",
+      "Serperior",
+      "Aurorus",
+      "Mega Eelektross",
+      "Alcremie",
+      "Heliolisk",
+      "Mega Chimecho",
+      "Arboliva",
+      "Salazzle",
+      "Mega Malamar",
+      "Clawitzer",
+      "Mega Dragalge",
+      "Perrserker",
+      "Greninja",
+      "Mega Scolipede",
+      "Quaquaval",
+      "Trevenant",
+      "Runerigus",
+      "Slowbro Galar",
+      "Typhlosion",
+      "Bastiodon",
+      "Luxray",
+      "Pangoro",
+      "Torterra",
+      "Garganacl",
+      "Farfetch'd",
+      "Decidueye",
+      "Slurpuff",
+      "Toucannon",
+      "Slowbro",
+      "Mr. Rime",
+      "Liepard",
+      "Cofagrigus",
+      "Beartic",
+      "Morpeko",
+      "Ariados",
+      "Dragalge",
+      "Mega Falinks",
+      "Rampardos",
+      "Espeon",
+      "Diggersby",
+      "Tyrantrum",
+      "Mabosstiff",
+      "Stunfisk",
+      "Castform",
+      "Abomasnow",
+      "Stunfisk Galar",
+      "Avalugg",
+      "Arbok",
+      "Houndoom",
+      "Victreebel",
+      "Roserade",
+      "Simisage",
+      "Mawile",
+      "Steelix",
+      "Mega Victreebel",
+      "Persian",
+      "Aggron",
+      "Glalie",
+      "Appletun",
+      "Eelektross",
+      "Thievul",
+      "Feraligatr",
+      "Emolga",
+      "Simisear",
+      "Simipour",
+      "Passimian",
+      "Golurk",
+      "Leafeon",
+      "Scovillain"
+    ],
+    "storedSpreadCount": 501,
+    "note": "Smogon publica hasta seis repartos explícitos por especie; el resto se agrupa como Other. No se inventan repartos para completar diez."
   },
-  "pokemon": {}
+  "pokemon": {
+    "Mega Skarmory": {
+      "sourceName": "Skarmory-Mega",
+      "rawCount": 790,
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 88.207,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            11,
+            32,
+            0,
+            0,
+            0,
+            23
+          ],
+          "usagePercent": 4.099,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            0,
+            32,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 3.183,
+          "rank": 3
+        }
+      ]
+    },
+    "Mega Starmie": {
+      "sourceName": "Starmie-Mega",
+      "rawCount": 1730,
+      "spreads": [
+        {
+          "natureId": "naive",
+          "points": [
+            0,
+            32,
+            0,
+            16,
+            0,
+            18
+          ],
+          "usagePercent": 21.208,
+          "rank": 1
+        },
+        {
+          "natureId": "naughty",
+          "points": [
+            17,
+            32,
+            0,
+            0,
+            0,
+            17
+          ],
+          "usagePercent": 15.549,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 13.173,
+          "rank": 3
+        },
+        {
+          "natureId": "naive",
+          "points": [
+            0,
+            32,
+            0,
+            19,
+            0,
+            15
+          ],
+          "usagePercent": 9.63,
+          "rank": 4
+        },
+        {
+          "natureId": "hasty",
+          "points": [
+            0,
+            32,
+            0,
+            16,
+            0,
+            18
+          ],
+          "usagePercent": 6.658,
+          "rank": 5
+        },
+        {
+          "natureId": "hasty",
+          "points": [
+            0,
+            11,
+            0,
+            23,
+            0,
+            32
+          ],
+          "usagePercent": 5.818,
+          "rank": 6
+        }
+      ]
+    },
+    "Inteleon": {
+      "sourceName": "Inteleon",
+      "rawCount": 2084,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 74.462,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            2,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 9.621,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            0,
+            32,
+            2,
+            32
+          ],
+          "usagePercent": 7.534,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            3,
+            0,
+            1,
+            31,
+            1,
+            30
+          ],
+          "usagePercent": 5.887,
+          "rank": 4
+        }
+      ]
+    },
+    "Samurott Hisui": {
+      "sourceName": "Samurott-Hisui",
+      "rawCount": 1407,
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 36.779,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 21.103,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            18,
+            13,
+            10,
+            0,
+            10,
+            15
+          ],
+          "usagePercent": 17.989,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 9.981,
+          "rank": 4
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            8,
+            32,
+            0,
+            0,
+            0,
+            26
+          ],
+          "usagePercent": 4.03,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            4,
+            32,
+            0,
+            0,
+            0,
+            30
+          ],
+          "usagePercent": 2.195,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Gyarados": {
+      "sourceName": "Gyarados-Mega",
+      "rawCount": 1609,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 12.032,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            23,
+            17,
+            0,
+            0,
+            0,
+            26
+          ],
+          "usagePercent": 10.674,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            11,
+            25,
+            0,
+            0,
+            0,
+            30
+          ],
+          "usagePercent": 10.078,
+          "rank": 3
+        },
+        {
+          "natureId": "lonely",
+          "points": [
+            0,
+            32,
+            0,
+            2,
+            0,
+            32
+          ],
+          "usagePercent": 9.567,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            7,
+            32,
+            0,
+            0,
+            0,
+            27
+          ],
+          "usagePercent": 7.268,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            24,
+            25,
+            0,
+            0,
+            0,
+            17
+          ],
+          "usagePercent": 6.138,
+          "rank": 6
+        }
+      ]
+    },
+    "Gyarados": {
+      "sourceName": "Gyarados",
+      "rawCount": 878,
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            5,
+            31,
+            0,
+            0,
+            0,
+            30
+          ],
+          "usagePercent": 34.92,
+          "rank": 1
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            11,
+            23,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 17.39,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 11.641,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            5,
+            26,
+            0,
+            1,
+            2
+          ],
+          "usagePercent": 5.762,
+          "rank": 4
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            30,
+            0,
+            18,
+            0,
+            7,
+            11
+          ],
+          "usagePercent": 4.415,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            1,
+            2,
+            31,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 4.291,
+          "rank": 6
+        }
+      ]
+    },
+    "Empoleon": {
+      "sourceName": "Empoleon",
+      "rawCount": 2373,
+      "spreads": [
+        {
+          "natureId": "bold",
+          "points": [
+            15,
+            0,
+            22,
+            19,
+            0,
+            10
+          ],
+          "usagePercent": 19.717,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            30,
+            0,
+            0,
+            31,
+            0,
+            5
+          ],
+          "usagePercent": 18.112,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            30,
+            0,
+            5,
+            19,
+            5,
+            7
+          ],
+          "usagePercent": 17.958,
+          "rank": 3
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            21,
+            0,
+            22,
+            18,
+            0,
+            5
+          ],
+          "usagePercent": 6.548,
+          "rank": 4
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            13,
+            1,
+            12,
+            8
+          ],
+          "usagePercent": 3.81,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 3.512,
+          "rank": 6
+        }
+      ]
+    },
+    "Azumarill": {
+      "sourceName": "Azumarill",
+      "rawCount": 1014,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            29,
+            32,
+            0,
+            0,
+            2,
+            3
+          ],
+          "usagePercent": 84.313,
+          "rank": 1
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            31,
+            32,
+            0,
+            0,
+            3,
+            0
+          ],
+          "usagePercent": 3.582,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            31,
+            32,
+            0,
+            0,
+            3,
+            0
+          ],
+          "usagePercent": 3.111,
+          "rank": 3
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            31,
+            32,
+            3,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 2.235,
+          "rank": 4
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 2.096,
+          "rank": 5
+        }
+      ]
+    },
+    "Mega Beedrill": {
+      "sourceName": "Beedrill-Mega",
+      "rawCount": 643,
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 67.226,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            5,
+            26,
+            10,
+            0,
+            0,
+            25
+          ],
+          "usagePercent": 25.323,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 6.438,
+          "rank": 3
+        }
+      ]
+    },
+    "Mega Heracross": {
+      "sourceName": "Heracross-Mega",
+      "rawCount": 427,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            14,
+            32,
+            0,
+            0,
+            1,
+            19
+          ],
+          "usagePercent": 89.445,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 7.713,
+          "rank": 2
+        }
+      ]
+    },
+    "Altaria": {
+      "sourceName": "Altaria",
+      "rawCount": 1360,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            5,
+            0,
+            0,
+            29
+          ],
+          "usagePercent": 41.59,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            13,
+            0,
+            0,
+            21
+          ],
+          "usagePercent": 18.608,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            31,
+            1,
+            13,
+            0,
+            0,
+            21
+          ],
+          "usagePercent": 9.655,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            31,
+            0,
+            2,
+            0,
+            12,
+            21
+          ],
+          "usagePercent": 6.195,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            11,
+            2,
+            0,
+            21
+          ],
+          "usagePercent": 5.551,
+          "rank": 5
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            31,
+            1,
+            1,
+            0,
+            12,
+            21
+          ],
+          "usagePercent": 4.962,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Manectric": {
+      "sourceName": "Manectric-Mega",
+      "rawCount": 1254,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 28.796,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            1,
+            1,
+            0,
+            32
+          ],
+          "usagePercent": 14.724,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            6,
+            0,
+            0,
+            28
+          ],
+          "usagePercent": 7.336,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            30,
+            0,
+            1,
+            3,
+            0,
+            32
+          ],
+          "usagePercent": 6.47,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            24,
+            0,
+            0,
+            2,
+            8,
+            32
+          ],
+          "usagePercent": 4.563,
+          "rank": 5
+        }
+      ]
+    },
+    "Pikachu": {
+      "sourceName": "Pikachu",
+      "rawCount": 221,
+      "spreads": [
+        {
+          "natureId": "hasty",
+          "points": [
+            0,
+            2,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 84.998,
+          "rank": 1
+        },
+        {
+          "natureId": "lonely",
+          "points": [
+            0,
+            32,
+            0,
+            2,
+            0,
+            32
+          ],
+          "usagePercent": 12.101,
+          "rank": 2
+        }
+      ]
+    },
+    "Rotom Mow": {
+      "sourceName": "Rotom-Mow",
+      "rawCount": 317,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 71.92,
+          "rank": 1
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            31,
+            0,
+            13,
+            15,
+            5,
+            2
+          ],
+          "usagePercent": 25.763,
+          "rank": 2
+        }
+      ]
+    },
+    "Rotom Heat": {
+      "sourceName": "Rotom-Heat",
+      "rawCount": 2911,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 35.905,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            6,
+            0,
+            0,
+            28,
+            0,
+            32
+          ],
+          "usagePercent": 34.945,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            17,
+            0,
+            0,
+            17,
+            0,
+            32
+          ],
+          "usagePercent": 2.573,
+          "rank": 3
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            15,
+            2,
+            5,
+            12
+          ],
+          "usagePercent": 2.559,
+          "rank": 4
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            6,
+            15,
+            0,
+            13
+          ],
+          "usagePercent": 2.072,
+          "rank": 5
+        }
+      ]
+    },
+    "Toxtricity": {
+      "sourceName": "Toxtricity",
+      "rawCount": 2707,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 34.044,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            1,
+            0,
+            0,
+            32,
+            1,
+            32
+          ],
+          "usagePercent": 12.311,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            12,
+            0,
+            0,
+            32,
+            0,
+            22
+          ],
+          "usagePercent": 8.155,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            25,
+            0,
+            10,
+            20,
+            0,
+            11
+          ],
+          "usagePercent": 7.659,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            26,
+            0,
+            0,
+            32,
+            0,
+            8
+          ],
+          "usagePercent": 7.071,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 5.073,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Ampharos": {
+      "sourceName": "Ampharos-Mega",
+      "rawCount": 752,
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            27,
+            0,
+            16,
+            23,
+            0,
+            0
+          ],
+          "usagePercent": 45.417,
+          "rank": 1
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 13.548,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 13.536,
+          "rank": 3
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 10.817,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            21,
+            0,
+            7,
+            20,
+            7,
+            11
+          ],
+          "usagePercent": 6.493,
+          "rank": 5
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 4.593,
+          "rank": 6
+        }
+      ]
+    },
+    "Pincurchin": {
+      "sourceName": "Pincurchin",
+      "rawCount": 2020,
+      "spreads": [
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 21.905,
+          "rank": 1
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            1,
+            32,
+            1,
+            0
+          ],
+          "usagePercent": 21.076,
+          "rank": 2
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            32,
+            2,
+            0,
+            0
+          ],
+          "usagePercent": 10.894,
+          "rank": 3
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 8.882,
+          "rank": 4
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            2,
+            0,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 5.987,
+          "rank": 5
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            0,
+            32,
+            17,
+            0,
+            17,
+            0
+          ],
+          "usagePercent": 4.449,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Chandelure": {
+      "sourceName": "Chandelure-Mega",
+      "rawCount": 985,
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            15,
+            5,
+            0,
+            14
+          ],
+          "usagePercent": 71.537,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            29,
+            0,
+            0,
+            15,
+            0,
+            22
+          ],
+          "usagePercent": 6.656,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 5.641,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            25,
+            0,
+            10,
+            27,
+            2,
+            2
+          ],
+          "usagePercent": 4.75,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 3.034,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            7,
+            5,
+            1,
+            21
+          ],
+          "usagePercent": 1.792,
+          "rank": 6
+        }
+      ]
+    },
+    "Chandelure": {
+      "sourceName": "Chandelure",
+      "rawCount": 468,
+      "spreads": [
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            27,
+            5,
+            1,
+            1
+          ],
+          "usagePercent": 31.215,
+          "rank": 1
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            28,
+            5,
+            1,
+            0
+          ],
+          "usagePercent": 22.629,
+          "rank": 2
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            0,
+            22,
+            12,
+            0
+          ],
+          "usagePercent": 10.689,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            26,
+            0,
+            2,
+            6,
+            0,
+            32
+          ],
+          "usagePercent": 9.734,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 8.949,
+          "rank": 5
+        }
+      ]
+    },
+    "Mega Banette": {
+      "sourceName": "Banette-Mega",
+      "rawCount": 803,
+      "spreads": [
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            6,
+            0,
+            28,
+            0
+          ],
+          "usagePercent": 80.867,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 8.978,
+          "rank": 2
+        },
+        {
+          "natureId": "naughty",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 4.561,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            10,
+            16,
+            0,
+            8,
+            0
+          ],
+          "usagePercent": 1.799,
+          "rank": 4
+        }
+      ]
+    },
+    "Polteageist": {
+      "sourceName": "Polteageist",
+      "rawCount": 183,
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 99.973,
+          "rank": 1
+        }
+      ]
+    },
+    "Houndstone": {
+      "sourceName": "Houndstone",
+      "rawCount": 551,
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            29,
+            0,
+            8,
+            0,
+            15,
+            14
+          ],
+          "usagePercent": 27.67,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 23.32,
+          "rank": 2
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            2,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 15.717,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            18,
+            29,
+            0,
+            0,
+            0,
+            19
+          ],
+          "usagePercent": 6.055,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            28,
+            1,
+            13,
+            0,
+            17,
+            7
+          ],
+          "usagePercent": 3.868,
+          "rank": 5
+        }
+      ]
+    },
+    "Mega Pyroar": {
+      "sourceName": "Pyroar-Mega",
+      "rawCount": 3450,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 77.846,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            7,
+            0,
+            0,
+            27,
+            0,
+            32
+          ],
+          "usagePercent": 5.259,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            7,
+            0,
+            0,
+            29,
+            0,
+            30
+          ],
+          "usagePercent": 3.819,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            7,
+            0,
+            0,
+            32,
+            0,
+            27
+          ],
+          "usagePercent": 3.441,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            4,
+            0,
+            14,
+            21,
+            0,
+            27
+          ],
+          "usagePercent": 3.157,
+          "rank": 5
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            2,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 1.552,
+          "rank": 6
+        }
+      ]
+    },
+    "Ninetales": {
+      "sourceName": "Ninetales",
+      "rawCount": 941,
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            28,
+            0,
+            0,
+            29,
+            0,
+            9
+          ],
+          "usagePercent": 26.223,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            1,
+            0,
+            0,
+            32,
+            1,
+            32
+          ],
+          "usagePercent": 18.235,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 16.102,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            1,
+            0,
+            1,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 6.267,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 5.98,
+          "rank": 5
+        }
+      ]
+    },
+    "Blaziken": {
+      "sourceName": "Blaziken",
+      "rawCount": 2803,
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 44.855,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 10.873,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 10.187,
+          "rank": 3
+        },
+        {
+          "natureId": "rash",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 8.36,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            1,
+            32,
+            1,
+            32
+          ],
+          "usagePercent": 7.597,
+          "rank": 5
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            0,
+            32,
+            0,
+            0,
+            11,
+            23
+          ],
+          "usagePercent": 4.988,
+          "rank": 6
+        }
+      ]
+    },
+    "Tinkaton": {
+      "sourceName": "Tinkaton",
+      "rawCount": 1744,
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            23,
+            15,
+            0,
+            0,
+            0,
+            28
+          ],
+          "usagePercent": 43.891,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            29,
+            0,
+            7,
+            0,
+            0,
+            30
+          ],
+          "usagePercent": 9.461,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            23,
+            16,
+            0,
+            0,
+            0,
+            27
+          ],
+          "usagePercent": 8.463,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 6.332,
+          "rank": 4
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            26,
+            15,
+            0,
+            0,
+            0,
+            25
+          ],
+          "usagePercent": 5.075,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 4.489,
+          "rank": 6
+        }
+      ]
+    },
+    "Clefable": {
+      "sourceName": "Clefable",
+      "rawCount": 3721,
+      "spreads": [
+        {
+          "natureId": "bold",
+          "points": [
+            30,
+            0,
+            17,
+            0,
+            19,
+            0
+          ],
+          "usagePercent": 22.004,
+          "rank": 1
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            24,
+            0,
+            10,
+            0
+          ],
+          "usagePercent": 13.91,
+          "rank": 2
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            27,
+            0,
+            7,
+            0
+          ],
+          "usagePercent": 13.784,
+          "rank": 3
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            19,
+            0,
+            32,
+            0,
+            15,
+            0
+          ],
+          "usagePercent": 11.701,
+          "rank": 4
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 5.99,
+          "rank": 5
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            2,
+            0,
+            0
+          ],
+          "usagePercent": 4.471,
+          "rank": 6
+        }
+      ]
+    },
+    "Mamoswine": {
+      "sourceName": "Mamoswine",
+      "rawCount": 3201,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 58.015,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 17.969,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            0,
+            32,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 5.263,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            0,
+            32,
+            2,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 2.559,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            10,
+            32,
+            0,
+            0,
+            0,
+            24
+          ],
+          "usagePercent": 2.527,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            8,
+            26,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 1.8,
+          "rank": 6
+        }
+      ]
+    },
+    "Vanilluxe": {
+      "sourceName": "Vanilluxe",
+      "rawCount": 1481,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            1,
+            0,
+            1,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 67.593,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            8,
+            0,
+            1,
+            25,
+            0,
+            32
+          ],
+          "usagePercent": 7.216,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            11,
+            0,
+            1,
+            22,
+            0,
+            32
+          ],
+          "usagePercent": 6.882,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 2.791,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            19,
+            15,
+            0,
+            32
+          ],
+          "usagePercent": 2.552,
+          "rank": 5
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            1,
+            0,
+            0,
+            32,
+            1,
+            32
+          ],
+          "usagePercent": 2.503,
+          "rank": 6
+        }
+      ]
+    },
+    "Sirfetch'd": {
+      "sourceName": "Sirfetch'd",
+      "rawCount": 3280,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 35.995,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            0,
+            32,
+            2,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 13.063,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            22,
+            32,
+            0,
+            0,
+            0,
+            12
+          ],
+          "usagePercent": 9.657,
+          "rank": 3
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 7.821,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            18,
+            0,
+            0,
+            16,
+            0
+          ],
+          "usagePercent": 6.246,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            12,
+            32,
+            0,
+            0,
+            4,
+            18
+          ],
+          "usagePercent": 5.133,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Crabominable": {
+      "sourceName": "Crabominable-Mega",
+      "rawCount": 1875,
+      "spreads": [
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 71.298,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 15.378,
+          "rank": 2
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            1,
+            0,
+            1,
+            0
+          ],
+          "usagePercent": 5.028,
+          "rank": 3
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 2.836,
+          "rank": 4
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            27,
+            0,
+            0,
+            7,
+            0
+          ],
+          "usagePercent": 1.789,
+          "rank": 5
+        }
+      ]
+    },
+    "Mega Lopunny": {
+      "sourceName": "Lopunny-Mega",
+      "rawCount": 3452,
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 92.571,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            5,
+            29,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 1.295,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            21,
+            11,
+            0,
+            0,
+            4,
+            30
+          ],
+          "usagePercent": 1.134,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            20,
+            12,
+            1,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 0.989,
+          "rank": 4
+        }
+      ]
+    },
+    "Tauros de Paldea (Raza Ardiente)": {
+      "sourceName": "Tauros-Paldea-Blaze",
+      "rawCount": 293,
+      "spreads": [
+        {
+          "natureId": "impish",
+          "points": [
+            21,
+            1,
+            11,
+            0,
+            15,
+            18
+          ],
+          "usagePercent": 57.009,
+          "rank": 1
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            23,
+            3,
+            8,
+            0,
+            14,
+            18
+          ],
+          "usagePercent": 38.361,
+          "rank": 2
+        }
+      ]
+    },
+    "Tauros de Paldea (Raza Acuática)": {
+      "sourceName": "Tauros-Paldea-Aqua",
+      "rawCount": 576,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            5,
+            32,
+            0,
+            0,
+            0,
+            29
+          ],
+          "usagePercent": 33.311,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            10,
+            32,
+            0,
+            0,
+            1,
+            23
+          ],
+          "usagePercent": 30.046,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            20,
+            32,
+            0,
+            0,
+            0,
+            14
+          ],
+          "usagePercent": 15.312,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            30,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 5.796,
+          "rank": 4
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            17,
+            4,
+            13,
+            0,
+            4,
+            28
+          ],
+          "usagePercent": 5.573,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            18,
+            10,
+            4,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 2.773,
+          "rank": 6
+        }
+      ]
+    },
+    "Zoroark Hisui": {
+      "sourceName": "Zoroark-Hisui",
+      "rawCount": 2903,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 62.835,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 31.778,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            14,
+            0,
+            3,
+            22,
+            0,
+            27
+          ],
+          "usagePercent": 2.57,
+          "rank": 3
+        }
+      ]
+    },
+    "Squawkabilly": {
+      "sourceName": "Squawkabilly",
+      "rawCount": 575,
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 53.413,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 15.1,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 11.359,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 7.318,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            1,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 5.695,
+          "rank": 5
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            32,
+            5,
+            0,
+            0,
+            0,
+            29
+          ],
+          "usagePercent": 3.529,
+          "rank": 6
+        }
+      ]
+    },
+    "Wyrdeer": {
+      "sourceName": "Wyrdeer",
+      "rawCount": 304,
+      "spreads": [
+        {
+          "natureId": "bold",
+          "points": [
+            14,
+            0,
+            28,
+            0,
+            24,
+            0
+          ],
+          "usagePercent": 55.658,
+          "rank": 1
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            21,
+            0,
+            13,
+            0
+          ],
+          "usagePercent": 26.766,
+          "rank": 2
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            10,
+            0,
+            24,
+            0
+          ],
+          "usagePercent": 9.16,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            21,
+            0,
+            8,
+            21,
+            0,
+            16
+          ],
+          "usagePercent": 5.662,
+          "rank": 4
+        }
+      ]
+    },
+    "Ditto": {
+      "sourceName": "Ditto",
+      "rawCount": 1115,
+      "spreads": [
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 56.746,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 9.604,
+          "rank": 2
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            32,
+            0,
+            1,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 7.152,
+          "rank": 3
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            32,
+            0,
+            32,
+            2,
+            0,
+            0
+          ],
+          "usagePercent": 7.114,
+          "rank": 4
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 5.404,
+          "rank": 5
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            1,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 4.012,
+          "rank": 6
+        }
+      ]
+    },
+    "Wigglytuff": {
+      "sourceName": "Wigglytuff",
+      "rawCount": 565,
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            14,
+            0,
+            32,
+            15,
+            5,
+            0
+          ],
+          "usagePercent": 27.993,
+          "rank": 1
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            0,
+            0,
+            17,
+            32,
+            17,
+            0
+          ],
+          "usagePercent": 17.983,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            1,
+            0,
+            32,
+            17,
+            16,
+            0
+          ],
+          "usagePercent": 17.888,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            0,
+            0,
+            16,
+            32,
+            0,
+            18
+          ],
+          "usagePercent": 16.235,
+          "rank": 4
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            0,
+            0,
+            26,
+            29,
+            11,
+            0
+          ],
+          "usagePercent": 5.106,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            11,
+            23,
+            0,
+            0
+          ],
+          "usagePercent": 4.613,
+          "rank": 6
+        }
+      ]
+    },
+    "Drampa": {
+      "sourceName": "Drampa",
+      "rawCount": 757,
+      "spreads": [
+        {
+          "natureId": "quiet",
+          "points": [
+            27,
+            0,
+            0,
+            32,
+            7,
+            0
+          ],
+          "usagePercent": 52.476,
+          "rank": 1
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 19.91,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            25,
+            4,
+            5
+          ],
+          "usagePercent": 19.818,
+          "rank": 3
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 4.237,
+          "rank": 4
+        }
+      ]
+    },
+    "Snorlax": {
+      "sourceName": "Snorlax",
+      "rawCount": 1777,
+      "spreads": [
+        {
+          "natureId": "relaxed",
+          "points": [
+            21,
+            0,
+            31,
+            0,
+            14,
+            0
+          ],
+          "usagePercent": 40.689,
+          "rank": 1
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 30.34,
+          "rank": 2
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            21,
+            0,
+            32,
+            0,
+            13,
+            0
+          ],
+          "usagePercent": 8.757,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            31,
+            32,
+            0,
+            0,
+            3,
+            0
+          ],
+          "usagePercent": 5.511,
+          "rank": 4
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            21,
+            0,
+            32,
+            0,
+            13,
+            0
+          ],
+          "usagePercent": 3.412,
+          "rank": 5
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            2,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 3.282,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Sceptile": {
+      "sourceName": "Sceptile-Mega",
+      "rawCount": 1580,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 74.877,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            11,
+            0,
+            0,
+            32,
+            2,
+            21
+          ],
+          "usagePercent": 7.188,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 4.726,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            6,
+            0,
+            0,
+            16,
+            18,
+            26
+          ],
+          "usagePercent": 4.545,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            1,
+            0,
+            0,
+            32,
+            2,
+            31
+          ],
+          "usagePercent": 2.326,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            1,
+            0,
+            0,
+            32,
+            2,
+            31
+          ],
+          "usagePercent": 1.743,
+          "rank": 6
+        }
+      ]
+    },
+    "Meowscarada": {
+      "sourceName": "Meowscarada",
+      "rawCount": 2106,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            3,
+            32,
+            0,
+            0,
+            0,
+            31
+          ],
+          "usagePercent": 35.864,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 28.232,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            27,
+            32,
+            0,
+            0,
+            0,
+            7
+          ],
+          "usagePercent": 16.823,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 6.633,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            0,
+            32,
+            3,
+            0,
+            0,
+            31
+          ],
+          "usagePercent": 3.242,
+          "rank": 5
+        }
+      ]
+    },
+    "Mega Meganium": {
+      "sourceName": "Meganium-Mega",
+      "rawCount": 2983,
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            26,
+            0,
+            0,
+            27,
+            0,
+            13
+          ],
+          "usagePercent": 19.771,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            4,
+            27,
+            3,
+            0
+          ],
+          "usagePercent": 13.144,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            18,
+            0,
+            0,
+            27,
+            2,
+            19
+          ],
+          "usagePercent": 11.328,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            18,
+            0,
+            0,
+            27,
+            1,
+            20
+          ],
+          "usagePercent": 11.157,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            28,
+            0,
+            1,
+            13,
+            23,
+            1
+          ],
+          "usagePercent": 4.79,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 4.585,
+          "rank": 6
+        }
+      ]
+    },
+    "Tsareena": {
+      "sourceName": "Tsareena",
+      "rawCount": 3363,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 24.264,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            30,
+            13,
+            1,
+            0,
+            1,
+            21
+          ],
+          "usagePercent": 22.563,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 18.987,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            0,
+            2
+          ],
+          "usagePercent": 8.29,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            15,
+            30,
+            0,
+            0,
+            0,
+            21
+          ],
+          "usagePercent": 3.825,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            0,
+            32,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 2.353,
+          "rank": 6
+        }
+      ]
+    },
+    "Chesnaught": {
+      "sourceName": "Chesnaught",
+      "rawCount": 124,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            23,
+            0,
+            0,
+            11,
+            0
+          ],
+          "usagePercent": 79.108,
+          "rank": 1
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            8,
+            13,
+            13,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 12.578,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            21,
+            21,
+            0,
+            0,
+            0,
+            24
+          ],
+          "usagePercent": 5.889,
+          "rank": 3
+        }
+      ]
+    },
+    "Vileplume": {
+      "sourceName": "Vileplume",
+      "rawCount": 1187,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            2,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 48.397,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 43.836,
+          "rank": 2
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 1.928,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            0,
+            32,
+            2,
+            32
+          ],
+          "usagePercent": 1.874,
+          "rank": 4
+        }
+      ]
+    },
+    "Mega Alakazam": {
+      "sourceName": "Alakazam-Mega",
+      "rawCount": 3189,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 34.979,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 23.992,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 14.522,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            4,
+            30,
+            0,
+            32
+          ],
+          "usagePercent": 9.754,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            20,
+            0,
+            0,
+            25,
+            0,
+            21
+          ],
+          "usagePercent": 2.642,
+          "rank": 5
+        }
+      ]
+    },
+    "Weavile": {
+      "sourceName": "Weavile",
+      "rawCount": 2108,
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 88.695,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            0,
+            32,
+            2,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 2.597,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 2.239,
+          "rank": 3
+        },
+        {
+          "natureId": "hasty",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 1.551,
+          "rank": 4
+        }
+      ]
+    },
+    "Mega Scrafty": {
+      "sourceName": "Scrafty-Mega",
+      "rawCount": 2234,
+      "spreads": [
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            1,
+            16,
+            0,
+            17,
+            0
+          ],
+          "usagePercent": 27.962,
+          "rank": 1
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            1,
+            0,
+            1,
+            0
+          ],
+          "usagePercent": 21.164,
+          "rank": 2
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 13.244,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 7.756,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            10,
+            0,
+            0,
+            0,
+            24
+          ],
+          "usagePercent": 7.429,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            30,
+            1,
+            0,
+            3,
+            0
+          ],
+          "usagePercent": 6.427,
+          "rank": 6
+        }
+      ]
+    },
+    "Umbreon": {
+      "sourceName": "Umbreon",
+      "rawCount": 738,
+      "spreads": [
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            12,
+            0,
+            20,
+            2
+          ],
+          "usagePercent": 56.115,
+          "rank": 1
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 16.89,
+          "rank": 2
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            29,
+            0,
+            5,
+            0
+          ],
+          "usagePercent": 7.725,
+          "rank": 3
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            12,
+            0,
+            20,
+            2
+          ],
+          "usagePercent": 6.8,
+          "rank": 4
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            5,
+            0,
+            0,
+            29
+          ],
+          "usagePercent": 3.502,
+          "rank": 5
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            32,
+            0
+          ],
+          "usagePercent": 2.252,
+          "rank": 6
+        }
+      ]
+    },
+    "Scrafty": {
+      "sourceName": "Scrafty",
+      "rawCount": 1200,
+      "spreads": [
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            4,
+            0,
+            4,
+            26
+          ],
+          "usagePercent": 44.269,
+          "rank": 1
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 33.748,
+          "rank": 2
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 6.916,
+          "rank": 3
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            7,
+            0,
+            0,
+            27
+          ],
+          "usagePercent": 4.282,
+          "rank": 4
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            12,
+            30,
+            0,
+            0,
+            24,
+            0
+          ],
+          "usagePercent": 3.222,
+          "rank": 5
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            10,
+            0,
+            0,
+            24,
+            0
+          ],
+          "usagePercent": 2.139,
+          "rank": 6
+        }
+      ]
+    },
+    "Gliscor": {
+      "sourceName": "Gliscor",
+      "rawCount": 1306,
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            5,
+            32,
+            0,
+            0,
+            1,
+            28
+          ],
+          "usagePercent": 27.354,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 19.489,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            6,
+            32,
+            0,
+            0,
+            0,
+            28
+          ],
+          "usagePercent": 13.287,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            0,
+            32,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 7.913,
+          "rank": 4
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 7.437,
+          "rank": 5
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            26,
+            8,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 3.988,
+          "rank": 6
+        }
+      ]
+    },
+    "Hippowdon": {
+      "sourceName": "Hippowdon",
+      "rawCount": 1037,
+      "spreads": [
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 50.838,
+          "rank": 1
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 21.574,
+          "rank": 2
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 11.24,
+          "rank": 3
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            6,
+            0,
+            28,
+            0
+          ],
+          "usagePercent": 3.453,
+          "rank": 4
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            16,
+            0,
+            18,
+            0
+          ],
+          "usagePercent": 3.362,
+          "rank": 5
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            26,
+            1,
+            10,
+            0,
+            28,
+            1
+          ],
+          "usagePercent": 1.925,
+          "rank": 6
+        }
+      ]
+    },
+    "Toxicroak": {
+      "sourceName": "Toxicroak",
+      "rawCount": 207,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            28,
+            24,
+            0,
+            0,
+            1,
+            13
+          ],
+          "usagePercent": 68.171,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            1,
+            0,
+            1,
+            0
+          ],
+          "usagePercent": 14.173,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 8.566,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            14,
+            20,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 3.736,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            22,
+            18,
+            0,
+            0,
+            13,
+            13
+          ],
+          "usagePercent": 3.016,
+          "rank": 5
+        }
+      ]
+    },
+    "Swalot": {
+      "sourceName": "Swalot",
+      "rawCount": 95,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 83.277,
+          "rank": 1
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 16.418,
+          "rank": 2
+        }
+      ]
+    },
+    "Noivern": {
+      "sourceName": "Noivern",
+      "rawCount": 608,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 83.56,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            1,
+            32,
+            1,
+            32
+          ],
+          "usagePercent": 10.016,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            9,
+            0,
+            0,
+            25,
+            0,
+            32
+          ],
+          "usagePercent": 2.118,
+          "rank": 3
+        }
+      ]
+    },
+    "Mega Barbaracle": {
+      "sourceName": "Barbaracle-Mega",
+      "rawCount": 363,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            30,
+            31,
+            0,
+            0,
+            0,
+            5
+          ],
+          "usagePercent": 50.058,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            27,
+            0,
+            0,
+            0,
+            7
+          ],
+          "usagePercent": 24.972,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            30,
+            28,
+            0,
+            0,
+            1,
+            7
+          ],
+          "usagePercent": 12.572,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            28,
+            0,
+            0,
+            0,
+            6
+          ],
+          "usagePercent": 5.959,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 4.171,
+          "rank": 5
+        }
+      ]
+    },
+    "Oranguru": {
+      "sourceName": "Oranguru",
+      "rawCount": 1007,
+      "spreads": [
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 43.977,
+          "rank": 1
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            30,
+            0,
+            4,
+            0
+          ],
+          "usagePercent": 19.004,
+          "rank": 2
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            21,
+            0,
+            13,
+            0
+          ],
+          "usagePercent": 10.126,
+          "rank": 3
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 10.048,
+          "rank": 4
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            25,
+            0,
+            28,
+            0,
+            11,
+            2
+          ],
+          "usagePercent": 2.857,
+          "rank": 5
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            24,
+            0,
+            10,
+            0
+          ],
+          "usagePercent": 2.83,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Greninja": {
+      "sourceName": "Greninja-Mega",
+      "rawCount": 973,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 55.166,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            3,
+            32,
+            0,
+            0,
+            0,
+            31
+          ],
+          "usagePercent": 16.889,
+          "rank": 2
+        },
+        {
+          "natureId": "hasty",
+          "points": [
+            0,
+            9,
+            0,
+            32,
+            0,
+            25
+          ],
+          "usagePercent": 9.616,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            2,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 6.909,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 4.482,
+          "rank": 5
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            8,
+            0,
+            0,
+            32,
+            0,
+            26
+          ],
+          "usagePercent": 3.245,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Scizor": {
+      "sourceName": "Scizor-Mega",
+      "rawCount": 1125,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 52.195,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            31,
+            25,
+            10,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 26.814,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 7.571,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            26,
+            32,
+            0,
+            0,
+            0,
+            8
+          ],
+          "usagePercent": 2.687,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            30,
+            32,
+            0,
+            0,
+            4,
+            0
+          ],
+          "usagePercent": 2.554,
+          "rank": 5
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            32,
+            0,
+            0,
+            0,
+            32,
+            2
+          ],
+          "usagePercent": 1.449,
+          "rank": 6
+        }
+      ]
+    },
+    "Cinderace": {
+      "sourceName": "Cinderace",
+      "rawCount": 1151,
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 45.845,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            6,
+            14,
+            13,
+            0,
+            2,
+            31
+          ],
+          "usagePercent": 30.155,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            4,
+            32,
+            6,
+            0,
+            0,
+            24
+          ],
+          "usagePercent": 8.456,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            5,
+            25,
+            4,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 6.278,
+          "rank": 4
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 5.931,
+          "rank": 5
+        }
+      ]
+    },
+    "Grapploct": {
+      "sourceName": "Grapploct",
+      "rawCount": 2535,
+      "spreads": [
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 49.308,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 37.658,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            21,
+            32,
+            0,
+            0,
+            2,
+            11
+          ],
+          "usagePercent": 3.764,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            1,
+            0,
+            1,
+            0
+          ],
+          "usagePercent": 3.588,
+          "rank": 4
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 2.369,
+          "rank": 5
+        }
+      ]
+    },
+    "Mega Meowstic (F)": {
+      "sourceName": "Meowstic-F-Mega",
+      "rawCount": 2601,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 87.002,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            7,
+            30,
+            0,
+            29
+          ],
+          "usagePercent": 6.301,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            1,
+            0,
+            1,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 1.396,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            10,
+            0,
+            0,
+            24,
+            0,
+            32
+          ],
+          "usagePercent": 1.324,
+          "rank": 4
+        }
+      ]
+    },
+    "Mega Golurk": {
+      "sourceName": "Golurk-Mega",
+      "rawCount": 935,
+      "spreads": [
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 36.921,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            31,
+            3,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 25.721,
+          "rank": 2
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            1,
+            0,
+            1,
+            0
+          ],
+          "usagePercent": 10.69,
+          "rank": 3
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            11,
+            32,
+            21,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 9.128,
+          "rank": 4
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            0,
+            32,
+            21,
+            0,
+            2,
+            11
+          ],
+          "usagePercent": 7.303,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            1,
+            1
+          ],
+          "usagePercent": 5.501,
+          "rank": 6
+        }
+      ]
+    },
+    "Araquanid": {
+      "sourceName": "Araquanid",
+      "rawCount": 2005,
+      "spreads": [
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 17.674,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            19,
+            0,
+            0,
+            15,
+            0
+          ],
+          "usagePercent": 16.186,
+          "rank": 2
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 7.892,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 7.123,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 6.269,
+          "rank": 5
+        }
+      ]
+    },
+    "Mimikyu": {
+      "sourceName": "Mimikyu",
+      "rawCount": 1403,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            29,
+            32,
+            4,
+            0,
+            1,
+            0
+          ],
+          "usagePercent": 60.793,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 8.334,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            1,
+            0,
+            1,
+            0
+          ],
+          "usagePercent": 6.569,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 6.501,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            8,
+            30,
+            0,
+            0,
+            0,
+            28
+          ],
+          "usagePercent": 6.304,
+          "rank": 5
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            24,
+            20,
+            8,
+            0,
+            5,
+            9
+          ],
+          "usagePercent": 4.383,
+          "rank": 6
+        }
+      ]
+    },
+    "Klefki": {
+      "sourceName": "Klefki",
+      "rawCount": 1919,
+      "spreads": [
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            21,
+            0,
+            13,
+            0
+          ],
+          "usagePercent": 53.238,
+          "rank": 1
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            19,
+            0,
+            15,
+            0
+          ],
+          "usagePercent": 33.968,
+          "rank": 2
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            31,
+            0,
+            8,
+            0,
+            27,
+            0
+          ],
+          "usagePercent": 2.52,
+          "rank": 3
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            9,
+            0,
+            25,
+            0
+          ],
+          "usagePercent": 1.829,
+          "rank": 4
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            27,
+            0,
+            7,
+            0
+          ],
+          "usagePercent": 1.824,
+          "rank": 5
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            12,
+            0,
+            22,
+            0
+          ],
+          "usagePercent": 1.124,
+          "rank": 6
+        }
+      ]
+    },
+    "Palafin": {
+      "sourceName": "Palafin",
+      "rawCount": 2411,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            30,
+            0,
+            0,
+            0,
+            4
+          ],
+          "usagePercent": 49.902,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            24,
+            32,
+            1,
+            0,
+            2,
+            7
+          ],
+          "usagePercent": 5.709,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 5.386,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 4.811,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            4,
+            32,
+            0,
+            0,
+            0,
+            30
+          ],
+          "usagePercent": 3.676,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            17,
+            31,
+            1,
+            0,
+            3,
+            14
+          ],
+          "usagePercent": 3.299,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Aggron": {
+      "sourceName": "Aggron-Mega",
+      "rawCount": 1245,
+      "spreads": [
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            4,
+            0,
+            30,
+            0
+          ],
+          "usagePercent": 28.586,
+          "rank": 1
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            31,
+            0,
+            3,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 23.154,
+          "rank": 2
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            10,
+            0,
+            24,
+            0
+          ],
+          "usagePercent": 9.167,
+          "rank": 3
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 6.215,
+          "rank": 4
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 5.766,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            31,
+            10,
+            0,
+            0,
+            20,
+            5
+          ],
+          "usagePercent": 5.552,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Abomasnow": {
+      "sourceName": "Abomasnow-Mega",
+      "rawCount": 936,
+      "spreads": [
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 63.845,
+          "rank": 1
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            1,
+            32,
+            1,
+            0
+          ],
+          "usagePercent": 22.14,
+          "rank": 2
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            2,
+            32,
+            0,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 4.137,
+          "rank": 3
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            2,
+            0,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 3.498,
+          "rank": 4
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            0,
+            32,
+            17,
+            0,
+            17,
+            0
+          ],
+          "usagePercent": 2.151,
+          "rank": 5
+        }
+      ]
+    },
+    "Mega Houndoom": {
+      "sourceName": "Houndoom-Mega",
+      "rawCount": 512,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            1,
+            32,
+            1,
+            32
+          ],
+          "usagePercent": 74.792,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            1,
+            0,
+            2,
+            30,
+            1,
+            32
+          ],
+          "usagePercent": 6.463,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            0,
+            32,
+            2,
+            32
+          ],
+          "usagePercent": 6.209,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            1,
+            0,
+            2,
+            32,
+            2,
+            29
+          ],
+          "usagePercent": 2.808,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            5,
+            0,
+            0,
+            32,
+            1,
+            28
+          ],
+          "usagePercent": 2.551,
+          "rank": 5
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            1,
+            0,
+            1,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 1.399,
+          "rank": 6
+        }
+      ]
+    },
+    "Goodra Hisui": {
+      "sourceName": "Goodra-Hisui",
+      "rawCount": 1577,
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            10,
+            0,
+            24
+          ],
+          "usagePercent": 21.181,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            21,
+            0,
+            10,
+            30,
+            0,
+            5
+          ],
+          "usagePercent": 15.344,
+          "rank": 2
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            2,
+            0,
+            0
+          ],
+          "usagePercent": 14.461,
+          "rank": 3
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            14,
+            0,
+            20,
+            0
+          ],
+          "usagePercent": 13.891,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            21,
+            0,
+            5,
+            30,
+            0,
+            10
+          ],
+          "usagePercent": 6.949,
+          "rank": 5
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 5.868,
+          "rank": 6
+        }
+      ]
+    },
+    "Mr. Mime": {
+      "sourceName": "Mr. Mime",
+      "rawCount": 407,
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 94.667,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            30,
+            0,
+            4,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 2.609,
+          "rank": 2
+        }
+      ]
+    },
+    "Persian Alola": {
+      "sourceName": "Persian-Alola",
+      "rawCount": 737,
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            28,
+            0,
+            9,
+            0,
+            1,
+            28
+          ],
+          "usagePercent": 36.644,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            0,
+            0,
+            9,
+            25
+          ],
+          "usagePercent": 23.605,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            3,
+            29
+          ],
+          "usagePercent": 16.29,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            32,
+            0,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 7.817,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            21,
+            0,
+            1,
+            0,
+            15,
+            29
+          ],
+          "usagePercent": 4.048,
+          "rank": 5
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            0,
+            2
+          ],
+          "usagePercent": 3.222,
+          "rank": 6
+        }
+      ]
+    },
+    "Mudsdale": {
+      "sourceName": "Mudsdale",
+      "rawCount": 850,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 54.096,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 18.656,
+          "rank": 2
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            29,
+            32,
+            0,
+            0,
+            5,
+            0
+          ],
+          "usagePercent": 7.905,
+          "rank": 3
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 5.658,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            4,
+            30,
+            0,
+            0,
+            1,
+            31
+          ],
+          "usagePercent": 5.534,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            4,
+            30,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 4.708,
+          "rank": 6
+        }
+      ]
+    },
+    "Arcanine": {
+      "sourceName": "Arcanine",
+      "rawCount": 768,
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            11,
+            0,
+            2,
+            21,
+            4,
+            28
+          ],
+          "usagePercent": 34.576,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            31,
+            1,
+            6,
+            0,
+            6,
+            22
+          ],
+          "usagePercent": 31.894,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            31,
+            3,
+            3,
+            0,
+            29,
+            0
+          ],
+          "usagePercent": 21.039,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            27,
+            0,
+            31,
+            0,
+            2,
+            6
+          ],
+          "usagePercent": 2.776,
+          "rank": 4
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            12,
+            0,
+            22,
+            0
+          ],
+          "usagePercent": 1.883,
+          "rank": 5
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 1.401,
+          "rank": 6
+        }
+      ]
+    },
+    "Meowstic-M": {
+      "sourceName": "Meowstic",
+      "rawCount": 792,
+      "spreads": [
+        {
+          "natureId": "bold",
+          "points": [
+            27,
+            0,
+            24,
+            0,
+            14,
+            1
+          ],
+          "usagePercent": 56.415,
+          "rank": 1
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            15,
+            0,
+            19,
+            0
+          ],
+          "usagePercent": 18.21,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 14.874,
+          "rank": 3
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            32,
+            2,
+            0,
+            0
+          ],
+          "usagePercent": 3.039,
+          "rank": 4
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            6,
+            0,
+            28,
+            0
+          ],
+          "usagePercent": 1.654,
+          "rank": 5
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 1.19,
+          "rank": 6
+        }
+      ]
+    },
+    "Overqwil": {
+      "sourceName": "Overqwil",
+      "rawCount": 1003,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 19.982,
+          "rank": 1
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 19.142,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 15.592,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 12.724,
+          "rank": 4
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            7,
+            0,
+            27,
+            0
+          ],
+          "usagePercent": 11.089,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            0,
+            32,
+            2,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 10.534,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Altaria": {
+      "sourceName": "Altaria-Mega",
+      "rawCount": 803,
+      "spreads": [
+        {
+          "natureId": "calm",
+          "points": [
+            31,
+            0,
+            0,
+            10,
+            25,
+            0
+          ],
+          "usagePercent": 22.837,
+          "rank": 1
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            29,
+            0,
+            5,
+            0
+          ],
+          "usagePercent": 15.847,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 9.962,
+          "rank": 3
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            31,
+            0,
+            10,
+            0,
+            25,
+            0
+          ],
+          "usagePercent": 9.312,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            0,
+            2
+          ],
+          "usagePercent": 8.185,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            31,
+            0,
+            0,
+            10,
+            21,
+            4
+          ],
+          "usagePercent": 6.748,
+          "rank": 6
+        }
+      ]
+    },
+    "Conkeldurr": {
+      "sourceName": "Conkeldurr",
+      "rawCount": 461,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            27,
+            20,
+            5,
+            0,
+            5,
+            9
+          ],
+          "usagePercent": 65.545,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            27,
+            20,
+            0,
+            0,
+            10,
+            9
+          ],
+          "usagePercent": 15.358,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 5.456,
+          "rank": 3
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 4.041,
+          "rank": 4
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 2.6,
+          "rank": 5
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            22,
+            2,
+            23,
+            0,
+            19,
+            0
+          ],
+          "usagePercent": 2.436,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Feraligatr": {
+      "sourceName": "Feraligatr-Mega",
+      "rawCount": 803,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 36.899,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            31,
+            32,
+            0,
+            0,
+            3,
+            0
+          ],
+          "usagePercent": 20.181,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 14.908,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            23,
+            10,
+            7,
+            0,
+            10,
+            16
+          ],
+          "usagePercent": 8.301,
+          "rank": 4
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            16,
+            32,
+            0,
+            0,
+            0,
+            18
+          ],
+          "usagePercent": 6.764,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            17,
+            20,
+            1,
+            0,
+            1,
+            27
+          ],
+          "usagePercent": 2.503,
+          "rank": 6
+        }
+      ]
+    },
+    "Decidueye Hisui": {
+      "sourceName": "Decidueye-Hisui",
+      "rawCount": 520,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            11,
+            32,
+            0,
+            0,
+            0,
+            23
+          ],
+          "usagePercent": 35.275,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 21.64,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            16,
+            32,
+            0,
+            0,
+            0,
+            18
+          ],
+          "usagePercent": 12.509,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            19,
+            32,
+            15,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 8.434,
+          "rank": 4
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 5.59,
+          "rank": 5
+        }
+      ]
+    },
+    "Slowking Galar": {
+      "sourceName": "Slowking-Galar",
+      "rawCount": 1061,
+      "spreads": [
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            10,
+            14,
+            10,
+            0
+          ],
+          "usagePercent": 55.524,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            29,
+            0,
+            0,
+            31,
+            0,
+            6
+          ],
+          "usagePercent": 16.212,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            0,
+            0,
+            32,
+            24,
+            10,
+            0
+          ],
+          "usagePercent": 16.197,
+          "rank": 3
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 4.26,
+          "rank": 4
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 3.069,
+          "rank": 5
+        }
+      ]
+    },
+    "Scizor": {
+      "sourceName": "Scizor",
+      "rawCount": 1714,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 67.722,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            1,
+            0,
+            0,
+            1
+          ],
+          "usagePercent": 9.991,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 6.001,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            14,
+            32,
+            6,
+            0,
+            6,
+            8
+          ],
+          "usagePercent": 3.576,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            18,
+            2,
+            0,
+            0,
+            14
+          ],
+          "usagePercent": 2.483,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            3,
+            32,
+            7,
+            0,
+            24,
+            0
+          ],
+          "usagePercent": 2.063,
+          "rank": 6
+        }
+      ]
+    },
+    "Skeledirge": {
+      "sourceName": "Skeledirge",
+      "rawCount": 728,
+      "spreads": [
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            2,
+            0,
+            0
+          ],
+          "usagePercent": 60.52,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            29,
+            0,
+            0,
+            20,
+            15,
+            2
+          ],
+          "usagePercent": 13.021,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            29,
+            0,
+            0,
+            20,
+            17,
+            0
+          ],
+          "usagePercent": 9.451,
+          "rank": 3
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            0,
+            0,
+            32,
+            2
+          ],
+          "usagePercent": 6.865,
+          "rank": 4
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 4.165,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 1.543,
+          "rank": 6
+        }
+      ]
+    },
+    "Krookodile": {
+      "sourceName": "Krookodile",
+      "rawCount": 915,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 41.652,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 31.312,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            20,
+            32,
+            2,
+            0,
+            12,
+            0
+          ],
+          "usagePercent": 9.361,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            24,
+            32,
+            0,
+            0,
+            10,
+            0
+          ],
+          "usagePercent": 5.707,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 2.746,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            0,
+            32,
+            18,
+            0,
+            0,
+            16
+          ],
+          "usagePercent": 2.086,
+          "rank": 6
+        }
+      ]
+    },
+    "Orthworm": {
+      "sourceName": "Orthworm",
+      "rawCount": 589,
+      "spreads": [
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            5,
+            0,
+            22,
+            7
+          ],
+          "usagePercent": 75.932,
+          "rank": 1
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            31,
+            0,
+            5,
+            0,
+            30,
+            0
+          ],
+          "usagePercent": 12.292,
+          "rank": 2
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            2,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 3.498,
+          "rank": 3
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 2.453,
+          "rank": 4
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            31,
+            2,
+            2,
+            0,
+            31,
+            0
+          ],
+          "usagePercent": 1.201,
+          "rank": 5
+        }
+      ]
+    },
+    "Mega Slowbro": {
+      "sourceName": "Slowbro-Mega",
+      "rawCount": 901,
+      "spreads": [
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 47.911,
+          "rank": 1
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            22,
+            0,
+            12,
+            0
+          ],
+          "usagePercent": 19.337,
+          "rank": 2
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            22,
+            0,
+            12,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 15.221,
+          "rank": 3
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            22,
+            0,
+            14,
+            0,
+            30,
+            0
+          ],
+          "usagePercent": 4.967,
+          "rank": 4
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            12,
+            10,
+            12,
+            0
+          ],
+          "usagePercent": 4.199,
+          "rank": 5
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            31,
+            0,
+            0,
+            32,
+            3,
+            0
+          ],
+          "usagePercent": 1.31,
+          "rank": 6
+        }
+      ]
+    },
+    "Reuniclus": {
+      "sourceName": "Reuniclus",
+      "rawCount": 416,
+      "spreads": [
+        {
+          "natureId": "quiet",
+          "points": [
+            16,
+            0,
+            18,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 82.997,
+          "rank": 1
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 11.394,
+          "rank": 2
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            31,
+            0,
+            15,
+            15,
+            5,
+            0
+          ],
+          "usagePercent": 4.42,
+          "rank": 3
+        }
+      ]
+    },
+    "Mega Steelix": {
+      "sourceName": "Steelix-Mega",
+      "rawCount": 1100,
+      "spreads": [
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 83.685,
+          "rank": 1
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            6,
+            1,
+            0,
+            27,
+            0
+          ],
+          "usagePercent": 4.84,
+          "rank": 2
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 2.99,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 1.77,
+          "rank": 4
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            26,
+            15,
+            0,
+            0,
+            25,
+            0
+          ],
+          "usagePercent": 1.389,
+          "rank": 5
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            1,
+            0,
+            1,
+            0
+          ],
+          "usagePercent": 1.188,
+          "rank": 6
+        }
+      ]
+    },
+    "Jolteon": {
+      "sourceName": "Jolteon",
+      "rawCount": 586,
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            26,
+            0,
+            0,
+            32,
+            0,
+            8
+          ],
+          "usagePercent": 90.394,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 6.27,
+          "rank": 2
+        }
+      ]
+    },
+    "Mega Chesnaught": {
+      "sourceName": "Chesnaught-Mega",
+      "rawCount": 1055,
+      "spreads": [
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            26,
+            0,
+            8,
+            0
+          ],
+          "usagePercent": 46.329,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            11,
+            0,
+            0,
+            2,
+            21
+          ],
+          "usagePercent": 15.397,
+          "rank": 2
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            20,
+            18,
+            28,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 10.373,
+          "rank": 3
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 6.324,
+          "rank": 4
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            31,
+            32,
+            0,
+            0,
+            3,
+            0
+          ],
+          "usagePercent": 5.778,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 3.247,
+          "rank": 6
+        }
+      ]
+    },
+    "Rhyperior": {
+      "sourceName": "Rhyperior",
+      "rawCount": 735,
+      "spreads": [
+        {
+          "natureId": "brave",
+          "points": [
+            29,
+            32,
+            0,
+            0,
+            5,
+            0
+          ],
+          "usagePercent": 32.875,
+          "rank": 1
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 31.107,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 6.077,
+          "rank": 3
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            16,
+            32,
+            0,
+            0,
+            18,
+            0
+          ],
+          "usagePercent": 4.637,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            20,
+            32,
+            0,
+            0,
+            5,
+            9
+          ],
+          "usagePercent": 4.3,
+          "rank": 5
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            29,
+            20,
+            2,
+            0,
+            15,
+            0
+          ],
+          "usagePercent": 3.947,
+          "rank": 6
+        }
+      ]
+    },
+    "Hydrapple": {
+      "sourceName": "Hydrapple",
+      "rawCount": 574,
+      "spreads": [
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 79.115,
+          "rank": 1
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            31,
+            0,
+            0,
+            30,
+            5,
+            0
+          ],
+          "usagePercent": 10.601,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 9.553,
+          "rank": 3
+        }
+      ]
+    },
+    "Forretress": {
+      "sourceName": "Forretress",
+      "rawCount": 85,
+      "spreads": [
+        {
+          "natureId": "naive",
+          "points": [
+            0,
+            32,
+            0,
+            2,
+            0,
+            32
+          ],
+          "usagePercent": 87.461,
+          "rank": 1
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            2,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 12.452,
+          "rank": 2
+        }
+      ]
+    },
+    "Gogoat": {
+      "sourceName": "Gogoat",
+      "rawCount": 430,
+      "spreads": [
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 85.243,
+          "rank": 1
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            15,
+            0,
+            19,
+            0
+          ],
+          "usagePercent": 6.829,
+          "rank": 2
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            14,
+            0,
+            20,
+            0
+          ],
+          "usagePercent": 4.005,
+          "rank": 3
+        }
+      ]
+    },
+    "Musharna": {
+      "sourceName": "Musharna",
+      "rawCount": 174,
+      "spreads": [
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            2,
+            0,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 98.655,
+          "rank": 1
+        }
+      ]
+    },
+    "Mega Absol": {
+      "sourceName": "Absol-Mega-Z",
+      "rawCount": 8223,
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 40.016,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 20.78,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            20,
+            12,
+            0,
+            0,
+            9,
+            25
+          ],
+          "usagePercent": 8.038,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            1,
+            26,
+            7,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 3.851,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            22,
+            14,
+            0,
+            0,
+            8,
+            22
+          ],
+          "usagePercent": 2.407,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            4,
+            32,
+            0,
+            0,
+            0,
+            30
+          ],
+          "usagePercent": 2.083,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Medicham": {
+      "sourceName": "Medicham-Mega",
+      "rawCount": 253,
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 98.938,
+          "rank": 1
+        }
+      ]
+    }
+  }
 }
