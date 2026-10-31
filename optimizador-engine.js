@@ -77,7 +77,8 @@ export function getPoolCombatReadiness(data) {
       referenceResolved: !!record,
       referenceId: record?.id ?? null,
       legalMoveCount: getLegalMoveNames(data, entry.name).length,
-      engineReady: !!record && getLegalMoveNames(data, entry.name).some(move => !!data.reference.moves?.[normalizeId(move)])
+      engineReady: !!record && getLegalMoveNames(data, entry.name).some(move => !!data.reference.moves?.[normalizeId(move)]),
+      movesWithoutEngineData: getLegalMoveNames(data, entry.name).filter(move => !data.reference.moves?.[normalizeId(move)])
     };
   });
 }
