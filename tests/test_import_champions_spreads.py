@@ -34,4 +34,10 @@ class ImportTests(unittest.TestCase):
   pool=[{"name":"Skarmory"},{"name":"Mega Skarmory"}]
   src={"skarmory":{"sourceName":"Skarmory","rawCount":100,"spreads":[{"natureId":"impish","points":[32,0,32,0,2,0],"usagePercent":50,"rank":1}]},"skarmorymega":{"sourceName":"Skarmory-Mega","rawCount":40,"spreads":[{"natureId":"impish","points":[32,0,32,0,2,0],"usagePercent":60,"rank":1}]}}
   self.assertEqual(len(build_output(pool,src,"2026-09","fixture",10)["pokemon"]),2)
+ def test_fallback_uses_lower_cutoff_and_records_it(self):
+  pool=[{"name":"Skarmory"}]
+  high={"skarmory":{"sourceName":"Skarmory","rawCount":20,"spreads":[]}}
+  lower={"skarmory":{"sourceName":"Skarmory","rawCount":80,"spreads":[{"natureId":"impish","points":[32,0,32,0,2,0],"usagePercent":55,"rank":1}]}}
+  result=build_output(pool,[(1760,"high",high),(1630,"lower",lower)],"2026-09",10)
+  self.assertEqual(result["pokemon"]["Skarmory"]["ratingCutoff"],1630)
 if __name__=="__main__": unittest.main()
