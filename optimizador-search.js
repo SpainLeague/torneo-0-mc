@@ -4,16 +4,23 @@
 // This module deliberately does not invent damage estimates: connect a verified
 // damage evaluator before using findBestSpreads for competitive recommendations.
 
-export function* enumerateStatPointSpreads(maxTotal = 66) {
+export function* enumerateStatPointSpreads(maxTotal = 66, {exactTotal = true} = {}) {
   if (!Number.isInteger(maxTotal) || maxTotal < 0 || maxTotal > 66) {
     throw new Error('El máximo total de PC debe estar entre 0 y 66.');
   }
   const points = [0, 0, 0, 0, 0, 0];
   function* visit(index, remaining) {
     if (index === 5) {
-      for (let value = 0; value <= Math.min(32, remaining); value++) {
-        points[index] = value;
-        yield points.slice();
+      if (exactTotal) {
+        if (remaining <= 32) {
+          points[index] = remaining;
+          yield points.slice();
+        }
+      } else {
+        for (let value = 0; value <= Math.min(32, remaining); value++) {
+          points[index] = value;
+          yield points.slice();
+        }
       }
       return;
     }
@@ -40,15 +47,17 @@ export function findBestSpreads({
   evaluate,
   maxTotal = 66,
   top = 3,
+  exactTotal = true,
   shouldCancel = () => false,
   onProgress = () => {},
   progressEvery = 100000
 }) {
   if (typeof evaluate !== 'function') throw new Error('Falta la función evaluadora.');
   if (!Number.isInteger(top) || top < 1) throw new Error('top debe ser un entero positivo.');
+  if (!Number.isInteger(progressEvery) || progressEvery < 1) throw new Error('progressEvery debe ser un entero positivo.');
   const best = [];
   let evaluated = 0;
-  for (const points of enumerateStatPointSpreads(maxTotal)) {
+  for (const points of enumerateStatPointSpreads(maxTotal, {exactTotal})) {
     if (shouldCancel()) return {cancelled: true, evaluated, results: best};
     const result = evaluate(points);
     if (!result || !Number.isFinite(result.score)) {
@@ -67,4 +76,25 @@ export function findBestSpreads({
   }
   onProgress({evaluated, best: best.slice(), complete: true});
   return {cancelled: false, evaluated, results: best};
+}
+
+
+// Exact combinatorial count, useful to estimate the cost before starting a search.
+export function countStatPointSpreads(total = 66, exactTotal = true) {
+  if (!Number.isInteger(total) || total < 0 || total > 66) {
+    throw new Error('El total de PC debe estar entre 0 y 66.');
+  }
+  const ways = Array(total + 1).fill(0);
+  ways[0] = 1;
+  for (let stat = 0; stat < 6; stat++) {
+    const next = Array(total + 1).fill(0);
+    for (let sum = 0; sum <= total; sum++) {
+      if (!ways[sum]) continue;
+      for (let value = 0; value <= Math.min(32, total - sum); value++) {
+        next[sum + value] += ways[sum];
+      }
+    }
+    for (let i = 0; i <= total; i++) ways[i] = next[i];
+  }
+  return exactTotal ? ways[total] : ways.reduce((sum, value) => sum + value, 0);
 }
