@@ -152,9 +152,13 @@ export function calculateSmogonDamage(data, {
   defenderItemId = '',
   field = {},
   isCrit = false,
+  accuracyOverride,
   hits
 }) {
   const {api, gen} = getSmogonRuntime();
+  if (accuracyOverride != null && (!Number.isFinite(accuracyOverride) || accuracyOverride < 0 || accuracyOverride > 1)) {
+    throw new Error('La precisión efectiva debe estar entre 0 y 1.');
+  }
   const legalMoves = getLegalMoveNames(data, attacker);
   if (!legalMoves.some(name => normalizeId(name) === normalizeId(moveName))) {
     throw new Error('El movimiento «' + moveName + '» no está en el movepool legal de «' + attacker + '».');
@@ -199,7 +203,9 @@ export function calculateSmogonDamage(data, {
   return {
     rolls,
     range: result.range(),
-    accuracy: moveData.accuracy === true || moveData.accuracy == null ? 1 : moveData.accuracy / 100,
+    accuracy: accuracyOverride == null
+      ? (moveData.accuracy === true || moveData.accuracy == null ? 1 : moveData.accuracy / 100)
+      : accuracyOverride,
     description: result.fullDesc(),
     attackerStats: {...attackingPokemon.rawStats},
     defenderStats: {...defendingPokemon.rawStats}
