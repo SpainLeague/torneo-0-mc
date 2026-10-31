@@ -13,14 +13,15 @@
 <article class="panel"><h2>PC del Pokémon a optimizar</h2><p class="hint">Reparto provisional de referencia. El optimizador buscará después los tres mejores.</p><div class="pc-row" id="ownPC"></div><div class="pc-total"><span id="ownTotal">Total: 0 / 66</span><span id="ownValidity"></span></div></article>
 <article class="panel"><h2>PC del rival</h2><p class="hint">Introduce el entrenamiento que quieres comprobar; no se presupone ningún reparto.</p><div class="pc-row" id="foePC"></div><div class="pc-total"><span id="foeTotal">Total: 0 / 66</span><span id="foeValidity"></span></div></article>
 </section>
-<section class="panel"><div class="target-head"><div><h2>Objetivos competitivos</h2><p class="hint">Todos tienen la misma importancia. Puedes combinar objetivos ofensivos y defensivos.</p></div><button id="addTarget" type="button">+ Añadir objetivo</button></div><div id="targets"></div><div class="actions"><button class="primary" id="prepare" type="button">Validar configuración</button><button id="reset" type="button">Restablecer</button></div><div id="status" class="status" aria-live="polite">Selecciona los Pokémon y configura los objetivos.</div></section>
+<section class="panel"><div class="target-head"><div><h2>Objetivos competitivos</h2><p class="hint">Todos tienen la misma importancia. Puedes combinar objetivos ofensivos y defensivos.</p></div><button id="addTarget" type="button">+ Añadir objetivo</button></div><div id="targets"></div><div class="actions"><button class="primary" id="prepare" type="button">Validar y calcular escenarios</button><button id="reset" type="button">Restablecer</button></div><div id="status" class="status" aria-live="polite">Selecciona los Pokémon y configura los objetivos.</div></section>
 <section class="panel"><h2>Condiciones y modificadores</h2><div class="three"><label class="check"><input type="checkbox"> Clima</label><label class="check"><input type="checkbox"> Terreno</label><label class="check"><input type="checkbox"> Pantallas</label><label class="check"><input type="checkbox"> Viento Afín</label><label class="check"><input type="checkbox"> Golpe crítico</label><label class="check"><input type="checkbox"> Daño residual</label><label class="check"><input type="checkbox"> Recuperación</label><label class="check"><input type="checkbox"> Dobles / daño en área</label></div><p class="hint">Los controles visuales se incorporarán al motor de cálculo al completar la integración de mecánicas.</p></section>
 </main>
 <script src="https://unpkg.com/@smogon/calc@0.12.0/dist/data/production.min.js"></script>
 <script src="https://unpkg.com/@smogon/calc@0.12.0/dist/production.min.js"></script>
 <script type="module">
 import {loadOptimizerData, getLegalMoveNames, auditPoolCoverage, calculateChampionStats, getLegalItemsForPool, getRequiredMegaStone, validatePoolItem} from './optimizador-data.js';
-import {getSmogonRuntime, auditSmogonCoverage} from './optimizador-smogon.js';
+import {getSmogonRuntime, auditSmogonCoverage, calculateSmogonDamage} from './optimizador-smogon.js';
+import {koThresholds} from './optimizador-ko.js';
 const STATS=['PS','Ataque','Defensa','At. Esp.','Def. Esp.','Velocidad'],KEYS=['hp','atk','def','spa','spd','spe'];
 const NATURES=['Activa','Afable','Agitada','Alegre','Alocada','Amable','Audaz','Cauta','Dócil','Firme','Floja','Fuerte','Grosera','Huraña','Ingenua','Mansa','Miedosa','Modesta','Osada','Pícara','Plácida','Rara','Serena','Seria','Tímida'];
 const NATURE_IDS={'Activa':'hasty','Afable':'mild','Agitada':'impish','Alegre':'jolly','Alocada':'rash','Amable':'gentle','Audaz':'brave','Cauta':'careful','Dócil':'docile','Firme':'adamant','Floja':'lax','Fuerte':'hardy','Grosera':'sassy','Huraña':'lonely','Ingenua':'naive','Mansa':'quiet','Miedosa':'timid','Modesta':'modest','Osada':'bold','Pícara':'naughty','Plácida':'relaxed','Rara':'quirky','Serena':'calm','Seria':'serious','Tímida':'bashful'};
@@ -43,5 +44,48 @@ function addTarget(){const id=++targetId,el=document.createElement('div');el.cla
 function populateAllMoves(){$('targets').querySelectorAll('.target').forEach(populateTargetMoves)}
 function reset(){$('targets').replaceChildren();targetId=0;addTarget();pcInputs('ownPC',[0,0,0,0,0,0]);pcInputs('foePC',[0,0,0,0,0,0]);$('status').textContent='Configuración restablecida.'}
 async function init(){try{optimizerData=await loadOptimizerData('./');pool=optimizerData.pool;moves=optimizerData.moveData;const coverage=auditPoolCoverage(optimizerData);const missingMoves=coverage.filter(x=>!x.legalMoveCount);const unsupportedDamageMoves=coverage.flatMap(x=>x.movesWithoutDamageData.map(move=>x.poolName+': '+move));const unresolvedForms=coverage.filter(x=>!x.referenceResolved);let smogonAudit=[];let smogonError='';try{getSmogonRuntime();smogonAudit=auditSmogonCoverage(optimizerData)}catch(error){smogonError=error.message}const unresolvedSmogon=smogonAudit.filter(x=>!x.speciesName);const unsupportedAbilities=smogonAudit.filter(x=>x.speciesName&&!x.abilityCount);const missingSmogonMoves=smogonAudit.flatMap(x=>x.missingMoves.map(move=>x.poolName+': '+move));opts($('own'),pool.map(p=>p.name));opts($('foe'),pool.map(p=>p.name));opts($('nature'),NATURES);opts($('foeNature'),NATURES);$('nature').value='Fuerte';$('foeNature').value='Fuerte';$('own').addEventListener('change',()=>{updateAbilities('own');updateItems('own');populateAllMoves()});$('foe').addEventListener('change',()=>{updateAbilities('foe');updateItems('foe');populateAllMoves()});$('nature').addEventListener('change',()=>renderStats('own'));$('foeNature').addEventListener('change',()=>renderStats('foe'));pcInputs('ownPC',[0,0,0,0,0,0]);pcInputs('foePC',[0,0,0,0,0,0]);updateAbilities('own');updateAbilities('foe');updateItems('own');updateItems('foe');addTarget();$('status').textContent='Datos cargados: '+pool.length+' Pokémon. '+(pool.length-missingMoves.length)+' tienen movepool asociado; sin movepool: '+(missingMoves.map(x=>x.poolName).join(', ')||'ninguno')+'. Formas sin ficha de referencia: '+unresolvedForms.length+'. Movimientos legales sin datos de daño: '+unsupportedDamageMoves.length+(unsupportedDamageMoves.length?' ('+unsupportedDamageMoves.join(', ')+')':'')+'. Motor Smogon Champions: '+(smogonError?'no disponible ('+smogonError+')':('cargado; especies compatibles '+(pool.length-unresolvedSmogon.length)+'/'+pool.length+', movimientos legales sin datos '+missingSmogonMoves.length+'; especies sin habilidad documentada: '+unsupportedAbilities.length+(unresolvedSmogon.length?'; especies sin resolver: '+unresolvedSmogon.map(x=>x.poolName).join(', '):'')))+'. El motor está preparado para pruebas, pero todavía no se muestran recomendaciones automáticas.'}catch(e){$('status').textContent='Error cargando pool o movepools: '+e.message}}
-$('addTarget').addEventListener('click',addTarget);$('reset').addEventListener('click',reset);$('prepare').addEventListener('click',()=>{const valid=validatePC('ownPC')&&validatePC('foePC'),targets=[...$('targets').querySelectorAll('.target')],missing=targets.some(t=>!t.querySelector('.move').value||t.querySelector('.move').disabled),itemValid=validatePoolItem(optimizerData,$('own').value,$('item').value)&&validatePoolItem(optimizerData,$('foe').value,$('foeItem').value);$('status').textContent=!valid?'PC inválidos: cada estadística debe ser un entero entre 0 y 32 y el total no puede superar 66.':!itemValid?'Objeto inválido: las formas Mega requieren su megapiedra correspondiente.':missing?'Hay objetivos sin movimiento legal seleccionado.':'Configuración validada. Los datos de objetos y megapiedras se han comprobado; el motor de daño y el optimizador global siguen pendientes.'});init();
+function calculateConfiguredTargets(){
+ const valid=validatePC('ownPC')&&validatePC('foePC');
+ const targets=[...$('targets').querySelectorAll('.target')];
+ const missing=targets.some(t=>!t.querySelector('.move').value||t.querySelector('.move').disabled);
+ const itemValid=validatePoolItem(optimizerData,$('own').value,$('item').value)&&validatePoolItem(optimizerData,$('foe').value,$('foeItem').value);
+ const modifiers=[...document.querySelectorAll('.check input')].some(input=>input.checked);
+ if(!valid){$('status').textContent='PC inválidos: cada estadística debe ser un entero entre 0 y 32 y el total no puede superar 66.';return}
+ if(!itemValid){$('status').textContent='Objeto inválido: las formas Mega requieren su megapiedra correspondiente.';return}
+ if(missing){$('status').textContent='Hay objetivos sin movimiento legal seleccionado.';return}
+ if(!targets.length){$('status').textContent='Añade al menos un objetivo.';return}
+ if(modifiers){$('status').textContent='Los controles de clima, terreno, pantallas y otros modificadores aún no están conectados. Desmárcalos para probar el escenario base.';return}
+ try{
+  const results=targets.map((target,index)=>{
+   const offensive=target.querySelector('.kind').value==='off';
+   const attacker=offensive?$('own').value:$('foe').value;
+   const defender=offensive?$('foe').value:$('own').value;
+   const attackerPoints=getPC(offensive?'ownPC':'foePC');
+   const defenderPoints=getPC(offensive?'foePC':'ownPC');
+   const damage=calculateSmogonDamage(optimizerData,{
+    attacker,defender,moveName:target.querySelector('.move').value,
+    attackerPoints,defenderPoints,
+    attackerNatureId:NATURE_IDS[$(offensive?'nature':'foeNature').value],
+    defenderNatureId:NATURE_IDS[$(offensive?'foeNature':'nature').value],
+    attackerAbility:$(offensive?'ability':'foeAbility').value,
+    defenderAbility:$(offensive?'foeAbility':'ability').value,
+    attackerItemId:$(offensive?'item':'foeItem').value,
+    defenderItemId:$(offensive?'foeItem':'item').value
+   });
+   const attacks=Number(target.querySelector('.hits').value);
+   const probabilities=koThresholds(damage.rolls,damage.defenderStats.hp);
+   const ko=probabilities.probabilities[attacks-1].probability;
+   const success=offensive?ko:1-ko;
+   const minimum=Number(target.querySelector('.chance').value)/100;
+   const minPercent=damage.range[0]/damage.defenderStats.hp*100;
+   const maxPercent=damage.range[1]/damage.defenderStats.hp*100;
+   return 'Objetivo '+(index+1)+' ('+(offensive?'hacer KO':'sobrevivir')+', '+attacks+'HKO): '+attacker+' → '+defender+' con '+target.querySelector('.move').value+': '+damage.range[0]+'–'+damage.range[1]+' PS ('+minPercent.toFixed(1)+'–'+maxPercent.toFixed(1)+'%). Probabilidad de cumplirlo: '+(success*100).toFixed(1)+'% / mínimo '+(minimum*100)+'% — '+(success>=minimum?'CUMPLIDO':'NO CUMPLIDO');
+  });
+  $('status').textContent=results.join('\n')+'\n\nCálculo Smogon Champions, dobles, rivales a PS completos y escenario base. Aún no se aplican modificadores seleccionables ni se ha ejecutado la búsqueda automática de repartos.';
+ }catch(error){$('status').textContent='No se ha podido calcular el escenario: '+error.message}
+}
+$('addTarget').addEventListener('click',addTarget);
+$('reset').addEventListener('click',reset);
+$('prepare').addEventListener('click',calculateConfiguredTargets);
+init();
 </script></body></html>
