@@ -210,16 +210,33 @@ export function auditSmogonCoverage(data) {
   const {gen} = getSmogonRuntime();
   return data.pool.map(entry => {
     let speciesName = null;
+    let resolved = null;
     let speciesError = null;
-    try { speciesName = resolveSmogonSpecies(data, entry.name, gen).name; }
-    catch (error) { speciesError = error.message; }
+    try {
+      resolved = resolveSmogonSpecies(data, entry.name, gen);
+      speciesName = resolved.name;
+    } catch (error) { speciesError = error.message; }
     const legalMoves = getLegalMoveNames(data, entry.name);
     const missingMoves = legalMoves.filter(move => !gen.moves.get(normalizeId(move)));
+    const poolAbilities = String(entry.abilities ?? '').split('/').map(value => value.trim()).filter(Boolean);
+    const unsupportedAbilities = [];
+    let abilityCount = 0;
+    if (resolved) {
+      for (const ability of poolAbilities) {
+        try {
+          resolveAbility(entry, resolved.species, resolved.reference, ability, gen);
+          abilityCount++;
+        } catch (error) {
+          unsupportedAbilities.push({name:ability, reason:error.message});
+        }
+      }
+    }
     return {
       poolName: entry.name,
       speciesName,
       speciesError,
-      abilityCount: speciesName ? Object.values(gen.species.get(normalizeId(speciesName))?.abilities ?? {}).length : 0,
+      abilityCount,
+      unsupportedAbilities,
       legalMoveCount: legalMoves.length,
       missingMoves
     };
