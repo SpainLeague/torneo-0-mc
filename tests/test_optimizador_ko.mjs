@@ -26,14 +26,14 @@ test('repeated attacks compute exact OHKO, 2HKO and 3HKO probabilities', () => {
   const rolls=Array(8).fill(40).concat(Array(8).fill(60));
   const result=koThresholds(rolls,100);
   assert.equal(result.ohko,0);
-  assert.equal(result.twoHko,1);
+  assert.equal(result.twoHko,0.75);
   assert.equal(result.threeHko,1);
 });
 
 test('residual damage is applied only between repeated attacks', () => {
   const rolls=Array(16).fill(40);
-  assert.equal(repeatedKoProbability(rolls,100,2,20),0);
-  assert.equal(repeatedKoProbability(rolls,100,2,21),1);
+  assert.equal(repeatedKoProbability(rolls,100,2,19),0);
+  assert.equal(repeatedKoProbability(rolls,100,2,20),1);
 });
 
 test('rejects invalid HP, attack counts and rolls', () => {
