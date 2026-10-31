@@ -48,12 +48,17 @@ export function getLegalMoveNames(data, poolName) {
   return data.moveData.pokemon?.[key] ?? [];
 }
 
-export function getReferenceSpecies(data, poolName) {
+export function getReferenceSpeciesRecord(data, poolName) {
   const alias = data.reference.meta?.nameAliases?.[poolName];
   const sought = normalizeId(alias ?? poolName);
-  return Object.values(data.reference.species ?? {}).find(species =>
+  const found = Object.entries(data.reference.species ?? {}).find(([, species]) =>
     normalizeId(species.name) === sought || normalizeId(species.display) === sought
-  ) ?? null;
+  );
+  return found ? {id: found[0], species: found[1]} : null;
+}
+
+export function getReferenceSpecies(data, poolName) {
+  return getReferenceSpeciesRecord(data, poolName)?.species ?? null;
 }
 
 // Champions uses 66 Stat Points total, at most 32 in one stat, and fixed 31 IVs.
@@ -87,7 +92,8 @@ export function auditPoolCoverage(data) {
   return data.pool.map(entry => ({
     poolName: entry.name,
     legalMoveCount: getLegalMoveNames(data, entry.name).length,
-    referenceResolved: !!getReferenceSpecies(data, entry.name),
-    referenceName: getReferenceSpecies(data, entry.name)?.display ?? null
+    referenceResolved: !!getReferenceSpeciesRecord(data, entry.name),
+    referenceName: getReferenceSpeciesRecord(data, entry.name)?.species.display ?? null,
+    referenceId: getReferenceSpeciesRecord(data, entry.name)?.id ?? null
   }));
 }
