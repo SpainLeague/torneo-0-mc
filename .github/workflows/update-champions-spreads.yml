@@ -1,8 +1,5 @@
 name: Update Champions M-C PC spreads
 on:
-  push:
-    branches:
-      - feature/optimizador-pc
   workflow_dispatch:
     inputs:
       stats_month:
