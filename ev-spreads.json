@@ -3,12 +3,17 @@
   "meta": {
     "status": "ready",
     "source": "Smogon University usage stats",
-    "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
+    "sourceUrls": [
+      "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
+      "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt"
+    ],
     "format": "gen9championsvgc2026regmcbo3",
     "formatLabel": "Pokémon Champions VGC Regulation M-C BO3",
-    "ratingCutoff": 1760,
+    "primaryRatingCutoff": 1760,
+    "fallbackRatingCutoffs": 1630,
     "month": "2026-09",
-    "generatedAt": "2026-10-31T15:54:53.387734+00:00",
+    "generatedAt": "2026-10-31T15:55:50.700365+00:00",
     "statOrder": [
       "hp",
       "atk",
@@ -21,139 +26,46 @@
     "statPointTotal": 66,
     "requestedTopN": 10,
     "sourceExplicitSpreadLimit": 6,
-    "matchedPoolEntries": 101,
+    "matchedPoolEntries": 196,
     "poolEntries": 223,
     "missingPoolEntries": [
-      "Skarmory",
-      "Starmie",
-      "Mega Sharpedo",
       "Sharpedo",
       "Qwilfish",
-      "Vaporeon",
-      "Slowking",
-      "Scolipede",
-      "Goodra",
-      "Raichu Alola",
-      "Manectric",
-      "Dedenne",
-      "Rotom Frost",
       "Rotom Fan",
-      "Ampharos",
-      "Bellibolt",
       "Gourgeist",
       "Banette",
-      "Infernape",
-      "Mega Emboar",
-      "Emboar",
-      "Florges",
-      "Mega Clefable",
-      "Aromatisse",
-      "Froslass",
-      "Glaceon",
-      "Avalugg Hisui",
-      "Mega Hawlucha",
-      "Hawlucha",
-      "Medicham",
       "Falinks",
-      "Machamp",
       "Crabominable",
-      "Mega Pidgeot",
       "Tauros",
       "Tauros de Paldea (Raza Combate)",
       "Lopunny",
       "Furfrou",
       "Watchog",
-      "Mega Audino",
-      "Audino",
-      "Mega Drampa",
-      "Sceptile",
-      "Flapple",
-      "Alakazam",
       "Meowstic-F",
-      "Zoroark",
       "Absol",
-      "Malamar",
-      "Sandaconda",
       "Garbodor",
       "Barbaracle",
-      "Spiritomb",
-      "Serperior",
-      "Aurorus",
-      "Mega Eelektross",
-      "Alcremie",
-      "Heliolisk",
-      "Mega Chimecho",
-      "Arboliva",
-      "Salazzle",
-      "Mega Malamar",
-      "Clawitzer",
-      "Mega Dragalge",
-      "Perrserker",
-      "Greninja",
-      "Mega Scolipede",
-      "Quaquaval",
-      "Trevenant",
-      "Runerigus",
-      "Slowbro Galar",
-      "Typhlosion",
-      "Bastiodon",
-      "Luxray",
-      "Pangoro",
-      "Torterra",
-      "Garganacl",
-      "Farfetch'd",
-      "Decidueye",
-      "Slurpuff",
       "Toucannon",
-      "Slowbro",
-      "Mr. Rime",
-      "Liepard",
-      "Cofagrigus",
-      "Beartic",
-      "Morpeko",
-      "Ariados",
-      "Dragalge",
-      "Mega Falinks",
-      "Rampardos",
-      "Espeon",
-      "Diggersby",
-      "Tyrantrum",
-      "Mabosstiff",
       "Stunfisk",
-      "Castform",
-      "Abomasnow",
       "Stunfisk Galar",
-      "Avalugg",
       "Arbok",
-      "Houndoom",
       "Victreebel",
-      "Roserade",
       "Simisage",
       "Mawile",
-      "Steelix",
-      "Mega Victreebel",
       "Persian",
-      "Aggron",
       "Glalie",
-      "Appletun",
-      "Eelektross",
-      "Thievul",
-      "Feraligatr",
-      "Emolga",
       "Simisear",
-      "Simipour",
-      "Passimian",
-      "Golurk",
-      "Leafeon",
-      "Scovillain"
+      "Simipour"
     ],
-    "storedSpreadCount": 501,
+    "storedSpreadCount": 1042,
     "note": "Smogon publica hasta seis repartos explícitos por especie; el resto se agrupa como Other. No se inventan repartos para completar diez."
   },
   "pokemon": {
     "Mega Skarmory": {
       "sourceName": "Skarmory-Mega",
       "rawCount": 790,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "jolly",
@@ -196,9 +108,84 @@
         }
       ]
     },
+    "Skarmory": {
+      "sourceName": "Skarmory",
+      "rawCount": 78,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            5,
+            0,
+            29,
+            0
+          ],
+          "usagePercent": 11.538,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 10.256,
+          "rank": 2
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            2,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 7.692,
+          "rank": 3
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            0,
+            2
+          ],
+          "usagePercent": 6.41,
+          "rank": 4
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 5.128,
+          "rank": 5
+        }
+      ]
+    },
     "Mega Starmie": {
       "sourceName": "Starmie-Mega",
       "rawCount": 1730,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "naive",
@@ -283,6 +270,8 @@
     "Inteleon": {
       "sourceName": "Inteleon",
       "rawCount": 2084,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -338,9 +327,183 @@
         }
       ]
     },
+    "Starmie": {
+      "sourceName": "Starmie",
+      "rawCount": 134,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 39.552,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            0,
+            32
+          ],
+          "usagePercent": 16.418,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            0,
+            0,
+            1,
+            32,
+            1,
+            32
+          ],
+          "usagePercent": 14.179,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 5.224,
+          "rank": 4
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            25,
+            4,
+            5,
+            0
+          ],
+          "usagePercent": 5.224,
+          "rank": 5
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            1,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 3.731,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Sharpedo": {
+      "sourceName": "Sharpedo-Mega",
+      "rawCount": 223,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 40.807,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            6,
+            20,
+            4,
+            0,
+            4,
+            32
+          ],
+          "usagePercent": 13.004,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 6.278,
+          "rank": 3
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 4.484,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            10,
+            32,
+            2,
+            0,
+            2,
+            20
+          ],
+          "usagePercent": 4.484,
+          "rank": 5
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            2,
+            0,
+            1,
+            29
+          ],
+          "usagePercent": 4.036,
+          "rank": 6
+        }
+      ]
+    },
     "Samurott Hisui": {
       "sourceName": "Samurott-Hisui",
       "rawCount": 1407,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "jolly",
@@ -425,6 +588,8 @@
     "Mega Gyarados": {
       "sourceName": "Gyarados-Mega",
       "rawCount": 1609,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -509,6 +674,8 @@
     "Gyarados": {
       "sourceName": "Gyarados",
       "rawCount": 878,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "jolly",
@@ -590,9 +757,97 @@
         }
       ]
     },
+    "Vaporeon": {
+      "sourceName": "Vaporeon",
+      "rawCount": 296,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            27,
+            0,
+            0,
+            7
+          ],
+          "usagePercent": 23.986,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 17.905,
+          "rank": 2
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            32,
+            0
+          ],
+          "usagePercent": 10.473,
+          "rank": 3
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            2,
+            0,
+            0
+          ],
+          "usagePercent": 6.081,
+          "rank": 4
+        },
+        {
+          "natureId": "mild",
+          "points": [
+            7,
+            0,
+            9,
+            25,
+            25,
+            0
+          ],
+          "usagePercent": 4.054,
+          "rank": 5
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            9,
+            0,
+            0,
+            15,
+            32,
+            10
+          ],
+          "usagePercent": 3.378,
+          "rank": 6
+        }
+      ]
+    },
     "Empoleon": {
       "sourceName": "Empoleon",
       "rawCount": 2373,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "bold",
@@ -677,6 +932,8 @@
     "Azumarill": {
       "sourceName": "Azumarill",
       "rawCount": 1014,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -745,9 +1002,97 @@
         }
       ]
     },
+    "Slowking": {
+      "sourceName": "Slowking",
+      "rawCount": 462,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            27,
+            5,
+            2,
+            0
+          ],
+          "usagePercent": 84.254,
+          "rank": 1
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 3.661,
+          "rank": 2
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            32,
+            0
+          ],
+          "usagePercent": 3.351,
+          "rank": 3
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            21,
+            0,
+            20,
+            7,
+            18,
+            0
+          ],
+          "usagePercent": 2.237,
+          "rank": 4
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            31,
+            0,
+            20,
+            14,
+            1,
+            0
+          ],
+          "usagePercent": 0.915,
+          "rank": 5
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            31,
+            0,
+            32,
+            3,
+            0,
+            0
+          ],
+          "usagePercent": 0.817,
+          "rank": 6
+        }
+      ]
+    },
     "Mega Beedrill": {
       "sourceName": "Beedrill-Mega",
       "rawCount": 643,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "jolly",
@@ -790,9 +1135,84 @@
         }
       ]
     },
+    "Scolipede": {
+      "sourceName": "Scolipede",
+      "rawCount": 228,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            21,
+            32,
+            0,
+            0,
+            0,
+            13
+          ],
+          "usagePercent": 39.474,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 9.211,
+          "rank": 2
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            0,
+            2,
+            32,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 9.211,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 4.386,
+          "rank": 4
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 3.947,
+          "rank": 5
+        }
+      ]
+    },
     "Mega Heracross": {
       "sourceName": "Heracross-Mega",
       "rawCount": 427,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -822,9 +1242,84 @@
         }
       ]
     },
+    "Goodra": {
+      "sourceName": "Goodra",
+      "rawCount": 230,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 49.538,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            1,
+            30,
+            1,
+            2
+          ],
+          "usagePercent": 22.009,
+          "rank": 2
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 18.149,
+          "rank": 3
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 2.136,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            31,
+            0,
+            25,
+            10,
+            0,
+            0
+          ],
+          "usagePercent": 1.848,
+          "rank": 5
+        }
+      ]
+    },
     "Altaria": {
       "sourceName": "Altaria",
       "rawCount": 1360,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -909,6 +1404,8 @@
     "Mega Manectric": {
       "sourceName": "Manectric-Mega",
       "rawCount": 1254,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -977,9 +1474,256 @@
         }
       ]
     },
+    "Raichu Alola": {
+      "sourceName": "Raichu-Alola",
+      "rawCount": 730,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 42.36,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            0,
+            0,
+            29,
+            32,
+            0,
+            5
+          ],
+          "usagePercent": 13.09,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            2,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 12.967,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            0,
+            2,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 7.947,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            4,
+            0,
+            0,
+            30,
+            0,
+            32
+          ],
+          "usagePercent": 6.734,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            12,
+            0,
+            1,
+            32,
+            0,
+            21
+          ],
+          "usagePercent": 4.63,
+          "rank": 6
+        }
+      ]
+    },
+    "Manectric": {
+      "sourceName": "Manectric",
+      "rawCount": 68,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 52.941,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 10.294,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            15,
+            0,
+            0,
+            32,
+            2,
+            17
+          ],
+          "usagePercent": 7.353,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            1,
+            32,
+            1,
+            32
+          ],
+          "usagePercent": 2.941,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            9,
+            0,
+            0,
+            32,
+            0,
+            25
+          ],
+          "usagePercent": 2.941,
+          "rank": 5
+        }
+      ]
+    },
+    "Dedenne": {
+      "sourceName": "Dedenne",
+      "rawCount": 66,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 22.727,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            0,
+            32
+          ],
+          "usagePercent": 18.182,
+          "rank": 2
+        },
+        {
+          "natureId": "hasty",
+          "points": [
+            0,
+            2,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 12.121,
+          "rank": 3
+        },
+        {
+          "natureId": "hasty",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 9.091,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 7.576,
+          "rank": 5
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            0,
+            32,
+            32
+          ],
+          "usagePercent": 6.061,
+          "rank": 6
+        }
+      ]
+    },
     "Pikachu": {
       "sourceName": "Pikachu",
       "rawCount": 221,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "hasty",
@@ -1009,9 +1753,97 @@
         }
       ]
     },
+    "Rotom Frost": {
+      "sourceName": "Rotom-Frost",
+      "rawCount": 196,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 35.714,
+          "rank": 1
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            9,
+            3,
+            22,
+            0
+          ],
+          "usagePercent": 11.224,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            0,
+            0,
+            32,
+            2,
+            32,
+            0
+          ],
+          "usagePercent": 9.184,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 4.592,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 4.592,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            14,
+            0,
+            0,
+            32,
+            4,
+            16
+          ],
+          "usagePercent": 3.571,
+          "rank": 6
+        }
+      ]
+    },
     "Rotom Mow": {
       "sourceName": "Rotom-Mow",
       "rawCount": 317,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -1044,6 +1876,8 @@
     "Rotom Heat": {
       "sourceName": "Rotom-Heat",
       "rawCount": 2911,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -1115,6 +1949,8 @@
     "Toxtricity": {
       "sourceName": "Toxtricity",
       "rawCount": 2707,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -1196,9 +2032,131 @@
         }
       ]
     },
+    "Ampharos": {
+      "sourceName": "Ampharos",
+      "rawCount": 56,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 23.214,
+          "rank": 1
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            2,
+            0,
+            32,
+            16,
+            16,
+            0
+          ],
+          "usagePercent": 23.214,
+          "rank": 2
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            0,
+            0,
+            26,
+            20,
+            20,
+            0
+          ],
+          "usagePercent": 10.714,
+          "rank": 3
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            32,
+            0,
+            19,
+            0,
+            15,
+            0
+          ],
+          "usagePercent": 10.714,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            5,
+            29,
+            0,
+            0
+          ],
+          "usagePercent": 5.357,
+          "rank": 5
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 5.357,
+          "rank": 6
+        }
+      ]
+    },
+    "Bellibolt": {
+      "sourceName": "Bellibolt",
+      "rawCount": 560,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            28,
+            0,
+            14,
+            1,
+            23,
+            0
+          ],
+          "usagePercent": 92.376,
+          "rank": 1
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            18,
+            0,
+            16,
+            0
+          ],
+          "usagePercent": 2.89,
+          "rank": 2
+        }
+      ]
+    },
     "Mega Ampharos": {
       "sourceName": "Ampharos-Mega",
       "rawCount": 752,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "modest",
@@ -1283,6 +2241,8 @@
     "Pincurchin": {
       "sourceName": "Pincurchin",
       "rawCount": 2020,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "quiet",
@@ -1367,6 +2327,8 @@
     "Mega Chandelure": {
       "sourceName": "Chandelure-Mega",
       "rawCount": 985,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "modest",
@@ -1451,6 +2413,8 @@
     "Chandelure": {
       "sourceName": "Chandelure",
       "rawCount": 468,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "bold",
@@ -1522,6 +2486,8 @@
     "Mega Banette": {
       "sourceName": "Banette-Mega",
       "rawCount": 803,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "sassy",
@@ -1580,6 +2546,8 @@
     "Polteageist": {
       "sourceName": "Polteageist",
       "rawCount": 183,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "modest",
@@ -1599,6 +2567,8 @@
     "Houndstone": {
       "sourceName": "Houndstone",
       "rawCount": 551,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "jolly",
@@ -1670,6 +2640,8 @@
     "Mega Pyroar": {
       "sourceName": "Pyroar-Mega",
       "rawCount": 3450,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -1751,9 +2723,84 @@
         }
       ]
     },
+    "Infernape": {
+      "sourceName": "Infernape",
+      "rawCount": 270,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 32.963,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 14.815,
+          "rank": 2
+        },
+        {
+          "natureId": "hasty",
+          "points": [
+            0,
+            32,
+            0,
+            2,
+            0,
+            32
+          ],
+          "usagePercent": 4.444,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 4.074,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 4.074,
+          "rank": 5
+        }
+      ]
+    },
     "Ninetales": {
       "sourceName": "Ninetales",
       "rawCount": 941,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "modest",
@@ -1825,6 +2872,8 @@
     "Blaziken": {
       "sourceName": "Blaziken",
       "rawCount": 2803,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "modest",
@@ -1906,9 +2955,183 @@
         }
       ]
     },
+    "Mega Emboar": {
+      "sourceName": "Emboar-Mega",
+      "rawCount": 145,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            14,
+            12,
+            17,
+            0,
+            0,
+            23
+          ],
+          "usagePercent": 10.345,
+          "rank": 1
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 10.345,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 7.586,
+          "rank": 3
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            22,
+            32,
+            0,
+            0,
+            12,
+            0
+          ],
+          "usagePercent": 6.897,
+          "rank": 4
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 4.138,
+          "rank": 5
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            0,
+            32,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 4.138,
+          "rank": 6
+        }
+      ]
+    },
+    "Emboar": {
+      "sourceName": "Emboar",
+      "rawCount": 71,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 32.394,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            25,
+            32,
+            0,
+            0,
+            0,
+            9
+          ],
+          "usagePercent": 30.986,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            24,
+            32,
+            0,
+            0,
+            0,
+            10
+          ],
+          "usagePercent": 18.31,
+          "rank": 3
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            2,
+            0,
+            15,
+            17,
+            32,
+            0
+          ],
+          "usagePercent": 4.225,
+          "rank": 4
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 2.817,
+          "rank": 5
+        },
+        {
+          "natureId": "naive",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            10,
+            22
+          ],
+          "usagePercent": 2.817,
+          "rank": 6
+        }
+      ]
+    },
     "Tinkaton": {
       "sourceName": "Tinkaton",
       "rawCount": 1744,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "jolly",
@@ -1990,9 +3213,170 @@
         }
       ]
     },
+    "Florges": {
+      "sourceName": "Florges",
+      "rawCount": 172,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 36.047,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            32,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 6.977,
+          "rank": 2
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            32,
+            2,
+            0,
+            0
+          ],
+          "usagePercent": 6.977,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            0,
+            0,
+            32,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 5.233,
+          "rank": 4
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 4.651,
+          "rank": 5
+        }
+      ]
+    },
+    "Mega Clefable": {
+      "sourceName": "Clefable-Mega",
+      "rawCount": 495,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 24.262,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            23,
+            0,
+            22,
+            15,
+            0,
+            6
+          ],
+          "usagePercent": 18.562,
+          "rank": 2
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            14,
+            10,
+            10,
+            0
+          ],
+          "usagePercent": 13.239,
+          "rank": 3
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            30,
+            0,
+            23,
+            0,
+            12,
+            1
+          ],
+          "usagePercent": 10.535,
+          "rank": 4
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            17,
+            1,
+            16,
+            0
+          ],
+          "usagePercent": 4.257,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            24,
+            0,
+            10,
+            0
+          ],
+          "usagePercent": 4.241,
+          "rank": 6
+        }
+      ]
+    },
     "Clefable": {
       "sourceName": "Clefable",
       "rawCount": 3721,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "bold",
@@ -2074,9 +3458,183 @@
         }
       ]
     },
+    "Aromatisse": {
+      "sourceName": "Aromatisse",
+      "rawCount": 160,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            18,
+            15,
+            1,
+            0
+          ],
+          "usagePercent": 6.875,
+          "rank": 1
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            4,
+            0,
+            18,
+            32,
+            12,
+            0
+          ],
+          "usagePercent": 6.875,
+          "rank": 2
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            31,
+            3,
+            0,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 5.625,
+          "rank": 3
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            2,
+            0,
+            32,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 5.0,
+          "rank": 4
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            31,
+            0,
+            0,
+            3,
+            32,
+            0
+          ],
+          "usagePercent": 5.0,
+          "rank": 5
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            1,
+            0,
+            31,
+            21,
+            13,
+            0
+          ],
+          "usagePercent": 5.0,
+          "rank": 6
+        }
+      ]
+    },
+    "Froslass": {
+      "sourceName": "Froslass",
+      "rawCount": 121,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            0,
+            32
+          ],
+          "usagePercent": 44.628,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 23.967,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 6.612,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 5.785,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            14,
+            0,
+            10,
+            10
+          ],
+          "usagePercent": 3.306,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            6,
+            0,
+            20,
+            20,
+            20,
+            0
+          ],
+          "usagePercent": 2.479,
+          "rank": 6
+        }
+      ]
+    },
     "Mamoswine": {
       "sourceName": "Mamoswine",
       "rawCount": 3201,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -2161,6 +3719,8 @@
     "Vanilluxe": {
       "sourceName": "Vanilluxe",
       "rawCount": 1481,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -2242,9 +3802,428 @@
         }
       ]
     },
+    "Glaceon": {
+      "sourceName": "Glaceon",
+      "rawCount": 370,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 43.243,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            31,
+            0,
+            0,
+            32,
+            3,
+            0
+          ],
+          "usagePercent": 6.486,
+          "rank": 2
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            31,
+            0,
+            0,
+            32,
+            3,
+            0
+          ],
+          "usagePercent": 5.676,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            0,
+            2
+          ],
+          "usagePercent": 4.054,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            24,
+            0,
+            2,
+            30,
+            0,
+            10
+          ],
+          "usagePercent": 3.784,
+          "rank": 5
+        }
+      ]
+    },
+    "Avalugg Hisui": {
+      "sourceName": "Avalugg-Hisui",
+      "rawCount": 71,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            2,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 18.31,
+          "rank": 1
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            2,
+            32,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 15.493,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 12.676,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            0,
+            32,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 8.451,
+          "rank": 4
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            20,
+            14,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 7.042,
+          "rank": 5
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            10,
+            24,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 7.042,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Hawlucha": {
+      "sourceName": "Hawlucha-Mega",
+      "rawCount": 359,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 38.162,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 10.864,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            32,
+            0,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 8.635,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 3.343,
+          "rank": 4
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            20,
+            13,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 2.786,
+          "rank": 5
+        },
+        {
+          "natureId": "naughty",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 2.507,
+          "rank": 6
+        }
+      ]
+    },
+    "Hawlucha": {
+      "sourceName": "Hawlucha",
+      "rawCount": 826,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            11,
+            22
+          ],
+          "usagePercent": 18.679,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 13.989,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            3,
+            32,
+            0,
+            0,
+            9,
+            22
+          ],
+          "usagePercent": 13.153,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            0,
+            32,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 10.67,
+          "rank": 4
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            5,
+            32,
+            0,
+            0,
+            9,
+            20
+          ],
+          "usagePercent": 9.003,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            19,
+            32,
+            0,
+            0,
+            0,
+            15
+          ],
+          "usagePercent": 8.433,
+          "rank": 6
+        }
+      ]
+    },
+    "Medicham": {
+      "sourceName": "Medicham",
+      "rawCount": 146,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 24.658,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            25,
+            0,
+            11,
+            0,
+            11,
+            19
+          ],
+          "usagePercent": 9.589,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            32,
+            0,
+            1,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 8.219,
+          "rank": 3
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 6.164,
+          "rank": 4
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            32,
+            0,
+            20,
+            0,
+            2,
+            12
+          ],
+          "usagePercent": 5.479,
+          "rank": 5
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 5.479,
+          "rank": 6
+        }
+      ]
+    },
     "Sirfetch'd": {
       "sourceName": "Sirfetch'd",
       "rawCount": 3280,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -2326,9 +4305,84 @@
         }
       ]
     },
+    "Machamp": {
+      "sourceName": "Machamp",
+      "rawCount": 150,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 34.0,
+          "rank": 1
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            19,
+            32,
+            10,
+            0,
+            5,
+            0
+          ],
+          "usagePercent": 12.667,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 8.667,
+          "rank": 3
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 7.333,
+          "rank": 4
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 5.333,
+          "rank": 5
+        }
+      ]
+    },
     "Mega Crabominable": {
       "sourceName": "Crabominable-Mega",
       "rawCount": 1875,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "brave",
@@ -2400,6 +4454,8 @@
     "Mega Lopunny": {
       "sourceName": "Lopunny-Mega",
       "rawCount": 3452,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "jolly",
@@ -2455,9 +4511,97 @@
         }
       ]
     },
+    "Mega Pidgeot": {
+      "sourceName": "Pidgeot-Mega",
+      "rawCount": 611,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            13,
+            0,
+            0,
+            20,
+            1,
+            32
+          ],
+          "usagePercent": 38.197,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            1,
+            0,
+            0,
+            32,
+            1,
+            32
+          ],
+          "usagePercent": 18.979,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            17,
+            0,
+            0,
+            17,
+            0,
+            32
+          ],
+          "usagePercent": 13.002,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 9.846,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            20,
+            0,
+            14,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 8.267,
+          "rank": 5
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            19,
+            0,
+            0,
+            15,
+            0,
+            32
+          ],
+          "usagePercent": 5.997,
+          "rank": 6
+        }
+      ]
+    },
     "Tauros de Paldea (Raza Ardiente)": {
       "sourceName": "Tauros-Paldea-Blaze",
       "rawCount": 293,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "impish",
@@ -2490,6 +4634,8 @@
     "Tauros de Paldea (Raza Acuática)": {
       "sourceName": "Tauros-Paldea-Aqua",
       "rawCount": 576,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -2574,6 +4720,8 @@
     "Zoroark Hisui": {
       "sourceName": "Zoroark-Hisui",
       "rawCount": 2903,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -2619,6 +4767,8 @@
     "Squawkabilly": {
       "sourceName": "Squawkabilly",
       "rawCount": 575,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "jolly",
@@ -2703,6 +4853,8 @@
     "Wyrdeer": {
       "sourceName": "Wyrdeer",
       "rawCount": 304,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "bold",
@@ -2758,9 +4910,183 @@
         }
       ]
     },
+    "Mega Audino": {
+      "sourceName": "Audino-Mega",
+      "rawCount": 174,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            2,
+            0,
+            0
+          ],
+          "usagePercent": 28.161,
+          "rank": 1
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            32,
+            0
+          ],
+          "usagePercent": 15.517,
+          "rank": 2
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            20,
+            0,
+            14,
+            0
+          ],
+          "usagePercent": 9.195,
+          "rank": 3
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            25,
+            0,
+            9,
+            0
+          ],
+          "usagePercent": 4.023,
+          "rank": 4
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            15,
+            0,
+            19,
+            0
+          ],
+          "usagePercent": 2.874,
+          "rank": 5
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 2.299,
+          "rank": 6
+        }
+      ]
+    },
+    "Audino": {
+      "sourceName": "Audino",
+      "rawCount": 249,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "careful",
+          "points": [
+            22,
+            0,
+            19,
+            0,
+            25,
+            0
+          ],
+          "usagePercent": 14.859,
+          "rank": 1
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            22,
+            0,
+            12,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 11.245,
+          "rank": 2
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            20,
+            0,
+            14,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 8.434,
+          "rank": 3
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 6.426,
+          "rank": 4
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            9,
+            0,
+            25,
+            0
+          ],
+          "usagePercent": 5.622,
+          "rank": 5
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 5.622,
+          "rank": 6
+        }
+      ]
+    },
     "Ditto": {
       "sourceName": "Ditto",
       "rawCount": 1115,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "bold",
@@ -2845,6 +5171,8 @@
     "Wigglytuff": {
       "sourceName": "Wigglytuff",
       "rawCount": 565,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "modest",
@@ -2926,9 +5254,97 @@
         }
       ]
     },
+    "Mega Drampa": {
+      "sourceName": "Drampa-Mega",
+      "rawCount": 746,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 42.225,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            7,
+            0,
+            9,
+            20,
+            0,
+            30
+          ],
+          "usagePercent": 13.022,
+          "rank": 2
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 10.449,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            17,
+            17,
+            0,
+            0
+          ],
+          "usagePercent": 9.995,
+          "rank": 4
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            31,
+            3,
+            0,
+            0
+          ],
+          "usagePercent": 6.501,
+          "rank": 5
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 4.724,
+          "rank": 6
+        }
+      ]
+    },
     "Drampa": {
       "sourceName": "Drampa",
       "rawCount": 757,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "quiet",
@@ -2987,6 +5403,8 @@
     "Snorlax": {
       "sourceName": "Snorlax",
       "rawCount": 1777,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "relaxed",
@@ -3071,6 +5489,8 @@
     "Mega Sceptile": {
       "sourceName": "Sceptile-Mega",
       "rawCount": 1580,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -3155,6 +5575,8 @@
     "Meowscarada": {
       "sourceName": "Meowscarada",
       "rawCount": 2106,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -3223,9 +5645,97 @@
         }
       ]
     },
+    "Sceptile": {
+      "sourceName": "Sceptile",
+      "rawCount": 162,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 28.395,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 15.432,
+          "rank": 2
+        },
+        {
+          "natureId": "hasty",
+          "points": [
+            31,
+            0,
+            0,
+            3,
+            0,
+            32
+          ],
+          "usagePercent": 8.025,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 4.321,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            11,
+            0,
+            5,
+            20,
+            0,
+            30
+          ],
+          "usagePercent": 3.704,
+          "rank": 5
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            24,
+            0,
+            10,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 3.704,
+          "rank": 6
+        }
+      ]
+    },
     "Mega Meganium": {
       "sourceName": "Meganium-Mega",
       "rawCount": 2983,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "modest",
@@ -3310,6 +5820,8 @@
     "Tsareena": {
       "sourceName": "Tsareena",
       "rawCount": 3363,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -3391,9 +5903,71 @@
         }
       ]
     },
+    "Flapple": {
+      "sourceName": "Flapple",
+      "rawCount": 116,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 50.0,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 37.069,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            0,
+            32,
+            26,
+            0,
+            8,
+            0
+          ],
+          "usagePercent": 3.448,
+          "rank": 3
+        },
+        {
+          "natureId": "naive",
+          "points": [
+            0,
+            32,
+            0,
+            2,
+            0,
+            32
+          ],
+          "usagePercent": 3.448,
+          "rank": 4
+        }
+      ]
+    },
     "Chesnaught": {
       "sourceName": "Chesnaught",
       "rawCount": 124,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -3439,6 +6013,8 @@
     "Vileplume": {
       "sourceName": "Vileplume",
       "rawCount": 1187,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -3497,6 +6073,8 @@
     "Mega Alakazam": {
       "sourceName": "Alakazam-Mega",
       "rawCount": 3189,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -3565,9 +6143,84 @@
         }
       ]
     },
+    "Alakazam": {
+      "sourceName": "Alakazam",
+      "rawCount": 467,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 48.394,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            0,
+            32,
+            2,
+            32
+          ],
+          "usagePercent": 11.563,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 7.709,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            1,
+            0,
+            21,
+            28,
+            1,
+            15
+          ],
+          "usagePercent": 4.283,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            0,
+            32
+          ],
+          "usagePercent": 2.998,
+          "rank": 5
+        }
+      ]
+    },
     "Weavile": {
       "sourceName": "Weavile",
       "rawCount": 2108,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "jolly",
@@ -3623,9 +6276,170 @@
         }
       ]
     },
+    "Zoroark": {
+      "sourceName": "Zoroark",
+      "rawCount": 77,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 32.468,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 9.091,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 7.792,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 7.792,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            0,
+            0,
+            14,
+            20,
+            0,
+            32
+          ],
+          "usagePercent": 6.494,
+          "rank": 5
+        },
+        {
+          "natureId": "hasty",
+          "points": [
+            0,
+            2,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 5.195,
+          "rank": 6
+        }
+      ]
+    },
+    "Malamar": {
+      "sourceName": "Malamar",
+      "rawCount": 582,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            12,
+            0,
+            22,
+            0
+          ],
+          "usagePercent": 23.627,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            28,
+            32,
+            1,
+            0,
+            5,
+            0
+          ],
+          "usagePercent": 19.866,
+          "rank": 2
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            31,
+            2,
+            1,
+            0,
+            21,
+            11
+          ],
+          "usagePercent": 17.588,
+          "rank": 3
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            31,
+            4,
+            15,
+            0,
+            1,
+            15
+          ],
+          "usagePercent": 7.339,
+          "rank": 4
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 3.854,
+          "rank": 5
+        }
+      ]
+    },
     "Mega Scrafty": {
       "sourceName": "Scrafty-Mega",
       "rawCount": 2234,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "impish",
@@ -3710,6 +6524,8 @@
     "Umbreon": {
       "sourceName": "Umbreon",
       "rawCount": 738,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "careful",
@@ -3794,6 +6610,8 @@
     "Scrafty": {
       "sourceName": "Scrafty",
       "rawCount": 1200,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "impish",
@@ -3878,6 +6696,8 @@
     "Gliscor": {
       "sourceName": "Gliscor",
       "rawCount": 1306,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "jolly",
@@ -3959,9 +6779,97 @@
         }
       ]
     },
+    "Sandaconda": {
+      "sourceName": "Sandaconda",
+      "rawCount": 72,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            2,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 16.667,
+          "rank": 1
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            28,
+            6,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 16.667,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 13.889,
+          "rank": 3
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 8.333,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            23,
+            0,
+            0,
+            11,
+            0
+          ],
+          "usagePercent": 8.333,
+          "rank": 5
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            2,
+            0,
+            32,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 5.556,
+          "rank": 6
+        }
+      ]
+    },
     "Hippowdon": {
       "sourceName": "Hippowdon",
       "rawCount": 1037,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "impish",
@@ -4046,6 +6954,8 @@
     "Toxicroak": {
       "sourceName": "Toxicroak",
       "rawCount": 207,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -4117,6 +7027,8 @@
     "Swalot": {
       "sourceName": "Swalot",
       "rawCount": 95,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -4149,6 +7061,8 @@
     "Noivern": {
       "sourceName": "Noivern",
       "rawCount": 608,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -4194,6 +7108,8 @@
     "Mega Barbaracle": {
       "sourceName": "Barbaracle-Mega",
       "rawCount": 363,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -4265,6 +7181,8 @@
     "Oranguru": {
       "sourceName": "Oranguru",
       "rawCount": 1007,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "bold",
@@ -4349,6 +7267,8 @@
     "Mega Greninja": {
       "sourceName": "Greninja-Mega",
       "rawCount": 973,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -4433,6 +7353,8 @@
     "Mega Scizor": {
       "sourceName": "Scizor-Mega",
       "rawCount": 1125,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -4517,6 +7439,8 @@
     "Cinderace": {
       "sourceName": "Cinderace",
       "rawCount": 1151,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "jolly",
@@ -4588,6 +7512,8 @@
     "Grapploct": {
       "sourceName": "Grapploct",
       "rawCount": 2535,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "brave",
@@ -4659,6 +7585,8 @@
     "Mega Meowstic (F)": {
       "sourceName": "Meowstic-F-Mega",
       "rawCount": 2601,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -4717,6 +7645,8 @@
     "Mega Golurk": {
       "sourceName": "Golurk-Mega",
       "rawCount": 935,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "brave",
@@ -4801,6 +7731,8 @@
     "Araquanid": {
       "sourceName": "Araquanid",
       "rawCount": 2005,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "brave",
@@ -4872,6 +7804,8 @@
     "Mimikyu": {
       "sourceName": "Mimikyu",
       "rawCount": 1403,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -4956,6 +7890,8 @@
     "Klefki": {
       "sourceName": "Klefki",
       "rawCount": 1919,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "calm",
@@ -5040,6 +7976,8 @@
     "Palafin": {
       "sourceName": "Palafin",
       "rawCount": 2411,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -5124,6 +8062,8 @@
     "Mega Aggron": {
       "sourceName": "Aggron-Mega",
       "rawCount": 1245,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "sassy",
@@ -5208,6 +8148,8 @@
     "Mega Abomasnow": {
       "sourceName": "Abomasnow-Mega",
       "rawCount": 936,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "quiet",
@@ -5279,6 +8221,8 @@
     "Mega Houndoom": {
       "sourceName": "Houndoom-Mega",
       "rawCount": 512,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -5363,6 +8307,8 @@
     "Goodra Hisui": {
       "sourceName": "Goodra-Hisui",
       "rawCount": 1577,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "modest",
@@ -5444,9 +8390,84 @@
         }
       ]
     },
+    "Spiritomb": {
+      "sourceName": "Spiritomb",
+      "rawCount": 423,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 19.149,
+          "rank": 1
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            32,
+            0
+          ],
+          "usagePercent": 12.53,
+          "rank": 2
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 8.747,
+          "rank": 3
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            32,
+            0
+          ],
+          "usagePercent": 6.856,
+          "rank": 4
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            2,
+            0,
+            32,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 3.546,
+          "rank": 5
+        }
+      ]
+    },
     "Mr. Mime": {
       "sourceName": "Mr. Mime",
       "rawCount": 407,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "jolly",
@@ -5476,9 +8497,183 @@
         }
       ]
     },
+    "Serperior": {
+      "sourceName": "Serperior",
+      "rawCount": 579,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            1,
+            0,
+            0,
+            32,
+            1,
+            32
+          ],
+          "usagePercent": 21.071,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            20,
+            0,
+            4,
+            6,
+            4,
+            32
+          ],
+          "usagePercent": 14.508,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            0,
+            32
+          ],
+          "usagePercent": 10.708,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 9.499,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 7.081,
+          "rank": 5
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            11,
+            11,
+            12,
+            32
+          ],
+          "usagePercent": 4.145,
+          "rank": 6
+        }
+      ]
+    },
+    "Aurorus": {
+      "sourceName": "Aurorus",
+      "rawCount": 393,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 27.99,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            17,
+            0,
+            0,
+            32,
+            0,
+            17
+          ],
+          "usagePercent": 8.142,
+          "rank": 2
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            12,
+            0,
+            22,
+            0
+          ],
+          "usagePercent": 6.87,
+          "rank": 3
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 5.344,
+          "rank": 4
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 4.071,
+          "rank": 5
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            22,
+            0,
+            12,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 3.562,
+          "rank": 6
+        }
+      ]
+    },
     "Persian Alola": {
       "sourceName": "Persian-Alola",
       "rawCount": 737,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "jolly",
@@ -5563,6 +8758,8 @@
     "Mudsdale": {
       "sourceName": "Mudsdale",
       "rawCount": 850,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -5644,9 +8841,97 @@
         }
       ]
     },
+    "Mega Eelektross": {
+      "sourceName": "Eelektross-Mega",
+      "rawCount": 620,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            1,
+            0,
+            0,
+            32,
+            1,
+            32
+          ],
+          "usagePercent": 6.129,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 5.484,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            1,
+            32,
+            1,
+            0
+          ],
+          "usagePercent": 5.0,
+          "rank": 3
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            10,
+            0,
+            24,
+            0
+          ],
+          "usagePercent": 4.516,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 4.194,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 3.871,
+          "rank": 6
+        }
+      ]
+    },
     "Arcanine": {
       "sourceName": "Arcanine",
       "rawCount": 768,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "timid",
@@ -5731,6 +9016,8 @@
     "Meowstic-M": {
       "sourceName": "Meowstic",
       "rawCount": 792,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "bold",
@@ -5812,9 +9099,97 @@
         }
       ]
     },
+    "Alcremie": {
+      "sourceName": "Alcremie",
+      "rawCount": 480,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            32,
+            0
+          ],
+          "usagePercent": 9.167,
+          "rank": 1
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            2,
+            0,
+            0
+          ],
+          "usagePercent": 7.5,
+          "rank": 2
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            18,
+            0,
+            32,
+            16,
+            0,
+            0
+          ],
+          "usagePercent": 7.292,
+          "rank": 3
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            18,
+            0,
+            32,
+            16,
+            0,
+            0
+          ],
+          "usagePercent": 6.458,
+          "rank": 4
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 5.417,
+          "rank": 5
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            25,
+            0,
+            9,
+            0
+          ],
+          "usagePercent": 2.708,
+          "rank": 6
+        }
+      ]
+    },
     "Overqwil": {
       "sourceName": "Overqwil",
       "rawCount": 1003,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -5899,6 +9274,8 @@
     "Mega Altaria": {
       "sourceName": "Altaria-Mega",
       "rawCount": 803,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "calm",
@@ -5983,6 +9360,8 @@
     "Conkeldurr": {
       "sourceName": "Conkeldurr",
       "rawCount": 461,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -6064,9 +9443,97 @@
         }
       ]
     },
+    "Heliolisk": {
+      "sourceName": "Heliolisk",
+      "rawCount": 751,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 28.686,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            6,
+            32,
+            0,
+            26
+          ],
+          "usagePercent": 22.761,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 19.317,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            0,
+            32,
+            2,
+            32
+          ],
+          "usagePercent": 7.964,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            6,
+            0,
+            0,
+            28,
+            0,
+            32
+          ],
+          "usagePercent": 4.751,
+          "rank": 5
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            15,
+            0,
+            0,
+            19
+          ],
+          "usagePercent": 3.622,
+          "rank": 6
+        }
+      ]
+    },
     "Mega Feraligatr": {
       "sourceName": "Feraligatr-Mega",
       "rawCount": 803,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -6151,6 +9618,8 @@
     "Decidueye Hisui": {
       "sourceName": "Decidueye-Hisui",
       "rawCount": 520,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -6219,9 +9688,97 @@
         }
       ]
     },
+    "Mega Chimecho": {
+      "sourceName": "Chimecho-Mega",
+      "rawCount": 414,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 31.401,
+          "rank": 1
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 7.971,
+          "rank": 2
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 7.729,
+          "rank": 3
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            0,
+            25,
+            9,
+            0
+          ],
+          "usagePercent": 4.348,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 3.382,
+          "rank": 5
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            32,
+            0
+          ],
+          "usagePercent": 2.657,
+          "rank": 6
+        }
+      ]
+    },
     "Slowking Galar": {
       "sourceName": "Slowking-Galar",
       "rawCount": 1061,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "sassy",
@@ -6293,6 +9850,8 @@
     "Scizor": {
       "sourceName": "Scizor",
       "rawCount": 1714,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -6377,6 +9936,8 @@
     "Skeledirge": {
       "sourceName": "Skeledirge",
       "rawCount": 728,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "bold",
@@ -6461,6 +10022,8 @@
     "Krookodile": {
       "sourceName": "Krookodile",
       "rawCount": 915,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -6542,9 +10105,97 @@
         }
       ]
     },
+    "Arboliva": {
+      "sourceName": "Arboliva",
+      "rawCount": 812,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            32,
+            0
+          ],
+          "usagePercent": 29.187,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 8.744,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 6.527,
+          "rank": 3
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            19,
+            0,
+            0,
+            15,
+            32,
+            0
+          ],
+          "usagePercent": 3.818,
+          "rank": 4
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 2.833,
+          "rank": 5
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 2.709,
+          "rank": 6
+        }
+      ]
+    },
     "Orthworm": {
       "sourceName": "Orthworm",
       "rawCount": 589,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "impish",
@@ -6613,9 +10264,84 @@
         }
       ]
     },
+    "Salazzle": {
+      "sourceName": "Salazzle",
+      "rawCount": 370,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 65.683,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            25,
+            0,
+            0,
+            9,
+            0,
+            32
+          ],
+          "usagePercent": 10.124,
+          "rank": 2
+        },
+        {
+          "natureId": "hasty",
+          "points": [
+            0,
+            2,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 7.501,
+          "rank": 3
+        },
+        {
+          "natureId": "hasty",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 5.676,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            1,
+            0,
+            1,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 5.359,
+          "rank": 5
+        }
+      ]
+    },
     "Mega Slowbro": {
       "sourceName": "Slowbro-Mega",
       "rawCount": 901,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "quiet",
@@ -6700,6 +10426,8 @@
     "Reuniclus": {
       "sourceName": "Reuniclus",
       "rawCount": 416,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "quiet",
@@ -6742,9 +10470,97 @@
         }
       ]
     },
+    "Mega Malamar": {
+      "sourceName": "Malamar-Mega",
+      "rawCount": 811,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "brave",
+          "points": [
+            31,
+            27,
+            0,
+            8,
+            0,
+            0
+          ],
+          "usagePercent": 50.96,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 5.061,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            24,
+            32,
+            6,
+            0,
+            2,
+            2
+          ],
+          "usagePercent": 4.56,
+          "rank": 3
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            24,
+            10,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 4.358,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 4.225,
+          "rank": 5
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 2.541,
+          "rank": 6
+        }
+      ]
+    },
     "Mega Steelix": {
       "sourceName": "Steelix-Mega",
       "rawCount": 1100,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "brave",
@@ -6826,9 +10642,342 @@
         }
       ]
     },
+    "Clawitzer": {
+      "sourceName": "Clawitzer",
+      "rawCount": 486,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 50.266,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 18.625,
+          "rank": 2
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            32,
+            0
+          ],
+          "usagePercent": 11.409,
+          "rank": 3
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 9.704,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 3.163,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            0,
+            2
+          ],
+          "usagePercent": 2.746,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Dragalge": {
+      "sourceName": "Dragalge-Mega",
+      "rawCount": 1188,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 18.387,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 9.579,
+          "rank": 2
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            6,
+            28,
+            0,
+            0
+          ],
+          "usagePercent": 9.29,
+          "rank": 3
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            0,
+            0,
+            2,
+            32,
+            32,
+            0
+          ],
+          "usagePercent": 8.405,
+          "rank": 4
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            32,
+            0
+          ],
+          "usagePercent": 8.387,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            31,
+            0,
+            6,
+            18,
+            11,
+            0
+          ],
+          "usagePercent": 6.948,
+          "rank": 6
+        }
+      ]
+    },
+    "Perrserker": {
+      "sourceName": "Perrserker",
+      "rawCount": 829,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 23.572,
+          "rank": 1
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            10,
+            0,
+            19,
+            5
+          ],
+          "usagePercent": 12.788,
+          "rank": 2
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 12.077,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 7.403,
+          "rank": 4
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 5.403,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            0,
+            32,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 5.297,
+          "rank": 6
+        }
+      ]
+    },
+    "Greninja": {
+      "sourceName": "Greninja",
+      "rawCount": 458,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 36.299,
+          "rank": 1
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            25,
+            0,
+            0,
+            32,
+            0,
+            9
+          ],
+          "usagePercent": 19.485,
+          "rank": 2
+        },
+        {
+          "natureId": "naive",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 4.933,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            26,
+            0,
+            0,
+            32,
+            0,
+            8
+          ],
+          "usagePercent": 4.312,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            8,
+            0,
+            0,
+            32,
+            0,
+            26
+          ],
+          "usagePercent": 3.457,
+          "rank": 5
+        }
+      ]
+    },
     "Jolteon": {
       "sourceName": "Jolteon",
       "rawCount": 586,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "modest",
@@ -6861,6 +11010,8 @@
     "Mega Chesnaught": {
       "sourceName": "Chesnaught-Mega",
       "rawCount": 1055,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "impish",
@@ -6942,9 +11093,673 @@
         }
       ]
     },
+    "Mega Scolipede": {
+      "sourceName": "Scolipede-Mega",
+      "rawCount": 222,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 21.171,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            26,
+            30,
+            0,
+            0,
+            0,
+            10
+          ],
+          "usagePercent": 11.712,
+          "rank": 2
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            0,
+            22,
+            9,
+            3,
+            32,
+            0
+          ],
+          "usagePercent": 7.207,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 6.306,
+          "rank": 4
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 5.405,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            10,
+            1,
+            0,
+            9,
+            14
+          ],
+          "usagePercent": 5.405,
+          "rank": 6
+        }
+      ]
+    },
+    "Quaquaval": {
+      "sourceName": "Quaquaval",
+      "rawCount": 493,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 48.963,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 19.188,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 19.033,
+          "rank": 3
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            20,
+            0,
+            25,
+            0,
+            21,
+            0
+          ],
+          "usagePercent": 1.671,
+          "rank": 4
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            0,
+            32,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 1.654,
+          "rank": 5
+        }
+      ]
+    },
+    "Trevenant": {
+      "sourceName": "Trevenant",
+      "rawCount": 127,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "calm",
+          "points": [
+            31,
+            0,
+            4,
+            0,
+            31,
+            0
+          ],
+          "usagePercent": 23.622,
+          "rank": 1
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            31,
+            3,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 7.874,
+          "rank": 2
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 6.299,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 4.724,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 4.724,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            31,
+            32,
+            0,
+            0,
+            3,
+            0
+          ],
+          "usagePercent": 4.724,
+          "rank": 6
+        }
+      ]
+    },
+    "Runerigus": {
+      "sourceName": "Runerigus",
+      "rawCount": 381,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            2,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 9.711,
+          "rank": 1
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            2,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 9.449,
+          "rank": 2
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            27,
+            0,
+            7,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 7.874,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 6.037,
+          "rank": 4
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 4.724,
+          "rank": 5
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            17,
+            0,
+            0,
+            17,
+            0
+          ],
+          "usagePercent": 3.937,
+          "rank": 6
+        }
+      ]
+    },
+    "Slowbro Galar": {
+      "sourceName": "Slowbro-Galar",
+      "rawCount": 284,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 28.873,
+          "rank": 1
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            0,
+            0,
+            32,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 9.507,
+          "rank": 2
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 8.803,
+          "rank": 3
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            32,
+            2,
+            0,
+            0
+          ],
+          "usagePercent": 7.042,
+          "rank": 4
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            30,
+            0,
+            0,
+            26,
+            10,
+            0
+          ],
+          "usagePercent": 4.225,
+          "rank": 5
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            2,
+            13,
+            19,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 3.873,
+          "rank": 6
+        }
+      ]
+    },
+    "Typhlosion": {
+      "sourceName": "Typhlosion",
+      "rawCount": 219,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 41.096,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 10.046,
+          "rank": 2
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            10,
+            8,
+            14,
+            9,
+            19,
+            6
+          ],
+          "usagePercent": 5.479,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            3,
+            0,
+            0,
+            32,
+            0,
+            31
+          ],
+          "usagePercent": 5.023,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            0,
+            0,
+            2,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 4.566,
+          "rank": 5
+        }
+      ]
+    },
+    "Bastiodon": {
+      "sourceName": "Bastiodon",
+      "rawCount": 332,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 76.506,
+          "rank": 1
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            25,
+            0,
+            9,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 4.518,
+          "rank": 2
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            17,
+            0,
+            17,
+            0
+          ],
+          "usagePercent": 3.012,
+          "rank": 3
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 2.108,
+          "rank": 4
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            2,
+            0,
+            32,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 1.807,
+          "rank": 5
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            14,
+            0,
+            0,
+            20,
+            0
+          ],
+          "usagePercent": 1.506,
+          "rank": 6
+        }
+      ]
+    },
+    "Luxray": {
+      "sourceName": "Luxray",
+      "rawCount": 102,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 11.765,
+          "rank": 1
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            11,
+            18,
+            16,
+            0,
+            21,
+            0
+          ],
+          "usagePercent": 11.765,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            29,
+            32,
+            0,
+            0,
+            0,
+            5
+          ],
+          "usagePercent": 10.784,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            24,
+            32,
+            0,
+            0,
+            0,
+            10
+          ],
+          "usagePercent": 8.824,
+          "rank": 4
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            1,
+            0,
+            1,
+            0
+          ],
+          "usagePercent": 7.843,
+          "rank": 5
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            0,
+            2,
+            32,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 5.882,
+          "rank": 6
+        }
+      ]
+    },
     "Rhyperior": {
       "sourceName": "Rhyperior",
       "rawCount": 735,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "brave",
@@ -7026,9 +11841,501 @@
         }
       ]
     },
+    "Pangoro": {
+      "sourceName": "Pangoro",
+      "rawCount": 177,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "relaxed",
+          "points": [
+            24,
+            20,
+            22,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 31.061,
+          "rank": 1
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 30.012,
+          "rank": 2
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            31,
+            32,
+            2,
+            0,
+            1,
+            0
+          ],
+          "usagePercent": 24.991,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            0,
+            32,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 3.633,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            15,
+            32,
+            0,
+            0,
+            0,
+            19
+          ],
+          "usagePercent": 3.396,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            12,
+            16,
+            2,
+            0,
+            14,
+            22
+          ],
+          "usagePercent": 2.44,
+          "rank": 6
+        }
+      ]
+    },
+    "Torterra": {
+      "sourceName": "Torterra",
+      "rawCount": 493,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            11,
+            15,
+            0,
+            0,
+            8
+          ],
+          "usagePercent": 47.829,
+          "rank": 1
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            18,
+            21,
+            9,
+            0,
+            18,
+            0
+          ],
+          "usagePercent": 11.894,
+          "rank": 2
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 9.9,
+          "rank": 3
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 7.086,
+          "rank": 4
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            32,
+            11,
+            15,
+            0,
+            0,
+            8
+          ],
+          "usagePercent": 4.798,
+          "rank": 5
+        }
+      ]
+    },
+    "Garganacl": {
+      "sourceName": "Garganacl",
+      "rawCount": 418,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            2,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 10.766,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 7.656,
+          "rank": 2
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 7.656,
+          "rank": 3
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 5.024,
+          "rank": 4
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 5.024,
+          "rank": 5
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 4.067,
+          "rank": 6
+        }
+      ]
+    },
+    "Farfetch'd": {
+      "sourceName": "Farfetch'd",
+      "rawCount": 249,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 15.663,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 10.04,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 9.639,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            0,
+            2
+          ],
+          "usagePercent": 8.032,
+          "rank": 4
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            0,
+            32,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 6.827,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            0,
+            32,
+            2,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 6.426,
+          "rank": 6
+        }
+      ]
+    },
+    "Decidueye": {
+      "sourceName": "Decidueye",
+      "rawCount": 100,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 26.0,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 15.0,
+          "rank": 2
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 13.0,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            6,
+            23,
+            10,
+            0,
+            0,
+            27
+          ],
+          "usagePercent": 7.0,
+          "rank": 4
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 6.0,
+          "rank": 5
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 5.0,
+          "rank": 6
+        }
+      ]
+    },
+    "Slurpuff": {
+      "sourceName": "Slurpuff",
+      "rawCount": 145,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            0,
+            32
+          ],
+          "usagePercent": 9.655,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            12,
+            0,
+            7,
+            15,
+            4,
+            28
+          ],
+          "usagePercent": 8.966,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 6.897,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            14,
+            0,
+            20
+          ],
+          "usagePercent": 6.207,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            12,
+            0,
+            9,
+            13,
+            0,
+            32
+          ],
+          "usagePercent": 5.517,
+          "rank": 5
+        }
+      ]
+    },
     "Hydrapple": {
       "sourceName": "Hydrapple",
       "rawCount": 574,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "quiet",
@@ -7071,9 +12378,183 @@
         }
       ]
     },
+    "Slowbro": {
+      "sourceName": "Slowbro",
+      "rawCount": 183,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            32,
+            2,
+            0,
+            0
+          ],
+          "usagePercent": 21.858,
+          "rank": 1
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            14,
+            2,
+            18,
+            0
+          ],
+          "usagePercent": 8.743,
+          "rank": 2
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            10,
+            24,
+            0,
+            0
+          ],
+          "usagePercent": 8.197,
+          "rank": 3
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 6.557,
+          "rank": 4
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            16,
+            0,
+            18,
+            0
+          ],
+          "usagePercent": 5.464,
+          "rank": 5
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 5.464,
+          "rank": 6
+        }
+      ]
+    },
+    "Mr. Rime": {
+      "sourceName": "Mr. Rime",
+      "rawCount": 485,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "bold",
+          "points": [
+            21,
+            0,
+            23,
+            0,
+            0,
+            22
+          ],
+          "usagePercent": 28.866,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 6.186,
+          "rank": 2
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 5.773,
+          "rank": 3
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 4.948,
+          "rank": 4
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 3.711,
+          "rank": 5
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            8,
+            0,
+            0,
+            0,
+            32,
+            26
+          ],
+          "usagePercent": 3.711,
+          "rank": 6
+        }
+      ]
+    },
     "Forretress": {
       "sourceName": "Forretress",
       "rawCount": 85,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "naive",
@@ -7103,9 +12584,686 @@
         }
       ]
     },
+    "Liepard": {
+      "sourceName": "Liepard",
+      "rawCount": 217,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 27.65,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 13.364,
+          "rank": 2
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            13,
+            0,
+            21,
+            0
+          ],
+          "usagePercent": 8.295,
+          "rank": 3
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            24,
+            2,
+            0,
+            8,
+            0,
+            32
+          ],
+          "usagePercent": 5.069,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 4.147,
+          "rank": 5
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            10,
+            0,
+            12,
+            0,
+            12,
+            32
+          ],
+          "usagePercent": 4.147,
+          "rank": 6
+        }
+      ]
+    },
+    "Cofagrigus": {
+      "sourceName": "Cofagrigus",
+      "rawCount": 572,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 48.668,
+          "rank": 1
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            17,
+            0,
+            17,
+            0
+          ],
+          "usagePercent": 7.966,
+          "rank": 2
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 7.821,
+          "rank": 3
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            0,
+            0,
+            32,
+            2,
+            32,
+            0
+          ],
+          "usagePercent": 7.307,
+          "rank": 4
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            17,
+            0,
+            30,
+            0,
+            19,
+            0
+          ],
+          "usagePercent": 5.528,
+          "rank": 5
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            27,
+            0,
+            17,
+            0,
+            22,
+            0
+          ],
+          "usagePercent": 5.245,
+          "rank": 6
+        }
+      ]
+    },
+    "Beartic": {
+      "sourceName": "Beartic",
+      "rawCount": 114,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 18.421,
+          "rank": 1
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            0,
+            32,
+            1,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 15.789,
+          "rank": 2
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            0,
+            2
+          ],
+          "usagePercent": 15.789,
+          "rank": 3
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 7.018,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 4.386,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 4.386,
+          "rank": 6
+        }
+      ]
+    },
+    "Morpeko": {
+      "sourceName": "Morpeko",
+      "rawCount": 73,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 39.726,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            1,
+            32,
+            13,
+            0,
+            0,
+            20
+          ],
+          "usagePercent": 28.767,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            0,
+            2
+          ],
+          "usagePercent": 12.329,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            28,
+            32,
+            3,
+            0,
+            3,
+            0
+          ],
+          "usagePercent": 6.849,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 2.74,
+          "rank": 5
+        }
+      ]
+    },
+    "Ariados": {
+      "sourceName": "Ariados",
+      "rawCount": 89,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 17.978,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 15.73,
+          "rank": 2
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            2,
+            0,
+            0
+          ],
+          "usagePercent": 11.236,
+          "rank": 3
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            2,
+            0,
+            32,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 5.618,
+          "rank": 4
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 4.494,
+          "rank": 5
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            31,
+            0,
+            20,
+            0,
+            15,
+            0
+          ],
+          "usagePercent": 4.494,
+          "rank": 6
+        }
+      ]
+    },
+    "Dragalge": {
+      "sourceName": "Dragalge",
+      "rawCount": 95,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 25.263,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 16.842,
+          "rank": 2
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            0,
+            20,
+            14,
+            0,
+            0
+          ],
+          "usagePercent": 8.421,
+          "rank": 3
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 7.368,
+          "rank": 4
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 6.316,
+          "rank": 5
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            32,
+            0
+          ],
+          "usagePercent": 6.316,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Falinks": {
+      "sourceName": "Falinks-Mega",
+      "rawCount": 365,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 17.26,
+          "rank": 1
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            0,
+            0,
+            32,
+            2
+          ],
+          "usagePercent": 16.986,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 12.877,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            0,
+            32,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 7.397,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 3.288,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 3.014,
+          "rank": 6
+        }
+      ]
+    },
+    "Rampardos": {
+      "sourceName": "Rampardos",
+      "rawCount": 159,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 17.61,
+          "rank": 1
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 13.208,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            15,
+            28,
+            11,
+            0,
+            12,
+            0
+          ],
+          "usagePercent": 8.805,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            8,
+            32,
+            0,
+            0,
+            0,
+            26
+          ],
+          "usagePercent": 6.289,
+          "rank": 4
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 6.289,
+          "rank": 5
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            0,
+            32,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 6.289,
+          "rank": 6
+        }
+      ]
+    },
     "Gogoat": {
       "sourceName": "Gogoat",
       "rawCount": 430,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "careful",
@@ -7148,9 +13306,342 @@
         }
       ]
     },
+    "Espeon": {
+      "sourceName": "Espeon",
+      "rawCount": 228,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 42.982,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            2,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 7.456,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 7.018,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            32,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 7.018,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            6,
+            0,
+            0,
+            32,
+            0,
+            28
+          ],
+          "usagePercent": 6.579,
+          "rank": 5
+        }
+      ]
+    },
+    "Diggersby": {
+      "sourceName": "Diggersby",
+      "rawCount": 106,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 17.925,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            0,
+            32,
+            2,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 16.038,
+          "rank": 2
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 11.321,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 10.377,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 9.434,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            31,
+            32,
+            0,
+            0,
+            3,
+            0
+          ],
+          "usagePercent": 7.547,
+          "rank": 6
+        }
+      ]
+    },
+    "Tyrantrum": {
+      "sourceName": "Tyrantrum",
+      "rawCount": 128,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 25.0,
+          "rank": 1
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 18.75,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 17.969,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 5.469,
+          "rank": 4
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            16,
+            18,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 2.344,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            23,
+            11,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 2.344,
+          "rank": 6
+        }
+      ]
+    },
+    "Mabosstiff": {
+      "sourceName": "Mabosstiff",
+      "rawCount": 148,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 33.108,
+          "rank": 1
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            25,
+            30,
+            11,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 12.162,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 10.135,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 6.081,
+          "rank": 4
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 5.405,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            17,
+            17,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 3.378,
+          "rank": 6
+        }
+      ]
+    },
     "Musharna": {
       "sourceName": "Musharna",
       "rawCount": 174,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "quiet",
@@ -7167,9 +13658,256 @@
         }
       ]
     },
+    "Castform": {
+      "sourceName": "Castform",
+      "rawCount": 102,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 40.196,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 22.549,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            6,
+            0,
+            0,
+            32,
+            0,
+            28
+          ],
+          "usagePercent": 4.902,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            10,
+            14,
+            10,
+            32
+          ],
+          "usagePercent": 4.902,
+          "rank": 4
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 3.922,
+          "rank": 5
+        }
+      ]
+    },
+    "Abomasnow": {
+      "sourceName": "Abomasnow",
+      "rawCount": 116,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 31.034,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 12.069,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 12.069,
+          "rank": 3
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            8,
+            0,
+            30,
+            4,
+            24,
+            0
+          ],
+          "usagePercent": 5.172,
+          "rank": 4
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 4.31,
+          "rank": 5
+        },
+        {
+          "natureId": "hardy",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 4.31,
+          "rank": 6
+        }
+      ]
+    },
+    "Avalugg": {
+      "sourceName": "Avalugg",
+      "rawCount": 144,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "sassy",
+          "points": [
+            2,
+            0,
+            32,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 15.278,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            2,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 13.194,
+          "rank": 2
+        },
+        {
+          "natureId": "relaxed",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 9.722,
+          "rank": 3
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 9.028,
+          "rank": 4
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            10,
+            10,
+            14,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 9.028,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 7.639,
+          "rank": 6
+        }
+      ]
+    },
     "Mega Absol": {
       "sourceName": "Absol-Mega-Z",
       "rawCount": 8223,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "adamant",
@@ -7251,9 +13989,329 @@
         }
       ]
     },
+    "Houndoom": {
+      "sourceName": "Houndoom",
+      "rawCount": 108,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 24.074,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            1,
+            0,
+            0,
+            32,
+            1,
+            32
+          ],
+          "usagePercent": 12.037,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            1,
+            0,
+            0,
+            32,
+            1,
+            32
+          ],
+          "usagePercent": 11.111,
+          "rank": 3
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 10.185,
+          "rank": 4
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            0,
+            0,
+            32,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 10.185,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            0,
+            0,
+            0,
+            32,
+            2,
+            32
+          ],
+          "usagePercent": 8.333,
+          "rank": 6
+        }
+      ]
+    },
+    "Roserade": {
+      "sourceName": "Roserade",
+      "rawCount": 134,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 30.597,
+          "rank": 1
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 25.373,
+          "rank": 2
+        },
+        {
+          "natureId": "hasty",
+          "points": [
+            0,
+            2,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 5.224,
+          "rank": 3
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            32,
+            0
+          ],
+          "usagePercent": 3.731,
+          "rank": 4
+        }
+      ]
+    },
+    "Steelix": {
+      "sourceName": "Steelix",
+      "rawCount": 67,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 22.388,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 11.94,
+          "rank": 2
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 11.94,
+          "rank": 3
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 10.448,
+          "rank": 4
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 10.448,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 4.478,
+          "rank": 6
+        }
+      ]
+    },
+    "Mega Victreebel": {
+      "sourceName": "Victreebel-Mega",
+      "rawCount": 294,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            2,
+            0,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 16.327,
+          "rank": 1
+        },
+        {
+          "natureId": "mild",
+          "points": [
+            0,
+            2,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 10.204,
+          "rank": 2
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            1,
+            0,
+            1,
+            25,
+            22,
+            17
+          ],
+          "usagePercent": 9.864,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            27,
+            0,
+            1,
+            32,
+            0,
+            6
+          ],
+          "usagePercent": 8.844,
+          "rank": 4
+        },
+        {
+          "natureId": "naughty",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            0,
+            2
+          ],
+          "usagePercent": 6.122,
+          "rank": 5
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 5.102,
+          "rank": 6
+        }
+      ]
+    },
     "Mega Medicham": {
       "sourceName": "Medicham-Mega",
       "rawCount": 253,
+      "ratingCutoff": 1760,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1760.txt",
       "spreads": [
         {
           "natureId": "jolly",
@@ -7267,6 +14325,853 @@
           ],
           "usagePercent": 98.938,
           "rank": 1
+        }
+      ]
+    },
+    "Aggron": {
+      "sourceName": "Aggron",
+      "rawCount": 78,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            2,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 20.513,
+          "rank": 1
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            2,
+            0,
+            0
+          ],
+          "usagePercent": 14.103,
+          "rank": 2
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            2,
+            32,
+            32,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 12.821,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 11.538,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            0,
+            32,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 7.692,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 5.128,
+          "rank": 6
+        }
+      ]
+    },
+    "Appletun": {
+      "sourceName": "Appletun",
+      "rawCount": 83,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 19.277,
+          "rank": 1
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            32,
+            0,
+            18,
+            0,
+            16,
+            0
+          ],
+          "usagePercent": 13.253,
+          "rank": 2
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 8.434,
+          "rank": 3
+        },
+        {
+          "natureId": "calm",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            32,
+            0
+          ],
+          "usagePercent": 8.434,
+          "rank": 4
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            4,
+            0,
+            0,
+            32,
+            30,
+            0
+          ],
+          "usagePercent": 8.434,
+          "rank": 5
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            14,
+            0,
+            10,
+            32,
+            10,
+            0
+          ],
+          "usagePercent": 6.024,
+          "rank": 6
+        }
+      ]
+    },
+    "Eelektross": {
+      "sourceName": "Eelektross",
+      "rawCount": 65,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            32,
+            0,
+            0,
+            32,
+            2,
+            0
+          ],
+          "usagePercent": 30.769,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            31,
+            32,
+            0,
+            0,
+            3,
+            0
+          ],
+          "usagePercent": 15.385,
+          "rank": 2
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            2,
+            32,
+            0,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 12.308,
+          "rank": 3
+        },
+        {
+          "natureId": "sassy",
+          "points": [
+            31,
+            3,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 10.769,
+          "rank": 4
+        },
+        {
+          "natureId": "quiet",
+          "points": [
+            32,
+            0,
+            2,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 7.692,
+          "rank": 5
+        },
+        {
+          "natureId": "naughty",
+          "points": [
+            0,
+            32,
+            8,
+            0,
+            26,
+            0
+          ],
+          "usagePercent": 4.615,
+          "rank": 6
+        }
+      ]
+    },
+    "Thievul": {
+      "sourceName": "Thievul",
+      "rawCount": 216,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 27.778,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            21,
+            0,
+            0,
+            13
+          ],
+          "usagePercent": 26.389,
+          "rank": 2
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            0,
+            0,
+            0,
+            32,
+            2,
+            32
+          ],
+          "usagePercent": 7.407,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 4.167,
+          "rank": 4
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            24,
+            0,
+            10,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 3.704,
+          "rank": 5
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            0,
+            32
+          ],
+          "usagePercent": 3.241,
+          "rank": 6
+        }
+      ]
+    },
+    "Feraligatr": {
+      "sourceName": "Feraligatr",
+      "rawCount": 207,
+      "ratingCutoff": 1630,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-1630.txt",
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            29,
+            32,
+            0,
+            0,
+            0,
+            5
+          ],
+          "usagePercent": 33.91,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 19.671,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            19,
+            32,
+            0,
+            0,
+            0,
+            15
+          ],
+          "usagePercent": 16.932,
+          "rank": 3
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            0,
+            2
+          ],
+          "usagePercent": 16.147,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 7.945,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            29,
+            17,
+            0,
+            0,
+            20,
+            0
+          ],
+          "usagePercent": 2.941,
+          "rank": 6
+        }
+      ]
+    },
+    "Emolga": {
+      "sourceName": "Emolga",
+      "rawCount": 143,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 27.972,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 18.182,
+          "rank": 2
+        },
+        {
+          "natureId": "naughty",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            0,
+            32
+          ],
+          "usagePercent": 6.993,
+          "rank": 3
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            1,
+            32,
+            0,
+            0,
+            1,
+            32
+          ],
+          "usagePercent": 6.993,
+          "rank": 4
+        },
+        {
+          "natureId": "hasty",
+          "points": [
+            32,
+            0,
+            0,
+            2,
+            0,
+            32
+          ],
+          "usagePercent": 6.294,
+          "rank": 5
+        }
+      ]
+    },
+    "Passimian": {
+      "sourceName": "Passimian",
+      "rawCount": 141,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 31.206,
+          "rank": 1
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 26.241,
+          "rank": 2
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 9.22,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 4.255,
+          "rank": 4
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            0,
+            32,
+            0,
+            0,
+            2,
+            32
+          ],
+          "usagePercent": 3.546,
+          "rank": 5
+        },
+        {
+          "natureId": "naive",
+          "points": [
+            0,
+            32,
+            0,
+            2,
+            0,
+            32
+          ],
+          "usagePercent": 3.546,
+          "rank": 6
+        }
+      ]
+    },
+    "Golurk": {
+      "sourceName": "Golurk",
+      "rawCount": 81,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 19.753,
+          "rank": 1
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            32,
+            1,
+            0,
+            1,
+            0
+          ],
+          "usagePercent": 13.58,
+          "rank": 2
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 9.877,
+          "rank": 3
+        },
+        {
+          "natureId": "brave",
+          "points": [
+            32,
+            20,
+            0,
+            0,
+            14,
+            0
+          ],
+          "usagePercent": 9.877,
+          "rank": 4
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            2,
+            0,
+            0,
+            0
+          ],
+          "usagePercent": 8.642,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            18,
+            19,
+            15,
+            1,
+            11,
+            2
+          ],
+          "usagePercent": 6.173,
+          "rank": 6
+        }
+      ]
+    },
+    "Leafeon": {
+      "sourceName": "Leafeon",
+      "rawCount": 177,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "adamant",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 33.333,
+          "rank": 1
+        },
+        {
+          "natureId": "impish",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 15.819,
+          "rank": 2
+        },
+        {
+          "natureId": "bold",
+          "points": [
+            32,
+            0,
+            32,
+            0,
+            2,
+            0
+          ],
+          "usagePercent": 14.689,
+          "rank": 3
+        },
+        {
+          "natureId": "jolly",
+          "points": [
+            2,
+            32,
+            0,
+            0,
+            0,
+            32
+          ],
+          "usagePercent": 6.78,
+          "rank": 4
+        },
+        {
+          "natureId": "careful",
+          "points": [
+            32,
+            2,
+            0,
+            0,
+            32,
+            0
+          ],
+          "usagePercent": 3.955,
+          "rank": 5
+        },
+        {
+          "natureId": "adamant",
+          "points": [
+            32,
+            32,
+            0,
+            0,
+            0,
+            2
+          ],
+          "usagePercent": 3.39,
+          "rank": 6
+        }
+      ]
+    },
+    "Scovillain": {
+      "sourceName": "Scovillain",
+      "rawCount": 221,
+      "ratingCutoff": 0,
+      "sourceUrl": "https://www.smogon.com/stats/2026-09/moveset/gen9championsvgc2026regmcbo3-0.txt",
+      "spreads": [
+        {
+          "natureId": "modest",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 20.362,
+          "rank": 1
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            2,
+            0,
+            0,
+            32,
+            0,
+            32
+          ],
+          "usagePercent": 10.86,
+          "rank": 2
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            16,
+            2,
+            16,
+            32
+          ],
+          "usagePercent": 10.407,
+          "rank": 3
+        },
+        {
+          "natureId": "modest",
+          "points": [
+            31,
+            0,
+            3,
+            32,
+            0,
+            0
+          ],
+          "usagePercent": 7.24,
+          "rank": 4
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            0,
+            0,
+            7,
+            27,
+            0,
+            32
+          ],
+          "usagePercent": 5.43,
+          "rank": 5
+        },
+        {
+          "natureId": "timid",
+          "points": [
+            1,
+            0,
+            0,
+            32,
+            1,
+            32
+          ],
+          "usagePercent": 4.525,
+          "rank": 6
         }
       ]
     }
