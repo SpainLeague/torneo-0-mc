@@ -70,10 +70,6 @@ export function resolveAbility(poolEntry, species, referenceSpecies, selectedAbi
   if (!requested) {
     throw new Error('No se puede verificar la habilidad seleccionada de «' + poolEntry.name + '» con los datos Champions disponibles.');
   }
-  if (selectedAbility && normalizeId(selectedAbility) !== normalizeId(requested)) {
-    throw new Error('La habilidad seleccionada («' + selectedAbility + '») no coincide con la referencia Champions («' + requested + '»).');
-  }
-
   const supported = championsAbilities.find(name => normalizeId(name) === normalizeId(requested));
   if (!supported) {
     throw new Error('La habilidad «' + requested + '» no está disponible en el dex Champions del motor.');
