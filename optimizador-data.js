@@ -94,9 +94,10 @@ export function auditPoolCoverage(data) {
   return data.pool.map(entry => {
     const legalMoves = getLegalMoveNames(data, entry.name);
     const record = getReferenceSpeciesRecord(data, entry.name);
-    const movesWithoutDamageData = legalMoves.filter(move =>
-      !data.reference.moves?.[normalizeId(move)]
-    );
+    const movesWithoutDamageData = legalMoves.filter(move => {
+      const moveId = normalizeId(move);
+      return !NON_DAMAGING_MOVE_IDS.has(moveId) && !data.reference.moves?.[moveId];
+    });
     return {
       poolName: entry.name,
       legalMoveCount: legalMoves.length,
