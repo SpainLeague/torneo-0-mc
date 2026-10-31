@@ -32,12 +32,18 @@ jobs:
         run: node --test tests/test_optimizador_heuristic.mjs
       - name: Test damage probability calculations
         run: node --test tests/test_optimizador_ko.mjs
+      - name: Install pinned Champions damage engine for integration tests
+        run: npm install --no-save --ignore-scripts @smogon/calc@0.12.0
+      - name: Test real Smogon Champions runtime integration
+        run: node --test tests/test_optimizador_runtime.mjs
       - name: Test selected ability mapping
         run: node --test tests/test_optimizador_ability.mjs
       - name: Check optimizer JavaScript syntax
         run: |
           node --check optimizador-heuristic.js
           node --check optimizador-smogon.js
+          node --check optimizador-ko.js
+          node --check tests/test_optimizador_runtime.mjs
           node --check optimizador-ko.js
           node --check optimizador-search.js
           node --check optimizador-data.js
