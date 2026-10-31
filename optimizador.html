@@ -27,6 +27,10 @@
 <div><b>Pantallas del Pokémon propio</b><div class="three"><label class="check"><input id="ownReflect" type="checkbox"> Reflejo</label><label class="check"><input id="ownLightScreen" type="checkbox"> Pantalla Luz</label><label class="check"><input id="ownAuroraVeil" type="checkbox"> Velo Aurora</label></div></div>
 <div><b>Pantallas del rival</b><div class="three"><label class="check"><input id="foeReflect" type="checkbox"> Reflejo</label><label class="check"><input id="foeLightScreen" type="checkbox"> Pantalla Luz</label><label class="check"><input id="foeAuroraVeil" type="checkbox"> Velo Aurora</label></div></div>
 </div>
+<div class="grid" style="margin-top:12px">
+<div><b>Viento Afín propio</b><label class="check"><input id="ownTailwind" type="checkbox"> Activo</label></div>
+<div><b>Viento Afín rival</b><label class="check"><input id="foeTailwind" type="checkbox"> Activo</label></div>
+</div>
 <div style="margin-top:12px"><label class="check"><input id="critical" type="checkbox"> Calcular como golpe crítico</label></div>
 <p class="hint">Clima, terreno, pantallas, golpe crítico y daño de movimientos en área se envían al motor de Pokémon Champions. La precisión base del movimiento se tiene en cuenta en las probabilidades de KO y puede ajustarse manualmente para efectos de habilidades u objetos. Viento Afín afecta a la Velocidad, no al daño; el daño residual y la recuperación entre turnos todavía no están modelados.</p></section>
 </main>
@@ -37,6 +41,7 @@ import {loadOptimizerData, getLegalMoveNames, auditPoolCoverage, calculateChampi
 import {getSmogonRuntime, auditSmogonCoverage, calculateSmogonDamage} from './optimizador-smogon.js';
 import {koThresholds} from './optimizador-ko.js';
 import {findBestLocalSpreads} from './optimizador-heuristic.js';
+import {calculateEffectiveSpeed,evaluateSpeedBenchmark} from './optimizador-speed.js';
 const STATS=['PS','Ataque','Defensa','At. Esp.','Def. Esp.','Velocidad'],KEYS=['hp','atk','def','spa','spd','spe'];
 const NATURES=['Activa','Afable','Agitada','Alegre','Alocada','Amable','Audaz','Cauta','Dócil','Firme','Floja','Fuerte','Grosera','Huraña','Ingenua','Mansa','Miedosa','Modesta','Osada','Pícara','Plácida','Rara','Serena','Seria','Tímida'];
 const NATURE_IDS={'Activa':'hasty','Afable':'mild','Agitada':'impish','Alegre':'jolly','Alocada':'rash','Amable':'gentle','Audaz':'brave','Cauta':'careful','Dócil':'docile','Firme':'adamant','Floja':'lax','Fuerte':'hardy','Grosera':'sassy','Huraña':'lonely','Ingenua':'naive','Mansa':'quiet','Miedosa':'timid','Modesta':'modest','Osada':'bold','Pícara':'naughty','Plácida':'relaxed','Rara':'quirky','Serena':'calm','Seria':'serious','Tímida':'bashful'};
@@ -64,8 +69,36 @@ function updateTargetHitControl(el){
  if(!variable)control.value='';
  el.querySelector('.moveHint').textContent=(variable?'Movimiento de golpes variables: selecciona el número de impactos. ':'')+'La precisión base de Champions se carga automáticamente; ajusta la precisión efectiva si intervienen habilidades, objetos o etapas.';
 }
-function populateTargetMoves(el){const attacking=el.querySelector('.kind').value==='off'?'own':'foe';const p=chosen(attacking),list=p&&optimizerData?getLegalMoveNames(optimizerData,p.name):[],sel=el.querySelector('.move');opts(sel,list.length?list:['Movepool no disponible']);sel.disabled=!list.length;updateTargetHitControl(el)}
-function addTarget(){const id=++targetId,el=document.createElement('div');el.className='target';el.dataset.id=id;el.innerHTML='<div class="target-head"><b>Objetivo '+id+'</b><button type="button" aria-label="Eliminar objetivo">Eliminar</button></div><div class="target-grid"><div><label>Tipo de objetivo</label><select class="kind"><option value="def">Resistir</option><option value="off">Dar</option></select></div><div><label>Umbral</label><select class="hits"><option value="1">OHKO</option><option value="2">2HKO</option><option value="3">3HKO</option></select></div><div><label>Movimiento del atacante</label><select class="move"><option value="">Selecciona atacante</option></select></div><div><label>Golpes (si es variable)</label><select class="hitCount"><option value="">Automático</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div><div><label>Precisión efectiva (%)</label><input class="accuracy" type="number" min="1" max="100" step="1" value="100"></div><div><label>PS actuales (%)</label><input class="hpPercent" type="number" min="1" max="100" step="1" value="100"></div><div><label>Daño residual entre ataques (PS)</label><input class="residual" type="number" min="0" step="1" value="0"></div><div><label>Recuperación entre ataques (PS)</label><input class="recovery" type="number" min="0" step="1" value="0"></div><div><label>Probabilidad mínima</label><select class="chance"><option>100</option><option>95</option><option>90</option><option>85</option><option>80</option><option>75</option><option>70</option><option>50</option></select></div></div><p class="hint moveHint">El movimiento se filtra por el Pokémon atacante.</p>';el.querySelector('button').addEventListener('click',()=>el.remove());el.querySelector('.kind').addEventListener('change',()=>populateTargetMoves(el));el.querySelector('.move').addEventListener('change',()=>updateTargetHitControl(el));$('targets').append(el);populateTargetMoves(el)}
+function isSpeedTarget(target){return target.querySelector('.kind').value.startsWith('speed-')}
+function updateTargetMode(el){
+ const speed=isSpeedTarget(el);
+ el.querySelectorAll('.damage-only').forEach(node=>node.hidden=speed);
+ el.querySelector('.speedMarginField').hidden=!speed;
+ el.querySelector('.moveHint').hidden=speed;
+ if(speed){el.querySelector('.move').disabled=true;el.querySelector('.moveHint').textContent='Objetivo determinista: compara la Velocidad efectiva propia con la del rival.'}
+ else populateTargetMoves(el);
+}
+function populateTargetMoves(el){if(isSpeedTarget(el))return;const attacking=el.querySelector('.kind').value==='off'?'own':'foe';const p=chosen(attacking),list=p&&optimizerData?getLegalMoveNames(optimizerData,p.name):[],sel=el.querySelector('.move');opts(sel,list.length?list:['Movepool no disponible']);sel.disabled=!list.length;updateTargetHitControl(el)}
+function readSpeedTargetState(target){
+ const margin=Number(target.querySelector('.speedMargin').value);
+ if(!Number.isInteger(margin)||margin<0)return {error:'El margen de Velocidad debe ser un entero no negativo.'};
+ return {margin};
+}
+function calculateSpeedComparison(ownPoints,relation,margin){
+ const ownStats=calculateChampionStats(optimizerData,$('own').value,ownPoints,NATURE_IDS[$('nature').value]);
+ const foeStats=calculateChampionStats(optimizerData,$('foe').value,getPC('foePC'),NATURE_IDS[$('foeNature').value]);
+ const ownSpeed=calculateEffectiveSpeed(ownStats[5],{ability:$('ability').value,itemId:$('item').value,weather:$('weather').value,terrain:$('terrain').value,tailwind:$('ownTailwind').checked});
+ const foeSpeed=calculateEffectiveSpeed(foeStats[5],{ability:$('foeAbility').value,itemId:$('foeItem').value,weather:$('weather').value,terrain:$('terrain').value,tailwind:$('foeTailwind').checked});
+ return evaluateSpeedBenchmark(ownSpeed,foeSpeed,{relation,margin});
+}
+function addTarget(){
+ const id=++targetId,el=document.createElement('div');el.className='target';el.dataset.id=id;
+ el.innerHTML='<div class="target-head"><b>Objetivo '+id+'</b><button type="button" aria-label="Eliminar objetivo">Eliminar</button></div><div class="target-grid"><div><label>Tipo de objetivo</label><select class="kind"><option value="def">Resistir</option><option value="off">Hacer KO</option><option value="speed-fast">Superar en Velocidad</option><option value="speed-slow">Ser más lento (Trick Room)</option></select></div><div class="damage-only"><label>Umbral</label><select class="hits"><option value="1">OHKO</option><option value="2">2HKO</option><option value="3">3HKO</option></select></div><div class="damage-only"><label>Movimiento del atacante</label><select class="move"><option value="">Selecciona atacante</option></select></div><div class="damage-only"><label>Golpes (si es variable)</label><select class="hitCount"><option value="">Automático</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div><div class="damage-only"><label>Precisión efectiva (%)</label><input class="accuracy" type="number" min="1" max="100" step="1" value="100"></div><div class="damage-only"><label>PS actuales (%)</label><input class="hpPercent" type="number" min="1" max="100" step="1" value="100"></div><div class="damage-only"><label>Daño residual entre ataques (PS)</label><input class="residual" type="number" min="0" step="1" value="0"></div><div class="damage-only"><label>Recuperación entre ataques (PS)</label><input class="recovery" type="number" min="0" step="1" value="0"></div><div class="damage-only"><label>Probabilidad mínima</label><select class="chance"><option>100</option><option>95</option><option>90</option><option>85</option><option>80</option><option>75</option><option>70</option><option>50</option></select></div><div class="speedMarginField" hidden><label>Margen mínimo de Velocidad</label><input class="speedMargin" type="number" min="0" step="1" value="0"></div></div><p class="hint moveHint">El movimiento se filtra por el Pokémon atacante.</p>';
+ el.querySelector('button').addEventListener('click',()=>el.remove());
+ el.querySelector('.kind').addEventListener('change',()=>updateTargetMode(el));
+ el.querySelector('.move').addEventListener('change',()=>updateTargetHitControl(el));
+ $('targets').append(el);updateTargetMode(el);
+}
 function populateAllMoves(){$('targets').querySelectorAll('.target').forEach(populateTargetMoves)}
 function reset(){$('targets').replaceChildren();targetId=0;addTarget();pcInputs('ownPC',[0,0,0,0,0,0]);pcInputs('foePC',[0,0,0,0,0,0]);$('status').textContent='Configuración restablecida.'}
 async function init(){try{optimizerData=await loadOptimizerData('./');pool=optimizerData.pool;moves=optimizerData.moveData;const coverage=auditPoolCoverage(optimizerData);const missingMoves=coverage.filter(x=>!x.legalMoveCount);const unsupportedDamageMoves=coverage.flatMap(x=>x.movesWithoutDamageData.map(move=>x.poolName+': '+move));const unresolvedForms=coverage.filter(x=>!x.referenceResolved);let smogonAudit=[];let smogonError='';try{getSmogonRuntime();smogonAudit=auditSmogonCoverage(optimizerData)}catch(error){smogonError=error.message}const unresolvedSmogon=smogonAudit.filter(x=>!x.speciesName);const unsupportedAbilities=smogonAudit.flatMap(x=>x.unsupportedAbilities.map(a=>x.poolName+': '+a.name));const missingSmogonMoves=smogonAudit.flatMap(x=>x.missingMoves.map(move=>x.poolName+': '+move));const spreadMeta=optimizerData.evSpreads?.meta||{};const spreadCoverage=Object.keys(optimizerData.evSpreads?.pokemon||{}).length;opts($('own'),pool.map(p=>p.name));opts($('foe'),pool.map(p=>p.name));opts($('nature'),NATURES);opts($('foeNature'),NATURES);$('nature').value='Fuerte';$('foeNature').value='Fuerte';$('own').addEventListener('change',()=>{updateAbilities('own');updateItems('own');populateAllMoves()});$('foe').addEventListener('change',()=>{updateAbilities('foe');updateItems('foe');populateAllMoves()});$('ownPreset').addEventListener('change',()=>applySpreadPreset('own'));$('foePreset').addEventListener('change',()=>applySpreadPreset('foe'));$('nature').addEventListener('change',()=>renderStats('own'));$('foeNature').addEventListener('change',()=>renderStats('foe'));pcInputs('ownPC',[0,0,0,0,0,0]);pcInputs('foePC',[0,0,0,0,0,0]);updateAbilities('own');updateAbilities('foe');updateItems('own');updateItems('foe');addTarget();$('status').textContent='Datos cargados: '+pool.length+' Pokémon. '+(pool.length-missingMoves.length)+' tienen movepool asociado; sin movepool: '+(missingMoves.map(x=>x.poolName).join(', ')||'ninguno')+'. Formas sin ficha de referencia: '+unresolvedForms.length+'. Movimientos legales sin datos de daño: '+unsupportedDamageMoves.length+(unsupportedDamageMoves.length?' ('+unsupportedDamageMoves.join(', ')+')':'')+'. Motor Smogon Champions: '+(smogonError?'no disponible ('+smogonError+')':('cargado; especies compatibles '+(pool.length-unresolvedSmogon.length)+'/'+pool.length+', movimientos legales sin datos '+missingSmogonMoves.length+'; habilidades sin soporte en el motor: '+unsupportedAbilities.length+(unresolvedSmogon.length?'; especies sin resolver: '+unresolvedSmogon.map(x=>x.poolName).join(', '):'')+(unsupportedAbilities.length?'; habilidades no compatibles: '+unsupportedAbilities.join(', '):'')))+'. Repartos competitivos disponibles: '+spreadCoverage+'/'+pool.length+'; fuente '+(spreadMeta.source||'Smogon')+' '+(spreadMeta.month||'pendiente')+', Champions M-C BO3; corte principal '+(spreadMeta.primaryRatingCutoff||1760)+'+ y respaldo '+(spreadMeta.fallbackRatingCutoffs||[]).map(x=>x+'+').join('/')+'. La búsqueda heurística de repartos está disponible; sus resultados aún requieren validación competitiva y de navegador.'}catch(e){$('status').textContent='Error cargando pool o movepools: '+e.message}}
@@ -89,17 +122,26 @@ function readTargetTurnState(target){
 function calculateConfiguredTargets(){
  const valid=validatePC('ownPC')&&validatePC('foePC');
  const targets=[...$('targets').querySelectorAll('.target')];
- const missing=targets.some(t=>!t.querySelector('.move').value||t.querySelector('.move').disabled);
- const invalidTurnState=targets.map(readTargetTurnState).find(x=>x.error);
+ const damageTargets=targets.filter(target=>!isSpeedTarget(target));
+ const speedTargets=targets.filter(isSpeedTarget);
+ const missing=damageTargets.some(t=>!t.querySelector('.move').value||t.querySelector('.move').disabled);
+ const invalidTurnState=damageTargets.map(readTargetTurnState).find(x=>x.error);
+ const invalidSpeedState=speedTargets.map(readSpeedTargetState).find(x=>x.error);
  const itemValid=validatePoolItem(optimizerData,$('own').value,$('item').value)&&validatePoolItem(optimizerData,$('foe').value,$('foeItem').value);
-
  if(!valid){$('status').textContent='PC inválidos: cada estadística debe ser un entero entre 0 y 32 y el total no puede superar 66.';return}
  if(!itemValid){$('status').textContent='Objeto inválido: las formas Mega requieren su megapiedra correspondiente.';return}
- if(missing){$('status').textContent='Hay objetivos sin movimiento legal seleccionado.';return}
+ if(missing){$('status').textContent='Hay objetivos de daño sin movimiento legal seleccionado.';return}
  if(invalidTurnState){$('status').textContent=invalidTurnState.error;return}
+ if(invalidSpeedState){$('status').textContent=invalidSpeedState.error;return}
  if(!targets.length){$('status').textContent='Añade al menos un objetivo.';return}
  try{
   const results=targets.map((target,index)=>{
+   if(isSpeedTarget(target)){
+    const state=readSpeedTargetState(target);
+    const relation=target.querySelector('.kind').value==='speed-fast'?'faster':'slower';
+    const result=calculateSpeedComparison(getPC('ownPC'),relation,state.margin);
+    return 'Objetivo '+(index+1)+' (Velocidad '+(relation==='faster'?'superar al rival':'ser más lento')+'): propio '+result.ownSpeed+' vs rival '+result.foeSpeed+'; margen mínimo '+state.margin+' — '+(result.passed?'CUMPLIDO':'NO CUMPLIDO');
+   }
    const offensive=target.querySelector('.kind').value==='off';
    const attacker=offensive?$('own').value:$('foe').value;
    const defender=offensive?$('foe').value:$('own').value;
@@ -128,7 +170,7 @@ function calculateConfiguredTargets(){
    const maxPercent=damage.range[1]/damage.defenderStats.hp*100;
    return 'Objetivo '+(index+1)+' ('+(offensive?'hacer KO':'sobrevivir')+', '+attacks+'HKO): '+attacker+' → '+defender+' con '+target.querySelector('.move').value+': '+damage.range[0]+'–'+damage.range[1]+' PS ('+minPercent.toFixed(1)+'–'+maxPercent.toFixed(1)+'%). precisión '+turnState.accuracy+'%; PS iniciales '+currentHP+'/'+damage.defenderStats.hp+'; residual '+turnState.residual+'; recuperación '+turnState.recovery+'. Probabilidad de cumplirlo: '+(success*100).toFixed(1)+'% / mínimo '+(minimum*100)+'% — '+(success>=minimum?'CUMPLIDO':'NO CUMPLIDO');
   });
-  $('status').textContent=results.join('\n')+'\n\nCálculo Smogon Champions, '+($('gameType').value==='Doubles'?'dobles':'individual')+', con las condiciones, precisión, PS iniciales y efectos entre ataques seleccionados. No simula turnos completos. La búsqueda heurística está disponible en el botón «Buscar mejores repartos de PC».';
+  $('status').textContent=results.join('\n')+'\n\nCálculo Smogon Champions, '+($('gameType').value==='Doubles'?'dobles':'individual')+', con condiciones, precisión, PS iniciales y efectos entre ataques. Los objetivos de Velocidad incluyen Viento Afín, Choice Scarf y habilidades de clima/terreno. No simula turnos completos ni etapas de Velocidad.';
  }catch(error){$('status').textContent='No se ha podido calcular el escenario: '+error.message}
 }
 $('addTarget').addEventListener('click',addTarget);
@@ -155,7 +197,7 @@ function renderSearchResults(result){
   const card=document.createElement('article');card.className='result-card';
   const title=document.createElement('h3');title.textContent='#'+(index+1)+' · '+candidate.points.join(' / ');
   const score=document.createElement('p');score.className='score';score.textContent='Cumplimiento medio de umbrales: '+(candidate.score*100).toFixed(1)+'%';
-  const detail=document.createElement('p');detail.textContent=candidate.details.map(x=>'Objetivo '+x.index+': '+(x.success*100).toFixed(1)+'% (mínimo '+(x.minimum*100).toFixed(0)+'%) · '+(x.passed?'cumplido':'no cumplido')+' · '+x.range[0]+'–'+x.range[1]+' PS; PS '+x.currentHP+'/'+x.maxHP+'; residual '+x.residual+'; recuperación '+x.recovery).join(' | ');
+  const detail=document.createElement('p');detail.textContent=candidate.details.map(x=>x.kind==='speed'?'Objetivo '+x.index+': Velocidad '+x.ownSpeed+' vs '+x.foeSpeed+' (margen '+x.margin+') · '+(x.passed?'cumplido':'no cumplido'):'Objetivo '+x.index+': '+(x.success*100).toFixed(1)+'% (mínimo '+(x.minimum*100).toFixed(0)+'%) · '+(x.passed?'cumplido':'no cumplido')+' · '+x.range[0]+'–'+x.range[1]+' PS; PS '+x.currentHP+'/'+x.maxHP+'; residual '+x.residual+'; recuperación '+x.recovery+'; precisión '+x.accuracy+'%').join(' | ');
   card.append(title,score,detail);
   const apply=document.createElement('button');apply.type='button';apply.textContent='Aplicar este reparto';
   apply.addEventListener('click',()=>{const rootPC=$('ownPC');rootPC.querySelectorAll('input').forEach((input,i)=>input.value=candidate.points[i]);$('ownPreset').value='';validatePC('ownPC');renderStats('own');$('status').textContent='Reparto aplicado. La naturaleza, habilidad y objeto no se han modificado.'});
@@ -169,20 +211,21 @@ async function searchBestPcSpreads(){
 
  if(!valid){$('status').textContent='PC inválidos: cada estadística debe ser un entero entre 0 y 32 y el total no puede superar 66.';return}
  if(!itemValid){$('status').textContent='Objeto inválido: las formas Mega requieren su megapiedra correspondiente.';return}
- if(!targets.length||targets.some(t=>!t.querySelector('.move').value||t.querySelector('.move').disabled)){ $('status').textContent='Añade objetivos con movimientos legales seleccionados antes de optimizar.';return}
- const invalidTurnState=targets.map(readTargetTurnState).find(x=>x.error);if(invalidTurnState){$('status').textContent=invalidTurnState.error;return}
- if(!getSmogonRuntimeAvailable()){return}
+ const damageTargets=targets.filter(target=>!isSpeedTarget(target));const speedTargets=targets.filter(isSpeedTarget);
+ if(!targets.length||damageTargets.some(t=>!t.querySelector('.move').value||t.querySelector('.move').disabled)){ $('status').textContent='Añade objetivos de daño con movimientos legales o benchmarks de Velocidad.';return}
+ const invalidTurnState=damageTargets.map(readTargetTurnState).find(x=>x.error);if(invalidTurnState){$('status').textContent=invalidTurnState.error;return}
+ const invalidSpeedState=speedTargets.map(readSpeedTargetState).find(x=>x.error);if(invalidSpeedState){$('status').textContent=invalidSpeedState.error;return}
+ if(damageTargets.length&&!getSmogonRuntimeAvailable()){return}
  const ownName=$('own').value,foeName=$('foe').value,foePoints=getPC('foePC');
  const ownNature=NATURE_IDS[$('nature').value],foeNature=NATURE_IDS[$('foeNature').value];
  const ownAbility=$('ability').value,foeAbility=$('foeAbility').value,ownItem=$('item').value,foeItem=$('foeItem').value;
- const targetSpecs=targets.map(target=>({
-  ...readTargetTurnState(target),
-  offensive:target.querySelector('.kind').value==='off',
-  moveName:target.querySelector('.move').value,
-  attacks:Number(target.querySelector('.hits').value),isCrit:$('critical').checked,
-  hits:target.querySelector('.hitCount').value?Number(target.querySelector('.hitCount').value):undefined,
-  minimum:Number(target.querySelector('.chance').value)/100
- }));
+ const targetSpecs=targets.map(target=>{
+  if(isSpeedTarget(target))return {kind:target.querySelector('.kind').value,...readSpeedTargetState(target)};
+  return {kind:'damage',...readTargetTurnState(target),offensive:target.querySelector('.kind').value==='off',
+   moveName:target.querySelector('.move').value,attacks:Number(target.querySelector('.hits').value),isCrit:$('critical').checked,
+   hits:target.querySelector('.hitCount').value?Number(target.querySelector('.hitCount').value):undefined,
+   minimum:Number(target.querySelector('.chance').value)/100};
+ });
  searchCancelled=false;$('searchBest').disabled=true;$('cancelSearch').classList.remove('hidden');$('searchResults').replaceChildren();
  $('status').textContent='Iniciando búsqueda de repartos...';
  try{
@@ -192,6 +235,11 @@ async function searchBestPcSpreads(){
    onProgress:progress=>{$('status').textContent='Búsqueda en curso: '+progress.completedSeeds+'/'+progress.totalSeeds+' puntos de partida · '+progress.evaluated+' candidatos evaluados.'},
    evaluate:points=>{
     const details=targetSpecs.map((target,index)=>{
+     if(target.kind==='speed-fast'||target.kind==='speed-slow'){
+      const relation=target.kind==='speed-fast'?'faster':'slower';
+      const comparison=calculateSpeedComparison(points,relation,target.margin);
+      return {index:index+1,kind:'speed',success:comparison.passed?1:0,minimum:1,passed:comparison.passed,ownSpeed:comparison.ownSpeed,foeSpeed:comparison.foeSpeed,margin:target.margin};
+     }
      const attacker=target.offensive?ownName:foeName,defender=target.offensive?foeName:ownName;
      const damage=calculateSmogonDamage(optimizerData,{
       attacker,defender,moveName:target.moveName,
@@ -206,7 +254,7 @@ async function searchBestPcSpreads(){
      const success=target.offensive?ko:1-ko;
      return {index:index+1,success,minimum:target.minimum,passed:success>=target.minimum,range:damage.range,currentHP,maxHP:damage.defenderStats.hp,residual:target.residual,recovery:target.recovery,accuracy:target.accuracy};
     });
-    const score=details.reduce((sum,item)=>sum+Math.min(1,item.success/item.minimum),0)/details.length;
+    const score=details.reduce((sum,item)=>sum+(item.kind==='speed'?item.success:Math.min(1,item.success/item.minimum)),0)/details.length;
     return {score,details};
    }
   });
