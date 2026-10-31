@@ -27,7 +27,7 @@ export async function loadOptimizerData(basePath = './') {
   const [poolResponse, movesResponse, referenceResponse] = await Promise.all([
     fetch(basePath + 'pool-data.json'),
     fetch(basePath + 'move-data.json'),
-    fetch(basePath + 'vendor/pokecalc/champions-data.json')
+    fetch(basePath + 'vendor/champions-reference/champions-data.json')
   ]);
   if (!poolResponse.ok || !movesResponse.ok || !referenceResponse.ok) {
     throw new Error('No se han podido cargar todos los archivos de datos del optimizador.');
