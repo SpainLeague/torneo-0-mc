@@ -17,7 +17,18 @@
 <div class="actions" style="margin-top:10px"><button class="primary" id="searchBest" type="button">Buscar mejores repartos de PC</button><button id="cancelSearch" type="button" class="hidden">Detener búsqueda</button></div>
 <p class="hint">La búsqueda heurística parte de repartos competitivos publicados y distribuciones iniciales. Mantiene fija la naturaleza, habilidad, objeto y configuración del rival. No examina todas las combinaciones legales.</p>
 <div id="searchResults" class="search-results" aria-live="polite"></div></section>
-<section class="panel"><h2>Condiciones y modificadores</h2><div class="three"><label class="check"><input type="checkbox"> Clima</label><label class="check"><input type="checkbox"> Terreno</label><label class="check"><input type="checkbox"> Pantallas</label><label class="check"><input type="checkbox"> Viento Afín</label><label class="check"><input type="checkbox"> Golpe crítico</label><label class="check"><input type="checkbox"> Daño residual</label><label class="check"><input type="checkbox"> Recuperación</label><label class="check"><input type="checkbox"> Dobles / daño en área</label></div><p class="hint">Los controles visuales se incorporarán al motor de cálculo al completar la integración de mecánicas.</p></section>
+<section class="panel"><h2>Condiciones y modificadores</h2>
+<div class="three">
+<div class="field"><label for="weather">Clima</label><select id="weather"><option value="">Sin clima</option><option value="Sun">Sol</option><option value="Rain">Lluvia</option><option value="Sand">Tormenta de arena</option><option value="Snow">Nieve</option><option value="Harsh Sunshine">Sol intenso</option><option value="Heavy Rain">Lluvia intensa</option><option value="Strong Winds">Vientos fuertes</option></select></div>
+<div class="field"><label for="terrain">Terreno</label><select id="terrain"><option value="">Sin terreno</option><option value="Electric">Eléctrico</option><option value="Grassy">Hierba</option><option value="Psychic">Psíquico</option><option value="Misty">Niebla</option></select></div>
+<div class="field"><label for="gameType">Formato de combate</label><select id="gameType"><option value="Doubles" selected>Dobles (VGC)</option><option value="Singles">Individual</option></select></div>
+</div>
+<div class="grid" style="margin-top:12px">
+<div><b>Pantallas del Pokémon propio</b><div class="three"><label class="check"><input id="ownReflect" type="checkbox"> Reflejo</label><label class="check"><input id="ownLightScreen" type="checkbox"> Pantalla Luz</label><label class="check"><input id="ownAuroraVeil" type="checkbox"> Velo Aurora</label></div></div>
+<div><b>Pantallas del rival</b><div class="three"><label class="check"><input id="foeReflect" type="checkbox"> Reflejo</label><label class="check"><input id="foeLightScreen" type="checkbox"> Pantalla Luz</label><label class="check"><input id="foeAuroraVeil" type="checkbox"> Velo Aurora</label></div></div>
+</div>
+<div style="margin-top:12px"><label class="check"><input id="critical" type="checkbox"> Calcular como golpe crítico</label></div>
+<p class="hint">Clima, terreno, pantallas, golpe crítico y daño de movimientos en área se envían al motor de Pokémon Champions. La precisión del movimiento también se tiene en cuenta en las probabilidades de KO. Viento Afín afecta a la Velocidad, no al daño; el daño residual y la recuperación entre turnos todavía no están modelados.</p></section>
 </main>
 <script src="https://unpkg.com/@smogon/calc@0.12.0/dist/data/production.min.js"></script>
 <script src="https://unpkg.com/@smogon/calc@0.12.0/dist/production.min.js"></script>
@@ -50,17 +61,22 @@ function addTarget(){const id=++targetId,el=document.createElement('div');el.cla
 function populateAllMoves(){$('targets').querySelectorAll('.target').forEach(populateTargetMoves)}
 function reset(){$('targets').replaceChildren();targetId=0;addTarget();pcInputs('ownPC',[0,0,0,0,0,0]);pcInputs('foePC',[0,0,0,0,0,0]);$('status').textContent='Configuración restablecida.'}
 async function init(){try{optimizerData=await loadOptimizerData('./');pool=optimizerData.pool;moves=optimizerData.moveData;const coverage=auditPoolCoverage(optimizerData);const missingMoves=coverage.filter(x=>!x.legalMoveCount);const unsupportedDamageMoves=coverage.flatMap(x=>x.movesWithoutDamageData.map(move=>x.poolName+': '+move));const unresolvedForms=coverage.filter(x=>!x.referenceResolved);let smogonAudit=[];let smogonError='';try{getSmogonRuntime();smogonAudit=auditSmogonCoverage(optimizerData)}catch(error){smogonError=error.message}const unresolvedSmogon=smogonAudit.filter(x=>!x.speciesName);const unsupportedAbilities=smogonAudit.filter(x=>x.speciesName&&!x.abilityCount);const missingSmogonMoves=smogonAudit.flatMap(x=>x.missingMoves.map(move=>x.poolName+': '+move));const spreadMeta=optimizerData.evSpreads?.meta||{};const spreadCoverage=Object.keys(optimizerData.evSpreads?.pokemon||{}).length;opts($('own'),pool.map(p=>p.name));opts($('foe'),pool.map(p=>p.name));opts($('nature'),NATURES);opts($('foeNature'),NATURES);$('nature').value='Fuerte';$('foeNature').value='Fuerte';$('own').addEventListener('change',()=>{updateAbilities('own');updateItems('own');populateAllMoves()});$('foe').addEventListener('change',()=>{updateAbilities('foe');updateItems('foe');populateAllMoves()});$('ownPreset').addEventListener('change',()=>applySpreadPreset('own'));$('foePreset').addEventListener('change',()=>applySpreadPreset('foe'));$('nature').addEventListener('change',()=>renderStats('own'));$('foeNature').addEventListener('change',()=>renderStats('foe'));pcInputs('ownPC',[0,0,0,0,0,0]);pcInputs('foePC',[0,0,0,0,0,0]);updateAbilities('own');updateAbilities('foe');updateItems('own');updateItems('foe');addTarget();$('status').textContent='Datos cargados: '+pool.length+' Pokémon. '+(pool.length-missingMoves.length)+' tienen movepool asociado; sin movepool: '+(missingMoves.map(x=>x.poolName).join(', ')||'ninguno')+'. Formas sin ficha de referencia: '+unresolvedForms.length+'. Movimientos legales sin datos de daño: '+unsupportedDamageMoves.length+(unsupportedDamageMoves.length?' ('+unsupportedDamageMoves.join(', ')+')':'')+'. Motor Smogon Champions: '+(smogonError?'no disponible ('+smogonError+')':('cargado; especies compatibles '+(pool.length-unresolvedSmogon.length)+'/'+pool.length+', movimientos legales sin datos '+missingSmogonMoves.length+'; especies sin habilidad documentada: '+unsupportedAbilities.length+(unresolvedSmogon.length?'; especies sin resolver: '+unresolvedSmogon.map(x=>x.poolName).join(', '):'')))+'. Repartos competitivos disponibles: '+spreadCoverage+'/'+pool.length+'; fuente '+(spreadMeta.source||'Smogon')+' '+(spreadMeta.month||'pendiente')+', Champions M-C BO3; corte principal '+(spreadMeta.primaryRatingCutoff||1760)+'+ y respaldo '+(spreadMeta.fallbackRatingCutoffs||[]).map(x=>x+'+').join('/')+'. La búsqueda heurística de repartos está disponible; sus resultados aún requieren validación competitiva y de navegador.'}catch(e){$('status').textContent='Error cargando pool o movepools: '+e.message}}
+function buildScenarioField(offensive){
+ const ownSide={isReflect:$('ownReflect').checked,isLightScreen:$('ownLightScreen').checked,isAuroraVeil:$('ownAuroraVeil').checked};
+ const foeSide={isReflect:$('foeReflect').checked,isLightScreen:$('foeLightScreen').checked,isAuroraVeil:$('foeAuroraVeil').checked};
+ return {gameType:$('gameType').value,weather:$('weather').value||undefined,terrain:$('terrain').value||undefined,
+  attackerSide:offensive?ownSide:foeSide,defenderSide:offensive?foeSide:ownSide};
+}
 function calculateConfiguredTargets(){
  const valid=validatePC('ownPC')&&validatePC('foePC');
  const targets=[...$('targets').querySelectorAll('.target')];
  const missing=targets.some(t=>!t.querySelector('.move').value||t.querySelector('.move').disabled);
  const itemValid=validatePoolItem(optimizerData,$('own').value,$('item').value)&&validatePoolItem(optimizerData,$('foe').value,$('foeItem').value);
- const modifiers=[...document.querySelectorAll('.check input')].some(input=>input.checked);
+
  if(!valid){$('status').textContent='PC inválidos: cada estadística debe ser un entero entre 0 y 32 y el total no puede superar 66.';return}
  if(!itemValid){$('status').textContent='Objeto inválido: las formas Mega requieren su megapiedra correspondiente.';return}
  if(missing){$('status').textContent='Hay objetivos sin movimiento legal seleccionado.';return}
  if(!targets.length){$('status').textContent='Añade al menos un objetivo.';return}
- if(modifiers){$('status').textContent='Los controles de clima, terreno, pantallas y otros modificadores aún no están conectados. Desmárcalos para probar el escenario base.';return}
  try{
   const results=targets.map((target,index)=>{
    const offensive=target.querySelector('.kind').value==='off';
@@ -76,10 +92,11 @@ function calculateConfiguredTargets(){
     attackerAbility:$(offensive?'ability':'foeAbility').value,
     defenderAbility:$(offensive?'foeAbility':'ability').value,
     attackerItemId:$(offensive?'item':'foeItem').value,
-    defenderItemId:$(offensive?'foeItem':'item').value
+    defenderItemId:$(offensive?'foeItem':'item').value,
+    field:buildScenarioField(offensive),isCrit:$('critical').checked
    });
    const attacks=Number(target.querySelector('.hits').value);
-   const probabilities=koThresholds(damage.rolls,damage.defenderStats.hp);
+   const probabilities=koThresholds(damage.rolls,damage.defenderStats.hp,0,damage.accuracy);
    const ko=probabilities.probabilities[attacks-1].probability;
    const success=offensive?ko:1-ko;
    const minimum=Number(target.querySelector('.chance').value)/100;
@@ -125,11 +142,10 @@ async function searchBestPcSpreads(){
  const targets=[...$('targets').querySelectorAll('.target')];
  const valid=validatePC('ownPC')&&validatePC('foePC');
  const itemValid=validatePoolItem(optimizerData,$('own').value,$('item').value)&&validatePoolItem(optimizerData,$('foe').value,$('foeItem').value);
- const modifiers=[...document.querySelectorAll('.check input')].some(input=>input.checked);
+
  if(!valid){$('status').textContent='PC inválidos: cada estadística debe ser un entero entre 0 y 32 y el total no puede superar 66.';return}
  if(!itemValid){$('status').textContent='Objeto inválido: las formas Mega requieren su megapiedra correspondiente.';return}
  if(!targets.length||targets.some(t=>!t.querySelector('.move').value||t.querySelector('.move').disabled)){ $('status').textContent='Añade objetivos con movimientos legales seleccionados antes de optimizar.';return}
- if(modifiers){$('status').textContent='Desmarca los modificadores: todavía no están conectados al motor de cálculo.';return}
  if(!getSmogonRuntimeAvailable()){return}
  const ownName=$('own').value,foeName=$('foe').value,foePoints=getPC('foePC');
  const ownNature=NATURE_IDS[$('nature').value],foeNature=NATURE_IDS[$('foeNature').value];
@@ -137,7 +153,7 @@ async function searchBestPcSpreads(){
  const targetSpecs=targets.map(target=>({
   offensive:target.querySelector('.kind').value==='off',
   moveName:target.querySelector('.move').value,
-  attacks:Number(target.querySelector('.hits').value),
+  attacks:Number(target.querySelector('.hits').value),isCrit:$('critical').checked,
   minimum:Number(target.querySelector('.chance').value)/100
  }));
  searchCancelled=false;$('searchBest').disabled=true;$('cancelSearch').classList.remove('hidden');$('searchResults').replaceChildren();
@@ -155,9 +171,10 @@ async function searchBestPcSpreads(){
       attackerPoints:target.offensive?points:foePoints,defenderPoints:target.offensive?foePoints:points,
       attackerNatureId:target.offensive?ownNature:foeNature,defenderNatureId:target.offensive?foeNature:ownNature,
       attackerAbility:target.offensive?ownAbility:foeAbility,defenderAbility:target.offensive?foeAbility:ownAbility,
-      attackerItemId:target.offensive?ownItem:foeItem,defenderItemId:target.offensive?foeItem:ownItem
+      attackerItemId:target.offensive?ownItem:foeItem,defenderItemId:target.offensive?foeItem:ownItem,
+      field:buildScenarioField(target.offensive),isCrit:target.isCrit
      });
-     const ko=koThresholds(damage.rolls,damage.defenderStats.hp).probabilities[target.attacks-1].probability;
+     const ko=koThresholds(damage.rolls,damage.defenderStats.hp,0,damage.accuracy).probabilities[target.attacks-1].probability;
      const success=target.offensive?ko:1-ko;
      return {index:index+1,success,minimum:target.minimum,passed:success>=target.minimum,range:damage.range};
     });
