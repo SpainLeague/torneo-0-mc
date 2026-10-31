@@ -66,7 +66,7 @@ export function resolveAbility(poolEntry, species, referenceSpecies, selectedAbi
   }
 
   const referenceAbilities = referenceSpecies?.abilities;
-  const requested = Array.isArray(referenceAbilities) ? referenceAbilities[selectedIndex] : poolAbilities[selectedIndex];
+  const requested = Array.isArray(referenceAbilities) ? referenceAbilities[selectedIndex] : championsAbilities[selectedIndex] ?? poolAbilities[selectedIndex];
   if (!requested) {
     throw new Error('No se puede verificar la habilidad seleccionada de «' + poolEntry.name + '» con los datos Champions disponibles.');
   }
