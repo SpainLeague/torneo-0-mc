@@ -41,7 +41,6 @@ jobs:
         run: |
           node --check optimizador-heuristic.js
           node --check optimizador-smogon.js
-          node --check optimizador-ko.js
           node --check optimizador-search.js
           node --check optimizador-data.js
           node --check tests/test_optimizador_runtime.mjs
