@@ -1,0 +1,183 @@
+// Thin browser adapter for the official @smogon/calc Champions mechanics.
+// Runtime: @smogon/calc 0.12.0, loaded from its pinned browser bundles.
+// Champions is generation 0 in Smogon's calculator; its EV-shaped field stores PC directly.
+import {
+  getLegalMoveNames,
+  getPoolEntry,
+  getReferenceSpeciesRecord,
+  normalizeId,
+  calculateChampionStats
+} from './optimizador-data.js';
+
+const SMOGON_SPECIES = {
+  'Samurott Hisui':'Samurott-Hisui',
+  'Raichu Alola':'Raichu-Alola',
+  'Rotom Frost':'Rotom-Frost',
+  'Rotom Mow':'Rotom-Mow',
+  'Rotom Fan':'Rotom-Fan',
+  'Rotom Heat':'Rotom-Heat',
+  'Avalugg Hisui':'Avalugg-Hisui',
+  'Tauros de Paldea (Raza Combate)':'Tauros-Paldea-Combat',
+  'Tauros de Paldea (Raza Ardiente)':'Tauros-Paldea-Blaze',
+  'Tauros de Paldea (Raza Acuática)':'Tauros-Paldea-Aqua',
+  'Zoroark Hisui':'Zoroark-Hisui',
+  'Meowstic-F':'Meowstic-F',
+  'Meowstic-M':'Meowstic',
+  'Goodra Hisui':'Goodra-Hisui',
+  'Persian Alola':'Persian-Alola',
+  'Decidueye Hisui':'Decidueye-Hisui',
+  'Slowking Galar':'Slowking-Galar',
+  'Slowbro Galar':'Slowbro-Galar',
+  'Stunfisk Galar':'Stunfisk-Galar'
+};
+
+const STAT_KEYS = ['hp','atk','def','spa','spd','spe'];
+
+export function getSmogonRuntime() {
+  const api = globalThis.calc;
+  if (!api?.Generations || !api?.Pokemon || !api?.Move || !api?.Field || !api?.calculate) {
+    throw new Error('No se ha cargado @smogon/calc. Comprueba la conexión con UNPKG y el orden de los scripts.');
+  }
+  return {api, gen: api.Generations.get(0)};
+}
+
+export function resolveSmogonSpecies(data, poolName, gen) {
+  const reference = getReferenceSpeciesRecord(data, poolName);
+  const name = SMOGON_SPECIES[poolName] ?? reference?.species?.name;
+  if (!name) throw new Error('Sin alias de especie Champions para «' + poolName + '».');
+  const species = gen.species.get(normalizeId(name));
+  if (!species) throw new Error('La especie «' + name + '» no existe en el dex Champions de Smogon.');
+  return {name: species.name, species, reference: reference?.species ?? null};
+}
+
+function resolveAbility(poolEntry, species, referenceSpecies, selectedAbility) {
+  const poolAbilities = String(poolEntry.abilities ?? '').split('/').map(x => x.trim()).filter(Boolean);
+  const selectedIndex = Math.max(0, poolAbilities.indexOf(selectedAbility));
+  const referenceAbilities = referenceSpecies?.abilities;
+  const fromReference = Array.isArray(referenceAbilities) ? referenceAbilities[selectedIndex] : null;
+  const fromSmogon = Object.values(species.abilities ?? {})[selectedIndex] ?? Object.values(species.abilities ?? {})[0];
+  const ability = fromReference ?? fromSmogon;
+  if (!ability) throw new Error('No se ha podido resolver una habilidad Champions para «' + poolEntry.name + '».');
+  return ability;
+}
+
+function resolveItem(data, gen, itemId) {
+  if (!itemId) return undefined;
+  const id = normalizeId(itemId);
+  const item = data.reference.items?.[id];
+  const name = item?.name ?? gen.items.get(id)?.name;
+  if (!name || !gen.items.get(normalizeId(name))) {
+    throw new Error('El objeto «' + itemId + '» no está disponible en el catálogo Champions del motor.');
+  }
+  return name;
+}
+
+export function createSmogonPokemon(data, poolName, {
+  points = [0,0,0,0,0,0],
+  natureId = 'hardy',
+  ability,
+  itemId = ''
+} = {}) {
+  const {api, gen} = getSmogonRuntime();
+  const entry = getPoolEntry(data, poolName);
+  if (!entry) throw new Error('Pokémon no encontrado en la pool: ' + poolName);
+  const resolved = resolveSmogonSpecies(data, poolName, gen);
+  const nature = data.reference.natures?.[natureId]?.name;
+  if (!nature || !gen.natures.get(normalizeId(nature))) {
+    throw new Error('Naturaleza no disponible en el motor Champions: ' + natureId);
+  }
+  const abilityName = resolveAbility(entry, resolved.species, resolved.reference, ability);
+  if (!gen.abilities.get(normalizeId(abilityName))) {
+    throw new Error('Habilidad no disponible en el motor Champions: ' + abilityName);
+  }
+  const itemName = resolveItem(data, gen, itemId);
+  const evs = Object.fromEntries(STAT_KEYS.map((key, index) => [key, points[index] ?? 0]));
+  const pokemon = new api.Pokemon(gen, resolved.name, {
+    level: 50,
+    nature,
+    ability: abilityName,
+    item: itemName,
+    evs
+  });
+
+  // Guard against silent disagreement between the project's stat preview and Smogon's
+  // Champions generation-0 stat-point implementation.
+  const expected = calculateChampionStats(data, poolName, points, natureId);
+  const actual = STAT_KEYS.map(key => pokemon.rawStats[key]);
+  if (expected.some((value, index) => value !== actual[index])) {
+    throw new Error('Diferencia de estadísticas entre los datos de la pool y Smogon para «' + poolName +
+      '»: pool [' + expected.join(',') + '], Smogon [' + actual.join(',') + '].');
+  }
+  return pokemon;
+}
+
+export function calculateSmogonDamage(data, {
+  attacker,
+  defender,
+  moveName,
+  attackerPoints = [0,0,0,0,0,0],
+  defenderPoints = [0,0,0,0,0,0],
+  attackerNatureId = 'hardy',
+  defenderNatureId = 'hardy',
+  attackerAbility,
+  defenderAbility,
+  attackerItemId = '',
+  defenderItemId = '',
+  field = {}
+}) {
+  const {api, gen} = getSmogonRuntime();
+  const legalMoves = getLegalMoveNames(data, attacker);
+  if (!legalMoves.some(name => normalizeId(name) === normalizeId(moveName))) {
+    throw new Error('El movimiento «' + moveName + '» no está en el movepool legal de «' + attacker + '».');
+  }
+  const moveData = gen.moves.get(normalizeId(moveName));
+  if (!moveData) throw new Error('Smogon no tiene datos Champions para el movimiento «' + moveName + '».');
+  if (moveData.category === 'Status') {
+    throw new Error('«' + moveName + '» es un movimiento de estado y no tiene cálculo de daño.');
+  }
+
+  const attackingPokemon = createSmogonPokemon(data, attacker, {
+    points: attackerPoints, natureId: attackerNatureId, ability: attackerAbility, itemId: attackerItemId
+  });
+  const defendingPokemon = createSmogonPokemon(data, defender, {
+    points: defenderPoints, natureId: defenderNatureId, ability: defenderAbility, itemId: defenderItemId
+  });
+  const move = new api.Move(gen, moveName, {
+    ability: attackingPokemon.ability,
+    item: attackingPokemon.item
+  });
+  const battleField = new api.Field({gameType: 'Doubles', ...field});
+  const result = api.calculate(gen, attackingPokemon, defendingPokemon, move, battleField);
+  const rolls = Array.isArray(result.damage) && result.damage.every(Number.isFinite)
+    ? result.damage.slice()
+    : null;
+  if (!rolls || rolls.length !== 16) {
+    throw new Error('El motor devolvió un formato de daño no compatible con el evaluador actual (por ejemplo, daño fijo o multigolpe).');
+  }
+  return {
+    rolls,
+    range: result.range(),
+    description: result.fullDesc(),
+    attackerStats: {...attackingPokemon.rawStats},
+    defenderStats: {...defendingPokemon.rawStats}
+  };
+}
+
+export function auditSmogonCoverage(data) {
+  const {gen} = getSmogonRuntime();
+  return data.pool.map(entry => {
+    let speciesName = null;
+    let speciesError = null;
+    try { speciesName = resolveSmogonSpecies(data, entry.name, gen).name; }
+    catch (error) { speciesError = error.message; }
+    const legalMoves = getLegalMoveNames(data, entry.name);
+    const missingMoves = legalMoves.filter(move => !gen.moves.get(normalizeId(move)));
+    return {
+      poolName: entry.name,
+      speciesName,
+      speciesError,
+      legalMoveCount: legalMoves.length,
+      missingMoves
+    };
+  });
+}
