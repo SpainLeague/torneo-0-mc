@@ -8,7 +8,9 @@ const TYPE_IDS = {
   Tierra:'Ground', Veneno:'Poison', Volador:'Flying'
 };
 
-const NON_DAMAGING_MOVE_IDS = new Set(['stuffcheeks']);\n\nconst MOVE_KEYS = {
+const NON_DAMAGING_MOVE_IDS = new Set(['stuffcheeks']);
+
+const MOVE_KEYS = {
   'Tauros de Paldea (Raza Combate)':'Tauros',
   'Tauros de Paldea (Raza Ardiente)':'Tauros',
   'Tauros de Paldea (Raza Acuática)':'Tauros',
