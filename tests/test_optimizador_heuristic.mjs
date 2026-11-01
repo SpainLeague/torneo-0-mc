@@ -94,8 +94,8 @@ test('coarse-to-fine transfers can move a large PC allocation and then refine it
     starts: [[32, 0, 32, 0, 2, 0]],
     activeStats: [5],
     top: 3,
-    maxIterations: 4,
-    transferSteps: [8, 4, 2, 1],
+    maxIterations: 8,
+    transferSteps: [8, 8, 8, 8, 4, 4, 2, 1],
     beamWidth: 8,
     yieldControl: async () => {},
     evaluate: points => ({
@@ -115,4 +115,23 @@ test('rejects invalid transfer step schedules', async () => {
     yieldControl: async () => {},
     evaluate: () => ({score: 0.5})
   }), /transferSteps/);
+});
+
+test('runs the complete eight-pass PC transfer schedule', async () => {
+  const observed=[];
+  const result=await findBestLocalSpreads({
+    starts:[[32,0,32,0,2,0]],
+    activeStats:[5],
+    top:1,
+    maxIterations:8,
+    transferSteps:[8,8,8,8,4,4,2,1],
+    beamWidth:8,
+    yieldControl:async()=>{},
+    onProgress:progress=>{if(progress.transferStep)observed.push(progress.transferStep)},
+    evaluate:points=>({score:Math.min(1,points[5]/32)})
+  });
+  assert.deepEqual(result.transferSteps,[8,8,8,8,4,4,2,1]);
+  assert.deepEqual(observed,[8,8,8,8,4,4,2,1]);
+  assert.equal(result.completedSeeds,8);
+  assert.equal(result.results[0].points[5],32);
 });
