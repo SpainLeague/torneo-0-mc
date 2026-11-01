@@ -15,7 +15,7 @@
 </section>
 <section class="panel"><div class="target-head"><div><h2>Objetivos competitivos</h2><p class="hint">Todos tienen la misma importancia. Puedes combinar objetivos ofensivos y defensivos.</p></div><button id="addTarget" type="button">+ Añadir objetivo</button></div><div id="targets"></div><div class="actions"><button class="primary" id="prepare" type="button">Validar y calcular escenarios</button><button id="reset" type="button">Restablecer</button></div><div id="status" class="status" aria-live="polite">Selecciona los Pokémon y configura los objetivos.</div>
 <div class="actions" style="margin-top:10px"><button class="primary" id="searchBest" type="button">Buscar mejores repartos de PC</button><button id="cancelSearch" type="button" class="hidden">Detener búsqueda</button></div>
-<p class="hint">La búsqueda por haz parte de repartos competitivos publicados y distribuciones iniciales. Mantiene fija la naturaleza, habilidad, objeto y configuración del rival. Explora varios vecinos por iteración, pero no examina todas las combinaciones legales ni garantiza el óptimo global.</p>
+<p class="hint">La búsqueda por haz parte de repartos competitivos publicados y distribuciones iniciales. Redistribuye PC solo hacia estadísticas que influyen en los objetivos elegidos (incluidos PS cuando el Pokémon propio recibe ataques). Mantiene fija la naturaleza, habilidad, objeto y configuración del rival. Explora varios vecinos por iteración, pero no examina todas las combinaciones legales ni garantiza el óptimo global.</p>
 <div id="searchResults" class="search-results" aria-live="polite"></div></section>
 <section class="panel"><h2>Condiciones y modificadores</h2>
 <div class="three">
@@ -42,7 +42,7 @@
 <script src="https://unpkg.com/@smogon/calc@0.12.0/dist/production.min.js"></script>
 <script type="module">
 import {loadOptimizerData, getLegalMoveNames, auditPoolCoverage, calculateChampionStats, getLegalItemsForPool, getRequiredMegaStone, validatePoolItem, getSpreadPresets, normalizeId} from './optimizador-data.js';
-import {getSmogonRuntime, auditSmogonCoverage, calculateSmogonDamage} from './optimizador-smogon.js';
+import {getSmogonRuntime, auditSmogonCoverage, calculateSmogonDamage, getRelevantPcStatIndexes} from './optimizador-smogon.js';
 import {koThresholds} from './optimizador-ko.js';
 import {findBestLocalSpreads} from './optimizador-heuristic.js';
 import {calculateEffectiveSpeed,evaluateSpeedBenchmark} from './optimizador-speed.js';
@@ -193,11 +193,11 @@ function searchSeedsForSelectedPokemon(){
  if(current.every(Number.isInteger)&&current.every(x=>x>=0&&x<=32)&&current.reduce((a,b)=>a+b,0)===66)seeds.unshift(current);
  return seeds;
 }
-function renderSearchResults(result){
+function renderSearchResults(result, activeStats){
  const root=$('searchResults');root.replaceChildren();
  if(!result.results.length){root.textContent='No se han encontrado repartos evaluables.';return}
  const summary=document.createElement('p');summary.className='hint';
- summary.textContent='Evaluados '+result.evaluated.toLocaleString('es-ES')+' repartos candidatos. Búsqueda por haz; no garantiza el óptimo global.';
+ summary.textContent='Estadísticas optimizadas: '+activeStats.map(index=>STATS[index]).join(', ')+'. Evaluados '+result.evaluated.toLocaleString('es-ES')+' repartos candidatos. Búsqueda por haz; no garantiza el óptimo global.';
  root.append(summary);
  result.results.forEach((candidate,index)=>{
   const card=document.createElement('article');card.className='result-card';
@@ -232,11 +232,16 @@ async function searchBestPcSpreads(){
    hits:target.querySelector('.hitCount').value?Number(target.querySelector('.hitCount').value):undefined,
    minimum:Number(target.querySelector('.chance').value)/100};
  });
+ const activeStats=[...new Set(targetSpecs.flatMap(target=>
+  target.kind==='speed-fast'||target.kind==='speed-slow'?[5]:
+   getRelevantPcStatIndexes(target.moveName,target.offensive?'offensive':'defensive')
+ ))];
+ if(!activeStats.length){$('status').textContent='Los objetivos seleccionados no dependen de las estadísticas de PC del Pokémon propio; no existe un reparto que pueda mejorarlos. Añade un objetivo ofensivo, defensivo o de Velocidad que sí dependa de sus estadísticas.';return}
  searchCancelled=false;$('searchBest').disabled=true;$('cancelSearch').classList.remove('hidden');$('searchResults').replaceChildren();
  $('status').textContent='Iniciando búsqueda de repartos...';
  try{
   const result=await findBestLocalSpreads({
-   starts:searchSeedsForSelectedPokemon(),top:3,maxIterations:4,
+   starts:searchSeedsForSelectedPokemon(),activeStats,top:3,maxIterations:4,
    shouldCancel:()=>searchCancelled,
    onProgress:progress=>{$('status').textContent='Búsqueda en curso: iteración '+progress.completedSeeds+'/'+progress.totalSeeds+' · haz '+progress.beamWidth+' · '+progress.evaluated+' candidatos evaluados.'},
    evaluate:points=>{
@@ -264,7 +269,7 @@ async function searchBestPcSpreads(){
     return {score,details};
    }
   });
-  renderSearchResults(result);
+  renderSearchResults(result,activeStats);
   $('status').textContent=result.cancelled?'Búsqueda detenida por el usuario.':'Búsqueda completada. Se muestran hasta tres repartos encontrados en los vecindarios explorados.';
  }catch(error){$('searchResults').replaceChildren();$('status').textContent='No se pudo completar la búsqueda: '+error.message}
  finally{$('searchBest').disabled=false;$('cancelSearch').classList.add('hidden');searchCancelled=false}
