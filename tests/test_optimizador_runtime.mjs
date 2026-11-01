@@ -11,6 +11,7 @@ import {
 } from '../optimizador-smogon.js';
 import {getLegalMoveNames, normalizeId} from '../optimizador-data.js';
 import {koThresholds} from '../optimizador-ko.js';
+import {evaluateDamageObjective} from '../optimizador-evaluator.js';
 
 globalThis.calc = smogonCalc;
 const read = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
@@ -287,4 +288,24 @@ test('identifies only PC stats that can affect each Champions damage objective',
   assert.deepEqual(getRelevantPcStatIndexes('Final Gambit','offensive'),[0]);
   assert.deepEqual(getRelevantPcStatIndexes('Electro Ball','defensive'),[0,4,5]);
   assert.deepEqual(getRelevantPcStatIndexes('Payback','defensive'),[0,2,5]);
+});
+
+test('shared optimizer objective scoring consumes real Champions damage rolls', () => {
+  const scenario=calculateSmogonDamage(data,{
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
+    attackerPoints:[0,0,0,0,0,0],defenderPoints:[0,0,0,0,0,0],
+    field:{gameType:'Doubles'}
+  });
+  const offensive=evaluateDamageObjective({
+    damage:scenario,attackCount:1,hpPercent:100,minimum:0.5,offensive:true
+  });
+  const defensive=evaluateDamageObjective({
+    damage:scenario,attackCount:1,hpPercent:100,minimum:0.5,offensive:false
+  });
+  assert.equal(offensive.success,offensive.koProbability);
+  assert.equal(defensive.success,1-defensive.koProbability);
+  assert.equal(offensive.currentHP,scenario.defenderStats.hp);
+  assert.equal(defensive.maxHP,scenario.defenderStats.hp);
+  assert.ok(offensive.score>=0 && offensive.score<=1);
+  assert.ok(defensive.score>=0 && defensive.score<=1);
 });
