@@ -244,7 +244,7 @@ async function searchBestPcSpreads(){
   const result=await findBestLocalSpreads({
    starts:searchSeedsForSelectedPokemon(),activeStats,top:3,maxIterations:4,
    shouldCancel:()=>searchCancelled,
-   onProgress:progress=>{$('status').textContent='Búsqueda en curso: iteración '+progress.completedSeeds+'/'+progress.totalSeeds+' · haz '+progress.beamWidth+' · '+progress.evaluated+' candidatos evaluados.'},
+   onProgress:progress=>{$('status').textContent='Búsqueda en curso: iteración '+progress.completedSeeds+'/'+progress.totalSeeds+' · transferencia '+progress.transferStep+' PC · haz '+progress.beamWidth+' · '+progress.evaluated+' candidatos evaluados.'},
    evaluate:points=>{
     const details=targetSpecs.map((target,index)=>{
      if(target.kind==='speed-fast'||target.kind==='speed-slow'){
