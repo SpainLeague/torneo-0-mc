@@ -44,6 +44,7 @@
 import {loadOptimizerData, getLegalMoveNames, auditPoolCoverage, calculateChampionStats, getLegalItemsForPool, getRequiredMegaStone, validatePoolItem, getSpreadPresets, normalizeId} from './optimizador-data.js';
 import {getSmogonRuntime, auditSmogonCoverage, calculateSmogonDamage, getRelevantPcStatIndexes} from './optimizador-smogon.js';
 import {koThresholds} from './optimizador-ko.js';
+import {evaluateDamageObjective,meanObjectiveScore} from './optimizador-evaluator.js';
 import {findBestLocalSpreads} from './optimizador-heuristic.js';
 import {calculateEffectiveSpeed,evaluateSpeedBenchmark} from './optimizador-speed.js';
 const STATS=['PS','Ataque','Defensa','At. Esp.','Def. Esp.','Velocidad'],KEYS=['hp','atk','def','spa','spd','spe'];
@@ -167,11 +168,12 @@ function calculateConfiguredTargets(){
     hits:target.querySelector('.hitCount').value?Number(target.querySelector('.hitCount').value):undefined
    });
    const attacks=Number(target.querySelector('.hits').value);
-   const currentHP=Math.max(1,Math.ceil(damage.defenderStats.hp*turnState.hpPercent/100));
-   const probabilities=koThresholds(damage.rolls,currentHP,turnState.residual,damage.accuracy,turnState.recovery,damage.defenderStats.hp);
-   const ko=probabilities.probabilities[attacks-1].probability;
-   const success=offensive?ko:1-ko;
-   const minimum=Number(target.querySelector('.chance').value)/100;
+   const evaluation=evaluateDamageObjective({
+    damage,attackCount:attacks,hpPercent:turnState.hpPercent,
+    residual:turnState.residual,recovery:turnState.recovery,
+    offensive,minimum:Number(target.querySelector('.chance').value)/100
+   });
+   const {currentHP,success,minimum}=evaluation;
    const minPercent=damage.range[0]/damage.defenderStats.hp*100;
    const maxPercent=damage.range[1]/damage.defenderStats.hp*100;
    return 'Objetivo '+(index+1)+' ('+(offensive?'hacer KO':'sobrevivir')+', '+attacks+'HKO): '+attacker+' → '+defender+' con '+target.querySelector('.move').value+': '+damage.range[0]+'–'+damage.range[1]+' PS ('+minPercent.toFixed(1)+'–'+maxPercent.toFixed(1)+'%). precisión '+turnState.accuracy+'%; PS iniciales '+currentHP+'/'+damage.defenderStats.hp+'; residual '+turnState.residual+'; recuperación '+turnState.recovery+'. Probabilidad de cumplirlo: '+(success*100).toFixed(1)+'% / mínimo '+(minimum*100)+'% — '+(success>=minimum?'CUMPLIDO':'NO CUMPLIDO');
@@ -249,7 +251,7 @@ async function searchBestPcSpreads(){
      if(target.kind==='speed-fast'||target.kind==='speed-slow'){
       const relation=target.kind==='speed-fast'?'faster':'slower';
       const comparison=calculateSpeedComparison(points,relation,target.margin);
-      return {index:index+1,kind:'speed',success:comparison.passed?1:0,minimum:1,passed:comparison.passed,ownSpeed:comparison.ownSpeed,foeSpeed:comparison.foeSpeed,margin:target.margin};
+      return {index:index+1,kind:'speed',success:comparison.passed?1:0,score:comparison.passed?1:0,minimum:1,passed:comparison.passed,ownSpeed:comparison.ownSpeed,foeSpeed:comparison.foeSpeed,margin:target.margin};
      }
      const attacker=target.offensive?ownName:foeName,defender=target.offensive?foeName:ownName;
      const damage=calculateSmogonDamage(optimizerData,{
@@ -260,12 +262,14 @@ async function searchBestPcSpreads(){
       attackerItemId:target.offensive?ownItem:foeItem,defenderItemId:target.offensive?foeItem:ownItem,
       field:buildScenarioField(target.offensive),isCrit:target.isCrit,accuracyOverride:target.accuracy/100,hits:target.hits
      });
-     const currentHP=Math.max(1,Math.ceil(damage.defenderStats.hp*target.hpPercent/100));
-     const ko=koThresholds(damage.rolls,currentHP,target.residual,damage.accuracy,target.recovery,damage.defenderStats.hp).probabilities[target.attacks-1].probability;
-     const success=target.offensive?ko:1-ko;
-     return {index:index+1,success,minimum:target.minimum,passed:success>=target.minimum,range:damage.range,currentHP,maxHP:damage.defenderStats.hp,residual:target.residual,recovery:target.recovery,accuracy:target.accuracy};
+     const evaluation=evaluateDamageObjective({
+      damage,attackCount:target.attacks,hpPercent:target.hpPercent,
+      residual:target.residual,recovery:target.recovery,
+      offensive:target.offensive,minimum:target.minimum
+     });
+     return {index:index+1,...evaluation,kind:'damage',accuracy:target.accuracy};
     });
-    const score=details.reduce((sum,item)=>sum+(item.kind==='speed'?item.success:Math.min(1,item.success/item.minimum)),0)/details.length;
+    const score=meanObjectiveScore(details);
     return {score,details};
    }
   });
