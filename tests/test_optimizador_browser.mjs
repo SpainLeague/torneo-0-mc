@@ -64,7 +64,17 @@ test('optimizer works in desktop and mobile browsers',async t=>{
   await page.locator('#prepare').click();
   await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Probabilidad de cumplirlo')||document.querySelector('#status').textContent.includes('No se ha podido calcular'),null);
   assert.match(await page.locator('#status').textContent(),/Probabilidad de cumplirlo/,'A real Champions damage scenario should calculate in the browser');
-  assert.deepEqual(pageErrors,[],'Speed search and damage calculation should not create browser exceptions');
+
+  // Exercise the optimizer with simultaneous offensive and defensive damage objectives.
+  await page.locator('#addTarget').click();
+  const defensiveMove=page.locator('#targets .target').nth(1).locator('.move');
+  await defensiveMove.selectOption({label:'Brave Bird'});
+  await page.locator('#searchBest').click();
+  await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Búsqueda completada')||document.querySelector('#status').textContent.includes('No se pudo completar'),null,{timeout:30000});
+  assert.match(await page.locator('#status').textContent(),/Búsqueda completada/,'Mixed offensive and defensive objectives should complete the PC search');
+  assert.ok(await page.locator('#searchResults .result-card').count()>0,'Damage-based search should return candidate spreads');
+  assert.match(await page.locator('#searchResults').textContent(),/Pasos de transferencia: 8\/4\/2\/1 PC/,'Search results should disclose the coarse-to-fine transfer schedule');
+  assert.deepEqual(pageErrors,[],'Speed search, damage evaluation and mixed-objective search should not create browser exceptions');
 
   await page.setViewportSize({width:390,height:844});
   await page.waitForTimeout(150);
