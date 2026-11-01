@@ -30,6 +30,8 @@ jobs:
         run: python -m unittest discover -s tests -p "test_import_champions_spreads.py" -v
       - name: Test PC heuristic optimizer
         run: node --test tests/test_optimizador_heuristic.mjs
+      - name: Test shared damage objective scoring
+        run: node --test tests/test_optimizador_evaluator.mjs
       - name: Test Mega Starmie pool regression
         run: node --test tests/test_mega_starmie_pool.mjs
       - name: Test damage and KO probability calculations
@@ -49,6 +51,8 @@ jobs:
       - name: Check optimizer JavaScript syntax
         run: |
           node --check optimizador-heuristic.js
+          node --check optimizador-evaluator.js
+          node --check tests/test_optimizador_evaluator.mjs
           node --check optimizador-smogon.js
           node --check optimizador-search.js
           node --check optimizador-speed.js
