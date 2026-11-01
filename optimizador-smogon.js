@@ -214,6 +214,34 @@ export function calculateSmogonDamage(data, {
   };
 }
 
+// PC stats that can affect the optimized Pokemon for a single damage objective.
+// The Champions damage engine remains authoritative for damage rolls; this helper
+// only prevents the search from spending points on stats that cannot change that objective.
+export function getRelevantPcStatIndexes(moveName, role = 'offensive') {
+  const {gen} = getSmogonRuntime();
+  const move = gen.moves.get(normalizeId(moveName));
+  if (!move || move.category === 'Status') {
+    throw new Error('No se puede determinar la influencia de PC para «' + moveName + '».');
+  }
+  if (role !== 'offensive' && role !== 'defensive') {
+    throw new Error('El rol debe ser offensive o defensive.');
+  }
+  const id = normalizeId(move.name);
+  if (role === 'offensive') {
+    if (id === 'foulplay') return [];
+    if (id === 'bodypress') return [2];
+    if (id === 'finalgambit') return [0];
+    if (['electroball', 'gyroball', 'payback', 'boltbeak', 'fishiousrend'].includes(id)) return [5];
+    if (id === 'shellsidearm') return [1, 3];
+    return [move.category === 'Special' ? 3 : 1];
+  }
+  const relevant = [0]; // Defender HP affects both offensive KO and defensive survival thresholds.
+  if (id === 'foulplay') relevant.push(1); // Foul Play uses the target's Attack.
+  if (id === 'shellsidearm') relevant.push(2, 4); // Its category can change dynamically.
+  else relevant.push(move.overrideDefensiveStat === 'def' || move.category === 'Physical' ? 2 : 4);
+  return [...new Set(relevant)];
+}
+
 export function auditSmogonCoverage(data) {
   const {gen} = getSmogonRuntime();
   return data.pool.map(entry => {
