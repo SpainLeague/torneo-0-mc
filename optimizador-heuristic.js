@@ -84,6 +84,10 @@ export async function findBestLocalSpreads({
     throw new Error('transferSteps debe contener enteros entre 1 y 32.');
   }
   transferSteps = transferSteps.slice(0, 20);
+  const appliedTransferSteps = Array.from({length: maxIterations}, (_, index) =>
+    transferSteps[Math.min(index, transferSteps.length - 1)]
+  );
+  const lastScheduledStepIndex = Math.min(maxIterations, transferSteps.length) - 1;
   if (!Number.isInteger(beamWidth) || beamWidth < 1 || beamWidth > 32) {
     throw new Error('beamWidth debe estar entre 1 y 32.');
   }
@@ -119,11 +123,13 @@ export async function findBestLocalSpreads({
   }
   beam = [...new Map(beam.map(candidate => [keyOf(candidate.points), candidate])).values()]
     .sort(compareCandidates).slice(0, beamWidth);
-  onProgress({evaluated, completedSeeds: 0, totalSeeds: maxIterations, results: best.slice(), beamWidth});
+  onProgress({evaluated, completedSeeds: 0, totalSeeds: maxIterations, results: best.slice(), beamWidth,
+    transferStep: appliedTransferSteps[0]});
 
   for (let iteration = 0; iteration < maxIterations; iteration++) {
-    if (shouldCancel()) return {cancelled: true, evaluated, results: best, completedSeeds: iteration};
-    const transferStep = transferSteps[Math.min(iteration, transferSteps.length - 1)];
+    if (shouldCancel()) return {cancelled: true, evaluated, results: best, completedSeeds: iteration,
+      transferSteps: appliedTransferSteps};
+    const transferStep = appliedTransferSteps[iteration];
     const candidates = new Map(beam.map(candidate => [keyOf(candidate.points), candidate]));
     for (const current of beam) {
       for (const next of neighbours(current.points, activeStats, transferStep)) {
@@ -137,11 +143,12 @@ export async function findBestLocalSpreads({
       keyOf(candidate.points) === keyOf(beam[index]?.points));
     beam = nextBeam;
     completedSeeds = iteration + 1;
-    onProgress({evaluated, completedSeeds, totalSeeds: maxIterations, results: best.slice(), beamWidth});
+    onProgress({evaluated, completedSeeds, totalSeeds: maxIterations, results: best.slice(), beamWidth, transferStep});
     await yieldControl();
     // Do not stop on a plateau before trying the smaller transfer steps.
-    if (unchanged && iteration >= transferSteps.length - 1) break;
+    if (unchanged && iteration >= lastScheduledStepIndex) break;
   }
 
-  return {cancelled: false, evaluated, results: best, completedSeeds, beamWidth};
+  return {cancelled: false, evaluated, results: best, completedSeeds, beamWidth,
+    transferSteps: appliedTransferSteps};
 }
