@@ -176,3 +176,76 @@ test('allows an explicit effective accuracy override for ability and item effect
     attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',accuracyOverride:1.1
   }),/precisión efectiva/);
 });
+
+
+test('uses only the relevant offensive and defensive stats for physical, special and Psyshock damage', () => {
+  const attackerZero = [0,0,0,0,0,0];
+  const attackOnly = [32,0,0,0,0,0];
+  const specialAttackOnly = [0,0,0,32,0,0];
+  const defenseOnly = [0,0,32,0,0,0];
+  const specialDefenseOnly = [0,0,0,0,32,0];
+
+  const physicalBase = calculateSmogonDamage(data, {
+    attacker:'Skarmory',defender:'Vaporeon',moveName:'Brave Bird',
+    attackerPoints:attackerZero,defenderPoints:attackerZero
+  });
+  const physicalAttack = calculateSmogonDamage(data, {
+    attacker:'Skarmory',defender:'Vaporeon',moveName:'Brave Bird',
+    attackerPoints:attackOnly,defenderPoints:attackerZero
+  });
+  const physicalSpecialAttack = calculateSmogonDamage(data, {
+    attacker:'Skarmory',defender:'Vaporeon',moveName:'Brave Bird',
+    attackerPoints:specialAttackOnly,defenderPoints:attackerZero
+  });
+  assert.ok(physicalAttack.range[1] > physicalBase.range[1],
+    'Physical damage must benefit from Attack investment');
+  assert.deepEqual(physicalSpecialAttack.range,physicalBase.range,
+    'Special Attack investment must not change physical damage');
+
+  const specialBase = calculateSmogonDamage(data, {
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
+    attackerPoints:attackerZero,defenderPoints:attackerZero
+  });
+  const specialAttack = calculateSmogonDamage(data, {
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
+    attackerPoints:specialAttackOnly,defenderPoints:attackerZero
+  });
+  const specialPhysicalAttack = calculateSmogonDamage(data, {
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
+    attackerPoints:attackOnly,defenderPoints:attackerZero
+  });
+  assert.ok(specialAttack.range[1] > specialBase.range[1],
+    'Special damage must benefit from Special Attack investment');
+  assert.deepEqual(specialPhysicalAttack.range,specialBase.range,
+    'Attack investment must not change special damage');
+
+  const physicalDefense = calculateSmogonDamage(data, {
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
+    attackerPoints:attackerZero,defenderPoints:defenseOnly
+  });
+  const physicalSpDefense = calculateSmogonDamage(data, {
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
+    attackerPoints:attackerZero,defenderPoints:specialDefenseOnly
+  });
+  assert.deepEqual(physicalDefense.range,specialBase.range,
+    'Special attacks must not use the target physical Defense');
+  assert.ok(physicalSpDefense.range[1] < specialBase.range[1],
+    'Special attacks must be reduced by Special Defense investment');
+
+  const psyshockBase = calculateSmogonDamage(data, {
+    attacker:'Mega Starmie',defender:'Skarmory',moveName:'Psyshock',
+    attackerPoints:attackerZero,defenderPoints:attackerZero
+  });
+  const psyshockDefense = calculateSmogonDamage(data, {
+    attacker:'Mega Starmie',defender:'Skarmory',moveName:'Psyshock',
+    attackerPoints:attackerZero,defenderPoints:defenseOnly
+  });
+  const psyshockSpDefense = calculateSmogonDamage(data, {
+    attacker:'Mega Starmie',defender:'Skarmory',moveName:'Psyshock',
+    attackerPoints:attackerZero,defenderPoints:specialDefenseOnly
+  });
+  assert.ok(psyshockDefense.range[1] < psyshockBase.range[1],
+    'Psyshock is special but must use the target physical Defense');
+  assert.deepEqual(psyshockSpDefense.range,psyshockBase.range,
+    'Psyshock must not use the target Special Defense');
+});
