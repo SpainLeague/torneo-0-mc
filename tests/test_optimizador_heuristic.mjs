@@ -127,7 +127,7 @@ test('runs the complete eight-pass PC transfer schedule', async () => {
     transferSteps:[8,8,8,8,4,4,2,1],
     beamWidth:8,
     yieldControl:async()=>{},
-    onProgress:progress=>{if(progress.transferStep)observed.push(progress.transferStep)},
+    onProgress:progress=>{if(progress.completedSeeds>0)observed.push(progress.transferStep)},
     evaluate:points=>({score:Math.min(1,points[5]/32)})
   });
   assert.deepEqual(result.transferSteps,[8,8,8,8,4,4,2,1]);
