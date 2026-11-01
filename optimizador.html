@@ -198,7 +198,7 @@ function renderSearchResults(result, activeStats){
  const root=$('searchResults');root.replaceChildren();
  if(!result.results.length){root.textContent='No se han encontrado repartos evaluables.';return}
  const summary=document.createElement('p');summary.className='hint';
- summary.textContent='Estadísticas optimizadas: '+activeStats.map(index=>STATS[index]).join(', ')+'. Evaluados '+result.evaluated.toLocaleString('es-ES')+' repartos candidatos. Búsqueda por haz; no garantiza el óptimo global.';
+ summary.textContent='Estadísticas optimizadas: '+activeStats.map(index=>STATS[index]).join(', ')+'. Evaluados '+result.evaluated.toLocaleString('es-ES')+' repartos candidatos. Pasos de transferencia: '+(result.transferSteps||[]).join('/')+' PC. Búsqueda por haz; no garantiza el óptimo global.';
  root.append(summary);
  result.results.forEach((candidate,index)=>{
   const card=document.createElement('article');card.className='result-card';
