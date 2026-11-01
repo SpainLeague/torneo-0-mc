@@ -117,7 +117,7 @@ export async function findBestLocalSpreads({
 
   let beam = [];
   for (const seed of uniqueStarts) {
-    if (shouldCancel()) return {cancelled: true, evaluated, results: best, completedSeeds};
+    if (shouldCancel()) return {cancelled: true, evaluated, results: best, completedSeeds, transferSteps: appliedTransferSteps};
     beam.push(score(seed));
     completedSeeds++;
   }
@@ -133,7 +133,7 @@ export async function findBestLocalSpreads({
     const candidates = new Map(beam.map(candidate => [keyOf(candidate.points), candidate]));
     for (const current of beam) {
       for (const next of neighbours(current.points, activeStats, transferStep)) {
-        if (shouldCancel()) return {cancelled: true, evaluated, results: best, completedSeeds: iteration};
+        if (shouldCancel()) return {cancelled: true, evaluated, results: best, completedSeeds: iteration, transferSteps: appliedTransferSteps};
         const candidate = score(next);
         candidates.set(keyOf(candidate.points), candidate);
       }
