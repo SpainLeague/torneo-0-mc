@@ -21,11 +21,11 @@ function comparePoints(a, b) {
   return 0;
 }
 
-function neighbours(points) {
+function neighbours(points, activeStats) {
   const output = [];
   for (let from = 0; from < 6; from++) {
     if (points[from] === 0) continue;
-    for (let to = 0; to < 6; to++) {
+    for (const to of activeStats) {
       if (from === to || points[to] === 32) continue;
       const next = points.slice();
       next[from]--;
@@ -65,7 +65,8 @@ export async function findBestLocalSpreads({
   beamWidth = 8,
   shouldCancel = () => false,
   onProgress = () => {},
-  yieldControl = () => new Promise(resolve => setTimeout(resolve, 0))
+  yieldControl = () => new Promise(resolve => setTimeout(resolve, 0)),
+  activeStats = [0, 1, 2, 3, 4, 5]
 }) {
   if (typeof evaluate !== 'function') throw new Error('Falta la función evaluadora.');
   if (!Array.isArray(starts) || !starts.length) throw new Error('Se necesita al menos un reparto inicial.');
@@ -73,6 +74,10 @@ export async function findBestLocalSpreads({
   if (!Number.isInteger(maxIterations) || maxIterations < 1 || maxIterations > 20) {
     throw new Error('maxIterations debe estar entre 1 y 20.');
   }
+  if (!Array.isArray(activeStats) || activeStats.some(stat => !Number.isInteger(stat) || stat < 0 || stat > 5)) {
+    throw new Error('activeStats debe contener índices de estadísticas entre 0 y 5.');
+  }
+  activeStats = [...new Set(activeStats)];
   if (!Number.isInteger(beamWidth) || beamWidth < 1 || beamWidth > 32) {
     throw new Error('beamWidth debe estar entre 1 y 32.');
   }
@@ -114,7 +119,7 @@ export async function findBestLocalSpreads({
     if (shouldCancel()) return {cancelled: true, evaluated, results: best, completedSeeds: iteration};
     const candidates = new Map(beam.map(candidate => [keyOf(candidate.points), candidate]));
     for (const current of beam) {
-      for (const next of neighbours(current.points)) {
+      for (const next of neighbours(current.points, activeStats)) {
         if (shouldCancel()) return {cancelled: true, evaluated, results: best, completedSeeds: iteration};
         const candidate = score(next);
         candidates.set(keyOf(candidate.points), candidate);
