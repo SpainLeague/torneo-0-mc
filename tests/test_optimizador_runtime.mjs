@@ -285,4 +285,6 @@ test('identifies only PC stats that can affect each Champions damage objective',
   assert.deepEqual(getRelevantPcStatIndexes('Foul Play','offensive'),[]);
   assert.deepEqual(getRelevantPcStatIndexes('Foul Play','defensive'),[0,1,2]);
   assert.deepEqual(getRelevantPcStatIndexes('Final Gambit','offensive'),[0]);
+  assert.deepEqual(getRelevantPcStatIndexes('Electro Ball','defensive'),[0,4,5]);
+  assert.deepEqual(getRelevantPcStatIndexes('Payback','defensive'),[0,2,5]);
 });
