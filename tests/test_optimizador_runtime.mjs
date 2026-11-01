@@ -309,3 +309,41 @@ test('shared optimizer objective scoring consumes real Champions damage rolls', 
   assert.ok(offensive.score>=0 && offensive.score<=1);
   assert.ok(defensive.score>=0 && defensive.score<=1);
 });
+
+test('competitive matchup matrix validates physical, special and Psyshock investment against Champions damage rolls', () => {
+  const scenarios=[
+    {attacker:'Mega Starmie',defender:'Vaporeon',moveName:'Psyshock',attackStat:3,defenseStat:2},
+    {attacker:'Inteleon',defender:'Mega Skarmory',moveName:'Hydro Pump',attackStat:3,defenseStat:4},
+    {attacker:'Skarmory',defender:'Mega Meganium',moveName:'Brave Bird',attackStat:1,defenseStat:2},
+    {attacker:'Mega Meganium',defender:'Vaporeon',moveName:'Grassy Glide',attackStat:1,defenseStat:2}
+  ];
+  for(const scenario of scenarios){
+    const zero=[0,0,0,0,0,0];
+    const attackerPoints=zero.slice();
+    attackerPoints[scenario.attackStat]=16;
+    const defenderPoints=zero.slice();
+    defenderPoints[scenario.defenseStat]=16;
+    const base=calculateSmogonDamage(data,{
+      ...scenario,attackerPoints:zero,defenderPoints:zero,
+      field:{gameType:'Doubles'}
+    });
+    const boostedAttack=calculateSmogonDamage(data,{
+      ...scenario,attackerPoints,defenderPoints:zero,
+      field:{gameType:'Doubles'}
+    });
+    const boostedDefense=calculateSmogonDamage(data,{
+      ...scenario,attackerPoints:zero,defenderPoints,
+      field:{gameType:'Doubles'}
+    });
+    assert.ok(base.rolls.length>0,scenario.attacker+' '+scenario.moveName+' should produce Champions damage rolls');
+    assert.ok(boostedAttack.range[1]>base.range[1],
+      scenario.attacker+' should benefit from the relevant offensive PC stat');
+    assert.ok(boostedDefense.range[1]<base.range[1],
+      scenario.defender+' should benefit from the relevant defensive PC stat');
+    const objective=evaluateDamageObjective({
+      damage:base,attackCount:2,hpPercent:100,offensive:true,minimum:0.5
+    });
+    assert.ok(objective.success>=0&&objective.success<=1);
+    assert.equal(objective.maxHP,base.defenderStats.hp);
+  }
+});
