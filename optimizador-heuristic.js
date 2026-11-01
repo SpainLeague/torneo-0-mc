@@ -1,7 +1,7 @@
 // Bounded beam search for Champions PC spreads.
 // This is not an exhaustive scan of every legal allocation.
-// It explores several promising neighboring spreads per iteration, which can
-// cross shallow local plateaus that defeat a single-path hill climb.
+// It explores several promising neighboring spreads using coarse-to-fine
+// PC transfers (8, 4, 2, 1), avoiding a one-point-only search bottleneck.
 
 export function isLegalPcSpread(points, {exactTotal = false} = {}) {
   return Array.isArray(points) && points.length === 6 &&
