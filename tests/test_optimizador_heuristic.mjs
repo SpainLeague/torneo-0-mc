@@ -71,3 +71,19 @@ test('rejects an excessive beam width', async () => {
     evaluate: () => ({score: 0.5})
   }), /beamWidth/);
 });
+
+
+test('moves PC only into stats used by the configured objectives', async () => {
+  const start = [32,0,32,0,2,0];
+  const result = await findBestLocalSpreads({
+    starts:[start],activeStats:[3],top:1,maxIterations:4,beamWidth:8,
+    yieldControl:async()=>{},
+    evaluate:points=>({score:points[3]/32})
+  });
+  assert.ok(result.results[0].points[3] > start[3], 'The active Special Attack stat should receive PC');
+  for (const index of [1,2,4,5]) {
+    assert.equal(result.results[0].points[index],start[index],
+      'An irrelevant stat must not receive PC');
+  }
+  assert.ok(result.results[0].points[0] < start[0], 'Unused HP can be reassigned to the active objective');
+});
