@@ -52,6 +52,7 @@ test('beam search crosses a neutral-score plateau to reach a two-step optimum', 
     starts: [[11, 11, 11, 11, 11, 11]],
     top: 3,
     maxIterations: 2,
+    transferSteps: [1,1],
     beamWidth: 32,
     yieldControl: async () => {},
     evaluate: points => ({
@@ -86,4 +87,32 @@ test('moves PC only into stats used by the configured objectives', async () => {
       'An irrelevant stat must not receive PC');
   }
   assert.ok(result.results[0].points[0] < start[0], 'Unused HP can be reassigned to the active objective');
+});
+
+test('coarse-to-fine transfers can move a large PC allocation and then refine it', async () => {
+  const result = await findBestLocalSpreads({
+    starts: [[32, 0, 32, 0, 2, 0]],
+    activeStats: [5],
+    top: 3,
+    maxIterations: 4,
+    transferSteps: [8, 4, 2, 1],
+    beamWidth: 8,
+    yieldControl: async () => {},
+    evaluate: points => ({
+      score: Math.min(1, points[5] / 15),
+      details: {speedPc: points[5]}
+    })
+  });
+  assert.equal(result.cancelled, false);
+  assert.ok(result.results[0].points[5] >= 15);
+  assert.equal(result.results[0].score, 1);
+});
+
+test('rejects invalid transfer step schedules', async () => {
+  await assert.rejects(() => findBestLocalSpreads({
+    starts: [[32, 0, 32, 0, 2, 0]],
+    transferSteps: [4, 0, 1],
+    yieldControl: async () => {},
+    evaluate: () => ({score: 0.5})
+  }), /transferSteps/);
 });
