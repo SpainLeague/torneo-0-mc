@@ -6,9 +6,11 @@ import {
   auditSmogonCoverage,
   calculateSmogonDamage,
   createSmogonPokemon,
+  getRelevantPcStatIndexes,
   getSmogonRuntime
 } from '../optimizador-smogon.js';
 import {getLegalMoveNames, normalizeId} from '../optimizador-data.js';
+import {koThresholds} from '../optimizador-ko.js';
 
 globalThis.calc = smogonCalc;
 const read = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
@@ -180,7 +182,8 @@ test('allows an explicit effective accuracy override for ability and item effect
 
 test('uses only the relevant offensive and defensive stats for physical, special and Psyshock damage', () => {
   const attackerZero = [0,0,0,0,0,0];
-  const attackOnly = [32,0,0,0,0,0];
+  const hpOnly = [32,0,0,0,0,0];
+  const attackOnly = [0,32,0,0,0,0];
   const specialAttackOnly = [0,0,0,32,0,0];
   const defenseOnly = [0,0,32,0,0,0];
   const specialDefenseOnly = [0,0,0,0,32,0];
@@ -248,4 +251,38 @@ test('uses only the relevant offensive and defensive stats for physical, special
     'Psyshock is special but must use the target physical Defense');
   assert.deepEqual(psyshockSpDefense.range,psyshockBase.range,
     'Psyshock must not use the target Special Defense');
+
+  const hpBase = calculateSmogonDamage(data, {
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
+    attackerPoints:attackerZero,defenderPoints:attackerZero
+  });
+  const hpInvested = calculateSmogonDamage(data, {
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
+    attackerPoints:attackerZero,defenderPoints:hpOnly
+  });
+  assert.ok(hpInvested.defenderStats.hp > hpBase.defenderStats.hp,
+    'HP investment must increase the target HP used by offensive and defensive KO thresholds');
+  assert.deepEqual(hpInvested.range,hpBase.range,
+    'Defender HP investment must change the KO threshold, not the raw damage roll');
+
+  const fixedDamage = Array(16).fill(60);
+  assert.equal(koThresholds(fixedDamage,100).ohko,0,
+    'A 60-damage hit must not KO a 100-HP target');
+  assert.equal(koThresholds(fixedDamage,100,0,1,0,100).twoHko,1,
+    'Two hits must KO a 100-HP target');
+  assert.equal(koThresholds(fixedDamage,150,0,1,0,150).twoHko,0,
+    'Two hits must not KO a 150-HP target');
+});
+
+test('identifies only PC stats that can affect each Champions damage objective', () => {
+  assert.deepEqual(getRelevantPcStatIndexes('Brave Bird','offensive'),[1]);
+  assert.deepEqual(getRelevantPcStatIndexes('Hydro Pump','offensive'),[3]);
+  assert.deepEqual(getRelevantPcStatIndexes('Psyshock','offensive'),[3]);
+  assert.deepEqual(getRelevantPcStatIndexes('Psyshock','defensive'),[0,2]);
+  assert.deepEqual(getRelevantPcStatIndexes('Hydro Pump','defensive'),[0,4]);
+  assert.deepEqual(getRelevantPcStatIndexes('Brave Bird','defensive'),[0,2]);
+  assert.deepEqual(getRelevantPcStatIndexes('Body Press','offensive'),[2]);
+  assert.deepEqual(getRelevantPcStatIndexes('Foul Play','offensive'),[]);
+  assert.deepEqual(getRelevantPcStatIndexes('Foul Play','defensive'),[0,1,2]);
+  assert.deepEqual(getRelevantPcStatIndexes('Final Gambit','offensive'),[0]);
 });
