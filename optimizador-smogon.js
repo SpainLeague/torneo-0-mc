@@ -239,6 +239,7 @@ export function getRelevantPcStatIndexes(moveName, role = 'offensive') {
   if (id === 'foulplay') relevant.push(1); // Foul Play uses the target's Attack.
   if (id === 'shellsidearm') relevant.push(2, 4); // Its category can change dynamically.
   else relevant.push(move.overrideDefensiveStat === 'def' || move.category === 'Physical' ? 2 : 4);
+  if (['electroball', 'gyroball', 'payback', 'boltbeak', 'fishiousrend'].includes(id)) relevant.push(5);
   return [...new Set(relevant)];
 }
 
