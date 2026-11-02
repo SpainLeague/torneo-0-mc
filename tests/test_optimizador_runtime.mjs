@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import * as smogonCalc from '@smogon/calc';
 import {
   auditSmogonCoverage,
+  auditSmogonItemCoverage,
   calculateSmogonDamage,
   createSmogonPokemon,
   getRelevantPcStatIndexes,
@@ -375,4 +376,19 @@ test('Champions damage runtime applies Life Orb modifier', () => {
   });
   assert.ok(lifeOrb.range[0] > hydroPump.range[0],
     'Life Orb should increase special damage');
+});
+
+
+test('all Mega forms in the pool have a Champions-supported required Mega Stone', () => {
+  const audit=auditSmogonItemCoverage(data);
+  assert.ok(audit.megaStoneCount>0,'The pool should contain Mega forms');
+  assert.deepEqual(audit.missingMegaStones,[],
+    'Every required Mega Stone should resolve in the Champions calculator');
+});
+
+test('legal item audit separates supported and unsupported Champions items', () => {
+  const audit=auditSmogonItemCoverage(data);
+  assert.equal(audit.supportedCount+audit.unsupported.length,audit.legalCount);
+  assert.ok(audit.supportedCount>0,'At least some legal items should be supported');
+  assert.ok(audit.unsupported.every(item=>item.id&&item.name));
 });
