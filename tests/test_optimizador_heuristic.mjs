@@ -181,3 +181,42 @@ test('rejects an invalid diversity distance', async () => {
     starts:[[0,0,0,0,0,0]],evaluate:()=>({score:1}),diversityDistance:-1
   }),/diversityDistance/);
 });
+
+
+test('reclaims PC that does not increase the source stat and reaches a destination breakpoint', async () => {
+  const result = await findBestLocalSpreads({
+    starts: [[0,0,0,1,0,0]],
+    activeStats: [0],
+    statBreakpoints: [
+      [{points:1,value:146,previousValue:145,gain:1}],
+      [],[],[{points:2,value:74,previousValue:73,gain:1}],[],[]
+    ],
+    top: 1,
+    maxIterations: 1,
+    transferSteps: [8],
+    beamWidth: 8,
+    yieldControl: async () => {},
+    evaluate: points => ({score: points[0] === 1 && points[3] === 0 ? 1 : 0})
+  });
+  assert.ok(result.results.some(candidate => candidate.points.join(',') === '1,0,0,0,0,0'),
+    'One ineffective PC in the source stat should be moved to the exact HP breakpoint');
+});
+
+test('does not treat effective source PC as free when reclaiming allocations', async () => {
+  const result = await findBestLocalSpreads({
+    starts: [[0,0,0,2,0,0]],
+    activeStats: [0],
+    statBreakpoints: [
+      [{points:1,value:146,previousValue:145,gain:1}],
+      [],[],[{points:2,value:74,previousValue:73,gain:1}],[],[]
+    ],
+    top: 1,
+    maxIterations: 1,
+    transferSteps: [1],
+    beamWidth: 8,
+    yieldControl: async () => {},
+    evaluate: points => ({score: points[0] === 1 && points[3] === 1 ? 1 : 0})
+  });
+  assert.ok(!result.results.some(candidate => candidate.points.join(',') === '1,0,0,1,0,0'),
+    'Removing a PC that is needed to retain the current source stat must not be classified as free');
+});
