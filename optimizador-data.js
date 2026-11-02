@@ -154,7 +154,8 @@ export function validatePoolItem(data, poolName, itemId) {
   const normalized = normalizeId(itemId);
   if (required) return normalized === normalizeId(required);
   if (!normalized) return true;
-  return !!data.reference.items?.[normalized]?.legal;
+  const item = data.reference.items?.[normalized];
+  return !!item?.legal && !item.megaStone;
 }
 
 
