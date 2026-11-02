@@ -9,7 +9,7 @@ import {
   getRelevantPcStatIndexes,
   getSmogonRuntime
 } from '../optimizador-smogon.js';
-import {getLegalMoveNames, normalizeId} from '../optimizador-data.js';
+import {getLegalMoveNames, getStatPointBreakpoints, normalizeId} from '../optimizador-data.js';
 import {koThresholds} from '../optimizador-ko.js';
 import {evaluateDamageObjective} from '../optimizador-evaluator.js';
 
@@ -346,4 +346,19 @@ test('competitive matchup matrix validates physical, special and Psyshock invest
     assert.ok(objective.success>=0&&objective.success<=1);
     assert.equal(objective.maxHP,base.defenderStats.hp);
   }
+});
+
+
+test('Mega Aggron Adamant breakpoint agrees with the real Smogon Champions runtime', () => {
+  const breakpoints = getStatPointBreakpoints(data, 'Mega Aggron', 'adamant', 1);
+  const atNine = createSmogonPokemon(data, 'Mega Aggron', {
+    points:[0,9,0,0,0,0], natureId:'adamant'
+  });
+  const atTen = createSmogonPokemon(data, 'Mega Aggron', {
+    points:[0,10,0,0,0,0], natureId:'adamant'
+  });
+  assert.equal(atNine.rawStats.atk,185);
+  assert.equal(atTen.rawStats.atk,187);
+  assert.deepEqual(breakpoints.find(entry=>entry.points===10),
+    {points:10,value:187,previousValue:185,gain:2});
 });
