@@ -86,6 +86,26 @@ export function calculateChampionStats(data, poolName, points = [0,0,0,0,0,0], n
   });
 }
 
+// PC values at which the selected stat actually increases after Champions rounding
+// and nature modifiers. The returned values are exact thresholds, not EV estimates.
+export function getStatPointBreakpoints(data, poolName, natureId = 'hardy', statIndex = 0) {
+  if (!Number.isInteger(statIndex) || statIndex < 0 || statIndex > 5) {
+    throw new Error('El índice de estadística debe estar entre 0 y 5.');
+  }
+  const breakpoints = [];
+  let previous = calculateChampionStats(data, poolName, [0,0,0,0,0,0], natureId)[statIndex];
+  for (let points = 1; points <= 32; points++) {
+    const allocation = [0,0,0,0,0,0];
+    allocation[statIndex] = points;
+    const value = calculateChampionStats(data, poolName, allocation, natureId)[statIndex];
+    if (value !== previous) {
+      breakpoints.push({points, value, previousValue: previous, gain: value - previous});
+      previous = value;
+    }
+  }
+  return breakpoints;
+}
+
 export function getPoolTypes(entry) {
   return [TYPE_IDS[entry.type1] ?? entry.type1, TYPE_IDS[entry.type2] ?? entry.type2]
     .filter(Boolean);
