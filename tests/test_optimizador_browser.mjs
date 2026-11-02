@@ -48,6 +48,13 @@ test('optimizer works in desktop and mobile browsers',async t=>{
   assert.ok(!itemOptions.includes('Choice Band'),'Items absent from the Champions engine must not be offered');
   assert.ok(!itemOptions.includes('Assault Vest'),'Items absent from the Champions engine must not be offered');
 
+  assert.match(await page.locator('#status').textContent(),/megapiedras requeridas sin soporte: 0/,
+    'Every required Mega Stone should be supported by the Champions calculator');
+  await page.locator('#own').selectOption({label:'Mega Aggron'});
+  assert.equal(await page.locator('#item').isDisabled(),true,'Mega forms must lock their required stone');
+  assert.equal(await page.locator('#item').inputValue(),'aggronite','Mega Aggron must receive Aggronite');
+  await page.locator('#own').selectOption({label:'Inteleon'});
+
   const kind=page.locator('#targets .target .kind').first();
   await kind.selectOption('speed-fast');
   assert.equal(await page.locator('#targets .target .speedMarginField').isVisible(),true);
