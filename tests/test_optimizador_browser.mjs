@@ -106,6 +106,10 @@ test('optimizer works in desktop and mobile browsers',async t=>{
   assert.match(await page.locator('#status').textContent(),/Búsqueda completada/,'Mixed offensive and defensive objectives should complete the PC search');
   assert.ok(await page.locator('#searchResults .result-card').count()>0,'Damage-based search should return candidate spreads');
   assert.match(await page.locator('#searchResults').textContent(),/Pasos de transferencia: 8\/8\/8\/8\/4\/4\/2\/1 PC/,'Search results should disclose the coarse-to-fine transfer schedule');
+  assert.match(await page.locator('#searchResults').textContent(),/Rival fijo: Skarmory · PC 0\/32\/0\/0\/32\/0/,
+    'Search results must disclose the exact manually entered rival PC spread');
+  assert.deepEqual(await foePcInputs.evaluateAll(inputs=>inputs.map(input=>input.value)),['0','32','0','0','32','0'],
+    'The optimizer must not modify any of the rival PC values');
   assert.deepEqual(pageErrors,[],'Speed search, damage evaluation and mixed-objective search should not create browser exceptions');
 
   await page.setViewportSize({width:390,height:844});
