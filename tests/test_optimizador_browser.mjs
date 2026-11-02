@@ -42,6 +42,11 @@ test('optimizer works in desktop and mobile browsers',async t=>{
   await page.waitForFunction(()=>document.querySelector('#status')?.textContent.includes('especies compatibles 223/223'),null,{timeout:30000});
   assert.deepEqual(pageErrors,[],'The optimizer page should load without browser exceptions');
 
+  const itemOptions=await page.locator('#item option').allTextContents();
+  assert.ok(itemOptions.includes('Life Orb'),'A supported legal item should remain selectable');
+  assert.ok(!itemOptions.includes('Choice Band'),'Items absent from the Champions engine must not be offered');
+  assert.ok(!itemOptions.includes('Assault Vest'),'Items absent from the Champions engine must not be offered');
+
   const kind=page.locator('#targets .target .kind').first();
   await kind.selectOption('speed-fast');
   assert.equal(await page.locator('#targets .target .speedMarginField').isVisible(),true);
