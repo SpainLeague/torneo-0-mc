@@ -410,6 +410,14 @@ test('Mega Pokemon can select only their own required Mega Stone', () => {
 });
 
 
+test('Mega Barbaracle resolves its required Barbaracite through the engine item ID', () => {
+  assert.equal(data.reference.items.barbaracite.name,'Barbaracleite',
+    'The reference display name intentionally differs from the pool item ID');
+  assert.doesNotThrow(() => createSmogonPokemon(data,'Mega Barbaracle',{
+    points:[0,0,0,0,0,0],natureId:'hardy',itemId:'barbaracite'
+  }));
+});
+
 test('every item exposed by the Champions support audit can be resolved by the damage runtime', () => {
   const audit=auditSmogonItemCoverage(data);
   for(const item of audit.supported){
