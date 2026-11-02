@@ -32,6 +32,8 @@ jobs:
         run: node --test tests/test_optimizador_heuristic.mjs
       - name: Test exact Champions stat breakpoints
         run: node --test tests/test_optimizador_breakpoints.mjs
+      - name: Test bounded exhaustive PC enumeration
+        run: node --test tests/test_optimizador_exhaustive.mjs
       - name: Test shared damage objective scoring
         run: node --test tests/test_optimizador_evaluator.mjs
       - name: Test Mega Starmie pool regression
@@ -53,6 +55,8 @@ jobs:
       - name: Check optimizer JavaScript syntax
         run: |
           node --check optimizador-heuristic.js
+          node --check optimizador-exhaustive.js
+          node --check tests/test_optimizador_exhaustive.mjs
           node --check optimizador-evaluator.js
           node --check tests/test_optimizador_evaluator.mjs
           node --check optimizador-smogon.js
