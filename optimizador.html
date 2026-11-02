@@ -194,11 +194,11 @@ function searchSeedsForSelectedPokemon(){
  if(current.every(Number.isInteger)&&current.every(x=>x>=0&&x<=32)&&current.reduce((a,b)=>a+b,0)===66)seeds.unshift(current);
  return seeds;
 }
-function renderSearchResults(result, activeStats){
+function renderSearchResults(result, activeStats, rival){
  const root=$('searchResults');root.replaceChildren();
  if(!result.results.length){root.textContent='No se han encontrado repartos evaluables.';return}
  const summary=document.createElement('p');summary.className='hint';
- summary.textContent='Estadísticas optimizadas: '+activeStats.map(index=>STATS[index]).join(', ')+'. Evaluados '+result.evaluated.toLocaleString('es-ES')+' repartos candidatos. Pasos de transferencia: '+(result.transferSteps||[]).join('/')+' PC. Umbrales reales de estadísticas incluidos; búsqueda por haz, sin garantía de óptimo global.';
+ summary.textContent='Estadísticas optimizadas: '+activeStats.map(index=>STATS[index]).join(', ')+'. Rival fijo: '+rival.name+' · PC '+rival.points.join('/')+' · '+rival.nature+'. Evaluados '+result.evaluated.toLocaleString('es-ES')+' repartos candidatos. Pasos de transferencia: '+(result.transferSteps||[]).join('/')+' PC. Umbrales reales de estadísticas incluidos; búsqueda por haz, sin garantía de óptimo global.';
  root.append(summary);
  result.results.forEach((candidate,index)=>{
   const card=document.createElement('article');card.className='result-card';
@@ -274,7 +274,7 @@ async function searchBestPcSpreads(){
     return {score,details};
    }
   });
-  renderSearchResults(result,activeStats);
+  renderSearchResults(result,activeStats,{name:foeName,points:foePoints,nature:$('foeNature').value});
   $('status').textContent=result.cancelled?'Búsqueda detenida por el usuario.':'Búsqueda completada. Se muestran hasta tres repartos distintos encontrados en los vecindarios explorados, priorizando puntuación y diversidad.';
  }catch(error){$('searchResults').replaceChildren();$('status').textContent='No se pudo completar la búsqueda: '+error.message}
  finally{$('searchBest').disabled=false;$('cancelSearch').classList.add('hidden');searchCancelled=false}
