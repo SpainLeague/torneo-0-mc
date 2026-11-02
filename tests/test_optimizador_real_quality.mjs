@@ -6,6 +6,7 @@ import * as smogonCalc from '@smogon/calc';
 import {findBestLocalSpreads} from '../optimizador-heuristic.js';
 import {evaluateExhaustivePcSpreads} from '../optimizador-exhaustive.js';
 import {calculateSmogonDamage} from '../optimizador-smogon.js';
+import {getStatPointBreakpoints} from '../optimizador-data.js';
 import {evaluateDamageObjective, aggregateObjectiveScores} from '../optimizador-evaluator.js';
 
 globalThis.calc = smogonCalc;
@@ -66,8 +67,9 @@ test('real Champions optimizer quality: Mega Aggron offense plus special bulk', 
     activeStats: [0, 1, 4],
     top: 3,
     maxIterations: 8,
-    transferSteps: [8, 8, 4, 4, 2, 2, 1, 1],
-    beamWidth: 32,
+    transferSteps: [8, 8, 8, 8, 4, 4, 2, 1],
+    statBreakpoints: Array.from({length: 6}, (_, index) => [0, 1, 4].includes(index)
+      ? getStatPointBreakpoints(data, 'Mega Aggron', 'adamant', index) : []),
     diversityDistance: 0,
     yieldControl: async () => {},
     evaluate
@@ -140,8 +142,10 @@ test('real Champions optimizer quality: Body Press plus physical bulk', async ()
   const heuristicStart = performance.now();
   const heuristic = await findBestLocalSpreads({
     starts: [start], activeStats: [0, 1, 2], top: 3,
-    maxIterations: 8, transferSteps: [8, 8, 4, 4, 2, 2, 1, 1],
-    beamWidth: 32, diversityDistance: 0,
+    maxIterations: 8, transferSteps: [8, 8, 8, 8, 4, 4, 2, 1],
+    statBreakpoints: Array.from({length: 6}, (_, index) => [0, 1, 2].includes(index)
+      ? getStatPointBreakpoints(data, 'Mega Aggron', 'impish', index) : []),
+    diversityDistance: 0,
     yieldControl: async () => {}, evaluate: evaluatePhysical
   });
   const heuristicMs = performance.now() - heuristicStart;
