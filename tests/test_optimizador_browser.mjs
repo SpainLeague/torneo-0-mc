@@ -76,12 +76,31 @@ test('optimizer works in desktop and mobile browsers',async t=>{
   await page.locator('#weather').selectOption('Rain');
   await page.locator('#prepare').click();
   await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Probabilidad de cumplirlo')||document.querySelector('#status').textContent.includes('No se ha podido calcular'),null);
-  assert.match(await page.locator('#status').textContent(),/Probabilidad de cumplirlo/,'A real Champions damage scenario should calculate in the browser');
+  const offensiveBaseline=await page.locator('#status').textContent();
+  assert.match(offensiveBaseline,/Probabilidad de cumplirlo/,'A real Champions damage scenario should calculate in the browser');
+  const foePcInputs=page.locator('#foePC input');
+  await foePcInputs.nth(4).fill('32'); // Special Defense investment on the defending rival.
+  await page.locator('#prepare').click();
+  await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Probabilidad de cumplirlo'),null);
+  const offensiveVsSpDef=await page.locator('#status').textContent();
+  const damageRange=text=>text.match(/con Hydro Pump: (\\d+)–(\\d+) PS/);
+  assert.ok(damageRange(offensiveBaseline)&&damageRange(offensiveVsSpDef),'Offensive output should expose the calculated damage range');
+  assert.ok(Number(damageRange(offensiveVsSpDef)[2])<Number(damageRange(offensiveBaseline)[2]),
+    'The rival manually invested in Special Defense must take less special damage');
+  assert.equal(await foePcInputs.nth(4).inputValue(),'32','The manually entered rival spread must remain unchanged');
 
-  // Exercise the optimizer with simultaneous offensive and defensive damage objectives.
+  // Add a defensive target: the same rival is now the attacker, with manually invested Attack.
   await page.locator('#addTarget').click();
   const defensiveMove=page.locator('#targets .target').nth(1).locator('.move');
   await defensiveMove.selectOption({label:'Brave Bird'});
+  await foePcInputs.nth(1).fill('32');
+  await page.locator('#prepare').click();
+  await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Objetivo 2')||document.querySelector('#status').textContent.includes('No se ha podido calcular'),null);
+  const mixedOutput=await page.locator('#status').textContent();
+  const defensiveRange=mixedOutput.match(/Objetivo 2 \\(sobrevivir[^\\n]*con Brave Bird: (\\d+)–(\\d+) PS/);
+  assert.ok(defensiveRange,'Defensive objective should calculate damage from the rival attacker');
+  assert.equal(await foePcInputs.nth(1).inputValue(),'32','The rival Attack investment must be retained for defensive evaluation');
+
   await page.locator('#searchBest').click();
   await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Búsqueda completada')||document.querySelector('#status').textContent.includes('No se pudo completar'),null,{timeout:30000});
   assert.match(await page.locator('#status').textContent(),/Búsqueda completada/,'Mixed offensive and defensive objectives should complete the PC search');
