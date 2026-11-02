@@ -202,3 +202,25 @@ test('reclaims PC that does not increase the source stat and reaches a destinati
     'One ineffective PC in the source stat should be moved to the exact HP breakpoint');
 });
 
+test('keeps gradual one-PC improvements available during coarse passes without requiring breakpoints', async () => {
+  const seenSpeedPoints = new Set();
+  const result = await findBestLocalSpreads({
+    starts: [[0,0,32,0,0,0]],
+    activeStats: [5],
+    top: 3,
+    maxIterations: 3,
+    transferSteps: [8,8,8],
+    beamWidth: 32,
+    yieldControl: async () => {},
+    evaluate: points => {
+      seenSpeedPoints.add(points[5]);
+      return {score: points[5] === 3 ? 1 : points[5] / 100};
+    }
+  });
+
+  assert.ok(seenSpeedPoints.has(1),
+    'A one-PC gradual move should be evaluated even in an eight-PC pass');
+  assert.ok(result.results.some(candidate => candidate.points[5] === 3),
+    'The search should be able to build a gradual three-PC improvement without stat breakpoints');
+  assert.equal(result.results[0].score, 1);
+});
