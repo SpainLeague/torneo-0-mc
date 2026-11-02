@@ -83,7 +83,7 @@ test('optimizer works in desktop and mobile browsers',async t=>{
   await page.locator('#prepare').click();
   await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Probabilidad de cumplirlo'),null);
   const offensiveVsSpDef=await page.locator('#status').textContent();
-  const damageRange=text=>text.match(/con Hydro Pump: (\\d+)–(\\d+) PS/);
+  const damageRange=text=>text.match(/con Hydro Pump: (\d+)–(\d+) PS/);
   assert.ok(damageRange(offensiveBaseline)&&damageRange(offensiveVsSpDef),'Offensive output should expose the calculated damage range');
   assert.ok(Number(damageRange(offensiveVsSpDef)[2])<Number(damageRange(offensiveBaseline)[2]),
     'The rival manually invested in Special Defense must take less special damage');
@@ -97,7 +97,7 @@ test('optimizer works in desktop and mobile browsers',async t=>{
   await page.locator('#prepare').click();
   await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Objetivo 2')||document.querySelector('#status').textContent.includes('No se ha podido calcular'),null);
   const mixedOutput=await page.locator('#status').textContent();
-  const defensiveRange=mixedOutput.match(/Objetivo 2 \\(sobrevivir[^\\n]*con Brave Bird: (\\d+)–(\\d+) PS/);
+  const defensiveRange=mixedOutput.match(/Objetivo 2 \(sobrevivir[^\n]*con Brave Bird: (\d+)–(\d+) PS/);
   assert.ok(defensiveRange,'Defensive objective should calculate damage from the rival attacker');
   assert.equal(await foePcInputs.nth(1).inputValue(),'32','The rival Attack investment must be retained for defensive evaluation');
 
