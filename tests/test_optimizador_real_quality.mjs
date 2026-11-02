@@ -115,8 +115,8 @@ test('real Champions optimizer quality: Body Press plus physical bulk', async ()
       attackerItemId: 'aggronite', field: {gameType: 'Doubles'}
     });
     const physicalBulkDamage = calculateSmogonDamage(data, {
-      attacker: 'Urshifu-Rapid-Strike', defender: 'Mega Aggron', moveName: 'Surging Strikes',
-      defenderPoints: points, defenderNatureId: 'impish',
+      attacker: 'Mega Heracross', defender: 'Mega Aggron', moveName: 'Close Combat',
+      attackerItemId: 'heracronite', defenderPoints: points, defenderNatureId: 'impish',
       defenderItemId: 'aggronite', field: {gameType: 'Doubles'}
     });
     const bodyPress = evaluateDamageObjective({
@@ -160,7 +160,7 @@ test('real Champions optimizer quality: Body Press plus physical bulk', async ()
   const gap = exact.results[0].score - heuristic.results[0].score;
   assert.ok(gap >= -1e-12);
   console.log(JSON.stringify({
-    scenario: 'Mega Aggron Body Press vs Inteleon + Surging Strikes bulk vs Urshifu-Rapid-Strike',
+    scenario: 'Mega Aggron Body Press vs Inteleon + Close Combat bulk vs Mega Heracross',
     exactCandidates: exact.evaluated, heuristicCandidates: heuristic.evaluated,
     exactMs: Number(exactMs.toFixed(2)), heuristicMs: Number(heuristicMs.toFixed(2)),
     exactScore: Number(exact.results[0].score.toFixed(6)),
