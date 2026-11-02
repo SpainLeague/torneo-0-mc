@@ -40,3 +40,27 @@ test('HP breakpoints reflect one point per PC except for Shedinja', () => {
 test('rejects an invalid stat index', () => {
   assert.throws(() => getStatPointBreakpoints(data, 'Mega Aggron', 'adamant', 6), /índice/);
 });
+
+
+test('Adamant Mega Aggron Special Attack reports PC values that do not change the stat', () => {
+  const breakpoints = getStatPointBreakpoints(data, 'Mega Aggron', 'adamant', 3);
+  for (const [before, after] of [[0,1],[10,11],[20,21],[30,31]]) {
+    const beforeStats = [0,0,0,0,0,0];
+    const afterStats = [0,0,0,0,0,0];
+    beforeStats[3] = before;
+    afterStats[3] = after;
+    assert.equal(
+      calculateChampionStats(data, 'Mega Aggron', beforeStats, 'adamant')[3],
+      calculateChampionStats(data, 'Mega Aggron', afterStats, 'adamant')[3],
+      `PC ${after} should not increase Special Attack after ${before}`
+    );
+    assert.ok(!breakpoints.some(entry => entry.points === after),
+      `PC ${after} must not be reported as a real stat breakpoint`
+    );
+  }
+  assert.deepEqual(
+    breakpoints.filter(entry => entry.gain > 1).map(entry => entry.points),
+    [],
+    'Adamant Special Attack should only gain one point at each effective breakpoint'
+  );
+});
