@@ -291,10 +291,11 @@ test('identifies only PC stats that can affect each Champions damage objective',
   assert.deepEqual(getRelevantPcStatIndexes('Payback','defensive'),[0,2,5]);
   assert.deepEqual(getRelevantPcStatIndexes('Electro Ball','offensive'),[3,5]);
   assert.deepEqual(getRelevantPcStatIndexes('Gyro Ball','offensive'),[1,5]);
-  assert.deepEqual(getRelevantPcStatIndexes('Eruption','offensive'),[0,3]);
-  assert.deepEqual(getRelevantPcStatIndexes('Flail','offensive'),[0,1]);
-  assert.deepEqual(getRelevantPcStatIndexes('Reversal','offensive'),[0,1]);
+  assert.deepEqual(getRelevantPcStatIndexes('Eruption','offensive'),[3]);
+  assert.deepEqual(getRelevantPcStatIndexes('Flail','offensive'),[1]);
+  assert.deepEqual(getRelevantPcStatIndexes('Reversal','offensive'),[1]);
   assert.deepEqual(getRelevantPcStatIndexes('Endeavor','offensive'),[0]);
+  assert.deepEqual(getRelevantPcStatIndexes('Final Gambit','offensive'),[0]);
 });
 
 test('shared optimizer objective scoring consumes real Champions damage rolls', () => {
@@ -370,6 +371,39 @@ test('Mega Aggron Adamant breakpoint agrees with the real Smogon Champions runti
     {points:10,value:187,previousValue:185,gain:2});
 });
 
+
+test('HP PC affects absolute-HP moves but not full-health ratio-based Eruption', () => {
+  const zero = [0,0,0,0,0,0];
+  const hp = [32,0,0,0,0,0];
+  const spa = [0,0,0,32,0,0];
+  const eruption = calculateSmogonDamage(data,{
+    attacker:'Typhlosion',defender:'Mega Skarmory',moveName:'Eruption',
+    attackerPoints:zero
+  });
+  const eruptionHp = calculateSmogonDamage(data,{
+    attacker:'Typhlosion',defender:'Mega Skarmory',moveName:'Eruption',
+    attackerPoints:hp
+  });
+  const eruptionSpa = calculateSmogonDamage(data,{
+    attacker:'Typhlosion',defender:'Mega Skarmory',moveName:'Eruption',
+    attackerPoints:spa
+  });
+  assert.deepEqual(eruptionHp.range,eruption.range,
+    'At full attacker HP, Eruption power is a ratio and HP PC does not change it');
+  assert.ok(eruptionSpa.range[1] > eruption.range[1],
+    'Eruption still uses Special Attack');
+
+  const finalGambit = calculateSmogonDamage(data,{
+    attacker:"Sirfetch'd",defender:'Mega Skarmory',moveName:'Final Gambit',
+    attackerPoints:zero
+  });
+  const finalGambitHp = calculateSmogonDamage(data,{
+    attacker:"Sirfetch'd",defender:'Mega Skarmory',moveName:'Final Gambit',
+    attackerPoints:hp
+  });
+  assert.ok(finalGambitHp.range[0] > finalGambit.range[0],
+    'Final Gambit damage increases with the attacker absolute HP');
+});
 
 test('Champions damage runtime applies Life Orb modifier', () => {
   const hydroPump = calculateSmogonDamage(data,{
