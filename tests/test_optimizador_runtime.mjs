@@ -364,11 +364,18 @@ test('Mega Aggron Adamant breakpoint agrees with the real Smogon Champions runti
 });
 
 
-test('Champions damage runtime applies Life Orb and Choice Band item modifiers', () => {
+test('Champions damage runtime applies Life Orb modifier', () => {
   const hydroPump = calculateSmogonDamage(data,{
     attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
     field:{gameType:'Doubles'}
   });
+  const lifeOrb = calculateSmogonDamage(data,{
+    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
+    attackerItemId:'lifeorb',field:{gameType:'Doubles'}
+  });
+  assert.ok(lifeOrb.range[0] > hydroPump.range[0],
+    'Life Orb should increase special damage');
+});
   const lifeOrb = calculateSmogonDamage(data,{
     attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
     attackerItemId:'lifeorb',field:{gameType:'Doubles'}
