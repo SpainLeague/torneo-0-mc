@@ -24,7 +24,8 @@ test('stat breakpoints report the exact PC value and actual rounded stat gain', 
   const points = getStatPointBreakpoints(data, 'Mega Aggron', 'adamant', 1);
   const threshold = points.find(entry => entry.points === 10);
   assert.deepEqual(threshold, {points:10, value:187, previousValue:185, gain:2});
-  assert.equal(points.some(entry => entry.points === 9), false);
+  assert.deepEqual(points.find(entry => entry.points === 9),
+    {points:9, value:185, previousValue:184, gain:1});
 });
 
 test('HP breakpoints reflect one point per PC except for Shedinja', () => {
