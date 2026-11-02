@@ -408,3 +408,12 @@ test('Mega Pokemon can select only their own required Mega Stone', () => {
   assert.equal(validatePoolItem(data,'Mega Aggron','aggronite'),true);
   assert.equal(validatePoolItem(data,'Mega Aggron','abomasite'),false);
 });
+
+
+test('every item exposed by the Champions support audit can be resolved by the damage runtime', () => {
+  const audit=auditSmogonItemCoverage(data);
+  for(const item of audit.supported){
+    assert.doesNotThrow(()=>createSmogonPokemon(data,'Inteleon',{itemId:item.id}),
+      'Supported item should resolve: '+item.id);
+  }
+});
