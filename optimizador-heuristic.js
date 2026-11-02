@@ -34,7 +34,10 @@ function neighbours(points, activeStats, transferStep, statBreakpoints) {
     for (let from = 0; from < 6; from++) {
       if (from === to || points[from] < 1) continue;
 
-      const amounts = new Set([transferStep]);
+      // Keep one-PC moves available in every pass, including coarse passes.
+      // A useful gradual improvement (for example, Speed) must not depend on
+      // crossing a stat breakpoint or waiting for the final fine-grained pass.
+      const amounts = new Set([1, transferStep]);
       if (targetDelta) amounts.add(targetDelta);
 
       // PC above the last breakpoint has no effect on the source stat. Allow
