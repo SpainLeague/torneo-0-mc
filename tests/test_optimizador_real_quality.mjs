@@ -6,7 +6,8 @@ import * as smogonCalc from '@smogon/calc';
 import {findBestLocalSpreads} from '../optimizador-heuristic.js';
 import {evaluateExhaustivePcSpreads} from '../optimizador-exhaustive.js';
 import {calculateSmogonDamage} from '../optimizador-smogon.js';
-import {getStatPointBreakpoints} from '../optimizador-data.js';
+import {getStatPointBreakpoints, calculateChampionStats} from '../optimizador-data.js';
+import {evaluateSpeedBenchmark} from '../optimizador-speed.js';
 import {evaluateDamageObjective, aggregateObjectiveScores} from '../optimizador-evaluator.js';
 
 globalThis.calc = smogonCalc;
@@ -236,5 +237,83 @@ test('real Champions optimizer quality: special offense plus special bulk', asyn
     scoreGap: Number(gap.toFixed(6)),
     exactSpreads: exact.results.map(result => result.points),
     heuristicSpreads: heuristic.results.map(result => result.points)
+  }));
+});
+
+
+test('real Champions optimizer quality: mixed special damage, bulk and speed threshold', async () => {
+  // Four active stats, including a gradual Speed objective and exact stat rounding.
+  // 24 PC across HP, SpA, SpD and Speed produce 2,925 exhaustive allocations.
+  const start = [6, 0, 0, 6, 6, 6];
+  const evaluateMixed = points => {
+    const shadowBallDamage = calculateSmogonDamage(data, {
+      attacker: 'Chandelure', defender: 'Goodra', moveName: 'Shadow Ball',
+      attackerPoints: points, attackerNatureId: 'modest',
+      field: {gameType: 'Doubles'}
+    });
+    const specialBulkDamage = calculateSmogonDamage(data, {
+      attacker: 'Inteleon', defender: 'Chandelure', moveName: 'Hydro Pump',
+      defenderPoints: points, defenderNatureId: 'modest',
+      field: {gameType: 'Doubles'}
+    });
+    const offense = evaluateDamageObjective({
+      damage: shadowBallDamage, attackCount: 1, hpPercent: 100,
+      offensive: true, minimum: 0.5
+    });
+    const bulk = evaluateDamageObjective({
+      damage: specialBulkDamage, attackCount: 2, hpPercent: 100,
+      offensive: false, minimum: 0.5
+    });
+    const speed = calculateChampionStats(data, 'Chandelure', points, 'modest')[5];
+    const speedResult = evaluateSpeedBenchmark(speed, 115, {relation: 'faster'});
+    // Smooth progress toward the required speed, then full credit once passed.
+    const speedObjective = {
+      passed: speedResult.passed,
+      score: speedResult.passed ? 1 : Math.min(1, speed / 116),
+      ownSpeed: speed,
+      foeSpeed: 115
+    };
+    return {
+      score: aggregateObjectiveScores([offense, bulk, speedObjective], {mode: 'balanced', balance: 0.3}),
+      details: {offense, bulk, speed: speedObjective}
+    };
+  };
+  const options = {
+    start, variableStats: [0, 3, 4, 5], maxCandidates: 5000, top: 3,
+    evaluate: evaluateMixed
+  };
+  const exactStart = performance.now();
+  const exact = evaluateExhaustivePcSpreads(options);
+  const exactMs = performance.now() - exactStart;
+  const heuristicStart = performance.now();
+  const heuristic = await findBestLocalSpreads({
+    starts: [start], activeStats: [0, 3, 4, 5], top: 3,
+    maxIterations: 8, transferSteps: [8, 8, 8, 8, 4, 4, 2, 1],
+    statBreakpoints: Array.from({length: 6}, (_, index) => [0, 3, 4, 5].includes(index)
+      ? getStatPointBreakpoints(data, 'Chandelure', 'modest', index) : []),
+    diversityDistance: 0,
+    yieldControl: async () => {}, evaluate: evaluateMixed
+  });
+  const heuristicMs = performance.now() - heuristicStart;
+
+  assert.equal(exact.truncated, false);
+  assert.equal(exact.evaluated, 2925);
+  assert.ok(heuristic.results.length > 0);
+  assert.equal(heuristic.results.every(result =>
+    result.points.reduce((sum, value) => sum + value, 0) === 24 &&
+    result.points.every(value => Number.isInteger(value) && value >= 0 && value <= 32)
+  ), true);
+  const gap = exact.results[0].score - heuristic.results[0].score;
+  assert.ok(gap >= -1e-12);
+  console.log(JSON.stringify({
+    scenario: 'Chandelure Shadow Ball + Hydro Pump bulk + faster than 115',
+    exactCandidates: exact.evaluated, heuristicCandidates: heuristic.evaluated,
+    exactMs: Number(exactMs.toFixed(2)), heuristicMs: Number(heuristicMs.toFixed(2)),
+    exactScore: Number(exact.results[0].score.toFixed(6)),
+    heuristicScore: Number(heuristic.results[0].score.toFixed(6)),
+    scoreGap: Number(gap.toFixed(6)),
+    exactSpreads: exact.results.map(result => result.points),
+    heuristicSpreads: heuristic.results.map(result => result.points),
+    speedDetails: heuristic.results.map(result => result.details.speed)
   }));
 });
