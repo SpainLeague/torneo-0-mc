@@ -50,6 +50,8 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Test real Smogon Champions runtime integration
         run: node --test tests/test_optimizador_runtime.mjs
+      - name: Benchmark heuristic quality against exhaustive reference
+        run: node --test tests/test_optimizador_quality.mjs tests/test_optimizador_real_quality.mjs
       - name: Test optimizer in desktop and mobile browsers
         run: node --test tests/test_optimizador_browser.mjs
       - name: Check optimizer JavaScript syntax
@@ -67,6 +69,8 @@ jobs:
           node --check optimizador-data.js
           node --check tests/test_optimizador_breakpoints.mjs
           node --check tests/test_optimizador_runtime.mjs
+          node --check tests/test_optimizador_quality.mjs
+          node --check tests/test_optimizador_real_quality.mjs
           node --check tests/test_optimizador_browser.mjs
           python - <<'PY'
           from pathlib import Path
