@@ -144,7 +144,7 @@ export function getLegalItemsForPool(data, poolName) {
     return item?.legal ? [{id: required, name: item.name}] : [];
   }
   return Object.entries(data.reference.items ?? {})
-    .filter(([, item]) => item.legal)
+    .filter(([, item]) => item.legal && !item.megaStone)
     .map(([id, item]) => ({id, name: item.name}))
     .sort((a,b) => a.name.localeCompare(b.name, 'es'));
 }
