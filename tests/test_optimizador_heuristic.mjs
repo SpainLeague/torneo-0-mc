@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {findBestLocalSpreads, isLegalPcSpread} from '../optimizador-heuristic.js';
+import {findBestSpreads} from '../optimizador-search.js';
 
 test('validates the Champions PC limits', () => {
   assert.equal(isLegalPcSpread([32, 0, 32, 0, 2, 0]), true);
@@ -223,4 +224,31 @@ test('keeps gradual one-PC improvements available during coarse passes without r
   assert.ok(result.results.some(candidate => candidate.points[5] === 3),
     'The search should be able to build a gradual three-PC improvement without stat breakpoints');
   assert.equal(result.results[0].score, 1);
+});
+
+test('matches exhaustive optimum on a small smooth allocation landscape', async () => {
+  const evaluate = points => ({
+    score: 1 - Math.abs(points[0] - 3) / 6
+  });
+  const exhaustive = findBestSpreads({
+    evaluate,
+    maxTotal: 6,
+    exactTotal: true,
+    top: 1
+  });
+  const heuristic = await findBestLocalSpreads({
+    starts: [[6,0,0,0,0,0]],
+    activeStats: [0,1],
+    top: 1,
+    maxIterations: 6,
+    transferSteps: [1],
+    beamWidth: 32,
+    diversityDistance: 0,
+    yieldControl: async () => {},
+    evaluate
+  });
+
+  assert.equal(heuristic.cancelled, false);
+  assert.equal(heuristic.results[0].score, exhaustive.results[0].score);
+  assert.deepEqual(heuristic.results[0].points, exhaustive.results[0].points);
 });
