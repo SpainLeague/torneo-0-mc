@@ -62,7 +62,7 @@ export function auditSmogonItemCoverage(data) {
     !gen.items.get(normalizeId(entry.itemId)) &&
     !gen.items.get(normalizeId(data.reference.items?.[normalizeId(entry.itemId)]?.name))
   );
-  return {legalCount:legalItems.length,supportedCount:supported.length,unsupported,
+  return {legalCount:legalItems.length,supportedCount:supported.length,supported,unsupported,
     megaStoneCount:megaStones.length,missingMegaStones};
 }
 
