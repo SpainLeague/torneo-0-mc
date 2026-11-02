@@ -152,3 +152,32 @@ test('jumps to the next exact stat breakpoint even when it differs from the sche
   assert.ok(result.results.some(candidate => candidate.points.join(',') === '0,10,0,0,0,0'),
     'The search should transfer exactly one PC to reach the breakpoint at 10');
 });
+
+
+test('returns diverse top spreads when enough distinct candidates were explored', async () => {
+  const result = await findBestLocalSpreads({
+    starts:[[16,0,0,0,0,0]],
+    activeStats:[1],
+    top:3,
+    maxIterations:1,
+    transferSteps:[1],
+    beamWidth:8,
+    diversityDistance:4,
+    yieldControl:async()=>{},
+    evaluate:points=>({score:points[1]/32})
+  });
+  assert.equal(result.results.length,3);
+  for(let i=0;i<result.results.length;i++) {
+    for(let j=i+1;j<result.results.length;j++) {
+      const distance=result.results[i].points.reduce((sum,value,index)=>
+        sum+Math.abs(value-result.results[j].points[index]),0);
+      assert.ok(distance>=4);
+    }
+  }
+});
+
+test('rejects an invalid diversity distance', async () => {
+  await assert.rejects(()=>findBestLocalSpreads({
+    starts:[[0,0,0,0,0,0]],evaluate:()=>({score:1}),diversityDistance:-1
+  }),/diversityDistance/);
+});
