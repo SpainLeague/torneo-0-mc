@@ -289,6 +289,16 @@ test('identifies only PC stats that can affect each Champions damage objective',
   assert.deepEqual(getRelevantPcStatIndexes('Final Gambit','offensive'),[0]);
   assert.deepEqual(getRelevantPcStatIndexes('Electro Ball','defensive'),[0,4,5]);
   assert.deepEqual(getRelevantPcStatIndexes('Payback','defensive'),[0,2,5]);
+  assert.deepEqual(getRelevantPcStatIndexes('Electro Ball','offensive'),[3,5]);
+  assert.deepEqual(getRelevantPcStatIndexes('Gyro Ball','offensive'),[1,5]);
+  assert.deepEqual(getRelevantPcStatIndexes('Dragon Energy','offensive'),[0,3]);
+  assert.deepEqual(getRelevantPcStatIndexes('Eruption','offensive'),[0,3]);
+  assert.deepEqual(getRelevantPcStatIndexes('Water Spout','offensive'),[0,3]);
+  assert.deepEqual(getRelevantPcStatIndexes('Flail','offensive'),[0,1]);
+  assert.deepEqual(getRelevantPcStatIndexes('Reversal','offensive'),[0,1]);
+  assert.deepEqual(getRelevantPcStatIndexes('Endeavor','offensive'),[0]);
+  assert.deepEqual(getRelevantPcStatIndexes('Psystrike','defensive'),[0,2]);
+  assert.deepEqual(getRelevantPcStatIndexes('Secret Sword','defensive'),[0,2]);
 });
 
 test('shared optimizer objective scoring consumes real Champions damage rolls', () => {
