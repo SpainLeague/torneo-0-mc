@@ -21,19 +21,28 @@ function comparePoints(a, b) {
   return 0;
 }
 
-function neighbours(points, activeStats, transferStep) {
-  const output = [];
-  for (let from = 0; from < 6; from++) {
-    if (points[from] < transferStep) continue;
-    for (const to of activeStats) {
-      if (from === to || points[to] + transferStep > 32) continue;
-      const next = points.slice();
-      next[from] -= transferStep;
-      next[to] += transferStep;
-      output.push(next);
+function neighbours(points, activeStats, transferStep, statBreakpoints) {
+  const output = new Map();
+  for (const to of activeStats) {
+    // Keep the scheduled coarse-to-fine move, but also jump exactly to the next
+    // real stat increase. Nature rounding means that this delta is not constant.
+    const nextBreakpoint = (statBreakpoints[to] ?? []).find(entry =>
+      Number.isInteger(entry.points) && entry.points > points[to]
+    );
+    const amounts = new Set([transferStep]);
+    if (nextBreakpoint) amounts.add(nextBreakpoint.points - points[to]);
+    for (const amount of amounts) {
+      if (!Number.isInteger(amount) || amount < 1 || amount > 32 || points[to] + amount > 32) continue;
+      for (let from = 0; from < 6; from++) {
+        if (from === to || points[from] < amount) continue;
+        const next = points.slice();
+        next[from] -= amount;
+        next[to] += amount;
+        output.set(keyOf(next), next);
+      }
     }
   }
-  return output;
+  return [...output.values()];
 }
 
 function compareCandidates(a, b) {
@@ -67,7 +76,8 @@ export async function findBestLocalSpreads({
   onProgress = () => {},
   yieldControl = () => new Promise(resolve => setTimeout(resolve, 0)),
   activeStats = [0, 1, 2, 3, 4, 5],
-  transferSteps = [8, 4, 2, 1]
+  transferSteps = [8, 4, 2, 1],
+  statBreakpoints = []
 }) {
   if (typeof evaluate !== 'function') throw new Error('Falta la función evaluadora.');
   if (!Array.isArray(starts) || !starts.length) throw new Error('Se necesita al menos un reparto inicial.');
@@ -84,6 +94,11 @@ export async function findBestLocalSpreads({
     throw new Error('transferSteps debe contener enteros entre 1 y 32.');
   }
   transferSteps = transferSteps.slice(0, 20);
+  if (!Array.isArray(statBreakpoints) || statBreakpoints.length > 6 ||
+      statBreakpoints.some(list => list !== undefined && (!Array.isArray(list) ||
+        list.some(entry => !entry || !Number.isInteger(entry.points) || entry.points < 1 || entry.points > 32)))) {
+    throw new Error('statBreakpoints debe contener umbrales de PC válidos por estadística.');
+  }
   const appliedTransferSteps = Array.from({length: maxIterations}, (_, index) =>
     transferSteps[Math.min(index, transferSteps.length - 1)]
   );
@@ -132,7 +147,7 @@ export async function findBestLocalSpreads({
     const transferStep = appliedTransferSteps[iteration];
     const candidates = new Map(beam.map(candidate => [keyOf(candidate.points), candidate]));
     for (const current of beam) {
-      for (const next of neighbours(current.points, activeStats, transferStep)) {
+      for (const next of neighbours(current.points, activeStats, transferStep, statBreakpoints)) {
         if (shouldCancel()) return {cancelled: true, evaluated, results: best, completedSeeds: iteration, transferSteps: appliedTransferSteps};
         const candidate = score(next);
         candidates.set(keyOf(candidate.points), candidate);
