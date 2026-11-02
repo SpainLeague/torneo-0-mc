@@ -135,3 +135,20 @@ test('runs the complete eight-pass PC transfer schedule', async () => {
   assert.equal(result.completedSeeds,8);
   assert.equal(result.results[0].points[5],32);
 });
+
+
+test('jumps to the next exact stat breakpoint even when it differs from the scheduled transfer', async () => {
+  const result = await findBestLocalSpreads({
+    starts: [[1,9,0,0,0,0]],
+    activeStats: [1],
+    statBreakpoints: [[], [{points:1,value:176},{points:2,value:177},{points:4,value:179},{points:6,value:181},{points:8,value:183},{points:10,value:187}]],
+    top: 1,
+    maxIterations: 1,
+    transferSteps: [8],
+    beamWidth: 8,
+    yieldControl: async () => {},
+    evaluate: points => ({score: points[1] === 10 ? 1 : 0})
+  });
+  assert.ok(result.results.some(candidate => candidate.points.join(',') === '0,10,0,0,0,0'),
+    'The search should transfer exactly one PC to reach the breakpoint at 10');
+});
