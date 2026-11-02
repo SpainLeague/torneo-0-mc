@@ -43,7 +43,7 @@
 <script type="module">
 import {loadOptimizerData, getLegalMoveNames, auditPoolCoverage, calculateChampionStats, getStatPointBreakpoints, getLegalItemsForPool, getRequiredMegaStone, validatePoolItem, getSpreadPresets, normalizeId} from './optimizador-data.js';
 import {getSmogonRuntime, auditSmogonCoverage, calculateSmogonDamage, getRelevantPcStatIndexes} from './optimizador-smogon.js';
-import {evaluateDamageObjective,meanObjectiveScore} from './optimizador-evaluator.js';
+import {evaluateDamageObjective,aggregateObjectiveScores} from './optimizador-evaluator.js';
 import {findBestLocalSpreads} from './optimizador-heuristic.js';
 import {calculateEffectiveSpeed,evaluateSpeedBenchmark} from './optimizador-speed.js';
 const STATS=['PS','Ataque','Defensa','At. Esp.','Def. Esp.','Velocidad'],KEYS=['hp','atk','def','spa','spd','spe'];
@@ -203,7 +203,7 @@ function renderSearchResults(result, activeStats){
  result.results.forEach((candidate,index)=>{
   const card=document.createElement('article');card.className='result-card';
   const title=document.createElement('h3');title.textContent='#'+(index+1)+' · '+candidate.points.join(' / ');
-  const score=document.createElement('p');score.className='score';score.textContent='Cumplimiento medio de umbrales: '+(candidate.score*100).toFixed(1)+'%';
+  const score=document.createElement('p');score.className='score';score.textContent='Cumplimiento equilibrado: '+(candidate.score*100).toFixed(1)+'%';
   const detail=document.createElement('p');detail.textContent=candidate.details.map(x=>x.kind==='speed'?'Objetivo '+x.index+': Velocidad '+x.ownSpeed+' vs '+x.foeSpeed+' (margen '+x.margin+') · '+(x.passed?'cumplido':'no cumplido'):'Objetivo '+x.index+': '+(x.success*100).toFixed(1)+'% (mínimo '+(x.minimum*100).toFixed(0)+'%) · '+(x.passed?'cumplido':'no cumplido')+' · '+x.range[0]+'–'+x.range[1]+' PS; PS '+x.currentHP+'/'+x.maxHP+'; residual '+x.residual+'; recuperación '+x.recovery+'; precisión '+x.accuracy+'%').join(' | ');
   card.append(title,score,detail);
   const apply=document.createElement('button');apply.type='button';apply.textContent='Aplicar este reparto';
@@ -270,7 +270,7 @@ async function searchBestPcSpreads(){
      });
      return {index:index+1,...evaluation,kind:'damage',accuracy:target.accuracy};
     });
-    const score=meanObjectiveScore(details);
+    const score=aggregateObjectiveScores(details,{mode:'balanced',balance:0.3});
     return {score,details};
    }
   });
