@@ -376,34 +376,3 @@ test('Champions damage runtime applies Life Orb modifier', () => {
   assert.ok(lifeOrb.range[0] > hydroPump.range[0],
     'Life Orb should increase special damage');
 });
-  const lifeOrb = calculateSmogonDamage(data,{
-    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
-    attackerItemId:'lifeorb',field:{gameType:'Doubles'}
-  });
-  assert.ok(lifeOrb.range[0] > hydroPump.range[0],
-    'Life Orb should increase special damage');
-
-  const braveBird = calculateSmogonDamage(data,{
-    attacker:'Skarmory',defender:'Vaporeon',moveName:'Brave Bird',
-    field:{gameType:'Doubles'}
-  });
-  const choiceBand = calculateSmogonDamage(data,{
-    attacker:'Skarmory',defender:'Vaporeon',moveName:'Brave Bird',
-    attackerItemId:'choiceband',field:{gameType:'Doubles'}
-  });
-  assert.ok(choiceBand.range[0] > braveBird.range[0],
-    'Choice Band should increase physical damage');
-});
-
-test('Champions damage runtime applies Assault Vest to special defense', () => {
-  const normal = calculateSmogonDamage(data,{
-    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
-    field:{gameType:'Doubles'}
-  });
-  const assaultVest = calculateSmogonDamage(data,{
-    attacker:'Inteleon',defender:'Skarmory',moveName:'Hydro Pump',
-    defenderItemId:'assaultvest',field:{gameType:'Doubles'}
-  });
-  assert.ok(assaultVest.range[1] < normal.range[1],
-    'Assault Vest should reduce special damage received');
-});
