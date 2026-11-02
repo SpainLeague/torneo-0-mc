@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {evaluateDamageObjective,meanObjectiveScore} from '../optimizador-evaluator.js';
+import {evaluateDamageObjective,meanObjectiveScore,aggregateObjectiveScores} from '../optimizador-evaluator.js';
 
 const damage = (hp=100,accuracy=1) => ({
   rolls:Array(16).fill(60),
@@ -62,4 +62,17 @@ test('rejects invalid objective inputs and scores', () => {
   assert.throws(()=>evaluateDamageObjective({damage:damage(),hpPercent:0}),/PS actuales/);
   assert.throws(()=>meanObjectiveScore([]),/al menos un objetivo/);
   assert.throws(()=>meanObjectiveScore([{score:1.1}]),/entre 0 y 1/);
+});
+
+
+test('balanced aggregation penalizes a neglected objective without changing equal objective weights', () => {
+  const objectives=[{score:1},{score:1},{score:0}];
+  assert.equal(aggregateObjectiveScores(objectives,{mode:'mean'}),2/3);
+  assert.equal(aggregateObjectiveScores(objectives,{mode:'balanced'}), (2/3)*0.7);
+  assert.equal(aggregateObjectiveScores([{score:0.6}],{mode:'balanced'}),0.6);
+});
+
+test('balanced aggregation validates mode and balance factor', () => {
+  assert.throws(()=>aggregateObjectiveScores([{score:1}],{mode:'weighted'}),/modo/);
+  assert.throws(()=>aggregateObjectiveScores([{score:1}],{balance:1.1}),/equilibrio/);
 });
