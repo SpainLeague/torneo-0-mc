@@ -49,6 +49,27 @@ function compareCandidates(a, b) {
   return b.score - a.score || comparePoints(a.points, b.points);
 }
 
+function selectDiverseCandidates(candidates, top, minimumDistance) {
+  const ranked = candidates.slice().sort(compareCandidates);
+  const selected = [];
+  const distance = (a,b) => a.reduce((sum,value,index) => sum + Math.abs(value-b[index]), 0);
+  for (const candidate of ranked) {
+    if (selected.every(existing => distance(existing.points,candidate.points) >= minimumDistance)) {
+      selected.push(candidate);
+      if (selected.length === top) return selected;
+    }
+  }
+  // If the explored neighborhood is too small, return the remaining best
+  // distinct candidates rather than silently returning fewer than available.
+  for (const candidate of ranked) {
+    if (!selected.some(existing => keyOf(existing.points) === keyOf(candidate.points))) {
+      selected.push(candidate);
+      if (selected.length === top) break;
+    }
+  }
+  return selected;
+}
+
 function insertTop(results, candidate, top) {
   const previous = results.findIndex(item => keyOf(item.points) === keyOf(candidate.points));
   if (previous >= 0) {
@@ -77,7 +98,8 @@ export async function findBestLocalSpreads({
   yieldControl = () => new Promise(resolve => setTimeout(resolve, 0)),
   activeStats = [0, 1, 2, 3, 4, 5],
   transferSteps = [8, 4, 2, 1],
-  statBreakpoints = []
+  statBreakpoints = [],
+  diversityDistance = 4
 }) {
   if (typeof evaluate !== 'function') throw new Error('Falta la función evaluadora.');
   if (!Array.isArray(starts) || !starts.length) throw new Error('Se necesita al menos un reparto inicial.');
@@ -103,6 +125,9 @@ export async function findBestLocalSpreads({
     transferSteps[Math.min(index, transferSteps.length - 1)]
   );
   const lastScheduledStepIndex = Math.min(maxIterations, transferSteps.length) - 1;
+  if (!Number.isInteger(diversityDistance) || diversityDistance < 0 || diversityDistance > 192) {
+    throw new Error('diversityDistance debe estar entre 0 y 192.');
+  }
   if (!Number.isInteger(beamWidth) || beamWidth < 1 || beamWidth > 32) {
     throw new Error('beamWidth debe estar entre 1 y 32.');
   }
@@ -164,6 +189,7 @@ export async function findBestLocalSpreads({
     if (unchanged && iteration >= lastScheduledStepIndex) break;
   }
 
-  return {cancelled: false, evaluated, results: best, completedSeeds, beamWidth,
+  const diverseResults = selectDiverseCandidates([...cache.values()], top, diversityDistance);
+  return {cancelled: false, evaluated, results: diverseResults, completedSeeds, beamWidth,
     transferSteps: appliedTransferSteps};
 }
