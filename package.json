@@ -2,6 +2,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test:pc-search": "node --test tests/test_optimizador_heuristic.mjs tests/test_optimizador_evaluator.mjs tests/test_optimizador_breakpoints.mjs"
+    "test:pc-search": "node --test tests/test_optimizador_heuristic.mjs tests/test_optimizador_evaluator.mjs tests/test_optimizador_breakpoints.mjs tests/test_optimizador_exhaustive.mjs"
   }
 }
