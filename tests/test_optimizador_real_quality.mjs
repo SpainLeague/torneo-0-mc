@@ -170,3 +170,71 @@ test('real Champions optimizer quality: Body Press plus physical bulk', async ()
     heuristicSpreads: heuristic.results.map(result => result.points)
   }));
 });
+
+
+test('real Champions optimizer quality: special offense plus special bulk', async () => {
+  // Shadow Ball tests Special Attack; Hydro Pump tests HP + Special Defense.
+  // This complements the physical Body Press / Close Combat scenario.
+  const start = [8, 0, 0, 8, 8, 0];
+  const evaluateSpecial = points => {
+    const shadowBallDamage = calculateSmogonDamage(data, {
+      attacker: 'Chandelure', defender: 'Goodra', moveName: 'Shadow Ball',
+      attackerPoints: points, attackerNatureId: 'modest',
+      field: {gameType: 'Doubles'}
+    });
+    const specialBulkDamage = calculateSmogonDamage(data, {
+      attacker: 'Inteleon', defender: 'Chandelure', moveName: 'Hydro Pump',
+      defenderPoints: points, defenderNatureId: 'modest',
+      field: {gameType: 'Doubles'}
+    });
+    const offense = evaluateDamageObjective({
+      damage: shadowBallDamage, attackCount: 1, hpPercent: 100,
+      offensive: true, minimum: 0.5
+    });
+    const bulk = evaluateDamageObjective({
+      damage: specialBulkDamage, attackCount: 2, hpPercent: 100,
+      offensive: false, minimum: 0.5
+    });
+    return {
+      score: aggregateObjectiveScores([offense, bulk], {mode: 'balanced', balance: 0.3}),
+      details: {offense, bulk}
+    };
+  };
+  const options = {
+    start, variableStats: [0, 3, 4], maxCandidates: 1000, top: 3,
+    evaluate: evaluateSpecial
+  };
+  const exactStart = performance.now();
+  const exact = evaluateExhaustivePcSpreads(options);
+  const exactMs = performance.now() - exactStart;
+  const heuristicStart = performance.now();
+  const heuristic = await findBestLocalSpreads({
+    starts: [start], activeStats: [0, 3, 4], top: 3,
+    maxIterations: 8, transferSteps: [8, 8, 8, 8, 4, 4, 2, 1],
+    statBreakpoints: Array.from({length: 6}, (_, index) => [0, 3, 4].includes(index)
+      ? getStatPointBreakpoints(data, 'Chandelure', 'modest', index) : []),
+    diversityDistance: 0,
+    yieldControl: async () => {}, evaluate: evaluateSpecial
+  });
+  const heuristicMs = performance.now() - heuristicStart;
+
+  assert.equal(exact.truncated, false);
+  assert.equal(exact.evaluated, 325);
+  assert.ok(heuristic.results.length > 0);
+  assert.equal(heuristic.results.every(result =>
+    result.points.reduce((sum, value) => sum + value, 0) === 24 &&
+    result.points.every(value => Number.isInteger(value) && value >= 0 && value <= 32)
+  ), true);
+  const gap = exact.results[0].score - heuristic.results[0].score;
+  assert.ok(gap >= -1e-12);
+  console.log(JSON.stringify({
+    scenario: 'Chandelure Shadow Ball vs Goodra + Hydro Pump bulk vs Inteleon',
+    exactCandidates: exact.evaluated, heuristicCandidates: heuristic.evaluated,
+    exactMs: Number(exactMs.toFixed(2)), heuristicMs: Number(heuristicMs.toFixed(2)),
+    exactScore: Number(exact.results[0].score.toFixed(6)),
+    heuristicScore: Number(heuristic.results[0].score.toFixed(6)),
+    scoreGap: Number(gap.toFixed(6)),
+    exactSpreads: exact.results.map(result => result.points),
+    heuristicSpreads: heuristic.results.map(result => result.points)
+  }));
+});
