@@ -159,7 +159,7 @@ test('returns diverse top spreads when enough distinct candidates were explored'
     starts:[[16,0,0,0,0,0]],
     activeStats:[1],
     top:3,
-    maxIterations:1,
+    maxIterations:4,
     transferSteps:[1],
     beamWidth:8,
     diversityDistance:4,
