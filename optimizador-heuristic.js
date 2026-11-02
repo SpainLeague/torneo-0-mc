@@ -40,11 +40,15 @@ function neighbours(points, activeStats, transferStep, statBreakpoints) {
       // PC above the last breakpoint has no effect on the source stat. Allow
       // the search to reclaim those points without sacrificing an actual stat
       // increase, and combine them with a destination breakpoint when possible.
-      const previousBreakpoint = (statBreakpoints[from] ?? []).reduce((latest, entry) =>
-        Number.isInteger(entry.points) && entry.points <= points[from] &&
-        (!latest || entry.points > latest.points) ? entry : latest, null);
-      const effectiveSourcePc = previousBreakpoint?.points ?? 0;
-      const freeSourcePc = points[from] - effectiveSourcePc;
+      const sourceBreakpoints = statBreakpoints[from];
+      const previousBreakpoint = Array.isArray(sourceBreakpoints)
+        ? sourceBreakpoints.reduce((latest, entry) =>
+          Number.isInteger(entry.points) && entry.points <= points[from] &&
+          (!latest || entry.points > latest.points) ? entry : latest, null)
+        : null;
+      const freeSourcePc = Array.isArray(sourceBreakpoints)
+        ? points[from] - (previousBreakpoint?.points ?? 0)
+        : 0;
       if (freeSourcePc > 0) {
         amounts.add(freeSourcePc);
         if (targetDelta) amounts.add(Math.min(freeSourcePc, targetDelta));
