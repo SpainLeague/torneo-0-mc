@@ -115,12 +115,15 @@ export function resolveAbility(poolEntry, species, referenceSpecies, selectedAbi
 function resolveItem(data, gen, itemId) {
   if (!itemId) return undefined;
   const id = normalizeId(itemId);
-  const item = data.reference.items?.[id];
-  const name = item?.name ?? gen.items.get(id)?.name;
-  if (!name || !gen.items.get(normalizeId(name))) {
+  const referenceItem = data.reference.items?.[id];
+  // Prefer the calculator's canonical record by ID. Reference display names can
+  // differ slightly from the internal engine ID (e.g. Barbaracite/Barbaracleite).
+  const engineItem = gen.items.get(id) ??
+    (referenceItem?.name ? gen.items.get(normalizeId(referenceItem.name)) : undefined);
+  if (!engineItem) {
     throw new Error('El objeto «' + itemId + '» no está disponible en el catálogo Champions del motor.');
   }
-  return name;
+  return engineItem.name ?? referenceItem?.name;
 }
 
 export function createSmogonPokemon(data, poolName, {
