@@ -255,17 +255,17 @@ export function getRelevantPcStatIndexes(moveName, role = 'offensive') {
   }
   const id = normalizeId(move.name);
   const speedDependent = ['electroball', 'gyroball', 'payback', 'boltbeak', 'fishiousrend'];
-  const hpDependent = ['dragonenergy', 'eruption', 'waterspout', 'flail', 'reversal'];
 
   if (role === 'offensive') {
     if (id === 'foulplay') return [];
     if (id === 'bodypress') return [2];
+    // These moves use the attacker's absolute current HP, which changes with HP PC.
     if (id === 'finalgambit' || id === 'endeavor') return [0];
     if (id === 'shellsidearm') return [1, 3];
-    const relevant = [];
-    if (hpDependent.includes(id)) relevant.push(0);
+    // Eruption, Flail and Reversal use current-HP / max-HP ratio. The current
+    // damage setup keeps the attacker at full HP, so HP PC does not change that ratio.
     // Electro Ball is special; the other speed-dependent moves use Attack.
-    relevant.push(id === 'electroball' || move.category === 'Special' ? 3 : 1);
+    const relevant = [id === 'electroball' || move.category === 'Special' ? 3 : 1];
     if (speedDependent.includes(id)) relevant.push(5);
     return [...new Set(relevant)];
   }
