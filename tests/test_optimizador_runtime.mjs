@@ -10,7 +10,7 @@ import {
   getRelevantPcStatIndexes,
   getSmogonRuntime
 } from '../optimizador-smogon.js';
-import {getLegalMoveNames, getStatPointBreakpoints, normalizeId} from '../optimizador-data.js';
+import {getLegalItemsForPool, getLegalMoveNames, getStatPointBreakpoints, normalizeId, validatePoolItem} from '../optimizador-data.js';
 import {koThresholds} from '../optimizador-ko.js';
 import {evaluateDamageObjective} from '../optimizador-evaluator.js';
 
@@ -391,4 +391,20 @@ test('legal item audit separates supported and unsupported Champions items', () 
   assert.equal(audit.supportedCount+audit.unsupported.length,audit.legalCount);
   assert.ok(audit.supportedCount>0,'At least some legal items should be supported');
   assert.ok(audit.unsupported.every(item=>item.id&&item.name));
+});
+
+
+test('regular Pokemon item choices exclude every Mega Stone', () => {
+  const items=getLegalItemsForPool(data,'Inteleon');
+  assert.ok(items.some(item=>item.id==='lifeorb'));
+  assert.ok(items.every(item=>!data.reference.items[item.id]?.megaStone));
+  assert.equal(validatePoolItem(data,'Inteleon','aggronite'),false);
+  assert.equal(validatePoolItem(data,'Inteleon','lifeorb'),true);
+});
+
+test('Mega Pokemon can select only their own required Mega Stone', () => {
+  const items=getLegalItemsForPool(data,'Mega Aggron');
+  assert.deepEqual(items,[{id:'aggronite',name:'Aggronite'}]);
+  assert.equal(validatePoolItem(data,'Mega Aggron','aggronite'),true);
+  assert.equal(validatePoolItem(data,'Mega Aggron','abomasite'),false);
 });
