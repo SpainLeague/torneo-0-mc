@@ -6,7 +6,8 @@ import {
   getPoolEntry,
   getReferenceSpeciesRecord,
   normalizeId,
-  calculateChampionStats
+  calculateChampionStats,
+  getRequiredMegaStone
 } from './optimizador-data.js';
 
 const SMOGON_SPECIES = {
@@ -40,6 +41,29 @@ export function getSmogonRuntime() {
     throw new Error('No se ha cargado @smogon/calc. Comprueba la conexión con UNPKG y el orden de los scripts.');
   }
   return {api, gen: api.Generations.get(0)};
+}
+
+export function auditSmogonItemCoverage(data) {
+  const {gen} = getSmogonRuntime();
+  const legalItems = Object.entries(data.reference.items ?? {})
+    .filter(([, item]) => item.legal)
+    .map(([id, item]) => ({id, name:item.name}));
+  const supported = legalItems.filter(item =>
+    gen.items.get(normalizeId(item.id)) || gen.items.get(normalizeId(item.name))
+  );
+  const unsupported = legalItems.filter(item =>
+    !gen.items.get(normalizeId(item.id)) && !gen.items.get(normalizeId(item.name))
+  );
+  const megaStones = data.pool.map(entry => ({
+    pokemon:entry.name,
+    itemId:getRequiredMegaStone(data,entry.name)
+  })).filter(entry => entry.itemId);
+  const missingMegaStones = megaStones.filter(entry =>
+    !gen.items.get(normalizeId(entry.itemId)) &&
+    !gen.items.get(normalizeId(data.reference.items?.[normalizeId(entry.itemId)]?.name))
+  );
+  return {legalCount:legalItems.length,supportedCount:supported.length,unsupported,
+    megaStoneCount:megaStones.length,missingMegaStones};
 }
 
 export function resolveSmogonSpecies(data, poolName, gen) {
