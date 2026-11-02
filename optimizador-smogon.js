@@ -254,19 +254,26 @@ export function getRelevantPcStatIndexes(moveName, role = 'offensive') {
     throw new Error('El rol debe ser offensive o defensive.');
   }
   const id = normalizeId(move.name);
+  const speedDependent = ['electroball', 'gyroball', 'payback', 'boltbeak', 'fishiousrend'];
+  const hpDependent = ['dragonenergy', 'eruption', 'waterspout', 'flail', 'reversal'];
+
   if (role === 'offensive') {
     if (id === 'foulplay') return [];
     if (id === 'bodypress') return [2];
-    if (id === 'finalgambit') return [0];
-    if (['electroball', 'gyroball', 'payback', 'boltbeak', 'fishiousrend'].includes(id)) return [5];
+    if (id === 'finalgambit' || id === 'endeavor') return [0];
     if (id === 'shellsidearm') return [1, 3];
-    return [move.category === 'Special' ? 3 : 1];
+    const relevant = [];
+    if (hpDependent.includes(id)) relevant.push(0);
+    // Electro Ball is special; the other speed-dependent moves use Attack.
+    relevant.push(id === 'electroball' || move.category === 'Special' ? 3 : 1);
+    if (speedDependent.includes(id)) relevant.push(5);
+    return [...new Set(relevant)];
   }
   const relevant = [0]; // Defender HP affects both offensive KO and defensive survival thresholds.
   if (id === 'foulplay') relevant.push(1); // Foul Play uses the target's Attack.
   if (id === 'shellsidearm') relevant.push(2, 4); // Its category can change dynamically.
   else relevant.push(move.overrideDefensiveStat === 'def' || move.category === 'Physical' ? 2 : 4);
-  if (['electroball', 'gyroball', 'payback', 'boltbeak', 'fishiousrend'].includes(id)) relevant.push(5);
+  if (speedDependent.includes(id)) relevant.push(5);
   return [...new Set(relevant)];
 }
 
