@@ -99,3 +99,70 @@ test('real Champions optimizer quality: Mega Aggron offense plus special bulk', 
     heuristicSpreads: heuristic.results.map(result => result.points)
   }));
 });
+
+
+test('real Champions optimizer quality: Body Press plus physical bulk', async () => {
+  // Body Press uses Defense offensively; Close Combat tests HP + Defense.
+  // The search also has Attack available as a competing stat for Iron Head,
+  // making this a useful check that it does not blindly chase every breakpoint.
+  const start = [8, 8, 8, 0, 0, 0];
+  const evaluatePhysical = points => {
+    const bodyPressDamage = calculateSmogonDamage(data, {
+      attacker: 'Mega Aggron', defender: 'Inteleon', moveName: 'Body Press',
+      attackerPoints: points, attackerNatureId: 'impish',
+      attackerItemId: 'aggronite', field: {gameType: 'Doubles'}
+    });
+    const physicalBulkDamage = calculateSmogonDamage(data, {
+      attacker: 'Urshifu-Rapid-Strike', defender: 'Mega Aggron', moveName: 'Close Combat',
+      defenderPoints: points, defenderNatureId: 'impish',
+      defenderItemId: 'aggronite', field: {gameType: 'Doubles'}
+    });
+    const bodyPress = evaluateDamageObjective({
+      damage: bodyPressDamage, attackCount: 1, hpPercent: 100,
+      offensive: true, minimum: 0.5
+    });
+    const bulk = evaluateDamageObjective({
+      damage: physicalBulkDamage, attackCount: 2, hpPercent: 100,
+      offensive: false, minimum: 0.5
+    });
+    return {
+      score: aggregateObjectiveScores([bodyPress, bulk], {mode: 'balanced', balance: 0.3}),
+      details: {bodyPress, bulk}
+    };
+  };
+  const options = {
+    start, variableStats: [0, 1, 2], maxCandidates: 1000, top: 3,
+    evaluate: evaluatePhysical
+  };
+  const exactStart = performance.now();
+  const exact = evaluateExhaustivePcSpreads(options);
+  const exactMs = performance.now() - exactStart;
+  const heuristicStart = performance.now();
+  const heuristic = await findBestLocalSpreads({
+    starts: [start], activeStats: [0, 1, 2], top: 3,
+    maxIterations: 8, transferSteps: [8, 8, 4, 4, 2, 2, 1, 1],
+    beamWidth: 32, diversityDistance: 0,
+    yieldControl: async () => {}, evaluate: evaluatePhysical
+  });
+  const heuristicMs = performance.now() - heuristicStart;
+
+  assert.equal(exact.truncated, false);
+  assert.equal(exact.evaluated, 325);
+  assert.ok(heuristic.results.length > 0);
+  assert.equal(heuristic.results.every(result =>
+    result.points.reduce((sum, value) => sum + value, 0) === 24 &&
+    result.points.every(value => Number.isInteger(value) && value >= 0 && value <= 32)
+  ), true);
+  const gap = exact.results[0].score - heuristic.results[0].score;
+  assert.ok(gap >= -1e-12);
+  console.log(JSON.stringify({
+    scenario: 'Mega Aggron Body Press vs Inteleon + Close Combat bulk vs Urshifu-Rapid-Strike',
+    exactCandidates: exact.evaluated, heuristicCandidates: heuristic.evaluated,
+    exactMs: Number(exactMs.toFixed(2)), heuristicMs: Number(heuristicMs.toFixed(2)),
+    exactScore: Number(exact.results[0].score.toFixed(6)),
+    heuristicScore: Number(heuristic.results[0].score.toFixed(6)),
+    scoreGap: Number(gap.toFixed(6)),
+    exactSpreads: exact.results.map(result => result.points),
+    heuristicSpreads: heuristic.results.map(result => result.points)
+  }));
+});
