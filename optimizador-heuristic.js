@@ -24,17 +24,35 @@ function comparePoints(a, b) {
 function neighbours(points, activeStats, transferStep, statBreakpoints) {
   const output = new Map();
   for (const to of activeStats) {
-    // Keep the scheduled coarse-to-fine move, but also jump exactly to the next
-    // real stat increase. Nature rounding means that this delta is not constant.
+    // Jump exactly to the next real stat increase. Nature rounding means that
+    // the useful PC delta is not constant.
     const nextBreakpoint = (statBreakpoints[to] ?? []).find(entry =>
       Number.isInteger(entry.points) && entry.points > points[to]
     );
-    const amounts = new Set([transferStep]);
-    if (nextBreakpoint) amounts.add(nextBreakpoint.points - points[to]);
-    for (const amount of amounts) {
-      if (!Number.isInteger(amount) || amount < 1 || amount > 32 || points[to] + amount > 32) continue;
-      for (let from = 0; from < 6; from++) {
-        if (from === to || points[from] < amount) continue;
+    const targetDelta = nextBreakpoint ? nextBreakpoint.points - points[to] : null;
+
+    for (let from = 0; from < 6; from++) {
+      if (from === to || points[from] < 1) continue;
+
+      const amounts = new Set([transferStep]);
+      if (targetDelta) amounts.add(targetDelta);
+
+      // PC above the last breakpoint has no effect on the source stat. Allow
+      // the search to reclaim those points without sacrificing an actual stat
+      // increase, and combine them with a destination breakpoint when possible.
+      const previousBreakpoint = (statBreakpoints[from] ?? []).reduce((latest, entry) =>
+        Number.isInteger(entry.points) && entry.points <= points[from] &&
+        (!latest || entry.points > latest.points) ? entry : latest, null);
+      const effectiveSourcePc = previousBreakpoint?.points ?? 0;
+      const freeSourcePc = points[from] - effectiveSourcePc;
+      if (freeSourcePc > 0) {
+        amounts.add(freeSourcePc);
+        if (targetDelta) amounts.add(Math.min(freeSourcePc, targetDelta));
+      }
+
+      for (const amount of amounts) {
+        if (!Number.isInteger(amount) || amount < 1 || amount > 32 ||
+            amount > points[from] || points[to] + amount > 32) continue;
         const next = points.slice();
         next[from] -= amount;
         next[to] += amount;
