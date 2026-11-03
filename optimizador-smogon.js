@@ -255,8 +255,17 @@ export function getRelevantPcStatIndexes(moveName, role = 'offensive') {
   }
   const id = normalizeId(move.name);
   const speedDependent = ['electroball', 'gyroball', 'payback', 'boltbeak', 'fishiousrend'];
+  // These moves do not use the user's ordinary offensive or defensive stat.
+  // Only HP on the optimized side can alter the KO threshold; Final Gambit and
+  // Endeavor also use the user's absolute HP when the optimized Pokémon attacks.
+  const hpBased = ['finalgambit', 'endeavor'];
+  const fixedDamage = ['seismictoss', 'nightshade', 'superfang', 'fissure', 'horndrill', 'sheercold'];
+  const retaliation = ['counter', 'mirrorcoat', 'metalburst', 'comeuppance'];
 
   if (role === 'offensive') {
+    if (hpBased.includes(id)) return [0];
+    if (fixedDamage.includes(id) || retaliation.includes(id)) return [];
+
     if (id === 'foulplay') return [];
     if (id === 'bodypress') return [2];
     // These moves use the attacker's absolute current HP, which changes with HP PC.
@@ -270,6 +279,7 @@ export function getRelevantPcStatIndexes(moveName, role = 'offensive') {
     return [...new Set(relevant)];
   }
   const relevant = [0]; // Defender HP affects both offensive KO and defensive survival thresholds.
+  if (hpBased.includes(id) || fixedDamage.includes(id) || retaliation.includes(id)) return relevant;
   if (id === 'foulplay') relevant.push(1); // Foul Play uses the target's Attack.
   if (id === 'shellsidearm') relevant.push(2, 4); // Its category can change dynamically.
   else relevant.push(move.overrideDefensiveStat === 'def' || move.category === 'Physical' ? 2 : 4);
