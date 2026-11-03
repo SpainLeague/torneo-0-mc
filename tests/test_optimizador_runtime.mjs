@@ -296,6 +296,20 @@ test('identifies only PC stats that can affect each Champions damage objective',
   assert.deepEqual(getRelevantPcStatIndexes('Reversal','offensive'),[1]);
   assert.deepEqual(getRelevantPcStatIndexes('Endeavor','offensive'),[0]);
   assert.deepEqual(getRelevantPcStatIndexes('Final Gambit','offensive'),[0]);
+  assert.deepEqual(getRelevantPcStatIndexes('Endeavor','defensive'),[0]);
+  assert.deepEqual(getRelevantPcStatIndexes('Final Gambit','defensive'),[0]);
+  assert.deepEqual(getRelevantPcStatIndexes('Seismic Toss','offensive'),[]);
+  assert.deepEqual(getRelevantPcStatIndexes('Seismic Toss','defensive'),[0]);
+  assert.deepEqual(getRelevantPcStatIndexes('Night Shade','offensive'),[]);
+  assert.deepEqual(getRelevantPcStatIndexes('Super Fang','offensive'),[]);
+  assert.deepEqual(getRelevantPcStatIndexes('Super Fang','defensive'),[0]);
+  assert.deepEqual(getRelevantPcStatIndexes('Fissure','offensive'),[]);
+  assert.deepEqual(getRelevantPcStatIndexes('Fissure','defensive'),[0]);
+  assert.deepEqual(getRelevantPcStatIndexes('Counter','offensive'),[]);
+  assert.deepEqual(getRelevantPcStatIndexes('Mirror Coat','offensive'),[]);
+  assert.deepEqual(getRelevantPcStatIndexes('Metal Burst','offensive'),[]);
+  assert.deepEqual(getRelevantPcStatIndexes('Shell Side Arm','offensive'),[1,3]);
+  assert.deepEqual(getRelevantPcStatIndexes('Shell Side Arm','defensive'),[0,2,4]);
 });
 
 test('shared optimizer objective scoring consumes real Champions damage rolls', () => {
