@@ -40,7 +40,10 @@ export function calculateAutomaticTurnEffects({
   const damageParts = [];
   const healingParts = [];
 
-  if (status === 'burn' && !isType('Fire', 'Fuego') && !hasAbility('Water Bubble', 'Pompa', 'Thermal Exchange', 'Termoconversión')) damageParts.push(floorFraction(maxHP, DAMAGE_DIVISORS.burn));
+  if (status === 'burn' && !isType('Fire', 'Fuego') && !hasAbility('Water Bubble', 'Pompa', 'Thermal Exchange', 'Intercambio Térmico', 'Termoconversión')) {
+    const burnDamage = floorFraction(maxHP, hasAbility('Heatproof', 'Ignífugo') ? 32 : DAMAGE_DIVISORS.burn);
+    damageParts.push(burnDamage);
+  }
   if (status === 'poison' && !isType('Poison', 'Veneno', 'Steel', 'Acero') && !hasAbility('Immunity', 'Inmunidad')) damageParts.push(floorFraction(maxHP, DAMAGE_DIVISORS.poison));
   if (status === 'badly-poisoned' && !isType('Poison', 'Veneno', 'Steel', 'Acero') && !hasAbility('Immunity', 'Inmunidad')) {
     damageParts.push(floorFraction(maxHP, DAMAGE_DIVISORS.badlyPoisonedBase / toxicStage));
@@ -52,7 +55,7 @@ export function calculateAutomaticTurnEffects({
   }
   if (weather === 'Sun' || weather === 'Harsh Sunshine') {
     if (hasAbility('Solar Power', 'Poder Solar')) damageParts.push(floorFraction(maxHP, DAMAGE_DIVISORS.solarPower));
-    if (hasAbility('Dry Skin', 'Piel Seca') && !isType('Fire', 'Fuego')) {
+    if (hasAbility('Dry Skin', 'Piel Seca')) {
       damageParts.push(floorFraction(maxHP, DAMAGE_DIVISORS.drySkinSun));
     }
   }
