@@ -40,14 +40,14 @@ export function calculateAutomaticTurnEffects({
   const damageParts = [];
   const healingParts = [];
 
-  if (status === 'burn' && !isType('Fire', 'Fuego')) damageParts.push(floorFraction(maxHP, DAMAGE_DIVISORS.burn));
-  if (status === 'poison' && !isType('Poison', 'Veneno', 'Steel', 'Acero')) damageParts.push(floorFraction(maxHP, DAMAGE_DIVISORS.poison));
-  if (status === 'badly-poisoned' && !isType('Poison', 'Veneno', 'Steel', 'Acero')) {
+  if (status === 'burn' && !isType('Fire', 'Fuego') && !hasAbility('Water Bubble', 'Pompa', 'Thermal Exchange', 'Termoconversión')) damageParts.push(floorFraction(maxHP, DAMAGE_DIVISORS.burn));
+  if (status === 'poison' && !isType('Poison', 'Veneno', 'Steel', 'Acero') && !hasAbility('Immunity', 'Inmunidad')) damageParts.push(floorFraction(maxHP, DAMAGE_DIVISORS.poison));
+  if (status === 'badly-poisoned' && !isType('Poison', 'Veneno', 'Steel', 'Acero') && !hasAbility('Immunity', 'Inmunidad')) {
     damageParts.push(floorFraction(maxHP, DAMAGE_DIVISORS.badlyPoisonedBase / toxicStage));
   }
 
   if (weather === 'Sand' && !isType('Rock', 'Roca', 'Ground', 'Tierra', 'Steel', 'Acero') &&
-      !hasAbility('Overcoat', 'Funda', 'Sand Force', 'Poder Arena', 'Sand Rush', ' ímpetu Arena', 'Sand Veil', 'Velo Arena')) {
+      !hasAbility('Overcoat', 'Funda', 'Sand Veil', 'Velo Arena')) {
     damageParts.push(floorFraction(maxHP, DAMAGE_DIVISORS.sandstorm));
   }
   if (weather === 'Sun' || weather === 'Harsh Sunshine') {
