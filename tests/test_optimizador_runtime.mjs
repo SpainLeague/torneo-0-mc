@@ -304,7 +304,9 @@ test('identifies only PC stats that can affect each Champions damage objective',
   assert.deepEqual(getRelevantPcStatIndexes('Super Fang','offensive'),[]);
   assert.deepEqual(getRelevantPcStatIndexes('Super Fang','defensive'),[0]);
   assert.deepEqual(getRelevantPcStatIndexes('Fissure','offensive'),[]);
-  assert.deepEqual(getRelevantPcStatIndexes('Fissure','defensive'),[0]);
+  assert.deepEqual(getRelevantPcStatIndexes('Fissure','defensive'),[]);
+  assert.deepEqual(getRelevantPcStatIndexes('Horn Drill','defensive'),[]);
+  assert.deepEqual(getRelevantPcStatIndexes('Sheer Cold','defensive'),[]);
   assert.deepEqual(getRelevantPcStatIndexes('Counter','offensive'),[]);
   assert.deepEqual(getRelevantPcStatIndexes('Mirror Coat','offensive'),[]);
   assert.deepEqual(getRelevantPcStatIndexes('Metal Burst','offensive'),[]);
