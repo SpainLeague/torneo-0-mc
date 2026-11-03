@@ -76,3 +76,17 @@ test('balanced aggregation validates mode and balance factor', () => {
   assert.throws(()=>aggregateObjectiveScores([{score:1}],{mode:'weighted'}),/modo/);
   assert.throws(()=>aggregateObjectiveScores([{score:1}],{balance:1.1}),/equilibrio/);
 });
+
+
+test('the selected defender item is applied to multi-attack KO probability', () => {
+  const scenario=damage(100);
+  const berryDamage={...scenario,rolls:Array(16).fill(60),range:[60,60]};
+  const withoutBerry=evaluateDamageObjective({damage:berryDamage,attackCount:2});
+  const withBerry=evaluateDamageObjective({damage:berryDamage,attackCount:2,defenderItem:'Sitrus Berry'});
+  assert.equal(withoutBerry.success,1);
+  assert.equal(withBerry.success,0);
+  assert.equal(withBerry.itemEffects.sitrusBerry,true);
+  const withLeftovers=evaluateDamageObjective({damage:{...scenario,rolls:Array(16).fill(50),range:[50,50]},attackCount:2,defenderItem:'Leftovers'});
+  assert.equal(withLeftovers.success,0);
+  assert.equal(withLeftovers.itemEffects.leftovers,true);
+});
