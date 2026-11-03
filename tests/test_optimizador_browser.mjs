@@ -105,6 +105,8 @@ test('optimizer works in desktop and mobile browsers',async t=>{
   await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Búsqueda completada')||document.querySelector('#status').textContent.includes('No se pudo completar'),null,{timeout:30000});
   assert.match(await page.locator('#status').textContent(),/Búsqueda completada/,'Mixed offensive and defensive objectives should complete the PC search');
   assert.ok(await page.locator('#searchResults .result-card').count()>0,'Damage-based search should return candidate spreads');
+  assert.match(await page.locator('#searchResults').textContent(),/Cumplimiento medio de objetivos:/,
+    'Optimizer results must report the equally weighted mean objective score');
   assert.match(await page.locator('#searchResults').textContent(),/Pasos de transferencia: 8\/8\/8\/8\/4\/4\/2\/1 PC/,'Search results should disclose the coarse-to-fine transfer schedule');
   assert.match(await page.locator('#searchResults').textContent(),/Rival fijo: Skarmory · PC 0\/32\/0\/0\/32\/0/,
     'Search results must disclose the exact manually entered rival PC spread');
