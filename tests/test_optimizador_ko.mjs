@@ -93,3 +93,10 @@ test('Sitrus Berry activates immediately when the configured starting HP is at o
   const rolls=Array(16).fill(60);
   assert.equal(repeatedKoProbability(rolls,50,1,0,1,0,100,{sitrusBerry:true}),0);
 });
+
+
+test('Sitrus Berry can activate between the individual hits of a multihit move', () => {
+  const twoHits=[Array(16).fill(60),Array(16).fill(60)];
+  assert.equal(repeatedKoProbability(twoHits,100,1,0,1,0,100),1);
+  assert.equal(repeatedKoProbability(twoHits,100,1,0,1,0,100,{sitrusBerry:true}),0);
+});
