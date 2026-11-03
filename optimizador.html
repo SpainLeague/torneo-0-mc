@@ -36,12 +36,13 @@
 <div><label class="check"><input id="foeParalyzed" type="checkbox"> Pokémon rival paralizado</label></div>
 </div>
 <div style="margin-top:12px"><label class="check"><input id="critical" type="checkbox"> Calcular como golpe crítico</label></div>
-<p class="hint">Clima, terreno, pantallas, golpe crítico y daño de movimientos en área se envían al motor de Pokémon Champions. La precisión base del movimiento se tiene en cuenta en las probabilidades de KO y puede ajustarse manualmente para efectos de habilidades u objetos. Viento Afín se aplica a los benchmarks de Velocidad. Estos consideran también Choice Scarf y las habilidades Nado Rápido, Clorofila, Ímpetu Arena, Quitanieves y Cola Surf; no incluyen parálisis, etapas de Velocidad ni activación de Impulso. El daño residual y la recuperación se introducen manualmente entre ataques consecutivos.</p></section>
+<p class="hint">Clima, terreno, pantallas, golpe crítico y daño de movimientos en área se envían al motor de Pokémon Champions. La precisión base del movimiento se tiene en cuenta en las probabilidades de KO y puede ajustarse manualmente para efectos de habilidades u objetos. Viento Afín se aplica a los benchmarks de Velocidad. Estos consideran también Choice Scarf y las habilidades Nado Rápido, Clorofila, Ímpetu Arena, Quitanieves y Cola Surf; no incluyen parálisis, etapas de Velocidad ni activación de Impulso. Entre ataques consecutivos se aplican automáticamente quemadura, veneno, intoxicación grave, tormenta de arena, terreno de hierba y efectos compatibles de habilidades según clima. Puedes sumar daño o recuperación manual para otros efectos. Cada intervalo representa un final de turno; no es una simulación completa de turnos ni de cambios de Pokémon.</p></section>
 </main>
 <script src="https://unpkg.com/@smogon/calc@0.12.0/dist/data/production.min.js"></script>
 <script src="https://unpkg.com/@smogon/calc@0.12.0/dist/production.min.js"></script>
 <script type="module">
-import {loadOptimizerData, getLegalMoveNames, auditPoolCoverage, calculateChampionStats, getStatPointBreakpoints, getLegalItemsForPool, getRequiredMegaStone, validatePoolItem, getSpreadPresets, normalizeId} from './optimizador-data.js';
+import {loadOptimizerData, getLegalMoveNames, auditPoolCoverage, calculateChampionStats, getStatPointBreakpoints, getLegalItemsForPool, getRequiredMegaStone, validatePoolItem, getSpreadPresets, normalizeId, getPoolTypes} from './optimizador-data.js';
+import {calculateAutomaticTurnEffects} from './optimizador-residual.js';
 import {getSmogonRuntime, auditSmogonCoverage, auditSmogonItemCoverage, calculateSmogonDamage, getRelevantPcStatIndexes} from './optimizador-smogon.js';
 import {evaluateDamageObjective,aggregateObjectiveScores} from './optimizador-evaluator.js';
 import {findBestLocalSpreads} from './optimizador-heuristic.js';
@@ -99,7 +100,7 @@ function calculateSpeedComparison(ownPoints,relation,margin){
 }
 function addTarget(){
  const id=++targetId,el=document.createElement('div');el.className='target';el.dataset.id=id;
- el.innerHTML='<div class="target-head"><b>Objetivo '+id+'</b><button type="button" aria-label="Eliminar objetivo">Eliminar</button></div><div class="target-grid"><div><label>Tipo de objetivo</label><select class="kind"><option value="def">Resistir</option><option value="off">Hacer KO</option><option value="speed-fast">Superar en Velocidad</option><option value="speed-slow">Ser más lento (Trick Room)</option></select></div><div class="damage-only"><label>Umbral</label><select class="hits"><option value="1">OHKO</option><option value="2">2HKO</option><option value="3">3HKO</option></select></div><div class="damage-only"><label>Movimiento del atacante</label><select class="move"><option value="">Selecciona atacante</option></select></div><div class="damage-only"><label>Golpes (si es variable)</label><select class="hitCount"><option value="">Automático</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div><div class="damage-only"><label>Precisión efectiva (%)</label><input class="accuracy" type="number" min="1" max="100" step="1" value="100"></div><div class="damage-only"><label>PS actuales (%)</label><input class="hpPercent" type="number" min="1" max="100" step="1" value="100"></div><div class="damage-only"><label>Daño residual entre ataques (PS)</label><input class="residual" type="number" min="0" step="1" value="0"></div><div class="damage-only"><label>Recuperación entre ataques (PS)</label><input class="recovery" type="number" min="0" step="1" value="0"></div><div class="damage-only"><label>Probabilidad mínima</label><select class="chance"><option>100</option><option>95</option><option>90</option><option>85</option><option>80</option><option>75</option><option>70</option><option>50</option></select></div><div class="speedMarginField" hidden><label>Margen mínimo de Velocidad</label><input class="speedMargin" type="number" min="0" step="1" value="0"></div></div><p class="hint moveHint">El movimiento se filtra por el Pokémon atacante.</p>';
+ el.innerHTML='<div class="target-head"><b>Objetivo '+id+'</b><button type="button" aria-label="Eliminar objetivo">Eliminar</button></div><div class="target-grid"><div><label>Tipo de objetivo</label><select class="kind"><option value="def">Resistir</option><option value="off">Hacer KO</option><option value="speed-fast">Superar en Velocidad</option><option value="speed-slow">Ser más lento (Trick Room)</option></select></div><div class="damage-only"><label>Umbral</label><select class="hits"><option value="1">OHKO</option><option value="2">2HKO</option><option value="3">3HKO</option></select></div><div class="damage-only"><label>Movimiento del atacante</label><select class="move"><option value="">Selecciona atacante</option></select></div><div class="damage-only"><label>Golpes (si es variable)</label><select class="hitCount"><option value="">Automático</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div><div class="damage-only"><label>Precisión efectiva (%)</label><input class="accuracy" type="number" min="1" max="100" step="1" value="100"></div><div class="damage-only"><label>PS actuales (%)</label><input class="hpPercent" type="number" min="1" max="100" step="1" value="100"></div><div class="damage-only"><label>Daño residual entre ataques (PS)</label><input class="residual" type="number" min="0" step="1" value="0"></div><div class="damage-only"><label>Recuperación manual entre ataques (PS)</label><input class="recovery" type="number" min="0" step="1" value="0"></div><div class="damage-only"><label>Estado del defensor</label><select class="status"><option value="none">Sin estado</option><option value="burn">Quemado</option><option value="poison">Envenenado</option><option value="badly-poisoned">Envenenamiento grave</option></select></div><div class="damage-only"><label>Turno de intoxicación grave</label><input class="toxicStage" type="number" min="1" max="15" step="1" value="1"></div><div class="damage-only"><label class="check"><input class="grounded" type="checkbox" checked> Defensor en el suelo</label></div><div class="damage-only"><label>Probabilidad mínima</label><select class="chance"><option>100</option><option>95</option><option>90</option><option>85</option><option>80</option><option>75</option><option>70</option><option>50</option></select></div><div class="speedMarginField" hidden><label>Margen mínimo de Velocidad</label><input class="speedMargin" type="number" min="0" step="1" value="0"></div></div><p class="hint moveHint">El movimiento se filtra por el Pokémon atacante.</p>';
  el.querySelector('button').addEventListener('click',()=>el.remove());
  el.querySelector('.kind').addEventListener('change',()=>updateTargetMode(el));
  el.querySelector('.move').addEventListener('change',()=>updateTargetHitControl(el));
@@ -119,11 +120,21 @@ function readTargetTurnState(target){
  const residual=Number(target.querySelector('.residual').value);
  const recovery=Number(target.querySelector('.recovery').value);
  const accuracy=Number(target.querySelector('.accuracy').value);
+ const toxicStage=Number(target.querySelector('.toxicStage').value);
+ const status=target.querySelector('.status').value;
+ const grounded=target.querySelector('.grounded').checked;
+ if(!Number.isInteger(toxicStage)||toxicStage<1||toxicStage>15)return {error:'El turno de intoxicación grave debe estar entre 1 y 15.'};
  if(!Number.isFinite(accuracy)||accuracy<1||accuracy>100)return {error:'La precisión efectiva debe estar entre el 1% y el 100%.'};
  if(!Number.isFinite(hpPercent)||hpPercent<1||hpPercent>100)return {error:'Los PS actuales deben estar entre el 1% y el 100%.'};
  if(!Number.isInteger(residual)||residual<0)return {error:'El daño residual debe ser un entero no negativo.'};
  if(!Number.isInteger(recovery)||recovery<0)return {error:'La recuperación debe ser un entero no negativo.'};
- return {hpPercent,residual,recovery,accuracy};
+ return {hpPercent,residual,recovery,accuracy,status,toxicStage,grounded};
+}
+function automaticTurnEffects(target,damage,offensive){
+ const defender=chosen(offensive?'foe':'own');
+ const ability=$(offensive?'foeAbility':'ability').value;
+ return calculateAutomaticTurnEffects({maxHP:damage.defenderStats.hp,status:target.status,toxicStage:target.toxicStage,
+  weather:$('weather').value,terrain:$('terrain').value,types:getPoolTypes(defender),ability,grounded:target.grounded});
 }
 function calculateConfiguredTargets(){
  const valid=validatePC('ownPC')&&validatePC('foePC');
@@ -169,13 +180,15 @@ function calculateConfiguredTargets(){
    const attacks=Number(target.querySelector('.hits').value);
    const evaluation=evaluateDamageObjective({
     damage,attackCount:attacks,hpPercent:turnState.hpPercent,
-    residual:turnState.residual,recovery:turnState.recovery,
+    residual:turnState.residual+automaticTurnEffects(turnState,damage,offensive).residualDamage,
+    recovery:turnState.recovery+automaticTurnEffects(turnState,damage,offensive).recovery,
     offensive,minimum:Number(target.querySelector('.chance').value)/100
    });
    const {currentHP,success,minimum}=evaluation;
+   const automatic=automaticTurnEffects(turnState,damage,offensive);
    const minPercent=damage.range[0]/damage.defenderStats.hp*100;
    const maxPercent=damage.range[1]/damage.defenderStats.hp*100;
-   return 'Objetivo '+(index+1)+' ('+(offensive?'hacer KO':'sobrevivir')+', '+attacks+'HKO): '+attacker+' → '+defender+' con '+target.querySelector('.move').value+': '+damage.range[0]+'–'+damage.range[1]+' PS ('+minPercent.toFixed(1)+'–'+maxPercent.toFixed(1)+'%). precisión '+turnState.accuracy+'%; PS iniciales '+currentHP+'/'+damage.defenderStats.hp+'; residual '+turnState.residual+'; recuperación '+turnState.recovery+'. Probabilidad de cumplirlo: '+(success*100).toFixed(1)+'% / mínimo '+(minimum*100)+'% — '+(success>=minimum?'CUMPLIDO':'NO CUMPLIDO');
+   return 'Objetivo '+(index+1)+' ('+(offensive?'hacer KO':'sobrevivir')+', '+attacks+'HKO): '+attacker+' → '+defender+' con '+target.querySelector('.move').value+': '+damage.range[0]+'–'+damage.range[1]+' PS ('+minPercent.toFixed(1)+'–'+maxPercent.toFixed(1)+'%). precisión '+turnState.accuracy+'%; PS iniciales '+currentHP+'/'+damage.defenderStats.hp+'; residual '+(turnState.residual+automatic.residualDamage)+' (auto '+automatic.residualDamage+'); recuperación '+(turnState.recovery+automatic.recovery)+' (auto '+automatic.recovery+'). Probabilidad de cumplirlo: '+(success*100).toFixed(1)+'% / mínimo '+(minimum*100)+'% — '+(success>=minimum?'CUMPLIDO':'NO CUMPLIDO');
   });
   $('status').textContent=results.join('\n')+'\n\nCálculo Smogon Champions, '+($('gameType').value==='Doubles'?'dobles':'individual')+', con condiciones, precisión, PS iniciales y efectos entre ataques. Los objetivos de Velocidad incluyen etapas, parálisis, Viento Afín, Choice Scarf y habilidades de clima/terreno compatibles. No simula turnos completos ni etapas de Velocidad.';
  }catch(error){$('status').textContent='No se ha podido calcular el escenario: '+error.message}
@@ -265,10 +278,12 @@ async function searchBestPcSpreads(){
      });
      const evaluation=evaluateDamageObjective({
       damage,attackCount:target.attacks,hpPercent:target.hpPercent,
-      residual:target.residual,recovery:target.recovery,
+      residual:target.residual+automaticTurnEffects(target,damage,target.offensive).residualDamage,
+      recovery:target.recovery+automaticTurnEffects(target,damage,target.offensive).recovery,
       offensive:target.offensive,minimum:target.minimum
      });
-     return {index:index+1,...evaluation,kind:'damage',accuracy:target.accuracy};
+     const auto=automaticTurnEffects(target,damage,target.offensive);
+     return {index:index+1,...evaluation,kind:'damage',accuracy:target.accuracy,residual:target.residual+auto.residualDamage,recovery:target.recovery+auto.recovery};
     });
     const score=aggregateObjectiveScores(details,{mode:'mean'});
     return {score,details};
