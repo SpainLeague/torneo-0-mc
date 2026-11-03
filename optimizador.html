@@ -270,7 +270,7 @@ async function searchBestPcSpreads(){
      });
      return {index:index+1,...evaluation,kind:'damage',accuracy:target.accuracy};
     });
-    const score=aggregateObjectiveScores(details,{mode:'mean});
+    const score=aggregateObjectiveScores(details,{mode:'mean'});
     return {score,details};
    }
   });
