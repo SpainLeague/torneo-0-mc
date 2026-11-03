@@ -8,6 +8,7 @@ export function evaluateDamageObjective({
   hpPercent = 100,
   residual = 0,
   recovery = 0,
+  defenderItem = '',
   offensive = true,
   minimum = 1
 }) {
@@ -35,13 +36,20 @@ export function evaluateDamageObjective({
 
   const maxHP = damage.defenderStats.hp;
   const currentHP = Math.max(1, Math.ceil(maxHP * hpPercent / 100));
+  const itemId = String(defenderItem ?? '').toLowerCase().normalize('NFD')
+    .replace(/[\\u0300-\\u036f]/g, '').replace(/[^a-z0-9]/g, '');
+  const itemEffects = {
+    leftovers: itemId === 'leftovers',
+    sitrusBerry: itemId === 'sitrusberry'
+  };
   const probabilities = koThresholds(
     damage.rolls,
     currentHP,
     residual,
     damage.accuracy,
     recovery,
-    maxHP
+    maxHP,
+    itemEffects
   );
   const koProbability = probabilities.probabilities[attackCount - 1].probability;
   const success = offensive ? koProbability : 1 - koProbability;
@@ -57,6 +65,8 @@ export function evaluateDamageObjective({
     range: Array.isArray(damage.range) ? damage.range.slice() : null,
     residual,
     recovery,
+    defenderItem,
+    itemEffects,
     accuracy: damage.accuracy * 100,
     attackCount
   };
