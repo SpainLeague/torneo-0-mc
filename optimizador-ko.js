@@ -37,7 +37,8 @@ export function repeatedKoProbability(
   residualBetweenAttacks = 0,
   accuracy = 1,
   recoveryBetweenAttacks = 0,
-  maxHP = currentHP
+  maxHP = currentHP,
+  itemEffects = {}
 ) {
   if (!Number.isFinite(currentHP) || currentHP <= 0) throw new Error('Los PS actuales deben ser positivos.');
   if (!Number.isInteger(attackCount) || attackCount < 1 || attackCount > 3) throw new Error('El número de ataques debe ser 1, 2 o 3.');
@@ -51,29 +52,53 @@ export function repeatedKoProbability(
     ...damageOutcomes.map(outcome => ({damage: outcome.damage, probability: outcome.probability * accuracy})),
     ...(accuracy < 1 ? [{damage: 0, probability: 1 - accuracy}] : [])
   ];
-  // Track remaining HP, not accumulated damage, so recovery is capped at maxHP.
-  // Between separate attacks, residual damage is applied before recovery.
-  let states = new Map([[currentHP, 1]]);
+  if (itemEffects == null || typeof itemEffects !== 'object') throw new Error('Los efectos del objeto deben ser un objeto.');
+  const leftovers = itemEffects.leftovers ? Math.max(1, Math.floor(maxHP / 16)) : 0;
+  const sitrusHeal = itemEffects.sitrusBerry ? Math.floor(maxHP / 4) : 0;
+  const triggerSitrus = (hp, available) => {
+    if (available && sitrusHeal > 0 && hp > 0 && hp <= maxHP / 2) {
+      return {hp: Math.min(maxHP, hp + sitrusHeal), available: false};
+    }
+    return {hp, available};
+  };
+
+  // Track HP and whether the one-use Sitrus Berry remains available.
+  // Residual damage is applied between attacks; then berries, manual/ability
+  // recovery and Leftovers are processed. No end-of-turn recovery follows a KO.
+  const initialBerry = triggerSitrus(currentHP, Boolean(itemEffects.sitrusBerry));
+  let states = new Map([[initialBerry.hp + ':' + initialBerry.available, {
+    hp: initialBerry.hp, berryAvailable: initialBerry.available, probability: 1
+  }]]);
   let koProbability = 0;
   for (let attack = 0; attack < attackCount; attack++) {
     const next = new Map();
-    for (const [hp, chance] of states) {
+    for (const state of states.values()) {
       for (const outcome of distribution) {
-        let remaining = hp - outcome.damage;
-        const outcomeChance = chance * outcome.probability;
+        let remaining = state.hp - outcome.damage;
+        let berryAvailable = state.berryAvailable;
+        const outcomeChance = state.probability * outcome.probability;
         if (remaining <= 0) {
           koProbability += outcomeChance;
           continue;
         }
+        let berry = triggerSitrus(remaining, berryAvailable);
+        remaining = berry.hp;
+        berryAvailable = berry.available;
         if (attack < attackCount - 1) {
           remaining -= residualBetweenAttacks;
           if (remaining <= 0) {
             koProbability += outcomeChance;
             continue;
           }
-          remaining = Math.min(maxHP, remaining + recoveryBetweenAttacks);
+          berry = triggerSitrus(remaining, berryAvailable);
+          remaining = berry.hp;
+          berryAvailable = berry.available;
+          remaining = Math.min(maxHP, remaining + recoveryBetweenAttacks + leftovers);
         }
-        next.set(remaining, (next.get(remaining) ?? 0) + outcomeChance);
+        const key = remaining + ':' + berryAvailable;
+        const previous = next.get(key);
+        if (previous) previous.probability += outcomeChance;
+        else next.set(key, {hp: remaining, berryAvailable, probability: outcomeChance});
       }
     }
     states = next;
@@ -81,10 +106,10 @@ export function repeatedKoProbability(
   return Math.max(0, Math.min(1, koProbability));
 }
 
-export function koThresholds(rolls, currentHP, residualBetweenAttacks = 0, accuracy = 1, recoveryBetweenAttacks = 0, maxHP = currentHP) {
+export function koThresholds(rolls, currentHP, residualBetweenAttacks = 0, accuracy = 1, recoveryBetweenAttacks = 0, maxHP = currentHP, itemEffects = {}) {
   const probabilities = [1,2,3].map(attacks => ({
     attacks,
-    probability: repeatedKoProbability(rolls, currentHP, attacks, residualBetweenAttacks, accuracy, recoveryBetweenAttacks, maxHP)
+    probability: repeatedKoProbability(rolls, currentHP, attacks, residualBetweenAttacks, accuracy, recoveryBetweenAttacks, maxHP, itemEffects)
   }));
   return {
     ohko: probabilities[0].probability,
