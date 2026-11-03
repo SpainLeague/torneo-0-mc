@@ -40,6 +40,8 @@ jobs:
         run: node --test tests/test_mega_starmie_pool.mjs
       - name: Test damage and KO probability calculations
         run: node --test tests/test_optimizador_ko.mjs
+      - name: Test automatic Champions residual effects
+        run: node --test tests/test_optimizador_residual.mjs
       - name: Test Champions speed benchmarks
         run: node --test tests/test_optimizador_speed.mjs
       - name: Test selected ability mapping
@@ -64,6 +66,8 @@ jobs:
           node --check optimizador-smogon.js
           node --check optimizador-search.js
           node --check optimizador-speed.js
+          node --check optimizador-residual.js
+          node --check tests/test_optimizador_residual.mjs
           node --check tests/test_optimizador_speed.mjs
           node --check tests/test_mega_starmie_pool.mjs
           node --check optimizador-data.js
