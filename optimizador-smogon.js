@@ -259,8 +259,10 @@ export function getRelevantPcStatIndexes(moveName, role = 'offensive') {
   // Only HP on the optimized side can alter the KO threshold; Final Gambit and
   // Endeavor also use the user's absolute HP when the optimized Pokémon attacks.
   const hpBased = ['finalgambit', 'endeavor'];
-  const fixedDamage = ['seismictoss', 'nightshade', 'superfang', 'fissure', 'horndrill', 'sheercold'];
+  const fixedDamage = ['seismictoss', 'nightshade', 'superfang'];
+  const ohkoMoves = ['fissure', 'horndrill', 'sheercold'];
   const retaliation = ['counter', 'mirrorcoat', 'metalburst', 'comeuppance'];
+  if (ohkoMoves.includes(id)) return [];
 
   if (role === 'offensive') {
     if (hpBased.includes(id)) return [0];
