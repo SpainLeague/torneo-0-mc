@@ -138,7 +138,7 @@ function automaticTurnEffects(target,damage,offensive){
  const otherAbility=$(offensive?'ability':'foeAbility').value;
  const weatherAbilities=[ability,otherAbility].map(normalizeId);
  const weather=weatherAbilities.some(value=>value==='cloudnine'||value==='aclimatacion')?'':$('weather').value;
- const grounded=target.grounded&&!types.includes('Flying')&&!['levitate','eelevate'].includes(normalizeId(ability))&&normalizeId(item)!=='airballoon';
+ const grounded=target.grounded&&!types.includes('Flying')&&!['levitate','levitacion','eelevate','elevacion'].includes(normalizeId(ability))&&normalizeId(item)!=='airballoon';
  return calculateAutomaticTurnEffects({maxHP:damage.defenderStats.hp,status:target.status,toxicStage:target.toxicStage,
   weather,terrain:$('terrain').value,types,ability,grounded});
 }
