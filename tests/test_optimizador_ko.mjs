@@ -72,3 +72,24 @@ test('residual damage is applied before recovery between attacks', () => {
   assert.equal(repeatedKoProbability(rolls,100,2,10,1,5,100),0);
   assert.equal(repeatedKoProbability(rolls,100,2,25,1,5,100),1);
 });
+
+
+test('Leftovers restores 1/16 only between separate attacks and is capped at max HP', () => {
+  const rolls=Array(16).fill(50);
+  assert.equal(repeatedKoProbability(rolls,100,2,0,1,0,100,{leftovers:false}),1);
+  assert.equal(repeatedKoProbability(rolls,100,2,0,1,0,100,{leftovers:true}),0);
+  assert.equal(repeatedKoProbability(rolls,100,1,0,1,0,100,{leftovers:true}),0);
+});
+
+test('Sitrus Berry activates at half HP, heals one quarter, and is consumed once', () => {
+  const rolls=Array(16).fill(30);
+  assert.equal(repeatedKoProbability(rolls,100,2,0,1,0,100,{sitrusBerry:false}),0);
+  assert.equal(repeatedKoProbability(rolls,100,2,0,1,0,100,{sitrusBerry:true}),0);
+  const residualTriggered=repeatedKoProbability(rolls,100,3,30,1,0,100,{sitrusBerry:true});
+  assert.equal(residualTriggered,1);
+});
+
+test('Sitrus Berry activates immediately when the configured starting HP is at or below half', () => {
+  const rolls=Array(16).fill(60);
+  assert.equal(repeatedKoProbability(rolls,50,1,0,1,0,100,{sitrusBerry:true}),0);
+});
