@@ -47,61 +47,78 @@ export function repeatedKoProbability(
   if (!Number.isFinite(recoveryBetweenAttacks) || recoveryBetweenAttacks < 0) throw new Error('La recuperación debe ser un número no negativo.');
   if (!Number.isFinite(maxHP) || maxHP < currentHP) throw new Error('Los PS máximos deben ser iguales o superiores a los PS actuales.');
 
-  const damageOutcomes = damageDistribution(rolls);
-  const distribution = [
-    ...damageOutcomes.map(outcome => ({damage: outcome.damage, probability: outcome.probability * accuracy})),
-    ...(accuracy < 1 ? [{damage: 0, probability: 1 - accuracy}] : [])
-  ];
+  // Preserve individual hits for fixed-count multihit moves: Sitrus Berry can
+  // activate between hits, while accuracy is rolled once for the whole move.
+  const hitRolls = Array.isArray(rolls[0]) ? rolls : [rolls];
+  const perHitDistributions = hitRolls.map(hit => damageDistribution(hit));
   if (itemEffects == null || typeof itemEffects !== 'object') throw new Error('Los efectos del objeto deben ser un objeto.');
   const leftovers = itemEffects.leftovers ? Math.max(1, Math.floor(maxHP / 16)) : 0;
-  const sitrusHeal = itemEffects.sitrusBerry ? Math.floor(maxHP / 4) : 0;
+  const sitrusHeal = itemEffects.sitrusBerry ? Math.max(1, Math.floor(maxHP / 4)) : 0;
   const triggerSitrus = (hp, available) => {
     if (available && sitrusHeal > 0 && hp > 0 && hp <= maxHP / 2) {
       return {hp: Math.min(maxHP, hp + sitrusHeal), available: false};
     }
     return {hp, available};
   };
+  const addState = (map, hp, berryAvailable, probability) => {
+    const key = hp + ':' + berryAvailable;
+    const previous = map.get(key);
+    if (previous) previous.probability += probability;
+    else map.set(key, {hp, berryAvailable, probability});
+  };
 
-  // Track HP and whether the one-use Sitrus Berry remains available.
-  // Residual damage is applied between attacks; then berries, manual/ability
-  // recovery and Leftovers are processed. No end-of-turn recovery follows a KO.
+  // Track HP and the one-use berry. At each end-of-turn interval, residual
+  // damage is applied before recovery and Leftovers. A KO prevents recovery.
   const initialBerry = triggerSitrus(currentHP, Boolean(itemEffects.sitrusBerry));
-  let states = new Map([[initialBerry.hp + ':' + initialBerry.available, {
-    hp: initialBerry.hp, berryAvailable: initialBerry.available, probability: 1
-  }]]);
+  let states = new Map();
+  addState(states, initialBerry.hp, initialBerry.available, 1);
   let koProbability = 0;
   for (let attack = 0; attack < attackCount; attack++) {
-    const next = new Map();
+    const postMove = new Map();
     for (const state of states.values()) {
-      for (const outcome of distribution) {
-        let remaining = state.hp - outcome.damage;
-        let berryAvailable = state.berryAvailable;
-        const outcomeChance = state.probability * outcome.probability;
-        if (remaining <= 0) {
-          koProbability += outcomeChance;
-          continue;
-        }
-        let berry = triggerSitrus(remaining, berryAvailable);
-        remaining = berry.hp;
-        berryAvailable = berry.available;
-        if (attack < attackCount - 1) {
-          remaining -= residualBetweenAttacks;
-          if (remaining <= 0) {
-            koProbability += outcomeChance;
-            continue;
+      // A miss still consumes the move's accuracy check, but not any damage roll.
+      if (accuracy < 1) {
+        addState(postMove, state.hp, state.berryAvailable, state.probability * (1 - accuracy));
+      }
+      let hitStates = new Map();
+      if (accuracy > 0) addState(hitStates, state.hp, state.berryAvailable, state.probability * accuracy);
+      for (const hitDistribution of perHitDistributions) {
+        const afterHit = new Map();
+        for (const hitState of hitStates.values()) {
+          for (const outcome of hitDistribution) {
+            const outcomeChance = hitState.probability * outcome.probability;
+            const remaining = hitState.hp - outcome.damage;
+            if (remaining <= 0) {
+              koProbability += outcomeChance;
+              continue;
+            }
+            const berry = triggerSitrus(remaining, hitState.berryAvailable);
+            addState(afterHit, berry.hp, berry.available, outcomeChance);
           }
-          berry = triggerSitrus(remaining, berryAvailable);
-          remaining = berry.hp;
-          berryAvailable = berry.available;
-          remaining = Math.min(maxHP, remaining + recoveryBetweenAttacks + leftovers);
         }
-        const key = remaining + ':' + berryAvailable;
-        const previous = next.get(key);
-        if (previous) previous.probability += outcomeChance;
-        else next.set(key, {hp: remaining, berryAvailable, probability: outcomeChance});
+        hitStates = afterHit;
+      }
+      for (const survivor of hitStates.values()) {
+        addState(postMove, survivor.hp, survivor.berryAvailable, survivor.probability);
       }
     }
-    states = next;
+
+    if (attack < attackCount - 1) {
+      const next = new Map();
+      for (const state of postMove.values()) {
+        let remaining = state.hp - residualBetweenAttacks;
+        if (remaining <= 0) {
+          koProbability += state.probability;
+          continue;
+        }
+        const berry = triggerSitrus(remaining, state.berryAvailable);
+        remaining = Math.min(maxHP, berry.hp + recoveryBetweenAttacks + leftovers);
+        addState(next, remaining, berry.available, state.probability);
+      }
+      states = next;
+    } else {
+      states = postMove;
+    }
   }
   return Math.max(0, Math.min(1, koProbability));
 }
