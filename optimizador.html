@@ -188,6 +188,7 @@ function calculateConfiguredTargets(){
     damage,attackCount:attacks,hpPercent:turnState.hpPercent,
     residual:turnState.residual+automaticTurnEffects(turnState,damage,offensive).residualDamage,
     recovery:turnState.recovery+automaticTurnEffects(turnState,damage,offensive).recovery,
+    defenderItem:$(offensive?'foeItem':'item').value,
     offensive,minimum:Number(target.querySelector('.chance').value)/100
    });
    const {currentHP,success,minimum}=evaluation;
@@ -286,6 +287,7 @@ async function searchBestPcSpreads(){
       damage,attackCount:target.attacks,hpPercent:target.hpPercent,
       residual:target.residual+automaticTurnEffects(target,damage,target.offensive).residualDamage,
       recovery:target.recovery+automaticTurnEffects(target,damage,target.offensive).recovery,
+      defenderItem:target.offensive?foeItem:ownItem,
       offensive:target.offensive,minimum:target.minimum
      });
      const auto=automaticTurnEffects(target,damage,target.offensive);
