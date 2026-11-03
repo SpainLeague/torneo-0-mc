@@ -36,8 +36,7 @@ export function evaluateDamageObjective({
 
   const maxHP = damage.defenderStats.hp;
   const currentHP = Math.max(1, Math.ceil(maxHP * hpPercent / 100));
-  const itemId = String(defenderItem ?? '').toLowerCase().normalize('NFD')
-    .replace(/[\\u0300-\\u036f]/g, '').replace(/[^a-z0-9]/g, '');
+  const itemId = String(defenderItem ?? '').toLowerCase().replace(/[^a-z0-9]/g, '');
   const itemEffects = {
     leftovers: itemId === 'leftovers',
     sitrusBerry: itemId === 'sitrusberry'
