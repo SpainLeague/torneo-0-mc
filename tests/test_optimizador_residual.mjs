@@ -31,6 +31,8 @@ test('applies Champions weather recovery and damage abilities', () => {
 
 test('respects status immunities and Magic Guard without suppressing healing', () => {
   assert.equal(calculateAutomaticTurnEffects({maxHP:160,status:'burn',types:['Fire']}).residualDamage,0);
+  assert.equal(calculateAutomaticTurnEffects({maxHP:160,status:'burn',ability:'Heatproof'}).residualDamage,5);
+  assert.equal(calculateAutomaticTurnEffects({maxHP:160,weather:'Harsh Sunshine',types:['Fire'],ability:'Dry Skin'}).residualDamage,20);
   assert.equal(calculateAutomaticTurnEffects({maxHP:160,status:'poison',ability:'Immunity'}).residualDamage,0);
   const result=calculateAutomaticTurnEffects({maxHP:160,status:'burn',weather:'Sand',terrain:'Grassy',ability:'Magic Guard'});
   assert.equal(result.residualDamage,0);
