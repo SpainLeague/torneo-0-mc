@@ -74,7 +74,8 @@ input,select{width:100%;min-width:0;padding:12px;border-radius:10px;border:1px s
 </main>
 <script>
 const $=id=>document.getElementById(id);
-let teams=[],species=[],poolNames=[];
+let teams=[],species=[],poolNames=[],poolAliases={};
+const canonicalName=name=>poolAliases[name]||name;
 const pct=(n,d)=>d?((100*n/d).toFixed(1).replace('.',',')+'%'):'—';
 const clean=v=>String(v??'').trim();
 function aggregate(key){
@@ -133,7 +134,7 @@ function render(){
  $('teamCount').textContent=total;$('pokemonCount').textContent=all.length;
  $('moveCount').textContent=all.reduce((n,m)=>n+(m.moves||[]).length,0);
  const bySpecies=new Map();
- for(const t of teams)for(const m of t.members){const k=m.name;if(!bySpecies.has(k))bySpecies.set(k,{name:k,members:[],teamSet:new Set()});const s=bySpecies.get(k);s.members.push(m);s.teamSet.add(t.name)}
+ for(const t of teams)for(const m of t.members){const k=canonicalName(m.name);if(!bySpecies.has(k))bySpecies.set(k,{name:k,members:[],teamSet:new Set()});const s=bySpecies.get(k);s.members.push(m);s.teamSet.add(t.name)}
  species=poolNames.map(name=>{const s=bySpecies.get(name)||{name,members:[],teamSet:new Set()};return {...s,usage:s.teamSet.size}}).sort((a,b)=>b.usage-a.usage||a.name.localeCompare(b.name,'es'));
  renderRank('topDuos',aggregateDuos(),total,12);
  renderRank('topTrios',aggregateTrios(),total,12);
@@ -182,6 +183,6 @@ function aggregateMove(){
  return [...map.values()].map(x=>({name:x.name,teams:x.teamSet.size})).sort((a,b)=>b.teams-a.teams||a.name.localeCompare(b.name));
 }
 $('search').addEventListener('input',renderCards);$('formFilter').addEventListener('change',renderCards);$('sort').addEventListener('change',renderCards);
-Promise.all([fetch('./estadisticas-data.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}),fetch('./estadisticas-pool.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})]).then(([data,pool])=>{teams=data.teams||[];poolNames=pool.names||[];render()}).catch(err=>{$('dataNote').textContent='No se pudieron cargar los datos estadísticos: '+err.message});
+Promise.all([fetch('./estadisticas-data.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}),fetch('./estadisticas-pool.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})]).then(([data,pool])=>{teams=data.teams||[];poolNames=pool.names||[];poolAliases=pool.aliases||{};render()}).catch(err=>{$('dataNote').textContent='No se pudieron cargar los datos estadísticos: '+err.message});
 </script>
 </body></html>
