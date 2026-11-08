@@ -227,5 +227,15 @@
     "Leafeon",
     "Scovillain",
     "Camerupt"
-  ]
+  ],
+  "aliases": {
+    "Goodra-Hisui": "Goodra Hisui",
+    "Persian-Alola": "Persian Alola",
+    "Palafin-Hero": "Palafin",
+    "Meowstic": "Meowstic-M",
+    "Samurott-Hisui": "Samurott Hisui",
+    "Rotom-Heat": "Rotom Heat",
+    "Rotom-Mow": "Rotom Mow",
+    "Tauros-Paldea-Aqua": "Tauros de Paldea (Raza Acuática)"
+  }
 }
