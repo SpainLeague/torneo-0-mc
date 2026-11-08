@@ -16,7 +16,7 @@ h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:12px 0 8px}h2{font-size
 .stat{display:inline-block;background:#21354a;color:#bfe8d7;border-radius:99px;padding:6px 11px;font-weight:750;margin:8px 0 18px}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
 .panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
-.usage-lines{display:grid;gap:10px}.usage-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px}.usage-line span:first-child{overflow-wrap:anywhere}.usage-line b{font-variant-numeric:tabular-nums}.usage-line small{grid-column:1/-1;color:var(--muted);font-size:12px}
+.usage-lines{display:grid;gap:10px}.companion-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px}.companion-line a{color:var(--text);text-decoration:none}.companion-line a:hover{color:var(--accent);text-decoration:underline}.companion-line small{grid-column:1/-1;color:var(--muted);font-size:12px}.usage-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px}.usage-line span:first-child{overflow-wrap:anywhere}.usage-line b{font-variant-numeric:tabular-nums}.usage-line small{grid-column:1/-1;color:var(--muted);font-size:12px}
 .empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}.pending{color:var(--warn)}
 </style>
 </head>
@@ -56,6 +56,34 @@ function renderSection(title,members,key){
  });
  section.append(lines);return section;
 }
+
+function renderCompanions(teams,requested,aliases,denominator){
+ const counts=new Map();
+ for(const team of teams){
+  const canonical=team.members.map(m=>aliases[m.name]||m.name);
+  if(!canonical.includes(requested))continue;
+  for(const name of new Set(canonical)){
+   if(name===requested)continue;
+   counts.set(name,(counts.get(name)||0)+1);
+  }
+ }
+ const section=document.createElement('section');section.className='panel';
+ const head=document.createElement('div');head.className='panel-head';
+ const heading=document.createElement('h2');heading.textContent='Acompañantes';
+ const sample=document.createElement('span');sample.className='muted';sample.textContent='Muestra: '+denominator+' equipo(s)';
+ head.append(heading,sample);section.append(head);
+ if(!counts.size){const empty=document.createElement('div');empty.className='empty';empty.textContent='No hay acompañantes registrados todavía.';section.append(empty);return section}
+ const lines=document.createElement('div');lines.className='usage-lines';
+ [...counts.entries()].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'es')).forEach(([name,count])=>{
+  const line=document.createElement('div');line.className='companion-line';
+  const link=document.createElement('a');link.href='./pokemon.html?name='+encodeURIComponent(name);link.textContent=name;
+  const value=document.createElement('b');value.textContent=pct(count,denominator);
+  const sampleText=document.createElement('small');sampleText.textContent=count+'/'+denominator+' equipos';
+  line.append(link,value,sampleText);lines.append(line);
+ });
+ section.append(lines);return section;
+}
+
 const params=new URLSearchParams(location.search),requested=params.get('name');
 Promise.all([fetch('./estadisticas-data.json',{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('HTTP '+response.status);return response.json()}),fetch('./estadisticas-pool.json',{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('HTTP '+response.status);return response.json()})]).then(([data,poolData])=>{
  const teams=data.teams||[],members=[],pool=poolData.names||[],aliases=poolData.aliases||{};
@@ -68,6 +96,8 @@ Promise.all([fetch('./estadisticas-data.json',{cache:'no-store'}).then(response=
  $('details').append(renderSection('Objetos',members,'item'));
  $('details').append(renderSection('Habilidades',members,'ability'));
  $('details').append(renderSection('Naturalezas',members,'nature'));
+ $('details').append(renderCompanions(teams,requested,aliases,usage));
+
  const missingNature=members.filter(m=>!clean(m.nature)).length,missingItem=members.filter(m=>!clean(m.item)).length;
  $('note').textContent='Datos de '+members.length+' ejemplar(es) en '+usage+' equipo(s). Pendientes en esta ficha: '+missingNature+' naturalezas y '+missingItem+' objetos.';
 }).catch(error=>{$('pokemonName').textContent='Error al cargar las estadísticas';$('note').textContent=error.message});
