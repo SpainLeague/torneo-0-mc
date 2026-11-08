@@ -186,7 +186,7 @@ function aggregateTrios(){
  return aggregateTeamSets(3,t=>t.members.map(m=>m.name),(v)=>v.join(' + '));
 }
 function aggregateMovePairs(){
- return aggregateTeamSets(2,t=>t.members.flatMap(m=>{
+ return aggregateTeamSets(1,t=>t.members.flatMap(m=>{
   const moves=[...new Set((m.moves||[]).map(clean).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'en'));
   return moves.map((move,i)=>moves.slice(i+1).map(other=>m.name+': '+move+' + '+other)).flat();
  }),(v)=>v.join(' · '));
