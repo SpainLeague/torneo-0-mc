@@ -65,6 +65,24 @@ input,select{width:100%;min-width:0;padding:12px;border-radius:10px;border:1px s
  <div class="panel-head"><h2 style="margin:0">Habilidades más utilizadas</h2></div>
  <div class="rank-list" id="topAbilities"></div>
 </section>
+
+<section class="panel">
+ <div class="panel-head"><h2 style="margin:0">Parejas de Pokémon más frecuentes</h2><span class="muted">Aparecen juntos en el mismo equipo</span></div>
+ <div class="rank-list" id="topDuos"></div>
+</section>
+<section class="panel">
+ <div class="panel-head"><h2 style="margin:0">Núcleos de tres Pokémon</h2><span class="muted">Tríos que coinciden en un equipo</span></div>
+ <div class="rank-list" id="topTrios"></div>
+</section>
+<section class="panel">
+ <div class="panel-head"><h2 style="margin:0">Parejas de movimientos</h2><span class="muted">Movimientos incluidos en el mismo Pokémon</span></div>
+ <div class="rank-list" id="topMovePairs"></div>
+</section>
+<section class="panel">
+ <div class="panel-head"><h2 style="margin:0">Combinaciones de objeto y habilidad</h2><span class="muted">Equipados por un mismo Pokémon</span></div>
+ <div class="rank-list" id="topItemAbility"></div>
+</section>
+
 <p class="foot" id="dataNote">Cargando datos…</p>
 </main>
 <script>
@@ -136,10 +154,47 @@ function render(){
  renderRank('topItems',aggregate('item'),total,12);
  renderRank('topNatures',aggregate('nature'),total,12);
  renderRank('topAbilities',aggregate('ability'),total,12);
+ renderRank('topDuos',aggregateDuos(),total,12);
+ renderRank('topTrios',aggregateTrios(),total,12);
+ renderRank('topMovePairs',aggregateMovePairs(),total,12);
+ renderRank('topItemAbility',aggregateItemAbility(),total,12);
+
  renderCards();
  const unknownNature=all.filter(m=>!clean(m.nature)).length,unknownItem=all.filter(m=>!clean(m.item)).length;
  $('dataNote').innerHTML='Datos de '+total+' equipos. En los rankings globales cada equipo cuenta una sola vez por valor. En cada ficha, los porcentajes se calculan sobre los Pokémon de esa misma forma con el dato conocido. Pendientes: '+unknownNature+' naturalezas y '+unknownItem+' objetos sin confirmar.';
 }
+
+function aggregateTeamSets(size, selector, labeler){
+ const counts=new Map();
+ for(const team of teams){
+  const values=selector(team).filter(Boolean);
+  const unique=[...new Set(values)].sort((a,b)=>a.localeCompare(b,'en'));
+  const combos=[];
+  function choose(start,picked){
+   if(picked.length===size){const key=picked.join('|||');if(!combos.includes(key))combos.push(key);return}
+   for(let i=start;i<unique.length;i++)choose(i+1,[...picked,unique[i]]);
+  }
+  choose(0,[]);
+  for(const key of combos){const row=counts.get(key)||{name:labeler(key.split('|||')),teams:0};row.teams++;counts.set(key,row)}
+ }
+ return [...counts.values()].sort((a,b)=>b.teams-a.teams||a.name.localeCompare(b.name,'es'));
+}
+function aggregateDuos(){
+ return aggregateTeamSets(2,t=>t.members.map(m=>m.name),(v)=>v.join(' + '));
+}
+function aggregateTrios(){
+ return aggregateTeamSets(3,t=>t.members.map(m=>m.name),(v)=>v.join(' + '));
+}
+function aggregateMovePairs(){
+ return aggregateTeamSets(2,t=>t.members.flatMap(m=>{
+  const moves=[...new Set((m.moves||[]).map(clean).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'en'));
+  return moves.map((move,i)=>moves.slice(i+1).map(other=>m.name+': '+move+' + '+other)).flat();
+ }),(v)=>v.join(' · '));
+}
+function aggregateItemAbility(){
+ return aggregateTeamSets(1,t=>t.members.filter(m=>clean(m.item)&&clean(m.ability)).map(m=>m.name+' — '+m.item+' + '+m.ability),(v)=>v[0]);
+}
+
 function aggregateMove(){
  const map=new Map();
  for(const t of teams)for(const m of t.members)for(const move of (m.moves||[])){const k=clean(move).toLocaleLowerCase('en');if(!k)continue;const x=map.get(k)||{name:move,teamSet:new Set()};x.teamSet.add(t.name);map.set(k,x)}
