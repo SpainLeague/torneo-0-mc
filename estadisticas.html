@@ -25,10 +25,13 @@ input,select{width:100%;min-width:0;padding:12px;border-radius:10px;border:1px s
 .empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
 .pending{color:var(--warn)}.foot{font-size:12px;color:var(--muted);margin-top:22px}
 @media(max-width:720px){.controls{grid-template-columns:1fr 1fr}.controls input{grid-column:1/-1}.grid{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:25px}}
+
+.tabs{display:flex;gap:8px;margin:0 0 22px;padding:5px;background:#10192b;border:1px solid var(--line);border-radius:14px;width:fit-content;max-width:100%;flex-wrap:wrap}.tab{border:0;border-radius:10px;padding:10px 14px;background:transparent;color:var(--muted);font:inherit;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;cursor:pointer}.tab.active{background:#2b3d5d;color:var(--text);box-shadow:inset 0 0 0 1px #52698d}.tab:hover{color:var(--text)}@media(max-width:560px){.tabs{width:100%;gap:4px}.tab{font-size:13px;padding:9px 10px}}
 </style>
 </head>
 <body><main class="wrap">
-<header><div class="brand">TORNEO 0% REG MC</div><a class="back" href="./index.html">← Volver a la Pool</a></header>
+<header><div class="brand">TORNEO 0% REG MC</div></header>
+<nav class="tabs" aria-label="Secciones"><a class="tab" href="./index.html">📚 Pool Pokémon</a><a class="tab" href="./index.html#builder">🧩 Crear equipo</a><a class="tab" href="./index.html#recommend">✨ Recomendar equipo</a><a class="tab active" href="./estadisticas.html" aria-current="page">📊 Estadísticas de uso</a></nav>
 <h1>Estadísticas de uso</h1>
 <p class="lead">Uso de Pokémon, movimientos, objetos, habilidades y naturalezas a partir de los equipos registrados. Las formas base y Mega se contabilizan por separado.</p>
 <section>
