@@ -12,7 +12,7 @@ a{color:var(--blue)}.wrap{max-width:900px;margin:auto;padding:22px 16px 56px}
 header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}.brand{font-weight:800;letter-spacing:.02em}
 .back{display:inline-block;padding:9px 13px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--text)}
 h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:12px 0 8px}h2{font-size:20px;margin:0}
-.lead,.muted{color:var(--muted)}.lead{margin:0 0 20px}
+.muted{color:var(--muted)}.pokemon-heading{display:flex;align-items:center;gap:14px;margin:12px 0 18px}.pokemon-heading h1{margin:0}.pokemon-sprite{width:88px;height:88px;object-fit:contain;flex:0 0 88px}
 .stat{display:inline-block;background:#21354a;color:#bfe8d7;border-radius:99px;padding:6px 11px;font-weight:750;margin:8px 0 18px}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
 .panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
@@ -22,8 +22,7 @@ h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:12px 0 8px}h2{font-size
 </head>
 <body><main class="wrap">
 <header><div class="brand">TORNEO 0% REG MC</div><a class="back" href="./estadisticas.html">← Volver a estadísticas</a></header>
-<h1 id="pokemonName">Estadísticas Pokémon</h1>
-<p class="lead">Porcentajes calculados a partir de los equipos registrados. Los datos pendientes no se incluyen en las muestras.</p>
+<div class="pokemon-heading"><img id="pokemonSprite" class="pokemon-sprite" alt="" hidden><h1 id="pokemonName">Estadísticas Pokémon</h1></div>
 <div class="stat" id="usage">Cargando uso…</div>
 <div id="details"></div>
 <p class="muted" id="note">Cargando datos…</p>
@@ -43,16 +42,14 @@ function renderSection(title,members,key){
  const section=document.createElement('section');section.className='panel';
  const head=document.createElement('div');head.className='panel-head';
  const heading=document.createElement('h2');heading.textContent=title;
- const sample=document.createElement('span');sample.className='muted';sample.textContent='Muestra '+known.length+'/'+members.length;
- head.append(heading,sample);section.append(head);
+ head.append(heading);section.append(head);
  if(!counts.size){const empty=document.createElement('div');empty.className='empty pending';empty.textContent=members.length?'Pendiente de comunicar':'Sin datos registrados todavía';section.append(empty);return section}
  const lines=document.createElement('div');lines.className='usage-lines';
  [...counts.values()].sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name)).forEach(item=>{
   const line=document.createElement('div');line.className='usage-line';
-  const name=document.createElement('span'),value=document.createElement('b'),sampleText=document.createElement('small');
+  const name=document.createElement('span'),value=document.createElement('b');
   name.textContent=item.name;value.textContent=pct(item.count,known.length);
-  sampleText.textContent=item.count+'/'+known.length+' Pokémon';
-  line.append(name,value,sampleText);lines.append(line);
+  line.append(name,value);lines.append(line);
  });
  section.append(lines);return section;
 }
@@ -70,8 +67,7 @@ function renderCompanions(teams,requested,aliases,sprites,denominator){
  const section=document.createElement('section');section.className='panel';
  const head=document.createElement('div');head.className='panel-head';
  const heading=document.createElement('h2');heading.textContent='Acompañantes';
- const sample=document.createElement('span');sample.className='muted';sample.textContent='Muestra: '+denominator+' equipo(s)';
- head.append(heading,sample);section.append(head);
+ head.append(heading);section.append(head);
  if(!counts.size){const empty=document.createElement('div');empty.className='empty';empty.textContent='No hay acompañantes registrados todavía.';section.append(empty);return section}
  const lines=document.createElement('div');lines.className='usage-lines';
  [...counts.entries()].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'es')).forEach(([name,count])=>{
@@ -80,8 +76,7 @@ function renderCompanions(teams,requested,aliases,sprites,denominator){
   const spriteUrl=sprites[name];if(spriteUrl){const img=document.createElement('img');img.className='companion-sprite';img.src=spriteUrl;img.alt='';img.loading='lazy';img.onerror=()=>img.remove();nameWrap.append(img)}
   const link=document.createElement('a');link.href='./pokemon.html?name='+encodeURIComponent(name);link.textContent=name;nameWrap.append(link);
   const value=document.createElement('b');value.textContent=pct(count,denominator);
-  const sampleText=document.createElement('small');sampleText.textContent=count+'/'+denominator+' equipos';
-  line.append(nameWrap,value,sampleText);lines.append(line);
+  line.append(nameWrap,value);lines.append(line);
  });
  section.append(lines);return section;
 }
@@ -93,15 +88,15 @@ Promise.all([fetch('./estadisticas-data.json',{cache:'no-store'}).then(response=
  for(const team of teams){const found=team.members.filter(m=>(aliases[m.name]||m.name)===requested);if(found.length){usage++;members.push(...found)}}
  if(!requested||!pool.includes(requested)){$('pokemonName').textContent='Pokémon no encontrado';$('usage').textContent='';$('details').innerHTML='<div class="empty">No existe en la pool actual.</div>';$('note').textContent='Comprueba el nombre o vuelve al listado.';return}
  $('pokemonName').textContent=requested;
- $('usage').textContent=pct(usage,teams.length)+' de uso · '+usage+'/'+teams.length+' equipos';
+ const pokemonSprite=$('pokemonSprite'),spriteUrl=sprites[requested];if(spriteUrl){pokemonSprite.src=spriteUrl;pokemonSprite.alt='Sprite de '+requested;pokemonSprite.hidden=false;pokemonSprite.onerror=()=>pokemonSprite.hidden=true}
+ $('usage').textContent=pct(usage,teams.length)+' de uso';
  $('details').append(renderSection('Movimientos',members,'moves'));
  $('details').append(renderSection('Objetos',members,'item'));
  $('details').append(renderSection('Habilidades',members,'ability'));
  $('details').append(renderSection('Naturalezas',members,'nature'));
  $('details').append(renderCompanions(teams,requested,aliases,sprites,usage));
 
- const missingNature=members.filter(m=>!clean(m.nature)).length,missingItem=members.filter(m=>!clean(m.item)).length;
- $('note').textContent='Datos de '+members.length+' ejemplar(es) en '+usage+' equipo(s). Pendientes en esta ficha: '+missingNature+' naturalezas y '+missingItem+' objetos.';
+ $('note').textContent='';
 }).catch(error=>{$('pokemonName').textContent='Error al cargar las estadísticas';$('note').textContent=error.message});
 </script>
 </body></html>
