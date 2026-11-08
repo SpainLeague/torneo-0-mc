@@ -102,7 +102,7 @@ function detailBlock(title,members,key){
  const label=document.createElement('div');label.className='section-label';label.textContent=title+' · muestra '+known+'/'+members.length;block.append(label);
  if(!values.length){const empty=document.createElement('div');empty.className='muted';empty.textContent='Pendiente de comunicar';block.append(empty);return block}
  const lines=document.createElement('div');lines.className='usage-lines';
- for(const x of values){const line=document.createElement('div');line.className='usage-line';const a=document.createElement('span'),b=document.createElement('b'),small=document.createElement('small');a.textContent=x.name;b.textContent=pct(x.count,known);small.textContent=x.count+'/'+known+' equipos';line.append(a,b,small);lines.append(line)}
+ for(const x of values){const line=document.createElement('div');line.className='usage-line';const a=document.createElement('span'),b=document.createElement('b'),small=document.createElement('small');a.textContent=x.name;b.textContent=pct(x.count,known);small.textContent=x.count+'/'+known+' Pokémon';line.append(a,b,small);lines.append(line)}
  block.append(lines);return block;
 }
 function renderCards(){
@@ -138,7 +138,7 @@ function render(){
  renderRank('topAbilities',aggregate('ability'),total,12);
  renderCards();
  const unknownNature=all.filter(m=>!clean(m.nature)).length,unknownItem=all.filter(m=>!clean(m.item)).length;
- $('dataNote').innerHTML='Datos de '+total+' equipos. Los porcentajes de cada ficha usan como denominador los Pokémon de esa misma forma que sí tienen ese dato registrado. Pendientes: '+unknownNature+' naturalezas y '+unknownItem+' objetos sin confirmar. Los movimientos se cuentan por equipo que los incluye.';
+ $('dataNote').innerHTML='Datos de '+total+' equipos. En los rankings globales cada equipo cuenta una sola vez por valor. En cada ficha, los porcentajes se calculan sobre los Pokémon de esa misma forma con el dato conocido. Pendientes: '+unknownNature+' naturalezas y '+unknownItem+' objetos sin confirmar.';
 }
 function aggregateMove(){
  const map=new Map();
