@@ -20,7 +20,7 @@ h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:12px 0 8px}h2{font-size
 input,select{width:100%;min-width:0;padding:12px;border-radius:10px;border:1px solid var(--line);background:#101a2a;color:var(--text);font:inherit}
 .panel{padding:16px;margin-top:16px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
 .rank-list{display:grid;gap:10px}.rank{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 12px;align-items:center}.rank-name{font-weight:650}.rank-meta{font-size:12px;color:var(--muted)}.rank-value{font-variant-numeric:tabular-nums;font-weight:750}.track{height:7px;background:#26364c;border-radius:99px;overflow:hidden;grid-column:1/-1}.fill{height:100%;background:var(--accent);border-radius:99px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.pokemon-card{padding:15px;min-width:0}.pokemon-card.selected{border-color:var(--accent);box-shadow:0 0 0 1px #62d6a544}.poke-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.poke-name{font-weight:800;font-size:17px}.pill{white-space:nowrap;border-radius:99px;background:#21354a;color:#bfe8d7;padding:4px 9px;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.pokemon-card{padding:15px;min-width:0}.pokemon-card.selected{border-color:var(--accent);box-shadow:0 0 0 1px #62d6a544}.poke-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.poke-name{font-weight:800;font-size:17px}.pokemon-link{color:var(--text);text-decoration:none}.pokemon-link:hover{color:var(--accent);text-decoration:underline}.pill{white-space:nowrap;border-radius:99px;background:#21354a;color:#bfe8d7;padding:4px 9px;font-size:12px}
 .section-label{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:15px 0 6px}.usage-lines{display:grid;gap:7px}.usage-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px}.usage-line span:first-child{overflow-wrap:anywhere}.usage-line b{font-variant-numeric:tabular-nums}.usage-line small{grid-column:1/-1;color:var(--muted);font-size:11px}
 .empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
 .pending{color:var(--warn)}.foot{font-size:12px;color:var(--muted);margin-top:22px}
@@ -36,12 +36,9 @@ input,select{width:100%;min-width:0;padding:12px;border-radius:10px;border:1px s
  <div class="stat"><strong id="pokemonCount">—</strong><span>Pokémon seleccionados</span></div>
  <div class="stat"><strong id="moveCount">—</strong><span>Movimientos registrados</span></div>
 </div>
-<section class="panel">
- <div class="panel-head"><h2 style="margin:0">Uso de Pokémon</h2><span class="muted" id="scope">Porcentaje sobre todos los equipos</span></div>
- <div class="rank-list" id="topPokemon"></div>
-</section>
 <section>
- <h2>Ficha y estadísticas por Pokémon</h2>
+ <h2>Pokémon participantes</h2>
+ <p class="muted">Selecciona un Pokémon para consultar sus estadísticas individuales.</p>
  <div class="controls">
   <input id="search" type="search" placeholder="Buscar Pokémon…">
   <select id="formFilter"><option value="all">Todas las formas</option><option value="mega">Solo Megas</option><option value="base">Solo formas base</option></select>
@@ -121,14 +118,13 @@ function renderCards(){
  if(!rows.length){root.innerHTML='<div class="empty">No hay Pokémon que coincidan con la búsqueda.</div>';return}
  for(const s of rows){
   const card=document.createElement('article');card.className='pokemon-card';
+  const link=document.createElement('a');link.className='pokemon-link';
+  link.href='./pokemon.html?name='+encodeURIComponent(s.name);
+  link.textContent=s.name;
   const top=document.createElement('div');top.className='poke-top';
-  const name=document.createElement('div');name.className='poke-name';name.textContent=s.name;
+  const name=document.createElement('div');name.className='poke-name';name.append(link);
   const pill=document.createElement('div');pill.className='pill';pill.textContent=pct(s.usage,teams.length)+' · '+s.usage+'/'+teams.length;
   top.append(name,pill);card.append(top);
-  card.append(detailBlock('Movimientos',s.members,'moves'));
-  card.append(detailBlock('Objetos',s.members,'item'));
-  card.append(detailBlock('Habilidades',s.members,'ability'));
-  card.append(detailBlock('Naturalezas',s.members,'nature'));
   root.append(card);
  }
 }
@@ -139,7 +135,6 @@ function render(){
  const bySpecies=new Map();
  for(const t of teams)for(const m of t.members){const k=m.name;if(!bySpecies.has(k))bySpecies.set(k,{name:k,members:[],teamSet:new Set()});const s=bySpecies.get(k);s.members.push(m);s.teamSet.add(t.name)}
  species=[...bySpecies.values()].map(s=>({...s,usage:s.teamSet.size})).sort((a,b)=>b.usage-a.usage);
- renderRank('topPokemon',species.map(s=>({name:s.name,teams:s.usage})),total,species.length);
  renderRank('topDuos',aggregateDuos(),total,12);
  renderRank('topTrios',aggregateTrios(),total,12);
  renderRank('topMovePairs',aggregateMovePairs(),total,12);
@@ -147,7 +142,7 @@ function render(){
 
  renderCards();
  const unknownNature=all.filter(m=>!clean(m.nature)).length,unknownItem=all.filter(m=>!clean(m.item)).length;
- $('dataNote').innerHTML='Datos de '+total+' equipos. En los rankings globales cada equipo cuenta una sola vez por valor. En cada ficha, los porcentajes se calculan sobre los Pokémon de esa misma forma con el dato conocido. Pendientes: '+unknownNature+' naturalezas y '+unknownItem+' objetos sin confirmar.';
+ $('dataNote').innerHTML='Datos de '+total+' equipos. Las estadísticas individuales se consultan al seleccionar cada Pokémon. Pendientes: '+unknownNature+' naturalezas y '+unknownItem+' objetos sin confirmar.';
 }
 
 function aggregateTeamSets(size, selector, labeler){
