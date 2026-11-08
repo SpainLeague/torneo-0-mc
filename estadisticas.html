@@ -50,12 +50,10 @@ input,select{width:100%;min-width:0;padding:12px;border-radius:10px;border:1px s
  <div class="grid" id="pokemonGrid"></div>
 </section>
 <section class="panel">
- <div class="panel-head"><h2 style="margin:0">Naturalezas más utilizadas</h2><span class="muted">Solo datos comunicados</span></div>
- <div class="rank-list" id="topNatures"></div>
+
 </section>
 <section class="panel">
- <div class="panel-head"><h2 style="margin:0">Habilidades más utilizadas</h2></div>
- <div class="rank-list" id="topAbilities"></div>
+
 </section>
 
 <section class="panel">
@@ -141,9 +139,7 @@ function render(){
  const bySpecies=new Map();
  for(const t of teams)for(const m of t.members){const k=m.name;if(!bySpecies.has(k))bySpecies.set(k,{name:k,members:[],teamSet:new Set()});const s=bySpecies.get(k);s.members.push(m);s.teamSet.add(t.name)}
  species=[...bySpecies.values()].map(s=>({...s,usage:s.teamSet.size})).sort((a,b)=>b.usage-a.usage);
- renderRank('topPokemon',species.map(s=>({name:s.name,teams:s.usage})),total,12);
- renderRank('topNatures',aggregate('nature'),total,12);
- renderRank('topAbilities',aggregate('ability'),total,12);
+ renderRank('topPokemon',species.map(s=>({name:s.name,teams:s.usage})),total,species.length);
  renderRank('topDuos',aggregateDuos(),total,12);
  renderRank('topTrios',aggregateTrios(),total,12);
  renderRank('topMovePairs',aggregateMovePairs(),total,12);
