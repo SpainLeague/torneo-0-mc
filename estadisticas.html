@@ -96,7 +96,7 @@ function renderCards(){
   link.textContent=s.name;
   const top=document.createElement('div');top.className='poke-top';
   const name=document.createElement('div');name.className='poke-name';const nameInner=document.createElement('div');nameInner.className='poke-name-inner';const spriteUrl=poolSprites[s.name];if(spriteUrl){const img=document.createElement('img');img.className='usage-sprite';img.src=spriteUrl;img.alt='';img.loading='lazy';img.onerror=()=>img.remove();nameInner.append(img)}nameInner.append(link);name.append(nameInner);
-  const pill=document.createElement('div');pill.className='pill';pill.textContent=pct(s.usage,teams.length)+' · '+s.usage+'/'+teams.length;
+  const pill=document.createElement('div');pill.className='pill';pill.textContent=pct(s.usage,teams.length);
   top.append(name,pill);card.append(top);
   root.append(card);
  }
