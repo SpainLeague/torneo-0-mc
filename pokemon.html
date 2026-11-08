@@ -16,7 +16,7 @@ h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:12px 0 8px}h2{font-size
 .stat{display:inline-block;background:#21354a;color:#bfe8d7;border-radius:99px;padding:6px 11px;font-weight:750;margin:8px 0 18px}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
 .panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
-.usage-lines{display:grid;gap:10px}.companion-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center}.companion-name{display:flex;align-items:center;gap:8px;min-width:0}.companion-sprite{width:30px;height:30px;object-fit:contain;flex:0 0 30px}.companion-line a{color:var(--text);text-decoration:none}.companion-line a:hover{color:var(--accent);text-decoration:underline}.companion-line small{grid-column:1/-1;color:var(--muted);font-size:12px}.usage-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center}.usage-line span:first-child{overflow-wrap:anywhere}.usage-line b{font-variant-numeric:tabular-nums}.usage-line small{grid-column:1/-1;color:var(--muted);font-size:12px}.item-name{display:flex;align-items:center;gap:8px;min-width:0}.item-sprite{width:30px;height:30px;object-fit:contain;flex:0 0 30px}
+.usage-lines{display:grid;gap:10px}.companion-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center}.companion-name{display:flex;align-items:center;gap:8px;min-width:0}.companion-sprite{width:30px;height:30px;object-fit:contain;flex:0 0 30px}.companion-line a{color:var(--text);text-decoration:none}.companion-line a:hover{color:var(--accent);text-decoration:underline}.companion-line small{grid-column:1/-1;color:var(--muted);font-size:12px}.usage-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center}.usage-line span:first-child{overflow-wrap:anywhere}.usage-line b{font-variant-numeric:tabular-nums}.usage-line small{grid-column:1/-1;color:var(--muted);font-size:12px}.item-name{display:flex;align-items:center;gap:8px;min-width:0}.item-sprite{width:30px;height:30px;object-fit:contain;flex:0 0 30px}.nature-up{color:#e05252;font-weight:750}.nature-down{color:#4b9ce2;font-weight:750}
 .empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}.pending{color:var(--warn)}
 </style>
 </head>
@@ -31,6 +31,18 @@ h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:12px 0 8px}h2{font-size
 const $=id=>document.getElementById(id);
 const clean=v=>String(v??'').trim();
 const pct=(n,d)=>d?((100*n/d).toFixed(1).replace('.',',')+'%'):'—';
+const natureChanges={
+ 'Lonely':['Atk','Def'],'Brave':['Atk','Spe'],'Adamant':['Atk','SpA'],'Naughty':['Atk','SpD'],
+ 'Bold':['Def','Atk'],'Relaxed':['Def','Spe'],'Impish':['Def','SpA'],'Lax':['Def','SpD'],
+ 'Timid':['Spe','Atk'],'Hasty':['Spe','Def'],'Jolly':['Spe','SpA'],'Naive':['Spe','SpD'],
+ 'Modest':['SpA','Atk'],'Mild':['SpA','Def'],'Quiet':['SpA','Spe'],'Rash':['SpA','SpD'],
+ 'Calm':['SpD','Atk'],'Gentle':['SpD','Def'],'Sassy':['SpD','Spe'],'Careful':['SpD','SpA']
+};
+const itemSpriteOverrides={
+ 'chimechite':'https://images.wikidexcdn.net/mwuploads/wikidex/5/5c/latest/20260416200347/Chimechita_Champions.png',
+ 'drampanite':'https://images.wikidexcdn.net/mwuploads/wikidex/a/a2/latest/20260416200331/Drampanita_Champions.png',
+ 'starminite':'https://images.wikidexcdn.net/mwuploads/wikidex/2/23/latest/20260416200328/Starmita_Champions.png'
+};
 function renderSection(title,members,key){
  const isMoves=key==='moves';
  const known=members.filter(m=>isMoves?Array.isArray(m.moves)&&m.moves.some(move=>clean(move)):!!clean(m[key]));
@@ -49,6 +61,17 @@ function renderSection(title,members,key){
   const line=document.createElement('div');line.className='usage-line';
   const name=document.createElement('span'),value=document.createElement('b');
   name.textContent=item.name;value.textContent=pct(item.count,known.length);
+  if(key==='nature'){
+   const change=natureChanges[item.name];
+   if(change){
+    name.textContent='';
+    const label=document.createElement('span');label.textContent=item.name+' (';
+    const up=document.createElement('span');up.className='nature-up';up.textContent='+'+change[0];
+    const down=document.createElement('span');down.className='nature-down';down.textContent='-'+change[1];
+    const close=document.createElement('span');close.textContent=')';
+    name.append(label,up,document.createTextNode(', '),down,close);
+   }
+  }
   if(key==='item'){
    const itemName=document.createElement('span');itemName.className='item-name';
    const slug=item.name.toLocaleLowerCase('en').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
