@@ -7,22 +7,76 @@
       "source": "VR Pastes",
       "members": [
         {
-          "name": "Sceptile"
+          "name": "Mega Sceptile",
+          "item": "Sceptilite",
+          "ability": "Overgrow",
+          "nature": "Timid",
+          "moves": [
+            "Energy Ball",
+            "Earth Power",
+            "Dragon Pulse",
+            "Protect"
+          ]
         },
         {
-          "name": "Gyarados"
+          "name": "Mega Gyarados",
+          "item": "Gyaradosite",
+          "ability": "Intimidate",
+          "nature": "Jolly",
+          "moves": [
+            "Waterfall",
+            "Crunch",
+            "Dragon Dance",
+            "Protect"
+          ]
         },
         {
-          "name": "Salazzle"
+          "name": "Salazzle",
+          "item": "Focus Sash",
+          "ability": "Corrosion",
+          "nature": "Timid",
+          "moves": [
+            "Fake Out",
+            "Sludge Bomb",
+            "Flamethrower",
+            "Encore"
+          ]
         },
         {
-          "name": "Goodra-Hisui"
+          "name": "Goodra-Hisui",
+          "item": "Leftovers",
+          "ability": "Shell Armor",
+          "nature": "Bold",
+          "moves": [
+            "Shelter",
+            "Body Press",
+            "Flash Cannon",
+            "Life Dew"
+          ]
         },
         {
-          "name": "Gliscor"
+          "name": "Gliscor",
+          "item": "Life Orb",
+          "ability": "Hyper Cutter",
+          "nature": "Jolly",
+          "moves": [
+            "Swords Dance",
+            "Dual Wingbeat",
+            "High Horsepower",
+            "Tailwind"
+          ]
         },
         {
-          "name": "Clefable"
+          "name": "Clefable",
+          "item": "Sitrus Berry",
+          "ability": "Unaware",
+          "nature": "Bold",
+          "moves": [
+            "Moonblast",
+            "Flamethrower",
+            "Follow Me",
+            "Protect"
+          ]
         }
       ]
     },
