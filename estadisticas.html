@@ -113,7 +113,7 @@ function detailBlock(title,members,key){
 }
 function renderCards(){
  const query=$('search').value.trim().toLocaleLowerCase('es'),form=$('formFilter').value,sort=$('sort').value;
- let rows=species.filter(s=>(!query||s.name.toLocaleLowerCase('es').includes(query))&&(form==='all'||(form==='mega')===s.name.startsWith('Mega ')));
+ let rows=species.filter(s=>s.usage>0&&(!query||s.name.toLocaleLowerCase('es').includes(query))&&(form==='all'||(form==='mega')===s.name.startsWith('Mega ')));
  rows.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'es'):b.usage-a.usage||a.name.localeCompare(b.name,'es'));
  const root=$('pokemonGrid');root.replaceChildren();
  if(!rows.length){root.innerHTML='<div class="empty">No hay Pokémon que coincidan con la búsqueda.</div>';return}
