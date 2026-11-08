@@ -41,14 +41,6 @@ input,select{width:100%;min-width:0;padding:12px;border-radius:10px;border:1px s
  </div>
  <div class="grid" id="pokemonGrid"></div>
 </section>
-<section class="panel">
- <div class="panel-head"><h2 style="margin:0">Parejas de Pokémon más frecuentes</h2><span class="muted">Aparecen juntos en el mismo equipo</span></div>
- <div class="rank-list" id="topDuos"></div>
-</section>
-<section class="panel">
- <div class="panel-head"><h2 style="margin:0">Núcleos de tres Pokémon</h2><span class="muted">Tríos que coinciden en un equipo</span></div>
- <div class="rank-list" id="topTrios"></div>
-</section>
 
 <p class="foot" id="dataNote">Cargando datos…</p>
 </main>
@@ -114,8 +106,6 @@ function render(){
  const bySpecies=new Map();
  for(const t of teams)for(const m of t.members){const k=canonicalName(m.name);if(!bySpecies.has(k))bySpecies.set(k,{name:k,members:[],teamSet:new Set()});const s=bySpecies.get(k);s.members.push(m);s.teamSet.add(t.name)}
  species=poolNames.map(name=>{const s=bySpecies.get(name)||{name,members:[],teamSet:new Set()};return {...s,usage:s.teamSet.size}}).sort((a,b)=>b.usage-a.usage||a.name.localeCompare(b.name,'es'));
- renderRank('topDuos',aggregateDuos(),total,12);
- renderRank('topTrios',aggregateTrios(),total,12);
 
  renderCards();
  const unknownNature=all.filter(m=>!clean(m.nature)).length,unknownItem=all.filter(m=>!clean(m.item)).length;
