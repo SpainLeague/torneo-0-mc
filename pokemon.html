@@ -43,6 +43,9 @@ const itemSpriteOverrides={
  'sitrus-berry':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/sitrus-berry.png',
  'restos':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/leftovers.png',
  'leftovers':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/leftovers.png',
+ 'baya-caquic':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/persim-berry.png',
+ 'baya-acardo':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/shuca-berry.png',
+ 'shuca-berry':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/shuca-berry.png',
  'chimechite':'https://images.wikidexcdn.net/mwuploads/wikidex/5/5c/latest/20260416200347/Chimechita_Champions.png',
  'drampanite':'https://images.wikidexcdn.net/mwuploads/wikidex/a/a2/latest/20260416200331/Drampanita_Champions.png',
  'starminite':'https://images.wikidexcdn.net/mwuploads/wikidex/2/23/latest/20260416200328/Starmita_Champions.png',
@@ -85,7 +88,15 @@ function renderSection(title,members,key){
   if(key==='item'){
    const itemName=document.createElement('span');itemName.className='item-name';
    const slug=item.name.toLocaleLowerCase('en').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-   const img=document.createElement('img');img.className='item-sprite';img.src=itemSpriteOverrides[slug]||'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/'+slug+'.png';img.alt='';img.loading='lazy';img.onerror=()=>img.remove();
+   const img=document.createElement('img');img.className='item-sprite';img.src=itemSpriteOverrides[slug]||'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/'+slug+'.png';img.alt='';img.loading='lazy';
+   const fallbackSources={
+    'baya-zidra':['https://img.pokemondb.net/sprites/items/sitrus-berry.png','https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/sitrus-berry.png'],
+    'sitrus-berry':['https://img.pokemondb.net/sprites/items/sitrus-berry.png','https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/sitrus-berry.png'],
+    'restos':['https://img.pokemondb.net/sprites/items/leftovers.png','https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/leftovers.png'],
+    'leftovers':['https://img.pokemondb.net/sprites/items/leftovers.png','https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/leftovers.png']
+   };
+   const fallbacks=fallbackSources[slug]||['https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/'+slug+'.png'];
+   img.onerror=()=>{const next=Number(img.dataset.fallbackIndex||0);if(next<fallbacks.length){img.dataset.fallbackIndex=String(next+1);img.src=fallbacks[next]}else img.remove()};
    itemName.append(img,name);line.append(itemName,value);
   }else line.append(name,value);
   lines.append(line);
