@@ -39,6 +39,12 @@ const natureChanges={
  'Calm':['SpD','Atk'],'Gentle':['SpD','Def'],'Sassy':['SpD','Spe'],'Careful':['SpD','SpA']
 };
 const itemSpriteOverrides={
+ 'baya-zidra':'https://img.pokemondb.net/sprites/items/sitrus-berry.png',
+ 'sitrus-berry':'https://img.pokemondb.net/sprites/items/sitrus-berry.png',
+ 'restos':'https://img.pokemondb.net/sprites/items/leftovers.png',
+ 'leftovers':'https://img.pokemondb.net/sprites/items/leftovers.png',
+ 'focus-sash':'https://img.pokemondb.net/sprites/items/focus-sash.png',
+ 'life-orb':'https://img.pokemondb.net/sprites/items/life-orb.png',
  'baya-zidra':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/gen5/sitrus-berry.png',
  'sitrus-berry':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/gen5/sitrus-berry.png',
  'restos':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/gen5/leftovers.png',
@@ -87,13 +93,15 @@ function renderSection(title,members,key){
   }
   if(key==='item'){
    const itemName=document.createElement('span');itemName.className='item-name';
-   const slug=item.name.toLocaleLowerCase('en').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+   const slug=item.name.toLocaleLowerCase('en').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
    const img=document.createElement('img');img.className='item-sprite';img.src=itemSpriteOverrides[slug]||'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/'+slug+'.png';img.alt='';img.loading='lazy';
    const fallbackSources={
     'baya-zidra':['https://img.pokemondb.net/sprites/items/sitrus-berry.png','https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/sitrus-berry.png'],
     'sitrus-berry':['https://img.pokemondb.net/sprites/items/sitrus-berry.png','https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/sitrus-berry.png'],
     'restos':['https://img.pokemondb.net/sprites/items/leftovers.png','https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/leftovers.png'],
-    'leftovers':['https://img.pokemondb.net/sprites/items/leftovers.png','https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/leftovers.png']
+    'leftovers':['https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/gen5/leftovers.png','https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/gen5/leftovers.png'],
+    'focus-sash':['https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/focus-sash.png','https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/gen5/focus-sash.png','https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/gen5/focus-sash.png'],
+    'life-orb':['https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/life-orb.png','https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/gen5/life-orb.png','https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/gen5/life-orb.png']
    };
    const fallbacks=fallbackSources[slug]||['https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/gen5/'+slug+'.png','https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/'+slug+'.png','https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/gen5/'+slug+'.png'];
    img.onerror=()=>{const next=Number(img.dataset.fallbackIndex||0);if(next<fallbacks.length){img.dataset.fallbackIndex=String(next+1);img.src=fallbacks[next]}else img.remove()};
