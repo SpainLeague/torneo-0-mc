@@ -33,9 +33,13 @@ const $=id=>document.getElementById(id);
 const clean=v=>String(v??'').trim();
 const pct=(n,d)=>d?((100*n/d).toFixed(1).replace('.',',')+'%'):'—';
 function renderSection(title,members,key){
- const known=members.filter(m=>clean(m[key]));
+ const isMoves=key==='moves';
+ const known=members.filter(m=>isMoves?Array.isArray(m.moves)&&m.moves.some(move=>clean(move)):!!clean(m[key]));
  const counts=new Map();
- for(const m of known){const value=clean(m[key]),id=value.toLocaleLowerCase('en');const row=counts.get(id)||{name:value,count:0};row.count++;counts.set(id,row)}
+ for(const m of known){
+  const values=isMoves?[...new Set(m.moves.map(clean).filter(Boolean))]:[clean(m[key])];
+  for(const value of values){const id=value.toLocaleLowerCase('en');const row=counts.get(id)||{name:value,count:0};row.count++;counts.set(id,row)}
+ }
  const section=document.createElement('section');section.className='panel';
  const head=document.createElement('div');head.className='panel-head';
  const heading=document.createElement('h2');heading.textContent=title;
