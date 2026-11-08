@@ -16,7 +16,7 @@ h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:12px 0 8px}h2{font-size
 .stat{display:inline-block;background:#21354a;color:#bfe8d7;border-radius:99px;padding:6px 11px;font-weight:750;margin:8px 0 18px}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
 .panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
-.usage-lines{display:grid;gap:10px}.companion-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center}.companion-name{display:flex;align-items:center;gap:8px;min-width:0}.companion-sprite{width:30px;height:30px;object-fit:contain;flex:0 0 30px}.companion-line a{color:var(--text);text-decoration:none}.companion-line a:hover{color:var(--accent);text-decoration:underline}.companion-line small{grid-column:1/-1;color:var(--muted);font-size:12px}.usage-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px}.usage-line span:first-child{overflow-wrap:anywhere}.usage-line b{font-variant-numeric:tabular-nums}.usage-line small{grid-column:1/-1;color:var(--muted);font-size:12px}
+.usage-lines{display:grid;gap:10px}.companion-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center}.companion-name{display:flex;align-items:center;gap:8px;min-width:0}.companion-sprite{width:30px;height:30px;object-fit:contain;flex:0 0 30px}.companion-line a{color:var(--text);text-decoration:none}.companion-line a:hover{color:var(--accent);text-decoration:underline}.companion-line small{grid-column:1/-1;color:var(--muted);font-size:12px}.usage-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center}.usage-line span:first-child{overflow-wrap:anywhere}.usage-line b{font-variant-numeric:tabular-nums}.usage-line small{grid-column:1/-1;color:var(--muted);font-size:12px}.item-name{display:flex;align-items:center;gap:8px;min-width:0}.item-sprite{width:30px;height:30px;object-fit:contain;flex:0 0 30px}
 .empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}.pending{color:var(--warn)}
 </style>
 </head>
@@ -49,7 +49,13 @@ function renderSection(title,members,key){
   const line=document.createElement('div');line.className='usage-line';
   const name=document.createElement('span'),value=document.createElement('b');
   name.textContent=item.name;value.textContent=pct(item.count,known.length);
-  line.append(name,value);lines.append(line);
+  if(key==='item'){
+   const itemName=document.createElement('span');itemName.className='item-name';
+   const slug=item.name.toLocaleLowerCase('en').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+   const img=document.createElement('img');img.className='item-sprite';img.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/'+slug+'.png';img.alt='';img.loading='lazy';img.onerror=()=>img.remove();
+   itemName.append(img,name);line.append(itemName,value);
+  }else line.append(name,value);
+  lines.append(line);
  });
  section.append(lines);return section;
 }
