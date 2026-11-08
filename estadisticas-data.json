@@ -1,0 +1,1317 @@
+{
+  "version": 1,
+  "updated": "2026-11-08",
+  "teams": [
+    {
+      "name": "Equipo 1 · VR Pastes",
+      "source": "VR Pastes",
+      "members": [
+        {
+          "name": "Mega Sceptile",
+          "item": "Sceptilite",
+          "ability": "Overgrow",
+          "nature": "Timid",
+          "moves": [
+            "Energy Ball",
+            "Earth Power",
+            "Dragon Pulse",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Mega Gyarados",
+          "item": "Gyaradosite",
+          "ability": "Intimidate",
+          "nature": "Jolly",
+          "moves": [
+            "Waterfall",
+            "Crunch",
+            "Dragon Dance",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Salazzle",
+          "item": "Focus Sash",
+          "ability": "Corrosion",
+          "nature": "Timid",
+          "moves": [
+            "Fake Out",
+            "Sludge Bomb",
+            "Flamethrower",
+            "Encore"
+          ]
+        },
+        {
+          "name": "Goodra-Hisui",
+          "item": "Leftovers",
+          "ability": "Shell Armor",
+          "nature": "Bold",
+          "moves": [
+            "Shelter",
+            "Body Press",
+            "Flash Cannon",
+            "Life Dew"
+          ]
+        },
+        {
+          "name": "Gliscor",
+          "item": "Life Orb",
+          "ability": "Hyper Cutter",
+          "nature": "Jolly",
+          "moves": [
+            "Swords Dance",
+            "Dual Wingbeat",
+            "High Horsepower",
+            "Tailwind"
+          ]
+        },
+        {
+          "name": "Clefable",
+          "item": "Sitrus Berry",
+          "ability": "Unaware",
+          "nature": "Bold",
+          "moves": [
+            "Moonblast",
+            "Flamethrower",
+            "Follow Me",
+            "Protect"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 2",
+      "members": [
+        {
+          "name": "Mega Meganium",
+          "item": "Meganiumite",
+          "ability": "Overgrow",
+          "nature": "Modest",
+          "moves": [
+            "Solar Beam",
+            "Dazzling Gleam",
+            "Weather Ball",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Mega Starmie",
+          "item": "Starminite",
+          "ability": "Natural Cure",
+          "nature": "Jolly",
+          "moves": [
+            "Liquidation",
+            "Zen Headbutt",
+            "Dazzling Gleam",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Infernape",
+          "item": "Life Orb",
+          "ability": "Blaze",
+          "nature": "Timid",
+          "moves": [
+            "Aura Sphere",
+            "Overheat",
+            "Fake Out",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Scrafty",
+          "item": "Sitrus Berry",
+          "ability": "Intimidate",
+          "nature": "Adamant",
+          "moves": [
+            "Drain Punch",
+            "Knock Off",
+            "Coaching",
+            "Fake Out"
+          ]
+        },
+        {
+          "name": "Noivern",
+          "item": "Focus Sash",
+          "ability": "Infiltrator",
+          "nature": "Timid",
+          "moves": [
+            "Draco Meteor",
+            "Air Slash",
+            "Tailwind",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Klefki",
+          "item": "Leftovers",
+          "ability": "Prankster",
+          "nature": "Calm",
+          "moves": [
+            "Dazzling Gleam",
+            "Rain Dance",
+            "Trick Room",
+            "Imprison"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 3",
+      "members": [
+        {
+          "name": "Klefki",
+          "item": "Light Clay",
+          "ability": "Prankster",
+          "nature": "Bold",
+          "moves": [
+            "Reflect",
+            "Light Screen",
+            "Thunder Wave",
+            "Dazzling Gleam"
+          ]
+        },
+        {
+          "name": "Mega Gyarados",
+          "item": "Gyaradosite",
+          "ability": "Intimidate",
+          "nature": "Adamant",
+          "moves": [
+            "Waterfall",
+            "Dragon Dance",
+            "Protect",
+            "Crunch"
+          ]
+        },
+        {
+          "name": "Mega Chandelure",
+          "item": "Chandelurite",
+          "ability": "Flash Fire",
+          "nature": "Modest",
+          "moves": [
+            "Heat Wave",
+            "Shadow Ball",
+            "Protect",
+            "Calm Mind"
+          ]
+        },
+        {
+          "name": "Noivern",
+          "item": "Focus Sash",
+          "ability": "Infiltrator",
+          "nature": "Brave",
+          "moves": [
+            "Taunt",
+            "Tailwind",
+            "Super Fang",
+            "Draco Meteor"
+          ]
+        },
+        {
+          "name": "Goodra-Hisui",
+          "item": "Leftovers",
+          "ability": "Sap Sipper",
+          "nature": "Bold",
+          "moves": [
+            "Shelter",
+            "Body Press",
+            "Protect",
+            "Flamethrower"
+          ]
+        },
+        {
+          "name": "Clefable",
+          "item": "Sitrus Berry",
+          "ability": "Unaware",
+          "nature": "Bold",
+          "moves": [
+            "Moonblast",
+            "Follow Me",
+            "Heal Pulse",
+            "Life Dew"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 4",
+      "members": [
+        {
+          "name": "Aromatisse",
+          "item": "Babiri Berry",
+          "ability": "Aroma Veil",
+          "nature": "Quiet",
+          "moves": [
+            "Trick Room",
+            "Heal Pulse",
+            "Protect",
+            "Moonblast"
+          ]
+        },
+        {
+          "name": "Medicham",
+          "item": "Focus Sash",
+          "ability": "Pure Power",
+          "nature": "Adamant",
+          "moves": [
+            "Fake Out",
+            "Close Combat",
+            "Bullet Punch",
+            "Psycho Cut"
+          ]
+        },
+        {
+          "name": "Camerupt",
+          "item": "Life Orb",
+          "ability": "Solid Rock",
+          "nature": "Quiet",
+          "moves": [
+            "Heat Wave",
+            "Ancient Power",
+            "Earth Power",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Mega Drampa",
+          "item": "Drampanite",
+          "ability": "Berserk",
+          "nature": "Quiet",
+          "moves": [
+            "Dragon Pulse",
+            "Hyper Voice",
+            "Protect",
+            "Calm Mind"
+          ]
+        },
+        {
+          "name": "Azumarill",
+          "item": "Sitrus Berry",
+          "ability": "Huge Power",
+          "nature": "Adamant",
+          "moves": [
+            "Protect",
+            "Aqua Jet",
+            "Belly Drum",
+            "Play Rough"
+          ]
+        },
+        {
+          "name": "Klefki",
+          "item": "Leftovers",
+          "ability": "Prankster",
+          "nature": "Modest",
+          "moves": [
+            "Calm Mind",
+            "Trick Room",
+            "Flash Cannon",
+            "Dazzling Gleam"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 5",
+      "members": [
+        {
+          "name": "Infernape",
+          "item": "Focus Sash",
+          "ability": "Iron Fist",
+          "nature": "Jolly",
+          "moves": [
+            "Fake Out",
+            "Coaching",
+            "Feint",
+            "Fire Punch"
+          ]
+        },
+        {
+          "name": "Audino",
+          "item": "Sitrus Berry",
+          "ability": "Healer",
+          "nature": "Bold",
+          "moves": [
+            "Simple Beam",
+            "Protect",
+            "Icy Wind",
+            "Hyper Voice"
+          ]
+        },
+        {
+          "name": "Overqwil",
+          "item": "Leftovers",
+          "ability": "Intimidate",
+          "nature": "Careful",
+          "moves": [
+            "Minimize",
+            "Protect",
+            "Poison Jab",
+            "Crunch"
+          ]
+        },
+        {
+          "name": "Mega Eelektross",
+          "item": "Eelektrossite",
+          "ability": "Levitate",
+          "nature": "Adamant",
+          "moves": [
+            "Drain Punch",
+            "Psychic Fangs",
+            "Thunder Punch",
+            "Knock Off"
+          ]
+        },
+        {
+          "name": "Araquanid",
+          "item": "Mystic Water",
+          "ability": "Water Bubble",
+          "nature": "Adamant",
+          "moves": [
+            "Liquidation",
+            "Leech Life",
+            "Protect",
+            "Wide Guard"
+          ]
+        },
+        {
+          "name": "Serperior",
+          "item": "Wide Lens",
+          "ability": "Contrary",
+          "nature": "Modest",
+          "moves": [
+            "Leaf Storm",
+            "Giga Drain",
+            "Dragon Pulse",
+            "Protect"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 6",
+      "members": [
+        {
+          "name": "Clefable",
+          "item": "Sitrus Berry",
+          "ability": "Unaware",
+          "nature": "Bold",
+          "moves": [
+            "Protect",
+            "Follow Me",
+            "Thunder Wave",
+            "Moonblast"
+          ]
+        },
+        {
+          "name": "Mega Meganium",
+          "item": "Meganiumite",
+          "ability": "Overgrow",
+          "nature": "Modest",
+          "moves": [
+            "Protect",
+            "Solar Beam",
+            "Weather Ball",
+            "Dazzling Gleam"
+          ]
+        },
+        {
+          "name": "Salazzle",
+          "item": "Focus Sash",
+          "ability": "Corrosion",
+          "nature": "Timid",
+          "moves": [
+            "Fake Out",
+            "Toxic",
+            "Flamethrower",
+            "Sludge Bomb"
+          ]
+        },
+        {
+          "name": "Mega Barbaracle",
+          "item": "Barbaracite",
+          "ability": "Tough Claws",
+          "nature": "Adamant",
+          "moves": [
+            "Protect",
+            "Shell Smash",
+            "Rock Slide",
+            "Close Combat"
+          ]
+        },
+        {
+          "name": "Gyarados",
+          "item": "Leftovers",
+          "ability": "Intimidate",
+          "nature": "Adamant",
+          "moves": [
+            "Protect",
+            "Helping Hand",
+            "Taunt",
+            "Waterfall"
+          ]
+        },
+        {
+          "name": "Krookodile",
+          "item": "Choice Scarf",
+          "ability": "Moxie",
+          "nature": "Adamant",
+          "moves": [
+            "Earthquake",
+            "High Horsepower",
+            "Knock Off",
+            "Rock Tomb"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 7",
+      "members": [
+        {
+          "name": "Blaziken",
+          "item": "Focus Sash",
+          "ability": "Speed Boost",
+          "nature": "Timid",
+          "moves": [
+            "Overheat",
+            "Aura Sphere",
+            "Coaching",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Clefable",
+          "item": "Leftovers",
+          "ability": "Unaware",
+          "nature": "Modest",
+          "moves": [
+            "Calm Mind",
+            "Draining Kiss",
+            "Stored Power",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Mega Gyarados",
+          "item": "Gyaradosite",
+          "ability": "Intimidate",
+          "nature": "Adamant",
+          "moves": [
+            "Earthquake",
+            "Waterfall",
+            "Dragon Dance",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Pincurchin",
+          "item": "Electric Seed",
+          "ability": "Electric Surge",
+          "nature": "Quiet",
+          "moves": [
+            "Electroweb",
+            "Hydro Pump",
+            "Rising Voltage",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Meowscarada",
+          "item": "Life Orb",
+          "ability": "Overgrow",
+          "nature": "Jolly",
+          "moves": [
+            "Flower Trick",
+            "Sucker Punch",
+            "Knock Off",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Persian-Alola",
+          "item": "Sitrus Berry",
+          "ability": "Fur Coat",
+          "nature": "Jolly",
+          "moves": [
+            "Fake Out",
+            "Parting Shot",
+            "Snarl",
+            "Foul Play"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 8",
+      "members": [
+        {
+          "name": "Mega Altaria",
+          "item": "Altarianite",
+          "ability": "Cloud Nine",
+          "nature": "Modest",
+          "moves": [
+            "Hyper Voice",
+            "Dragon Pulse",
+            "Tailwind",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Mega Manectric",
+          "item": "Manectite",
+          "ability": "Lightning Rod",
+          "nature": "Timid",
+          "moves": [
+            "Thunderbolt",
+            "Snarl",
+            "Overheat",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Palafin-Hero",
+          "item": "Mystic Water",
+          "ability": "Zero to Hero",
+          "nature": "Adamant",
+          "moves": [
+            "Wave Crash",
+            "Jet Punch",
+            "Ice Punch",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Scrafty",
+          "item": "Focus Sash",
+          "ability": "Intimidate",
+          "nature": "Jolly",
+          "moves": [
+            "Fake Out",
+            "Close Combat",
+            "Knock Off",
+            "Taunt"
+          ]
+        },
+        {
+          "name": "Arcanine",
+          "item": "Sitrus Berry",
+          "ability": "Intimidate",
+          "nature": "Jolly",
+          "moves": [
+            "Flare Blitz",
+            "Snarl",
+            "Will-O-Wisp",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Tsareena",
+          "item": "Choice Scarf",
+          "ability": "Queenly Majesty",
+          "nature": "Jolly",
+          "moves": [
+            "Trop Kick",
+            "Triple Axel",
+            "Low Kick",
+            "U-turn"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 9",
+      "members": [
+        {
+          "name": "Mega Feraligatr",
+          "item": "Feraligatrite",
+          "ability": "Sheer Force",
+          "nature": "Jolly",
+          "moves": [
+            "Liquidation",
+            "Body Slam",
+            "Protect",
+            "Dragon Dance"
+          ]
+        },
+        {
+          "name": "Blaziken",
+          "item": "Focus Sash",
+          "ability": "Speed Boost",
+          "nature": "Timid",
+          "moves": [
+            "Coaching",
+            "Detect",
+            "Heat Wave",
+            "Aura Sphere"
+          ]
+        },
+        {
+          "name": "Simisage",
+          "item": "Occa Berry",
+          "ability": "Overgrow",
+          "nature": "Timid",
+          "moves": [
+            "Fake Out",
+            "Helping Hand",
+            "Leaf Storm",
+            "Taunt"
+          ]
+        },
+        {
+          "name": "Gliscor",
+          "item": "Psychic Seed",
+          "ability": "Hyper Cutter",
+          "nature": "Adamant",
+          "moves": [
+            "Protect",
+            "High Horsepower",
+            "Tailwind",
+            "Acrobatics"
+          ]
+        },
+        {
+          "name": "Meowstic",
+          "item": "Sitrus Berry",
+          "ability": "Prankster",
+          "nature": "Bold",
+          "moves": [
+            "Expanding Force",
+            "Light Screen",
+            "Psychic Terrain",
+            "Fake Out"
+          ]
+        },
+        {
+          "name": "Mawile",
+          "item": null,
+          "ability": "Intimidate",
+          "nature": "Adamant",
+          "moves": [
+            "Play Rough",
+            "Rock Slide",
+            "Iron Head",
+            "Protect"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 10",
+      "members": [
+        {
+          "name": "Snorlax",
+          "item": "Leftovers",
+          "ability": "Thick Fat",
+          "nature": "Adamant",
+          "moves": [
+            "Protect",
+            "Curse",
+            "Body Slam",
+            "High Horsepower"
+          ]
+        },
+        {
+          "name": "Mega Banette",
+          "item": "Banettite",
+          "ability": "Insomnia",
+          "nature": "Adamant",
+          "moves": [
+            "Poltergeist",
+            "Trick Room",
+            "Taunt",
+            "Destiny Bond"
+          ]
+        },
+        {
+          "name": "Arcanine",
+          "item": "Sitrus Berry",
+          "ability": "Intimidate",
+          "nature": "Jolly",
+          "moves": [
+            "Protect",
+            "Flare Blitz",
+            "Snarl",
+            "Will-O-Wisp"
+          ]
+        },
+        {
+          "name": "Samurott-Hisui",
+          "item": "Choice Scarf",
+          "ability": "Sharpness",
+          "nature": "Adamant",
+          "moves": [
+            "Sacred Sword",
+            "Aqua Cutter",
+            "Night Slash",
+            "Flip Turn"
+          ]
+        },
+        {
+          "name": "Mega Meganium",
+          "item": "Meganiumite",
+          "ability": "Overgrow",
+          "nature": "Modest",
+          "moves": [
+            "Protect",
+            "Solar Beam",
+            "Weather Ball",
+            "Dazzling Gleam"
+          ]
+        },
+        {
+          "name": "Klefki",
+          "item": "Light Clay",
+          "ability": "Prankster",
+          "nature": "Bold",
+          "moves": [
+            "Reflect",
+            "Light Screen",
+            "Dazzling Gleam",
+            "Rain Dance"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 11",
+      "members": [
+        {
+          "name": "Mega Banette",
+          "item": "Banettite",
+          "ability": "Insomnia",
+          "nature": "Adamant",
+          "moves": [
+            "Skill Swap",
+            "Shadow Sneak",
+            "Shadow Claw",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Medicham",
+          "item": "Focus Sash",
+          "ability": "Pure Power",
+          "nature": "Adamant",
+          "moves": [
+            "Fake Out",
+            "Close Combat",
+            "Coaching",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Squawkabilly",
+          "item": "Choice Scarf",
+          "ability": "Intimidate",
+          "nature": "Jolly",
+          "moves": [
+            "Parting Shot",
+            "U-turn",
+            "Brave Bird",
+            "Final Gambit"
+          ]
+        },
+        {
+          "name": "Rotom-Heat",
+          "item": "White Herb",
+          "ability": "Levitate",
+          "nature": "Modest",
+          "moves": [
+            "Overheat",
+            "Thunderbolt",
+            "Electroweb",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Clefable",
+          "item": "Sitrus Berry",
+          "ability": "Unaware",
+          "nature": "Bold",
+          "moves": [
+            "Follow Me",
+            "Moonblast",
+            "Helping Hand",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Empoleon",
+          "item": "Mystic Water",
+          "ability": "Competitive",
+          "nature": "Modest",
+          "moves": [
+            "Hydro Pump",
+            "Flash Cannon",
+            "Ice Beam",
+            "Protect"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 12",
+      "members": [
+        {
+          "name": "Mega Malamar",
+          "item": "Malamarite",
+          "ability": "Contrary",
+          "nature": "Adamant",
+          "moves": [
+            "Knock Off",
+            "Protect",
+            "Superpower",
+            "Psycho Cut"
+          ]
+        },
+        {
+          "name": "Persian-Alola",
+          "item": "Chople Berry",
+          "ability": "Fur Coat",
+          "nature": "Jolly",
+          "moves": [
+            "Fake Tears",
+            "Foul Play",
+            "Parting Shot",
+            "Screech"
+          ]
+        },
+        {
+          "name": "Clefable",
+          "item": "Rocky Helmet",
+          "ability": "Unaware",
+          "nature": "Calm",
+          "moves": [
+            "Fake Tears",
+            "Follow Me",
+            "Moonblast",
+            "Life Dew"
+          ]
+        },
+        {
+          "name": "Mega Abomasnow",
+          "item": "Abomasite",
+          "ability": "Snow Warning",
+          "nature": "Quiet",
+          "moves": [
+            "Blizzard",
+            "Aurora Veil",
+            "Leaf Storm",
+            "Earth Power"
+          ]
+        },
+        {
+          "name": "Mimikyu",
+          "item": "Life Orb",
+          "ability": "Disguise",
+          "nature": "Brave",
+          "moves": [
+            "Trick Room",
+            "Play Rough",
+            "Swords Dance",
+            "Shadow Claw"
+          ]
+        },
+        {
+          "name": "Scrafty",
+          "item": "Sitrus Berry",
+          "ability": "Intimidate",
+          "nature": "Impish",
+          "moves": [
+            "Fake Out",
+            "Scary Face",
+            "Knock Off",
+            "Close Combat"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 13",
+      "members": [
+        {
+          "name": "Mega Sceptile",
+          "item": "Sceptilite",
+          "ability": "Overgrow",
+          "nature": "Timid",
+          "moves": [
+            "Energy Ball",
+            "Earth Power",
+            "Dragon Pulse",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Mega Gyarados",
+          "item": "Gyaradosite",
+          "ability": "Intimidate",
+          "nature": "Jolly",
+          "moves": [
+            "Waterfall",
+            "Crunch",
+            "Dragon Dance",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Infernape",
+          "item": "Focus Sash",
+          "ability": "Iron Fist",
+          "nature": "Jolly",
+          "moves": [
+            "Fake Out",
+            "Coaching",
+            "Fire Punch",
+            "Encore"
+          ]
+        },
+        {
+          "name": "Goodra-Hisui",
+          "item": "Shuca Berry",
+          "ability": "Shell Armor",
+          "nature": "Impish",
+          "moves": [
+            "Shelter",
+            "Body Press",
+            "Heavy Slam",
+            "Life Dew"
+          ]
+        },
+        {
+          "name": "Overqwil",
+          "item": "Leftovers",
+          "ability": "Intimidate",
+          "nature": "Careful",
+          "moves": [
+            "Minimize",
+            "Protect",
+            "Poison Jab",
+            "Crunch"
+          ]
+        },
+        {
+          "name": "Clefable",
+          "item": "Sitrus Berry",
+          "ability": "Unaware",
+          "nature": "Bold",
+          "moves": [
+            "Moonblast",
+            "Follow Me",
+            "Heal Pulse",
+            "Protect"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 14",
+      "members": [
+        {
+          "name": "Mega Chimecho",
+          "item": "Chimechite",
+          "ability": "Levitate",
+          "nature": "Bold",
+          "moves": [
+            "Trick Room",
+            "Psychic",
+            "Flash Cannon",
+            "Recover"
+          ]
+        },
+        {
+          "name": "Mega Gyarados",
+          "item": "Gyaradosite",
+          "ability": "Intimidate",
+          "nature": "Adamant",
+          "moves": [
+            "Protect",
+            "Dragon Dance",
+            "Waterfall",
+            "Crunch"
+          ]
+        },
+        {
+          "name": "Salazzle",
+          "item": "Focus Sash",
+          "ability": "Corrosion",
+          "nature": "Timid",
+          "moves": [
+            "Fake Out",
+            "Encore",
+            "Protect",
+            "Overheat"
+          ]
+        },
+        {
+          "name": "Rotom-Mow",
+          "item": "Choice Scarf",
+          "ability": "Levitate",
+          "nature": "Timid",
+          "moves": [
+            "Volt Switch",
+            "Electroweb",
+            "Leaf Storm",
+            "Trick"
+          ]
+        },
+        {
+          "name": "Mamoswine",
+          "item": "Life Orb",
+          "ability": "Oblivious",
+          "nature": "Adamant",
+          "moves": [
+            "Protect",
+            "Earthquake",
+            "Icicle Crash",
+            "Ice Shard"
+          ]
+        },
+        {
+          "name": "Mimikyu",
+          "item": "Sitrus Berry",
+          "ability": "Disguise",
+          "nature": "Adamant",
+          "moves": [
+            "Will-O-Wisp",
+            "Shadow Claw",
+            "Shadow Sneak",
+            "Play Rough"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 15",
+      "members": [
+        {
+          "name": "Tauros-Paldea-Aqua",
+          "item": "Choice Scarf",
+          "ability": "Intimidate",
+          "nature": "Adamant",
+          "moves": [
+            "Close Combat",
+            "Raging Bull",
+            "Wave Crash",
+            "Stone Edge"
+          ]
+        },
+        {
+          "name": "Mega Drampa",
+          "item": "Drampanite",
+          "ability": "Cloud Nine",
+          "nature": "Quiet",
+          "moves": [
+            "Hyper Voice",
+            "Dragon Pulse",
+            "Earth Power",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Clefable",
+          "item": "Mental Herb",
+          "ability": "Unaware",
+          "nature": "Calm",
+          "moves": [
+            "Moonblast",
+            "Follow Me",
+            "Life Dew",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Mega Chandelure",
+          "item": "Chandelurite",
+          "ability": "Flash Fire",
+          "nature": "Modest",
+          "moves": [
+            "Heat Wave",
+            "Shadow Ball",
+            "Trick Room",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Meowscarada",
+          "item": "Focus Sash",
+          "ability": "Overgrow",
+          "nature": "Jolly",
+          "moves": [
+            "Flower Trick",
+            "Knock Off",
+            "Taunt",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Toxtricity",
+          "item": "Life Orb",
+          "ability": "Punk Rock",
+          "nature": "Modest",
+          "moves": [
+            "Overdrive",
+            "Sludge Bomb",
+            "Boomburst",
+            "Protect"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 16",
+      "members": [
+        {
+          "name": "Mega Eelektross",
+          "item": "Eelektrossite",
+          "ability": "Levitate",
+          "nature": null,
+          "moves": [
+            "Discharge",
+            "Flamethrower",
+            "Giga Drain",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Noivern",
+          "item": "Roseli Berry",
+          "ability": "Telepathy",
+          "nature": null,
+          "moves": [
+            "Tailwind",
+            "Draco Meteor",
+            "Protect",
+            "Air Slash"
+          ]
+        },
+        {
+          "name": "Simipour",
+          "item": "Choice Scarf",
+          "ability": "Torrent",
+          "nature": null,
+          "moves": [
+            "Fake Out",
+            "Hydro Pump",
+            "Flip Turn",
+            "Icy Wind"
+          ]
+        },
+        {
+          "name": "Mamoswine",
+          "item": "Focus Sash",
+          "ability": "Oblivious",
+          "nature": null,
+          "moves": [
+            "Earthquake",
+            "High Horsepower",
+            "Ice Shard",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Mega Scizor",
+          "item": "Scizorite",
+          "ability": "Technician",
+          "nature": null,
+          "moves": [
+            "Bullet Punch",
+            "Bug Bite",
+            "Swords Dance",
+            "Protect"
+          ]
+        },
+        {
+          "name": "Samurott-Hisui",
+          "item": "Life Orb",
+          "ability": "Sharpness",
+          "nature": null,
+          "moves": [
+            "Knock Off",
+            "Sacred Sword",
+            "Aqua Jet",
+            "Protect"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Equipo 17 · ChompLab",
+      "source": "ChompLab",
+      "members": [
+        {
+          "name": "Rotom-Mow",
+          "item": "Choice Scarf",
+          "ability": "Levitate",
+          "nature": "Modest",
+          "moves": [
+            "Thunderbolt",
+            "Trick",
+            "Electroweb",
+            "Volt Switch"
+          ]
+        },
+        {
+          "name": "Mega Gyarados",
+          "item": "Gyaradosite",
+          "ability": "Intimidate",
+          "nature": "Adamant",
+          "moves": [
+            "Waterfall",
+            "Protect",
+            "Crunch",
+            "Dragon Dance"
+          ]
+        },
+        {
+          "name": "Mega Chandelure",
+          "item": "Chandelurite",
+          "ability": "Flash Fire",
+          "nature": "Modest",
+          "moves": [
+            "Heat Wave",
+            "Protect",
+            "Shadow Ball",
+            "Calm Mind"
+          ]
+        },
+        {
+          "name": "Overqwil",
+          "item": "Life Orb",
+          "ability": "Intimidate",
+          "nature": "Adamant",
+          "moves": [
+            "Poison Jab",
+            "Protect",
+            "Throat Chop",
+            "Taunt"
+          ]
+        },
+        {
+          "name": "Klefki",
+          "item": "Sitrus Berry",
+          "ability": "Prankster",
+          "nature": "Calm",
+          "moves": [
+            "Dazzling Gleam",
+            "Protect",
+            "Imprison",
+            "Trick Room"
+          ]
+        },
+        {
+          "name": "Persian-Alola",
+          "item": "Roseli Berry",
+          "ability": "Fur Coat",
+          "nature": "Jolly",
+          "moves": [
+            "Fake Out",
+            "Protect",
+            "Parting Shot",
+            "Foul Play"
+          ]
+        }
+      ]
+    }
+  ]
+}

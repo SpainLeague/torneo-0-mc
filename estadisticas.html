@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101827">
+<title>Estadísticas de uso · Torneo 0% Reg MC</title>
+<style>
+:root{color-scheme:dark;--bg:#0d1421;--panel:#151f30;--panel2:#1b2940;--line:#2a3a52;--text:#eef4ff;--muted:#a9b8cc;--accent:#62d6a5;--blue:#79aaff;--warn:#f5c56a}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#111d30 0,#0d1421 360px);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:var(--blue)}.wrap{max-width:1120px;margin:auto;padding:22px 16px 56px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.brand{font-weight:800;letter-spacing:.02em}.back{display:inline-block;padding:9px 13px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--text)}
+h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:12px 0 8px}h2{font-size:21px;margin:28px 0 12px}h3{font-size:17px;margin:0 0 8px}
+.lead,.muted,.hint{color:var(--muted)}.lead{max-width:720px;margin:0 0 20px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}
+.stat,.panel,.pokemon-card{background:var(--panel);border:1px solid var(--line);border-radius:16px}
+.stat{padding:16px}.stat strong{display:block;font-size:30px;line-height:1.1}.stat span{font-size:13px;color:var(--muted)}
+.controls{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin:18px 0}
+input,select{width:100%;min-width:0;padding:12px;border-radius:10px;border:1px solid var(--line);background:#101a2a;color:var(--text);font:inherit}
+.panel{padding:16px;margin-top:16px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.rank-list{display:grid;gap:10px}.rank{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 12px;align-items:center}.rank-name{font-weight:650}.rank-meta{font-size:12px;color:var(--muted)}.rank-value{font-variant-numeric:tabular-nums;font-weight:750}.track{height:7px;background:#26364c;border-radius:99px;overflow:hidden;grid-column:1/-1}.fill{height:100%;background:var(--accent);border-radius:99px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.pokemon-card{padding:15px;min-width:0}.pokemon-card.selected{border-color:var(--accent);box-shadow:0 0 0 1px #62d6a544}.poke-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.poke-name{font-weight:800;font-size:17px}.pill{white-space:nowrap;border-radius:99px;background:#21354a;color:#bfe8d7;padding:4px 9px;font-size:12px}
+.section-label{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:15px 0 6px}.usage-lines{display:grid;gap:7px}.usage-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px}.usage-line span:first-child{overflow-wrap:anywhere}.usage-line b{font-variant-numeric:tabular-nums}.usage-line small{grid-column:1/-1;color:var(--muted);font-size:11px}
+.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+.pending{color:var(--warn)}.foot{font-size:12px;color:var(--muted);margin-top:22px}
+@media(max-width:720px){.controls{grid-template-columns:1fr 1fr}.controls input{grid-column:1/-1}.grid{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:25px}}
+</style>
+</head>
+<body><main class="wrap">
+<header><div class="brand">TORNEO 0% REG MC</div><a class="back" href="./index.html">← Volver a la Pool</a></header>
+<h1>Estadísticas de uso</h1>
+<p class="lead">Uso de Pokémon, movimientos, objetos, habilidades y naturalezas a partir de los equipos registrados. Las formas base y Mega se contabilizan por separado.</p>
+<div class="stats">
+ <div class="stat"><strong id="teamCount">—</strong><span>Equipos registrados</span></div>
+ <div class="stat"><strong id="pokemonCount">—</strong><span>Pokémon seleccionados</span></div>
+ <div class="stat"><strong id="moveCount">—</strong><span>Movimientos registrados</span></div>
+</div>
+<section class="panel">
+ <div class="panel-head"><h2 style="margin:0">Uso de Pokémon</h2><span class="muted" id="scope">Porcentaje sobre todos los equipos</span></div>
+ <div class="rank-list" id="topPokemon"></div>
+</section>
+<section>
+ <h2>Ficha y estadísticas por Pokémon</h2>
+ <div class="controls">
+  <input id="search" type="search" placeholder="Buscar Pokémon…">
+  <select id="formFilter"><option value="all">Todas las formas</option><option value="mega">Solo Megas</option><option value="base">Solo formas base</option></select>
+  <select id="sort"><option value="usage">Mayor uso</option><option value="name">Nombre</option></select>
+ </div>
+ <div class="grid" id="pokemonGrid"></div>
+</section>
+<section class="panel">
+ <div class="panel-head"><h2 style="margin:0">Naturalezas más utilizadas</h2><span class="muted">Solo datos comunicados</span></div>
+ <div class="rank-list" id="topNatures"></div>
+</section>
+<section class="panel">
+ <div class="panel-head"><h2 style="margin:0">Habilidades más utilizadas</h2></div>
+ <div class="rank-list" id="topAbilities"></div>
+</section>
+
+<section class="panel">
+ <div class="panel-head"><h2 style="margin:0">Parejas de Pokémon más frecuentes</h2><span class="muted">Aparecen juntos en el mismo equipo</span></div>
+ <div class="rank-list" id="topDuos"></div>
+</section>
+<section class="panel">
+ <div class="panel-head"><h2 style="margin:0">Núcleos de tres Pokémon</h2><span class="muted">Tríos que coinciden en un equipo</span></div>
+ <div class="rank-list" id="topTrios"></div>
+</section>
+<section class="panel">
+ <div class="panel-head"><h2 style="margin:0">Parejas de movimientos</h2><span class="muted">Movimientos incluidos en el mismo Pokémon</span></div>
+ <div class="rank-list" id="topMovePairs"></div>
+</section>
+<section class="panel">
+ <div class="panel-head"><h2 style="margin:0">Combinaciones de objeto y habilidad</h2><span class="muted">Equipados por un mismo Pokémon</span></div>
+ <div class="rank-list" id="topItemAbility"></div>
+</section>
+
+<p class="foot" id="dataNote">Cargando datos…</p>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+let teams=[],species=[];
+const pct=(n,d)=>d?((100*n/d).toFixed(1).replace('.',',')+'%'):'—';
+const clean=v=>String(v??'').trim();
+function aggregate(key){
+ const map=new Map();
+ for(const team of teams)for(const m of team.members){const v=clean(m[key]);if(!v)continue;const k=v.toLocaleLowerCase('en');if(!map.has(k))map.set(k,{name:v,count:0,teams:new Set()});const x=map.get(k);x.count++;x.teams.add(team.name)}
+ return [...map.values()].map(x=>({...x,teams:x.teams.size})).sort((a,b)=>b.teams-a.teams||a.name.localeCompare(b.name));
+}
+function renderRank(rootId,rows,denom,limit=10){
+ const root=$(rootId);root.replaceChildren();
+ if(!rows.length){root.innerHTML='<div class="empty">Todavía no hay datos suficientes.</div>';return}
+ const max=Math.max(1,...rows.slice(0,limit).map(x=>x.teams));
+ for(const x of rows.slice(0,limit)){
+  const row=document.createElement('div');row.className='rank';
+  row.innerHTML='<div><div class="rank-name"></div><div class="rank-meta"></div></div><div class="rank-value"></div><div class="track"><div class="fill"></div></div>';
+  row.querySelector('.rank-name').textContent=x.name;
+  row.querySelector('.rank-meta').textContent=x.teams+' equipo(s)';
+  row.querySelector('.rank-value').textContent=pct(x.teams,denom);
+  row.querySelector('.fill').style.width=(100*x.teams/max)+'%';
+  root.append(row);
+ }
+}
+function distribution(members,key){
+ const known=members.filter(m=>clean(m[key]));
+ const counts=new Map();for(const m of known){const v=clean(m[key]);const k=v.toLocaleLowerCase('en');const old=counts.get(k)||{name:v,count:0};old.count++;counts.set(k,old)}
+ return [...counts.values()].sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name));
+}
+function detailBlock(title,members,key){
+ const values=distribution(members,key);const known=members.filter(m=>clean(m[key])).length;
+ const block=document.createElement('div');
+ const label=document.createElement('div');label.className='section-label';label.textContent=title+' · muestra '+known+'/'+members.length;block.append(label);
+ if(!values.length){const empty=document.createElement('div');empty.className='muted';empty.textContent='Pendiente de comunicar';block.append(empty);return block}
+ const lines=document.createElement('div');lines.className='usage-lines';
+ for(const x of values){const line=document.createElement('div');line.className='usage-line';const a=document.createElement('span'),b=document.createElement('b'),small=document.createElement('small');a.textContent=x.name;b.textContent=pct(x.count,known);small.textContent=x.count+'/'+known+' Pokémon';line.append(a,b,small);lines.append(line)}
+ block.append(lines);return block;
+}
+function renderCards(){
+ const query=$('search').value.trim().toLocaleLowerCase('es'),form=$('formFilter').value,sort=$('sort').value;
+ let rows=species.filter(s=>(!query||s.name.toLocaleLowerCase('es').includes(query))&&(form==='all'||(form==='mega')===s.name.startsWith('Mega ')));
+ rows.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'es'):b.usage-a.usage||a.name.localeCompare(b.name,'es'));
+ const root=$('pokemonGrid');root.replaceChildren();
+ if(!rows.length){root.innerHTML='<div class="empty">No hay Pokémon que coincidan con la búsqueda.</div>';return}
+ for(const s of rows){
+  const card=document.createElement('article');card.className='pokemon-card';
+  const top=document.createElement('div');top.className='poke-top';
+  const name=document.createElement('div');name.className='poke-name';name.textContent=s.name;
+  const pill=document.createElement('div');pill.className='pill';pill.textContent=pct(s.usage,teams.length)+' · '+s.usage+'/'+teams.length;
+  top.append(name,pill);card.append(top);
+  card.append(detailBlock('Movimientos',s.members,'moves'));
+  card.append(detailBlock('Objetos',s.members,'item'));
+  card.append(detailBlock('Habilidades',s.members,'ability'));
+  card.append(detailBlock('Naturalezas',s.members,'nature'));
+  root.append(card);
+ }
+}
+function render(){
+ const total=teams.length,all=teams.flatMap(t=>t.members);
+ $('teamCount').textContent=total;$('pokemonCount').textContent=all.length;
+ $('moveCount').textContent=all.reduce((n,m)=>n+(m.moves||[]).length,0);
+ const bySpecies=new Map();
+ for(const t of teams)for(const m of t.members){const k=m.name;if(!bySpecies.has(k))bySpecies.set(k,{name:k,members:[],teamSet:new Set()});const s=bySpecies.get(k);s.members.push(m);s.teamSet.add(t.name)}
+ species=[...bySpecies.values()].map(s=>({...s,usage:s.teamSet.size})).sort((a,b)=>b.usage-a.usage);
+ renderRank('topPokemon',species.map(s=>({name:s.name,teams:s.usage})),total,12);
+ renderRank('topNatures',aggregate('nature'),total,12);
+ renderRank('topAbilities',aggregate('ability'),total,12);
+ renderRank('topDuos',aggregateDuos(),total,12);
+ renderRank('topTrios',aggregateTrios(),total,12);
+ renderRank('topMovePairs',aggregateMovePairs(),total,12);
+ renderRank('topItemAbility',aggregateItemAbility(),total,12);
+
+ renderCards();
+ const unknownNature=all.filter(m=>!clean(m.nature)).length,unknownItem=all.filter(m=>!clean(m.item)).length;
+ $('dataNote').innerHTML='Datos de '+total+' equipos. En los rankings globales cada equipo cuenta una sola vez por valor. En cada ficha, los porcentajes se calculan sobre los Pokémon de esa misma forma con el dato conocido. Pendientes: '+unknownNature+' naturalezas y '+unknownItem+' objetos sin confirmar.';
+}
+
+function aggregateTeamSets(size, selector, labeler){
+ const counts=new Map();
+ for(const team of teams){
+  const values=selector(team).filter(Boolean);
+  const unique=[...new Set(values)].sort((a,b)=>a.localeCompare(b,'en'));
+  const combos=[];
+  function choose(start,picked){
+   if(picked.length===size){const key=picked.join('|||');if(!combos.includes(key))combos.push(key);return}
+   for(let i=start;i<unique.length;i++)choose(i+1,[...picked,unique[i]]);
+  }
+  choose(0,[]);
+  for(const key of combos){const row=counts.get(key)||{name:labeler(key.split('|||')),teams:0};row.teams++;counts.set(key,row)}
+ }
+ return [...counts.values()].sort((a,b)=>b.teams-a.teams||a.name.localeCompare(b.name,'es'));
+}
+function aggregateDuos(){
+ return aggregateTeamSets(2,t=>t.members.map(m=>m.name),(v)=>v.join(' + '));
+}
+function aggregateTrios(){
+ return aggregateTeamSets(3,t=>t.members.map(m=>m.name),(v)=>v.join(' + '));
+}
+function aggregateMovePairs(){
+ return aggregateTeamSets(1,t=>t.members.flatMap(m=>{
+  const moves=[...new Set((m.moves||[]).map(clean).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'en'));
+  return moves.map((move,i)=>moves.slice(i+1).map(other=>m.name+': '+move+' + '+other)).flat();
+ }),(v)=>v.join(' · '));
+}
+function aggregateItemAbility(){
+ return aggregateTeamSets(1,t=>t.members.filter(m=>clean(m.item)&&clean(m.ability)).map(m=>m.name+' — '+m.item+' + '+m.ability),(v)=>v[0]);
+}
+
+function aggregateMove(){
+ const map=new Map();
+ for(const t of teams)for(const m of t.members)for(const move of (m.moves||[])){const k=clean(move).toLocaleLowerCase('en');if(!k)continue;const x=map.get(k)||{name:move,teamSet:new Set()};x.teamSet.add(t.name);map.set(k,x)}
+ return [...map.values()].map(x=>({name:x.name,teams:x.teamSet.size})).sort((a,b)=>b.teams-a.teams||a.name.localeCompare(b.name));
+}
+$('search').addEventListener('input',renderCards);$('formFilter').addEventListener('change',renderCards);$('sort').addEventListener('change',renderCards);
+fetch('./estadisticas-data.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(data=>{teams=data.teams||[];render()}).catch(err=>{$('dataNote').textContent='No se pudieron cargar los datos estadísticos: '+err.message});
+</script>
+</body></html>
