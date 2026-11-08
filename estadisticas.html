@@ -31,11 +31,6 @@ input,select{width:100%;min-width:0;padding:12px;border-radius:10px;border:1px s
 <header><div class="brand">TORNEO 0% REG MC</div><a class="back" href="./index.html">← Volver a la Pool</a></header>
 <h1>Estadísticas de uso</h1>
 <p class="lead">Uso de Pokémon, movimientos, objetos, habilidades y naturalezas a partir de los equipos registrados. Las formas base y Mega se contabilizan por separado.</p>
-<div class="stats">
- <div class="stat"><strong id="teamCount">—</strong><span>Equipos registrados</span></div>
- <div class="stat"><strong id="pokemonCount">—</strong><span>Pokémon seleccionados</span></div>
- <div class="stat"><strong id="moveCount">—</strong><span>Movimientos registrados</span></div>
-</div>
 <section>
  <h2>Pokémon participantes</h2>
  <p class="muted">Selecciona un Pokémon para consultar sus estadísticas individuales.</p>
@@ -53,14 +48,6 @@ input,select{width:100%;min-width:0;padding:12px;border-radius:10px;border:1px s
 <section class="panel">
  <div class="panel-head"><h2 style="margin:0">Núcleos de tres Pokémon</h2><span class="muted">Tríos que coinciden en un equipo</span></div>
  <div class="rank-list" id="topTrios"></div>
-</section>
-<section class="panel">
- <div class="panel-head"><h2 style="margin:0">Parejas de movimientos</h2><span class="muted">Movimientos incluidos en el mismo Pokémon</span></div>
- <div class="rank-list" id="topMovePairs"></div>
-</section>
-<section class="panel">
- <div class="panel-head"><h2 style="margin:0">Combinaciones de objeto y habilidad</h2><span class="muted">Equipados por un mismo Pokémon</span></div>
- <div class="rank-list" id="topItemAbility"></div>
 </section>
 
 <p class="foot" id="dataNote">Cargando datos…</p>
@@ -124,15 +111,11 @@ function renderCards(){
 }
 function render(){
  const total=teams.length,all=teams.flatMap(t=>t.members);
- $('teamCount').textContent=total;$('pokemonCount').textContent=all.length;
- $('moveCount').textContent=all.reduce((n,m)=>n+(m.moves||[]).length,0);
  const bySpecies=new Map();
  for(const t of teams)for(const m of t.members){const k=canonicalName(m.name);if(!bySpecies.has(k))bySpecies.set(k,{name:k,members:[],teamSet:new Set()});const s=bySpecies.get(k);s.members.push(m);s.teamSet.add(t.name)}
  species=poolNames.map(name=>{const s=bySpecies.get(name)||{name,members:[],teamSet:new Set()};return {...s,usage:s.teamSet.size}}).sort((a,b)=>b.usage-a.usage||a.name.localeCompare(b.name,'es'));
  renderRank('topDuos',aggregateDuos(),total,12);
  renderRank('topTrios',aggregateTrios(),total,12);
- renderRank('topMovePairs',aggregateMovePairs(),total,12);
- renderRank('topItemAbility',aggregateItemAbility(),total,12);
 
  renderCards();
  const unknownNature=all.filter(m=>!clean(m.nature)).length,unknownItem=all.filter(m=>!clean(m.item)).length;
