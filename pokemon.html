@@ -87,7 +87,7 @@ function renderSection(title,members,key){
   if(key==='item'){
    const itemName=document.createElement('span');itemName.className='item-name';
    const slug=item.name.toLocaleLowerCase('en').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-   const img=document.createElement('img');img.className='item-sprite';img.src=itemSpriteOverrides[slug]||'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/'+slug+'.png';img.alt='';img.loading='lazy';img.onerror=()=>img.remove();
+   const img=document.createElement('img');img.className='item-sprite';img.src=itemSpriteOverrides[slug]||'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/'+slug+'.png';img.alt='';img.loading='lazy';img.onerror=()=>{if(img.dataset.fallbackTried!=='1'){img.dataset.fallbackTried='1';img.src='https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/items/'+slug+'.png'}else img.remove()};
    itemName.append(img,name);line.append(itemName,value);
   }else line.append(name,value);
   lines.append(line);
