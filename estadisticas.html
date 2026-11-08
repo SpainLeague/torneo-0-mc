@@ -20,7 +20,7 @@ h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:12px 0 8px}h2{font-size
 input,select{width:100%;min-width:0;padding:12px;border-radius:10px;border:1px solid var(--line);background:#101a2a;color:var(--text);font:inherit}
 .panel{padding:16px;margin-top:16px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
 .rank-list{display:grid;gap:10px}.rank{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 12px;align-items:center}.rank-name{font-weight:650}.rank-meta{font-size:12px;color:var(--muted)}.rank-value{font-variant-numeric:tabular-nums;font-weight:750}.track{height:7px;background:#26364c;border-radius:99px;overflow:hidden;grid-column:1/-1}.fill{height:100%;background:var(--accent);border-radius:99px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.pokemon-card{padding:15px;min-width:0}.pokemon-card.selected{border-color:var(--accent);box-shadow:0 0 0 1px #62d6a544}.poke-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.poke-name{font-weight:800;font-size:17px}.pokemon-link{color:var(--text);text-decoration:none}.pokemon-link:hover{color:var(--accent);text-decoration:underline}.pill{white-space:nowrap;border-radius:99px;background:#21354a;color:#bfe8d7;padding:4px 9px;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.pokemon-card{padding:15px;min-width:0}.pokemon-card.selected{border-color:var(--accent);box-shadow:0 0 0 1px #62d6a544}.poke-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.poke-name{font-weight:800;font-size:17px}.poke-name-inner{display:flex;align-items:center;gap:9px;min-width:0}.usage-sprite{width:38px;height:38px;object-fit:contain;flex:0 0 38px;image-rendering:auto}.pokemon-link{min-width:0}.pokemon-link{color:var(--text);text-decoration:none}.pokemon-link:hover{color:var(--accent);text-decoration:underline}.pill{white-space:nowrap;border-radius:99px;background:#21354a;color:#bfe8d7;padding:4px 9px;font-size:12px}
 .section-label{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:15px 0 6px}.usage-lines{display:grid;gap:7px}.usage-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px}.usage-line span:first-child{overflow-wrap:anywhere}.usage-line b{font-variant-numeric:tabular-nums}.usage-line small{grid-column:1/-1;color:var(--muted);font-size:11px}
 .empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
 .pending{color:var(--warn)}.foot{font-size:12px;color:var(--muted);margin-top:22px}
@@ -67,7 +67,7 @@ input,select{width:100%;min-width:0;padding:12px;border-radius:10px;border:1px s
 </main>
 <script>
 const $=id=>document.getElementById(id);
-let teams=[],species=[],poolNames=[],poolAliases={};
+let teams=[],species=[],poolNames=[],poolAliases={},poolSprites={};
 const canonicalName=name=>poolAliases[name]||name;
 const pct=(n,d)=>d?((100*n/d).toFixed(1).replace('.',',')+'%'):'—';
 const clean=v=>String(v??'').trim();
@@ -116,7 +116,7 @@ function renderCards(){
   link.href='./pokemon.html?name='+encodeURIComponent(s.name);
   link.textContent=s.name;
   const top=document.createElement('div');top.className='poke-top';
-  const name=document.createElement('div');name.className='poke-name';name.append(link);
+  const name=document.createElement('div');name.className='poke-name';const nameInner=document.createElement('div');nameInner.className='poke-name-inner';const spriteUrl=poolSprites[s.name];if(spriteUrl){const img=document.createElement('img');img.className='usage-sprite';img.src=spriteUrl;img.alt='';img.loading='lazy';img.onerror=()=>img.remove();nameInner.append(img)}nameInner.append(link);name.append(nameInner);
   const pill=document.createElement('div');pill.className='pill';pill.textContent=pct(s.usage,teams.length)+' · '+s.usage+'/'+teams.length;
   top.append(name,pill);card.append(top);
   root.append(card);
@@ -176,6 +176,6 @@ function aggregateMove(){
  return [...map.values()].map(x=>({name:x.name,teams:x.teamSet.size})).sort((a,b)=>b.teams-a.teams||a.name.localeCompare(b.name));
 }
 $('search').addEventListener('input',renderCards);$('formFilter').addEventListener('change',renderCards);$('sort').addEventListener('change',renderCards);
-Promise.all([fetch('./estadisticas-data.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}),fetch('./estadisticas-pool.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})]).then(([data,pool])=>{teams=data.teams||[];poolNames=pool.names||[];poolAliases=pool.aliases||{};render()}).catch(err=>{$('dataNote').textContent='No se pudieron cargar los datos estadísticos: '+err.message});
+Promise.all([fetch('./estadisticas-data.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}),fetch('./estadisticas-pool.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})]).then(([data,pool])=>{teams=data.teams||[];poolNames=pool.names||[];poolAliases=pool.aliases||{};poolSprites=pool.sprites||{};render()}).catch(err=>{$('dataNote').textContent='No se pudieron cargar los datos estadísticos: '+err.message});
 </script>
 </body></html>
