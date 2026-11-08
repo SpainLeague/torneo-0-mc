@@ -684,7 +684,7 @@
         },
         {
           "name": "Mawile",
-          "item": null,
+          "item": "Life Orb",
           "ability": "Intimidate",
           "nature": "Adamant",
           "moves": [
