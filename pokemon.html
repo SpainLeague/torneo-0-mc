@@ -54,9 +54,9 @@ function renderSection(title,members,key){
 }
 const params=new URLSearchParams(location.search),requested=params.get('name');
 Promise.all([fetch('./estadisticas-data.json',{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('HTTP '+response.status);return response.json()}),fetch('./estadisticas-pool.json',{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('HTTP '+response.status);return response.json()})]).then(([data,poolData])=>{
- const teams=data.teams||[],members=[],pool=poolData.names||[];
+ const teams=data.teams||[],members=[],pool=poolData.names||[],aliases=poolData.aliases||{};
  let usage=0;
- for(const team of teams){const found=team.members.filter(m=>m.name===requested);if(found.length){usage++;members.push(...found)}}
+ for(const team of teams){const found=team.members.filter(m=>(aliases[m.name]||m.name)===requested);if(found.length){usage++;members.push(...found)}}
  if(!requested||!pool.includes(requested)){$('pokemonName').textContent='Pokémon no encontrado';$('usage').textContent='';$('details').innerHTML='<div class="empty">No existe en la pool actual.</div>';$('note').textContent='Comprueba el nombre o vuelve al listado.';return}
  $('pokemonName').textContent=requested;
  $('usage').textContent=pct(usage,teams.length)+' de uso · '+usage+'/'+teams.length+' equipos';
