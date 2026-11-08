@@ -41,7 +41,7 @@ function renderSection(title,members,key){
  const heading=document.createElement('h2');heading.textContent=title;
  const sample=document.createElement('span');sample.className='muted';sample.textContent='Muestra '+known.length+'/'+members.length;
  head.append(heading,sample);section.append(head);
- if(!counts.size){const empty=document.createElement('div');empty.className='empty pending';empty.textContent='Pendiente de comunicar';section.append(empty);return section}
+ if(!counts.size){const empty=document.createElement('div');empty.className='empty pending';empty.textContent=members.length?'Pendiente de comunicar':'Sin datos registrados todavía';section.append(empty);return section}
  const lines=document.createElement('div');lines.className='usage-lines';
  [...counts.values()].sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name)).forEach(item=>{
   const line=document.createElement('div');line.className='usage-line';
@@ -53,11 +53,11 @@ function renderSection(title,members,key){
  section.append(lines);return section;
 }
 const params=new URLSearchParams(location.search),requested=params.get('name');
-fetch('./estadisticas-data.json',{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('HTTP '+response.status);return response.json()}).then(data=>{
- const teams=data.teams||[],members=[];
+Promise.all([fetch('./estadisticas-data.json',{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('HTTP '+response.status);return response.json()}),fetch('./estadisticas-pool.json',{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('HTTP '+response.status);return response.json()})]).then(([data,poolData])=>{
+ const teams=data.teams||[],members=[],pool=poolData.names||[];
  let usage=0;
  for(const team of teams){const found=team.members.filter(m=>m.name===requested);if(found.length){usage++;members.push(...found)}}
- if(!requested||!members.length){$('pokemonName').textContent='Pokémon no encontrado';$('usage').textContent='';$('details').innerHTML='<div class="empty">No hay estadísticas registradas para este Pokémon.</div>';$('note').textContent='Comprueba el nombre o vuelve al listado.';return}
+ if(!requested||!pool.includes(requested)){$('pokemonName').textContent='Pokémon no encontrado';$('usage').textContent='';$('details').innerHTML='<div class="empty">No existe en la pool actual.</div>';$('note').textContent='Comprueba el nombre o vuelve al listado.';return}
  $('pokemonName').textContent=requested;
  $('usage').textContent=pct(usage,teams.length)+' de uso · '+usage+'/'+teams.length+' equipos';
  $('details').append(renderSection('Movimientos',members,'moves'));
