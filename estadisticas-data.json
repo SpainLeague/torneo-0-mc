@@ -1165,7 +1165,7 @@
           "name": "Mega Eelektross",
           "item": "Eelektrossite",
           "ability": "Levitate",
-          "nature": null,
+          "nature": "Modest",
           "moves": [
             "Discharge",
             "Flamethrower",
@@ -1177,7 +1177,7 @@
           "name": "Noivern",
           "item": "Roseli Berry",
           "ability": "Telepathy",
-          "nature": null,
+          "nature": "Timid",
           "moves": [
             "Tailwind",
             "Draco Meteor",
@@ -1189,7 +1189,7 @@
           "name": "Simipour",
           "item": "Choice Scarf",
           "ability": "Torrent",
-          "nature": null,
+          "nature": "Rash",
           "moves": [
             "Fake Out",
             "Hydro Pump",
@@ -1201,7 +1201,7 @@
           "name": "Mamoswine",
           "item": "Focus Sash",
           "ability": "Oblivious",
-          "nature": null,
+          "nature": "Adamant",
           "moves": [
             "Earthquake",
             "High Horsepower",
@@ -1213,7 +1213,7 @@
           "name": "Mega Scizor",
           "item": "Scizorite",
           "ability": "Technician",
-          "nature": null,
+          "nature": "Adamant",
           "moves": [
             "Bullet Punch",
             "Bug Bite",
@@ -1225,7 +1225,7 @@
           "name": "Samurott-Hisui",
           "item": "Life Orb",
           "ability": "Sharpness",
-          "nature": null,
+          "nature": "Adamant",
           "moves": [
             "Knock Off",
             "Sacred Sword",
