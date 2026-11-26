@@ -28,9 +28,10 @@ h2{font-size:19px;margin:0 0 12px}
 .player-name{font-size:24px;font-weight:850;letter-spacing:-.025em;margin:0 0 13px}
 .team-link{display:block;text-decoration:none;border-radius:10px;outline-offset:4px}
 .team-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;align-items:center}
-.team-grid img{display:block;width:100%;height:62px;object-fit:contain;filter:drop-shadow(0 3px 4px #0005);transition:transform .15s ease}
+.team-slot{position:relative;display:block;min-width:0}
+.team-grid img.pokemon-sprite{display:block;width:100%;height:62px;object-fit:contain;filter:drop-shadow(0 3px 4px #0005);transition:transform .15s ease}
+.team-grid img.item-icon{position:absolute;right:-1px;bottom:0;width:21px;height:21px;object-fit:contain;padding:2px;border-radius:50%;background:#101827;border:1px solid #53627a;filter:drop-shadow(0 2px 3px #0008)}
 .team-link:hover .team-grid img{transform:translateY(-3px)}
-.paste-hint{display:block;text-align:right;color:var(--blue);font-size:11px;font-weight:700;margin-top:8px}
 .provisional-note{padding:11px 14px;border:1px solid #685936;background:#2a2416;border-radius:11px;color:#f1dfae;font-size:13px;margin:0 0 28px}
 .ranking-list{display:grid;gap:8px}
 .rank-row{display:grid;grid-template-columns:48px minmax(135px,1fr) minmax(300px,430px) 68px;gap:12px;align-items:center;padding:10px 13px;background:rgba(21,31,48,.92);border:1px solid var(--line);border-radius:13px;min-width:0}
@@ -90,18 +91,24 @@ function makeTeamLink(player,sprites,extraClass=''){
  link.rel='noopener noreferrer';
  link.setAttribute('aria-label','Abrir el paste del equipo de '+player.name+' en una pestaña nueva');
  const grid=document.createElement('span');grid.className='team-grid';
- player.team.forEach(name=>{
-  const img=document.createElement('img');
-  img.src=sprites[name]||'';
-  img.alt='';
-  img.title=name;
-  img.loading='lazy';
+ player.team.forEach((name,index)=>{
+  const slot=document.createElement('span');slot.className='team-slot';
+  const img=document.createElement('img');img.className='pokemon-sprite';
+  img.src=sprites[name]||'';img.alt='';img.title=name;img.loading='lazy';
   img.onerror=()=>{img.style.visibility='hidden'};
-  grid.append(img);
+  slot.append(img);
+  const item=player.items?.[index];
+  if(item){
+   const icon=document.createElement('img');icon.className='item-icon';
+   const itemSlug=item.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+   icon.src=itemSlug.endsWith('ite')?'https://raw.githubusercontent.com/msikma/pokesprite/master/items/mega-stone/'+itemSlug+'.png':'https://play.pokemonshowdown.com/sprites/itemicons/'+itemSlug+'.png';
+   icon.alt=item;icon.title=item;icon.loading='lazy';
+   icon.onerror=()=>{icon.style.display='none'};
+   slot.append(icon);
+  }
+  grid.append(slot);
  });
  link.append(grid);
- const hint=document.createElement('span');hint.className='paste-hint';hint.textContent='Ver equipo completo ↗';
- link.append(hint);
  return link;
 }
 function renderFinalist(player,sprites){
