@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101827">
+<title>Clasificación · Torneo 0% Reg MC</title>
+<style>
+:root{color-scheme:dark;--bg:#0d1421;--panel:#151f30;--panel2:#1b2940;--line:#2a3a52;--text:#eef4ff;--muted:#a9b8cc;--accent:#62d6a5;--blue:#79aaff;--gold:#e8c66a;--silver:#c5d0df}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#17243a 0,#0d1421 420px);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:inherit}.wrap{max-width:1120px;margin:auto;padding:22px 16px 56px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.brand{font-weight:850;letter-spacing:.06em;font-size:13px;color:#dce8fa}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.05;letter-spacing:-.04em;margin:28px 0 8px}
+.lead{color:var(--muted);margin:0 0 24px;max-width:700px}
+.tabs{display:flex;gap:7px;margin:0 0 22px;padding:5px;background:#10192b;border:1px solid var(--line);border-radius:14px;width:fit-content;max-width:100%;flex-wrap:wrap}
+.tab{border:0;border-radius:10px;padding:10px 13px;background:transparent;color:var(--muted);font:inherit;font-weight:700;text-decoration:none;display:inline-flex;align-items:center}
+.tab.active{background:#2b3d5d;color:var(--text);box-shadow:inset 0 0 0 1px #52698d}
+h2{font-size:19px;margin:0 0 12px}
+.finalists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0 30px}
+.finalist{min-width:0;padding:17px;background:linear-gradient(145deg,#1b2b45,#141e30);border:1px solid #53627a;border-radius:17px;box-shadow:0 12px 30px #0002}
+.finalist:first-child{border-color:#9c8245}
+.finalist-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.finalist-tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.finalist:last-child .finalist-tag{color:var(--silver)}
+.record{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;padding:5px 10px;border-radius:99px;background:#0c1627;border:1px solid #34445e;color:#d9e7fa;white-space:nowrap}
+.player-name{font-size:24px;font-weight:850;letter-spacing:-.025em;margin:0 0 13px}
+.team-link{display:block;text-decoration:none;border-radius:10px;outline-offset:4px}
+.team-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;align-items:center}
+.team-grid img{display:block;width:100%;height:62px;object-fit:contain;filter:drop-shadow(0 3px 4px #0005);transition:transform .15s ease}
+.team-link:hover .team-grid img{transform:translateY(-3px)}
+.paste-hint{display:block;text-align:right;color:var(--blue);font-size:11px;font-weight:700;margin-top:8px}
+.provisional-note{padding:11px 14px;border:1px solid #685936;background:#2a2416;border-radius:11px;color:#f1dfae;font-size:13px;margin:0 0 28px}
+.ranking-list{display:grid;gap:8px}
+.rank-row{display:grid;grid-template-columns:48px minmax(135px,1fr) minmax(300px,430px) 68px;gap:12px;align-items:center;padding:10px 13px;background:rgba(21,31,48,.92);border:1px solid var(--line);border-radius:13px;min-width:0}
+.rank-number{font-size:20px;font-weight:850;color:#9eb0ca;text-align:center;font-variant-numeric:tabular-nums}
+.rank-player{font-size:16px;font-weight:800;min-width:0;overflow-wrap:anywhere}
+.rank-team .team-grid img{height:49px}
+.rank-record{justify-self:end;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;color:#d8e6fa;background:#0d1728;border:1px solid #30415b;border-radius:8px;padding:5px 8px;white-space:nowrap}
+.loading,.error{padding:24px;text-align:center;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.error{color:#ffb8b8}
+.foot{font-size:12px;color:var(--muted);margin-top:22px}
+@media(max-width:760px){
+ .finalists{grid-template-columns:1fr}
+ .rank-row{grid-template-columns:38px minmax(0,1fr) auto;gap:7px 10px;padding:10px}
+ .rank-number{grid-row:1;grid-column:1;font-size:18px}
+ .rank-player{grid-row:1;grid-column:2;font-size:15px}
+ .rank-record{grid-row:1;grid-column:3}
+ .rank-team{grid-row:2;grid-column:2/4}
+ .rank-team .team-grid img{height:47px}
+}
+@media(max-width:430px){
+ .wrap{padding:16px 11px 40px}
+ .tabs{width:100%;gap:3px}
+ .tab{font-size:12px;padding:9px 8px;flex:1;justify-content:center}
+ .finalist{padding:14px}
+ .team-grid{gap:2px}
+ .team-grid img{height:54px}
+ .rank-team .team-grid img{height:40px}
+ .rank-row{grid-template-columns:30px minmax(0,1fr) auto;gap:6px;padding:9px 7px}
+ .rank-number{font-size:16px}
+ .rank-player{font-size:14px}
+ .rank-record{font-size:11px;padding:4px 6px}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header><div class="brand">TORNEO 0% REG MC</div></header>
+<nav class="tabs" aria-label="Secciones">
+<a class="tab" href="./index.html">📚 Pool Pokémon</a>
+<a class="tab" href="./index.html?view=builder#builder">🧩 Crear equipo</a>
+<a class="tab" href="./index.html?view=recommend#recommend">✨ Recomendar equipo</a>
+<a class="tab" href="./estadisticas.html">📊 Estadísticas de uso</a>
+<a class="tab active" href="./clasificacion.html" aria-current="page">🏆 Clasificación</a>
+</nav>
+<h1>Clasificación</h1>
+<p class="lead">Resultados finales del Torneo 0% Reg MC. Pulsa sobre cualquiera de los equipos para abrir su paste en una pestaña nueva.</p>
+<div id="content" class="loading">Cargando clasificación…</div>
+<p class="foot">Los sprites representan las formas utilizadas en cada equipo.</p>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+function makeTeamLink(player,sprites,extraClass=''){
+ const link=document.createElement('a');
+ link.className='team-link '+extraClass;
+ link.href=player.paste;
+ link.target='_blank';
+ link.rel='noopener noreferrer';
+ link.setAttribute('aria-label','Abrir el paste del equipo de '+player.name+' en una pestaña nueva');
+ const grid=document.createElement('span');grid.className='team-grid';
+ player.team.forEach(name=>{
+  const img=document.createElement('img');
+  img.src=sprites[name]||'';
+  img.alt='';
+  img.title=name;
+  img.loading='lazy';
+  img.onerror=()=>{img.style.visibility='hidden'};
+  grid.append(img);
+ });
+ link.append(grid);
+ const hint=document.createElement('span');hint.className='paste-hint';hint.textContent='Ver equipo completo ↗';
+ link.append(hint);
+ return link;
+}
+function renderFinalist(player,sprites){
+ const card=document.createElement('article');card.className='finalist';
+ const top=document.createElement('div');top.className='finalist-top';
+ const tag=document.createElement('span');tag.className='finalist-tag';tag.textContent='Finalista · 1.º / 2.º';
+ const record=document.createElement('span');record.className='record';record.textContent=player.record;
+ top.append(tag,record);
+ const name=document.createElement('h2');name.className='player-name';name.textContent=player.name;
+ card.append(top,name,makeTeamLink(player,sprites));
+ return card;
+}
+function renderRow(player,sprites){
+ const row=document.createElement('article');row.className='rank-row';
+ const rank=document.createElement('div');rank.className='rank-number';rank.textContent=player.position+'.';
+ const name=document.createElement('div');name.className='rank-player';name.textContent=player.name;
+ const team=document.createElement('div');team.className='rank-team';team.append(makeTeamLink(player,sprites));
+ const record=document.createElement('div');record.className='rank-record';record.textContent=player.record;
+ row.append(rank,name,team,record);
+ return row;
+}
+Promise.all([
+ fetch('./clasificacion-data.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}),
+ fetch('./estadisticas-pool.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})
+]).then(([data,pool])=>{
+ const participants=data.participants||[],sprites=pool.sprites||{};
+ if(participants.length!==17)throw new Error('La clasificación no contiene los 17 participantes esperados.');
+ if(participants.some(p=>!Array.isArray(p.team)||p.team.length!==6))throw new Error('Hay un equipo que no contiene seis Pokémon.');
+ const root=$('content');root.className='';
+ root.replaceChildren();
+ const note=document.createElement('div');note.className='provisional-note';note.textContent='La final está pendiente. Hohen y David aparecen provisionalmente en los puestos 1.º y 2.º; el orden definitivo se actualizará cuando se conozca el resultado.';
+ root.append(note);
+ const finalists=document.createElement('section');finalists.className='finalists';
+ participants.slice(0,2).forEach(p=>finalists.append(renderFinalist(p,sprites)));
+ root.append(finalists);
+ const heading=document.createElement('h2');heading.textContent='Resto de la clasificación';root.append(heading);
+ const list=document.createElement('section');list.className='ranking-list';
+ participants.slice(2).forEach(p=>list.append(renderRow(p,sprites)));
+ root.append(list);
+}).catch(error=>{$('content').className='error';$('content').textContent='No se pudo cargar la clasificación: '+error.message});
+</script>
+</body>
+</html>
