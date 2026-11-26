@@ -28,8 +28,8 @@ h2{font-size:19px;margin:0 0 12px}
 .player-name{font-size:24px;font-weight:850;letter-spacing:-.025em;margin:0 0 13px}
 .team-link{display:block;text-decoration:none;border-radius:10px;outline-offset:4px}
 .team-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;align-items:center}
-.team-slot{position:relative;display:block;min-width:0}
-.team-grid img.pokemon-sprite{display:block;width:100%;height:62px;object-fit:contain;filter:drop-shadow(0 3px 4px #0005);transition:transform .15s ease}
+.team-slot{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;height:62px}
+.team-grid img.pokemon-sprite{display:block;width:100%;height:100%;object-fit:contain;object-position:center;filter:drop-shadow(0 3px 4px #0005);transition:transform .15s ease}
 .team-grid img.item-icon{position:absolute;right:-1px;bottom:0;width:21px;height:21px;object-fit:contain;padding:2px;border-radius:50%;background:#101827;border:1px solid #53627a;filter:drop-shadow(0 2px 3px #0008)}
 .team-link:hover .team-grid img{transform:translateY(-3px)}
 .provisional-note{padding:11px 14px;border:1px solid #685936;background:#2a2416;border-radius:11px;color:#f1dfae;font-size:13px;margin:0 0 28px}
@@ -37,7 +37,7 @@ h2{font-size:19px;margin:0 0 12px}
 .rank-row{display:grid;grid-template-columns:48px minmax(135px,1fr) minmax(300px,430px) 68px;gap:12px;align-items:center;padding:10px 13px;background:rgba(21,31,48,.92);border:1px solid var(--line);border-radius:13px;min-width:0}
 .rank-number{font-size:20px;font-weight:850;color:#9eb0ca;text-align:center;font-variant-numeric:tabular-nums}
 .rank-player{font-size:16px;font-weight:800;min-width:0;overflow-wrap:anywhere}
-.rank-team .team-grid img.pokemon-sprite{height:49px}
+.rank-team .team-slot{height:49px}
 .rank-record{justify-self:end;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;color:#d8e6fa;background:#0d1728;border:1px solid #30415b;border-radius:8px;padding:5px 8px;white-space:nowrap}
 .loading,.error{padding:24px;text-align:center;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:14px}
 .error{color:#ffb8b8}
@@ -49,7 +49,7 @@ h2{font-size:19px;margin:0 0 12px}
  .rank-player{grid-row:1;grid-column:2;font-size:15px}
  .rank-record{grid-row:1;grid-column:3}
  .rank-team{grid-row:2;grid-column:2/4}
- .rank-team .team-grid img.pokemon-sprite{height:47px}
+ .rank-team .team-slot{height:47px}
 }
 @media(max-width:430px){
  .wrap{padding:16px 11px 40px}
@@ -58,7 +58,7 @@ h2{font-size:19px;margin:0 0 12px}
  .finalist{padding:14px}
  .team-grid{gap:2px}
  .team-grid img{height:54px}
- .rank-team .team-grid img.pokemon-sprite{height:40px}
+ .rank-team .team-slot{height:40px}
  .rank-row{grid-template-columns:30px minmax(0,1fr) auto;gap:6px;padding:9px 7px}
  .rank-number{font-size:16px}
  .rank-player{font-size:14px}
@@ -101,7 +101,38 @@ function makeTeamLink(player,sprites,extraClass=''){
   if(item){
    const icon=document.createElement('img');icon.className='item-icon';
    const itemSlug=item.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-   icon.src=itemSlug.endsWith('ite')?'https://raw.githubusercontent.com/msikma/pokesprite/master/items/mega-stone/'+itemSlug+'.png':'https://play.pokemonshowdown.com/sprites/itemicons/'+itemSlug+'.png';
+   const megaStoneSprites={
+    'clefablite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/clefablite.png?image=q_auto:good,f_png,w_48&v=1788766961',
+    'victreebelite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/victreebelite.png?image=q_auto:good,f_png,w_48&v=1788240028',
+    'skarmorite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/skarmorite.png?image=q_auto:good,f_png,w_48&v=1794025708',
+    'emboarite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/emboarite.png?image=q_auto:good,f_png,w_48&v=1794025708',
+    'scolipite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/scolipedite.png?image=q_auto:good,f_png,w_48&v=1794025708',
+    'scolipedite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/scolipedite.png?image=q_auto:good,f_png,w_48&v=1794025708',
+    'scraftite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/scraftite.png?image=q_auto:good,f_png,w_48&v=1794025708',
+    'scraftinite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/scraftite.png?image=q_auto:good,f_png,w_48&v=1794025708',
+    'golurkite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/golurkite.png?image=q_auto:good,f_png,w_48&v=1794025708',
+    'chesnaughtite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/chesnaughtite.png?image=q_auto:good,f_png,w_48&v=1794025708',
+    'greninjite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/greninjite.png?image=q_auto:good,f_png,w_48&v=1794025708',
+    'pyroarite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/pyroarite.png?image=q_auto:good,f_png,w_48&v=1794025708',
+    'meowsticite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/meowsticite.png?image=q_auto:good,f_png,w_48&v=1794025708',
+    'dragalgite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/dragalgite.png?image=q_auto:good,f_png,w_48&v=1794025708',
+    'hawluchanite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/hawluchanite.png?image=q_auto:good,f_png,w_48&v=1794025708',
+    'crabominite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/crabominite.png?image=q_auto:good,f_png,w_48&v=1794025708',
+    'falinksite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/falinksite.png?image=q_auto:good,f_png,w_48&v=1794025708',
+    'chimechite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/chimechite.png?image=q_auto:good,f_png,w_48&v=1790176631',
+    'drampanite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/drampanite.png?image=q_auto:good,f_png,w_48&v=1788769777',
+    'starminite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/starminite.png?image=q_auto:good,f_png,w_48&v=1788757688',
+    'starmite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/starminite.png?image=q_auto:good,f_png,w_48&v=1788757688',
+    'barbaracite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/barbaraclite.png?image=q_auto:good,f_png,w_48&v=1788278419',
+    'barbaraclite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/barbaraclite.png?image=q_auto:good,f_png,w_48&v=1788278419',
+    'chandelurite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/chandelurite.png?image=q_auto:good,f_png,w_48&v=1789717312',
+    'eelektrossite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/eelektrossite.png?image=q_auto:good,f_png,w_48&v=1788757688',
+    'feraligatrite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/feraligite.png?image=q_auto:good,f_png,w_48&v=1788831516',
+    'feraligite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/feraligite.png?image=q_auto:good,f_png,w_48&v=1788831516',
+    'malamarite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/malamarite.png?image=q_auto:good,f_png,w_48&v=1790176631',
+    'meganiumite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/meganiumite.png?image=q_auto:good,f_png,w_48&v=1788757688'
+   };
+   icon.src=megaStoneSprites[itemSlug]||(itemSlug.endsWith('ite')?'https://raw.githubusercontent.com/msikma/pokesprite/master/items/mega-stone/'+itemSlug+'.png':'https://play.pokemonshowdown.com/sprites/itemicons/'+itemSlug+'.png');
    icon.alt=item;icon.title=item;icon.loading='lazy';
    icon.onerror=()=>{icon.style.display='none'};
    slot.append(icon);
