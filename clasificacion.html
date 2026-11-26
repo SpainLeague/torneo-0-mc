@@ -132,9 +132,18 @@ function makeTeamLink(player,sprites,extraClass=''){
     'malamarite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/malamarite.png?image=q_auto:good,f_png,w_48&v=1790176631',
     'meganiumite':'https://s-stats-platform-cdn.op.gg/pokemon-champions/images/items/meganiumite.png?image=q_auto:good,f_png,w_48&v=1788757688'
    };
-   icon.src=megaStoneSprites[itemSlug]||(itemSlug.endsWith('ite')?'https://raw.githubusercontent.com/msikma/pokesprite/master/items/mega-stone/'+itemSlug+'.png':'https://play.pokemonshowdown.com/sprites/itemicons/'+itemSlug+'.png');
+   const pokeApiItemSlug=item.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+   const isMegaStone=itemSlug.endsWith('ite');
+   icon.src=megaStoneSprites[itemSlug]||(isMegaStone?'https://raw.githubusercontent.com/msikma/pokesprite/master/items/mega-stone/'+itemSlug+'.png':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/'+pokeApiItemSlug+'.png');
    icon.alt=item;icon.title=item;icon.loading='lazy';
-   icon.onerror=()=>{icon.style.display='none'};
+   icon.onerror=()=>{
+    if(!isMegaStone&&icon.dataset.fallback!=='showdown'){
+     icon.dataset.fallback='showdown';
+     icon.src='https://play.pokemonshowdown.com/sprites/itemicons/'+itemSlug+'.png';
+    }else{
+     icon.style.display='none';
+    }
+   };
    slot.append(icon);
   }
   grid.append(slot);
