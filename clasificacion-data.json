@@ -14,6 +14,14 @@
         "Goodra Hisui",
         "Gliscor",
         "Clefable"
+      ],
+      "items": [
+        "Sceptilite",
+        "Gyaradosite",
+        "Focus Sash",
+        "Leftovers",
+        "Life Orb",
+        "Sitrus Berry"
       ]
     },
     {
@@ -29,6 +37,14 @@
         "Samurott Hisui",
         "Mega Meganium",
         "Klefki"
+      ],
+      "items": [
+        "Leftovers",
+        "Banettite",
+        "Sitrus Berry",
+        "Choice Scarf",
+        "Meganiumite",
+        "Light Clay"
       ]
     },
     {
@@ -43,6 +59,14 @@
         "Rotom Mow",
         "Mamoswine",
         "Mimikyu"
+      ],
+      "items": [
+        "Chimechite",
+        "Gyaradosite",
+        "Focus Sash",
+        "Choice Scarf",
+        "Life Orb",
+        "Sitrus Berry"
       ]
     },
     {
@@ -57,6 +81,14 @@
         "Mega Barbaracle",
         "Gyarados",
         "Krookodile"
+      ],
+      "items": [
+        "Sitrus Berry",
+        "Meganiumite",
+        "Focus Sash",
+        "Barbaracite",
+        "Leftovers",
+        "Choice Scarf"
       ]
     },
     {
@@ -71,6 +103,14 @@
         "Mega Chandelure",
         "Meowscarada",
         "Toxtricity"
+      ],
+      "items": [
+        "Choice Scarf",
+        "Drampanite",
+        "Mental Herb",
+        "Chandelurite",
+        "Focus Sash",
+        "Life Orb"
       ]
     },
     {
@@ -85,6 +125,14 @@
         "Noivern",
         "Goodra Hisui",
         "Clefable"
+      ],
+      "items": [
+        "Light Clay",
+        "Gyaradosite",
+        "Chandelurite",
+        "Focus Sash",
+        "Leftovers",
+        "Sitrus Berry"
       ]
     },
     {
@@ -99,6 +147,14 @@
         "Mamoswine",
         "Mega Scizor",
         "Samurott Hisui"
+      ],
+      "items": [
+        "Eelektrossite",
+        "Roseli Berry",
+        "Choice Scarf",
+        "Focus Sash",
+        "Scizorite",
+        "Life Orb"
       ]
     },
     {
@@ -113,6 +169,14 @@
         "Goodra Hisui",
         "Overqwil",
         "Clefable"
+      ],
+      "items": [
+        "Sceptilite",
+        "Gyaradosite",
+        "Focus Sash",
+        "Shuca Berry",
+        "Leftovers",
+        "Sitrus Berry"
       ]
     },
     {
@@ -127,6 +191,14 @@
         "Rotom Heat",
         "Clefable",
         "Empoleon"
+      ],
+      "items": [
+        "Banettite",
+        "Focus Sash",
+        "Choice Scarf",
+        "White Herb",
+        "Sitrus Berry",
+        "Mystic Water"
       ]
     },
     {
@@ -141,6 +213,14 @@
         "Scrafty",
         "Arcanine",
         "Tsareena"
+      ],
+      "items": [
+        "Altarianite",
+        "Manectite",
+        "Mystic Water",
+        "Focus Sash",
+        "Sitrus Berry",
+        "Choice Scarf"
       ]
     },
     {
@@ -155,6 +235,14 @@
         "Mega Abomasnow",
         "Mimikyu",
         "Scrafty"
+      ],
+      "items": [
+        "Malamarite",
+        "Chople Berry",
+        "Rocky Helmet",
+        "Abomasite",
+        "Life Orb",
+        "Sitrus Berry"
       ]
     },
     {
@@ -169,6 +257,14 @@
         "Pincurchin",
         "Meowscarada",
         "Persian Alola"
+      ],
+      "items": [
+        "Focus Sash",
+        "Leftovers",
+        "Gyaradosite",
+        "Electric Seed",
+        "Life Orb",
+        "Sitrus Berry"
       ]
     },
     {
@@ -183,6 +279,14 @@
         "Gliscor",
         "Meowstic-F",
         "Mawile"
+      ],
+      "items": [
+        "Feraligite",
+        "Focus Sash",
+        "Occa Berry",
+        "Psychic Seed",
+        "Sitrus Berry",
+        "Life Orb"
       ]
     },
     {
@@ -197,6 +301,14 @@
         "Scrafty",
         "Noivern",
         "Klefki"
+      ],
+      "items": [
+        "Meganiumite",
+        "Starminite",
+        "Life Orb",
+        "Sitrus Berry",
+        "Focus Sash",
+        "Leftovers"
       ]
     },
     {
@@ -211,6 +323,14 @@
         "Overqwil",
         "Klefki",
         "Persian Alola"
+      ],
+      "items": [
+        "Choice Scarf",
+        "Gyaradosite",
+        "Chandelurite",
+        "Life Orb",
+        "Sitrus Berry",
+        "Roseli Berry"
       ]
     },
     {
@@ -225,6 +345,14 @@
         "Mega Drampa",
         "Azumarill",
         "Klefki"
+      ],
+      "items": [
+        "Babiri Berry",
+        "Focus Sash",
+        "Life Orb",
+        "Drampanite",
+        "Sitrus Berry",
+        "Leftovers"
       ]
     },
     {
@@ -239,6 +367,14 @@
         "Mega Eelektross",
         "Araquanid",
         "Serperior"
+      ],
+      "items": [
+        "Focus Sash",
+        "Sitrus Berry",
+        "Leftovers",
+        "Eelektrossite",
+        "Mystic Water",
+        "Wide Lens"
       ]
     }
   ]
