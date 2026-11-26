@@ -100,7 +100,8 @@ function makeTeamLink(player,sprites,extraClass=''){
   const item=player.items?.[index];
   if(item){
    const icon=document.createElement('img');icon.className='item-icon';
-   icon.src='https://play.pokemonshowdown.com/sprites/itemicons/'+item.replace(/[^a-z0-9]/gi,'')+'.png';
+   const itemSlug=item.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+   icon.src=itemSlug.endsWith('ite')?'https://raw.githubusercontent.com/msikma/pokesprite/master/items/mega-stone/'+itemSlug+'.png':'https://play.pokemonshowdown.com/sprites/itemicons/'+itemSlug+'.png';
    icon.alt=item;icon.title=item;icon.loading='lazy';
    icon.onerror=()=>{icon.style.display='none'};
    slot.append(icon);
